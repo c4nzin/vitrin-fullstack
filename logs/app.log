@@ -1,0 +1,432 @@
+[20:34:09.985] [32mINFO[39m (18443): [36mrequest completed[39m
+    req: {
+      "id": 1,
+      "method": "POST",
+      "url": "/api/auth/register",
+      "query": {},
+      "params": {
+        "0": "api/auth/register"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.40.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "7fa36000-48f6-4455-9f2f-39a0816c8cfd",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "102"
+      },
+      "remoteAddress": "::1",
+      "remotePort": 53746
+    }
+    res: {
+      "statusCode": 404,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "81",
+        "etag": "W/\"51-INyFP5BnJ2rcOi/w9fJRqfpriqU\""
+      }
+    }
+    responseTime: 13
+[20:34:44.272] [32mINFO[39m (18533): [36mrequest completed[39m
+    req: {
+      "id": 1,
+      "method": "POST",
+      "url": "/api/auth/register",
+      "query": {},
+      "params": {
+        "0": "auth/register"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.40.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "236e7cc1-afb2-458d-a172-76ec2e97fa42",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "102"
+      },
+      "remoteAddress": "::1",
+      "remotePort": 53769
+    }
+    res: {
+      "statusCode": 400,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "67",
+        "etag": "W/\"43-/AkTTIQrQ73uaIkBoiFJM5uY4XI\""
+      }
+    }
+    responseTime: 100
+[20:35:10.242] [32mINFO[39m (18595): [36mrequest completed[39m
+    req: {
+      "id": 1,
+      "method": "POST",
+      "url": "/api/auth/register",
+      "query": {},
+      "params": {
+        "0": "auth/register"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.40.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "48fab073-ac50-41a6-a3d7-4d4bc361abd1",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "102"
+      },
+      "remoteAddress": "::1",
+      "remotePort": 53787
+    }
+    res: {
+      "statusCode": 400,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "67",
+        "etag": "W/\"43-/AkTTIQrQ73uaIkBoiFJM5uY4XI\""
+      }
+    }
+    responseTime: 98
+[20:36:15.302] [32mINFO[39m (18667): [36mrequest completed[39m
+    req: {
+      "id": 1,
+      "method": "POST",
+      "url": "/api/auth/register",
+      "query": {},
+      "params": {
+        "0": "auth/register"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.40.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "945e2257-54e9-4ffb-a165-06fd6f3aebba",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "102"
+      },
+      "remoteAddress": "::1",
+      "remotePort": 53843
+    }
+    res: {
+      "statusCode": 400,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "67",
+        "etag": "W/\"43-/AkTTIQrQ73uaIkBoiFJM5uY4XI\""
+      }
+    }
+    responseTime: 109
+[20:36:33.551] [32mINFO[39m (18847): [36mrequest completed[39m
+    req: {
+      "id": 1,
+      "method": "POST",
+      "url": "/api/auth/register",
+      "query": {},
+      "params": {
+        "0": "auth/register"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.40.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "c39f2e4d-172a-4290-97fb-d69449af4961",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "102"
+      },
+      "remoteAddress": "::1",
+      "remotePort": 53873
+    }
+    res: {
+      "statusCode": 400,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "67",
+        "etag": "W/\"43-/AkTTIQrQ73uaIkBoiFJM5uY4XI\""
+      }
+    }
+    responseTime: 99
+[20:37:55.551] [32mINFO[39m (18952): [36mrequest completed[39m
+    req: {
+      "id": 1,
+      "method": "POST",
+      "url": "/api/auth/register",
+      "query": {},
+      "params": {
+        "0": "auth/register"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.40.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "0c348c69-5d4f-4c83-a644-a7a833ebe9fd",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "102"
+      },
+      "remoteAddress": "::1",
+      "remotePort": 53907
+    }
+    res: {
+      "statusCode": 400,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "80",
+        "etag": "W/\"50-WWf996ixQRPl38oy4zVhgwfwgDI\""
+      }
+    }
+    responseTime: 101
+[20:38:06.676] [32mINFO[39m (18973): [36mrequest errored[39m
+    req: {
+      "id": 1,
+      "method": "POST",
+      "url": "/api/auth/register",
+      "query": {},
+      "params": {
+        "0": "auth/register"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.40.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "10d566ed-b568-41f6-80ca-2403e08026d3",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "102"
+      },
+      "remoteAddress": "::1",
+      "remotePort": 53925
+    }
+    res: {
+      "statusCode": 500,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "52",
+        "etag": "W/\"34-g/OEYgWsU9e+UjBP7Uypd4ShtsA\""
+      }
+    }
+    responseTime: 111
+    err: {
+      "type": "Error",
+      "message": "failed with status code 500",
+      "stack":
+          Error: failed with status code 500
+              at onResFinished (/Users/canson/Desktop/nexus/node_modules/.pnpm/pino-http@10.2.0/node_modules/pino-http/logger.js:115:39)
+              at ServerResponse.onResponseComplete (/Users/canson/Desktop/nexus/node_modules/.pnpm/pino-http@10.2.0/node_modules/pino-http/logger.js:178:14)
+              at ServerResponse.emit (node:events:532:35)
+              at onFinish (node:_http_outgoing:1077:10)
+              at callback (node:internal/streams/writable:764:21)
+              at afterWrite (node:internal/streams/writable:708:5)
+              at afterWriteTick (node:internal/streams/writable:694:10)
+              at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+    }
+[20:39:30.783] [32mINFO[39m (19012): [36mrequest errored[39m
+    req: {
+      "id": 1,
+      "method": "POST",
+      "url": "/api/auth/register",
+      "query": {},
+      "params": {
+        "0": "auth/register"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.40.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "7099ec14-40dc-446a-bdda-b32876067363",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "102"
+      },
+      "remoteAddress": "::1",
+      "remotePort": 53952
+    }
+    res: {
+      "statusCode": 500,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "52",
+        "etag": "W/\"34-g/OEYgWsU9e+UjBP7Uypd4ShtsA\""
+      }
+    }
+    responseTime: 113
+    err: {
+      "type": "Error",
+      "message": "failed with status code 500",
+      "stack":
+          Error: failed with status code 500
+              at onResFinished (/Users/canson/Desktop/nexus/node_modules/.pnpm/pino-http@10.2.0/node_modules/pino-http/logger.js:115:39)
+              at ServerResponse.onResponseComplete (/Users/canson/Desktop/nexus/node_modules/.pnpm/pino-http@10.2.0/node_modules/pino-http/logger.js:178:14)
+              at ServerResponse.emit (node:events:532:35)
+              at onFinish (node:_http_outgoing:1077:10)
+              at callback (node:internal/streams/writable:764:21)
+              at afterWrite (node:internal/streams/writable:708:5)
+              at afterWriteTick (node:internal/streams/writable:694:10)
+              at process.processTicksAndRejections (node:internal/process/task_queues:81:21)
+    }
+[20:40:06.608] [32mINFO[39m (19012): [36mrequest completed[39m
+    req: {
+      "id": 2,
+      "method": "POST",
+      "url": "/api/auth/register",
+      "query": {},
+      "params": {
+        "0": "auth/register"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.40.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "92b0329a-2b02-45c0-b4f5-e059e2f6242e",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "105"
+      },
+      "remoteAddress": "::1",
+      "remotePort": 53968
+    }
+    res: {
+      "statusCode": 201,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "243",
+        "etag": "W/\"f3-nOwv+l+Z8u9SfltDueuySKAS5Q4\""
+      }
+    }
+    responseTime: 256
+[20:41:20.067] [32mINFO[39m (19054): [36mrequest completed[39m
+    req: {
+      "id": 1,
+      "method": "POST",
+      "url": "/api/auth/login",
+      "query": {},
+      "params": {
+        "0": "auth/login"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.40.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "e9ee8d59-d011-42f0-ba77-945450e0ff78",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "67"
+      },
+      "remoteAddress": "::1",
+      "remotePort": 53991
+    }
+    res: {
+      "statusCode": 201,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "18",
+        "etag": "W/\"12-euF+R960j7JdSLm80k0y5gs6hzw\"",
+        "set-cookie": [
+          "sessionId=s%3A3AOR7uXlSxfnQLsGz_d0YBqIXJPJl3Sp.Pwzf77R46uxDy4gLWga1l4ba5eivEC1wMHdWNZjr5mc; Path=/; Expires=Wed, 21 Aug 2024 17:41:19 GMT"
+        ]
+      }
+    }
+    responseTime: 414
+[11:41:07.480] [32mINFO[39m (20247): [36mrequest completed[39m
+    req: {
+      "id": 1,
+      "method": "POST",
+      "url": "/api/auth/login",
+      "query": {},
+      "params": {
+        "0": "auth/login"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.40.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "f8c79cda-8764-473e-acbb-28a3c331105b",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "66",
+        "cookie": "sessionId=s%3A3AOR7uXlSxfnQLsGz_d0YBqIXJPJl3Sp.Pwzf77R46uxDy4gLWga1l4ba5eivEC1wMHdWNZjr5mc"
+      },
+      "remoteAddress": "::1",
+      "remotePort": 54556
+    }
+    res: {
+      "statusCode": 400,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "80",
+        "etag": "W/\"50-aRjgf0zIuLLtwgVqNtWQ/cNANMk\""
+      }
+    }
+    responseTime: 246
+[11:41:12.468] [32mINFO[39m (20247): [36mrequest completed[39m
+    req: {
+      "id": 2,
+      "method": "POST",
+      "url": "/api/auth/login",
+      "query": {},
+      "params": {
+        "0": "auth/login"
+      },
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.40.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "f23444ea-ac98-4cf5-8684-7913dc7f80a6",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "67",
+        "cookie": "sessionId=s%3A3AOR7uXlSxfnQLsGz_d0YBqIXJPJl3Sp.Pwzf77R46uxDy4gLWga1l4ba5eivEC1wMHdWNZjr5mc"
+      },
+      "remoteAddress": "::1",
+      "remotePort": 54556
+    }
+    res: {
+      "statusCode": 201,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "18",
+        "etag": "W/\"12-euF+R960j7JdSLm80k0y5gs6hzw\"",
+        "set-cookie": [
+          "sessionId=s%3AcSBky4SrE-JBNxRwnX8sJfwgbxBXvcWx.meLrtz6QcP%2FZkQRxiuZqPqeqZUdoMJ0tNBpKlpBfMaQ; Path=/; Expires=Thu, 22 Aug 2024 08:41:12 GMT"
+        ]
+      }
+    }
+    responseTime: 411
