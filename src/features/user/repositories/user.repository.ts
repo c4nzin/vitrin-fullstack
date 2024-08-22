@@ -34,10 +34,6 @@ export class UserRepository extends BaseRepository<User> {
   ): Promise<UserDocument> {
     const user = await this.findOne({ $or: [{ username }, { email }] });
 
-    if (!user) {
-      throw new BadRequestException('No User found.');
-    }
-
     return user;
   }
 }

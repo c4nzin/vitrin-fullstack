@@ -9,9 +9,22 @@ import { TransformInterceptor } from './core/interceptors/transform.interceptor'
 import { Logger } from 'nestjs-pino';
 import { LoggingInterceptor } from './core/interceptors/logging.interceptor';
 import passport from 'passport';
+import helmet from 'helmet';
+import compression from 'compression';
+import expressMongoSanitize from 'express-mongo-sanitize';
 
 export async function setupApp(app: NestExpressApplication) {
   const config = app.get<Config>(ENV);
+
+  app.use(helmet());
+  app.use(compression());
+  app.use(
+    expressMongoSanitize({
+      replaceWith: '_',
+      allowDots: true,
+      dryRun: true,
+    }),
+  );
 
   app.use(
     session({

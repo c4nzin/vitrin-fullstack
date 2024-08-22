@@ -9,10 +9,7 @@ import { validate } from 'class-validator';
 
 @Injectable()
 export class ValidationPipe implements PipeTransform {
-  public async transform<T>(
-    value: T,
-    { metatype }: ArgumentMetadata,
-  ): Promise<T> {
+  public async transform<T>(value: T, { metatype }: ArgumentMetadata): Promise<T> {
     if (!metatype || !this.toValidate(metatype)) {
       return value;
     }
@@ -22,15 +19,14 @@ export class ValidationPipe implements PipeTransform {
       whitelist: true,
       forbidNonWhitelisted: true,
       stopAtFirstError: true,
+      transform: true,
     });
 
     if (errors.length === 0) {
       return value;
     }
 
-    const errorMessages = errors.flatMap((err) =>
-      Object.values(err.constraints!),
-    );
+    const errorMessages = errors.flatMap((err) => Object.values(err.constraints!));
     throw new BadRequestException(errorMessages);
   }
 

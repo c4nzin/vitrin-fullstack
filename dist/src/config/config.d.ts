@@ -4,6 +4,13 @@ export declare const envalidValidator: import("nestjs-envalid").MakeValidatorsRe
     PORT: number;
     SESSION_SECRET: string;
     GLOBAL_PREFIX: string;
+    REDIS_PORT: number;
+    REDIS_HOST: string;
+    OTP_LENGTH: number;
+    MAIL_PORT: number;
+    MAIL_HOST: string;
+    MAIL_PASSWORD: string;
+    MAIL: string;
 }>;
 export type Config = Static<typeof envalidValidator>;
 export declare const ENV = "EnvalidModuleEnv";

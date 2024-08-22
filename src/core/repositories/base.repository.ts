@@ -1,9 +1,4 @@
-import {
-  FilterQuery,
-  Model,
-  UpdateQuery,
-  UpdateWithAggregationPipeline,
-} from 'mongoose';
+import { FilterQuery, Model, UpdateQuery, UpdateWithAggregationPipeline } from 'mongoose';
 import {
   CreateResult,
   DeleteResult,

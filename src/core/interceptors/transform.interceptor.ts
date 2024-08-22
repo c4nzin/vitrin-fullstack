@@ -18,9 +18,7 @@ export class TransformInterceptor<T> implements NestInterceptor<T, Payload<T>> {
     context: ExecutionContext,
     next: CallHandler<T>,
   ): Observable<Payload<T>> {
-    return next
-      .handle()
-      .pipe(map((data) => this.transformResponse(data, context)));
+    return next.handle().pipe(map((data) => this.transformResponse(data, context)));
   }
 
   private transformResponse<T>(data: T, context: ExecutionContext): Payload<T> {

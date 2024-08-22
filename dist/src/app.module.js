@@ -14,6 +14,8 @@ const database_module_1 = require("./common/database/database.module");
 const nestjs_pino_1 = require("nestjs-pino");
 const user_module_1 = require("./features/user/user.module");
 const auth_module_1 = require("./features/auth/auth.module");
+const bull_module_1 = require("./modules/bull/bull.module");
+const otp_module_1 = require("./features/otp/otp.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -41,6 +43,8 @@ exports.AppModule = AppModule = __decorate([
                 },
             }),
             database_module_1.DatabaseModule,
+            bull_module_1.BullModule,
+            otp_module_1.OtpModule,
         ],
     })
 ], AppModule);

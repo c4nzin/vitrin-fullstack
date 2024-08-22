@@ -74,6 +74,7 @@ export class User {
     default: false,
   })
   public isEmailVerified: boolean;
+
   @Prop({
     type: String,
   })

@@ -14,18 +14,23 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
-const services_1 = require("../services");
-const guards_1 = require("../../../common/guards");
 const dto_1 = require("../dto");
+const cqrs_1 = require("@nestjs/cqrs");
+const decorators_1 = require("../../../common/decorators");
+const guards_1 = require("../../../common/guards");
+const cqrs_2 = require("../cqrs");
 let AuthController = class AuthController {
-    constructor(authService) {
-        this.authService = authService;
+    constructor(commandbus) {
+        this.commandbus = commandbus;
     }
     async login(loginDto) {
-        await this.authService.login(loginDto);
+        return this.commandbus.execute(new cqrs_2.LoginUserCommand(loginDto));
     }
     async register(registerDto) {
-        return this.authService.register(registerDto);
+        return this.commandbus.execute(new cqrs_2.RegisterUserCommand(registerDto));
+    }
+    async getme(user) {
+        return user;
     }
 };
 exports.AuthController = AuthController;
@@ -44,8 +49,16 @@ __decorate([
     __metadata("design:paramtypes", [dto_1.RegisterDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "register", null);
+__decorate([
+    (0, common_1.Get)('me'),
+    (0, common_1.UseGuards)(guards_1.LocalAuthGuard),
+    __param(0, (0, decorators_1.User)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "getme", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
-    __metadata("design:paramtypes", [services_1.AuthService])
+    __metadata("design:paramtypes", [cqrs_1.CommandBus])
 ], AuthController);
 //# sourceMappingURL=auth.controller.js.map

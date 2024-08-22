@@ -40,9 +40,6 @@ let UserRepository = class UserRepository extends base_repository_1.BaseReposito
     }
     async findByUsernameAndEmail(username, email) {
         const user = await this.findOne({ $or: [{ username }, { email }] });
-        if (!user) {
-            throw new common_1.BadRequestException('No User found.');
-        }
         return user;
     }
 };

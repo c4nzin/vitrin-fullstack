@@ -20,6 +20,7 @@ let ValidationPipe = class ValidationPipe {
             whitelist: true,
             forbidNonWhitelisted: true,
             stopAtFirstError: true,
+            transform: true,
         });
         if (errors.length === 0) {
             return value;

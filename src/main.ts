@@ -4,20 +4,19 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 import { Config, ENV } from './config/config';
 import { setupSwagger } from './setup-swagger';
+import { useContainer } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const config = app.get<Config>(ENV);
+
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+
   setupSwagger(app);
   setupApp(app);
-  //TODO : ADD GUARDS TO REGISTER/LOGIN
   //TODO : ADD GOOGLE LOGIN
-  //TODO : ADD ESSENTIAL MIDDLEWARES HELMET COMPRESSION ETC
-  //TODO : ADD BULLMQ
   //TODO : ADD MAIL SERVICE
-  //TODO : ADD OTP
   //TODO : ADD THROTTLER
-  //TODO : ADD PINO PRETTIER
   //TODO : ADD CLOUD STORAGE
   //TODO : ADD IS USER FIELD IS UNQIUE DECORATOR WITH CLASS VALIDATOR
 

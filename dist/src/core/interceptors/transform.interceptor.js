@@ -19,9 +19,7 @@ let TransformInterceptor = class TransformInterceptor {
         this.reflector = reflector;
     }
     intercept(context, next) {
-        return next
-            .handle()
-            .pipe((0, rxjs_1.map)((data) => this.transformResponse(data, context)));
+        return next.handle().pipe((0, rxjs_1.map)((data) => this.transformResponse(data, context)));
     }
     transformResponse(data, context) {
         const handler = context.getHandler();

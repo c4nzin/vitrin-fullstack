@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const is_field_unique_decorator_1 = require("../../../common/decorators/is-field-unique.decorator");
 const schemas_1 = require("../../user/schemas");
 class RegisterDto {
     constructor() {
@@ -24,6 +25,7 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.Length)(3, 15),
+    (0, is_field_unique_decorator_1.IsUserFieldUnique)('username'),
     __metadata("design:type", String)
 ], RegisterDto.prototype, "username", void 0);
 __decorate([

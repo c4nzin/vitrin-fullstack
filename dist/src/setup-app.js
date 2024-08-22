@@ -14,8 +14,18 @@ const transform_interceptor_1 = require("./core/interceptors/transform.intercept
 const nestjs_pino_1 = require("nestjs-pino");
 const logging_interceptor_1 = require("./core/interceptors/logging.interceptor");
 const passport_1 = __importDefault(require("passport"));
+const helmet_1 = __importDefault(require("helmet"));
+const compression_1 = __importDefault(require("compression"));
+const express_mongo_sanitize_1 = __importDefault(require("express-mongo-sanitize"));
 async function setupApp(app) {
     const config = app.get(config_1.ENV);
+    app.use((0, helmet_1.default)());
+    app.use((0, compression_1.default)());
+    app.use((0, express_mongo_sanitize_1.default)({
+        replaceWith: '_',
+        allowDots: true,
+        dryRun: true,
+    }));
     app.use((0, express_session_1.default)({
         cookie: {
             httpOnly: false,

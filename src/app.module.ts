@@ -5,8 +5,8 @@ import { DatabaseModule } from './common/database/database.module';
 import { LoggerModule } from 'nestjs-pino';
 import { UserModule } from './features/user/user.module';
 import { AuthModule } from './features/auth/auth.module';
-
-//TODO : add features module and import here
+import { BullModule } from './modules/bull/bull.module';
+import { OtpModule } from './features/otp/otp.module';
 
 @Module({
   imports: [
@@ -31,6 +31,8 @@ import { AuthModule } from './features/auth/auth.module';
       },
     }),
     DatabaseModule,
+    BullModule,
+    OtpModule,
   ],
 })
 export class AppModule {}
