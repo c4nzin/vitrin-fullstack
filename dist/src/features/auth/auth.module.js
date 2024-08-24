@@ -21,7 +21,7 @@ const nestjs_1 = require("@automapper/nestjs");
 const bull_1 = require("@nestjs/bull");
 const services_1 = require("../../modules/email/services");
 const otp_module_1 = require("../otp/otp.module");
-const is_field_unique_decorator_1 = require("../../common/decorators/is-field-unique.decorator");
+const decorators_1 = require("../../common/decorators");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
@@ -42,7 +42,7 @@ exports.AuthModule = AuthModule = __decorate([
             cqrs_2.RegisterUserHandler,
             cqrs_2.LoginUserHandler,
             auth_profile_1.AuthProfile,
-            is_field_unique_decorator_1.IsFieldUniqueDecorator,
+            decorators_1.IsFieldUniqueConstraint,
         ],
         exports: [],
     })

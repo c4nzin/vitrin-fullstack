@@ -13,6 +13,9 @@ const config = {
   MAIL_HOST: str(),
   MAIL_PASSWORD: str(),
   MAIL: str(),
+  CLOUDINARY_API_KEY: str(),
+  CLOUDINARY_CLOUD_NAME: str(),
+  CLOUDINARY_API_SECRET: str(),
 };
 
 export const envalidValidator = makeValidators(config);

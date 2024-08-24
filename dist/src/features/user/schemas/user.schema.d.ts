@@ -16,6 +16,8 @@ export declare class User {
     hasPassword: boolean;
     bio: string;
     birthDay: Date | null;
+    profilePicture: string;
+    website: string;
 }
 export declare const UserSchema: import("mongoose").Schema<User, import("mongoose").Model<User, any, any, any, import("mongoose").Document<unknown, any, User> & User & {
     _id: import("mongoose").Types.ObjectId;

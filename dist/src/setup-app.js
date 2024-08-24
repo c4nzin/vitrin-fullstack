@@ -35,7 +35,7 @@ async function setupApp(app) {
         name: 'sessionId',
         resave: false,
         saveUninitialized: false,
-        store: connect_mongo_1.default.create({ mongoUrl: config.DB_URI }),
+        store: connect_mongo_1.default.create({ mongoUrl: config.DB_URI, ttl: 7 * 24 * 60 * 60 }),
     }));
     app.useGlobalPipes(new validation_pipe_1.ValidationPipe());
     app.useGlobalFilters(new http_exception_filter_1.HttpExceptionFilter());

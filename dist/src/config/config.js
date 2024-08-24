@@ -15,6 +15,9 @@ const config = {
     MAIL_HOST: (0, envalid_1.str)(),
     MAIL_PASSWORD: (0, envalid_1.str)(),
     MAIL: (0, envalid_1.str)(),
+    CLOUDINARY_API_KEY: (0, envalid_1.str)(),
+    CLOUDINARY_CLOUD_NAME: (0, envalid_1.str)(),
+    CLOUDINARY_API_SECRET: (0, envalid_1.str)(),
 };
 exports.envalidValidator = (0, nestjs_envalid_1.makeValidators)(config);
 exports.ENV = 'EnvalidModuleEnv';

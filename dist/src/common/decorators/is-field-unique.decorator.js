@@ -9,40 +9,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IsFieldUniqueDecorator = void 0;
+exports.IsFieldUniqueConstraint = void 0;
 exports.IsUserFieldUnique = IsUserFieldUnique;
 const class_validator_1 = require("class-validator");
 const repositories_1 = require("../../features/user/repositories");
-let IsFieldUniqueDecorator = class IsFieldUniqueDecorator {
+let IsFieldUniqueConstraint = class IsFieldUniqueConstraint {
     constructor(userRepository) {
         this.userRepository = userRepository;
     }
     async validate(value, validationArguments) {
         const [constraints] = validationArguments.constraints;
         const user = await this.userRepository.findOne({ [constraints]: value });
-        if (!user) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return !user;
     }
     defaultMessage(args) {
         return `The field '${args.property}' is already taken.`;
     }
 };
-exports.IsFieldUniqueDecorator = IsFieldUniqueDecorator;
-exports.IsFieldUniqueDecorator = IsFieldUniqueDecorator = __decorate([
+exports.IsFieldUniqueConstraint = IsFieldUniqueConstraint;
+exports.IsFieldUniqueConstraint = IsFieldUniqueConstraint = __decorate([
     (0, class_validator_1.ValidatorConstraint)({ async: true, name: 'IsUserFieldUnique' }),
     __metadata("design:paramtypes", [repositories_1.UserRepository])
-], IsFieldUniqueDecorator);
+], IsFieldUniqueConstraint);
 function IsUserFieldUnique(property, validationOptions) {
     return function (object, propertyName) {
         (0, class_validator_1.registerDecorator)({
             propertyName: propertyName,
             name: 'IsUserFieldUnique',
             constraints: [property],
-            validator: IsFieldUniqueDecorator,
+            validator: IsFieldUniqueConstraint,
             options: validationOptions,
             target: object.constructor,
         });

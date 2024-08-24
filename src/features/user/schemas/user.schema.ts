@@ -100,6 +100,20 @@ export class User {
     type: Date,
   })
   public birthDay: Date | null;
+
+  @Prop({
+    type: String,
+    default: process.env.PROFILE_PICTURE_URL,
+  })
+  public profilePicture: string;
+
+  @Prop({
+    type: String,
+    validate: {
+      validator: (url: string) => validator.isURL(url),
+    },
+  })
+  public website: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass<User>(User);

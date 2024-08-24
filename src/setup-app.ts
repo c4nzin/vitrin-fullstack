@@ -36,7 +36,7 @@ export async function setupApp(app: NestExpressApplication) {
       name: 'sessionId',
       resave: false,
       saveUninitialized: false,
-      store: connectMongo.create({ mongoUrl: config.DB_URI }),
+      store: connectMongo.create({ mongoUrl: config.DB_URI, ttl: 7 * 24 * 60 * 60 }),
     }),
   );
 

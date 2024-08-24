@@ -13,12 +13,7 @@ async function bootstrap() {
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   setupSwagger(app);
-  setupApp(app);
-  //TODO : ADD GOOGLE LOGIN
-  //TODO : ADD MAIL SERVICE
-  //TODO : ADD THROTTLER
-  //TODO : ADD CLOUD STORAGE
-  //TODO : ADD IS USER FIELD IS UNQIUE DECORATOR WITH CLASS VALIDATOR
+  await setupApp(app);
 
   await app.listen(config.PORT);
 }

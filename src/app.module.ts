@@ -7,6 +7,8 @@ import { UserModule } from './features/user/user.module';
 import { AuthModule } from './features/auth/auth.module';
 import { BullModule } from './modules/bull/bull.module';
 import { OtpModule } from './features/otp/otp.module';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -33,6 +35,8 @@ import { OtpModule } from './features/otp/otp.module';
     DatabaseModule,
     BullModule,
     OtpModule,
+    ThrottlerModule,
+    CloudinaryModule,
   ],
 })
 export class AppModule {}

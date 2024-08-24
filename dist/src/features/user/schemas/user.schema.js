@@ -105,6 +105,22 @@ __decorate([
     }),
     __metadata("design:type", Date)
 ], User.prototype, "birthDay", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: String,
+        default: process.env.PROFILE_PICTURE_URL,
+    }),
+    __metadata("design:type", String)
+], User.prototype, "profilePicture", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: String,
+        validate: {
+            validator: (url) => validator_1.default.isURL(url),
+        },
+    }),
+    __metadata("design:type", String)
+], User.prototype, "website", void 0);
 exports.User = User = __decorate([
     (0, mongoose_1.Schema)({
         versionKey: false,

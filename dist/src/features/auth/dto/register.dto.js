@@ -32,6 +32,7 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsEmail)(),
     (0, class_validator_1.IsNotEmpty)(),
+    (0, is_field_unique_decorator_1.IsUserFieldUnique)('email'),
     __metadata("design:type", String)
 ], RegisterDto.prototype, "email", void 0);
 __decorate([
