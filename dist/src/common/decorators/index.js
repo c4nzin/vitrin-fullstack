@@ -17,4 +17,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./message.decorator"), exports);
 __exportStar(require("./user.decorator"), exports);
 __exportStar(require("./is-field-unique.decorator"), exports);
+__exportStar(require("./paginate.decorator"), exports);
 //# sourceMappingURL=index.js.map

@@ -13,26 +13,26 @@ const mongoose_1 = require("@nestjs/mongoose");
 const schemas_1 = require("./schemas/");
 const controllers_1 = require("./controllers");
 const cloudinary_module_1 = require("../../modules/cloudinary/cloudinary.module");
-const upload_photo_handler_1 = require("./cqrs/photo/handler/upload-photo.handler");
 const cqrs_1 = require("@nestjs/cqrs");
-const update_profile_handler_1 = require("./cqrs/account/handler/update-profile.handler");
+const follow_controller_1 = require("./controllers/follow.controller");
+const all_handlers_1 = require("./cqrs/all-handlers");
+const post_controller_1 = require("./controllers/post.controller");
 let UserModule = class UserModule {
 };
 exports.UserModule = UserModule;
 exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forFeature([{ name: schemas_1.User.name, schema: schemas_1.UserSchema }]),
+            mongoose_1.MongooseModule.forFeature([
+                { name: schemas_1.User.name, schema: schemas_1.UserSchema },
+                { name: schemas_1.Post.name, schema: schemas_1.PostSchema },
+            ]),
             cloudinary_module_1.CloudinaryModule,
             cqrs_1.CqrsModule,
         ],
-        controllers: [controllers_1.PhotoController, controllers_1.UserController],
-        providers: [
-            repositories_1.UserRepository,
-            upload_photo_handler_1.UploadPhotoCommandHandler,
-            update_profile_handler_1.UpdateProfileFieldsCommandHandler,
-        ],
-        exports: [repositories_1.UserRepository, upload_photo_handler_1.UploadPhotoCommandHandler, update_profile_handler_1.UpdateProfileFieldsCommandHandler],
+        controllers: [controllers_1.PhotoController, controllers_1.UserController, follow_controller_1.FollowController, post_controller_1.PostController],
+        providers: [repositories_1.UserRepository, repositories_1.PostRepository, ...all_handlers_1.allHandlers],
+        exports: [repositories_1.UserRepository, repositories_1.PostRepository, ...all_handlers_1.allHandlers],
     })
 ], UserModule);
 //# sourceMappingURL=user.module.js.map

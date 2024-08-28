@@ -16,6 +16,6 @@ import { VerifyOtpHandler } from './cqrs/verify-otp/handler/verify-otp.handler';
   ],
   providers: [OtpRepository, GenerateOtpHandler, VerifyOtpHandler],
   controllers: [OtpController],
-  exports: [OtpRepository],
+  exports: [OtpRepository, GenerateOtpHandler, VerifyOtpHandler],
 })
 export class OtpModule {}

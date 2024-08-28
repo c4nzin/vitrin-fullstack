@@ -1,0 +1,1 @@
+{"version":3,"file":"update-email.command.js","sourceRoot":"","sources":["../../../../../../../src/features/user/cqrs/account/command/update-email.command.ts"],"names":[],"mappings":";;;AAGA,MAAa,iBAAiB;IAC5B,YACS,WAA2B,EAClB,IAAkB;QAD3B,gBAAW,GAAX,WAAW,CAAgB;QAClB,SAAI,GAAJ,IAAI,CAAc;IACjC,CAAC;CACL;AALD,8CAKC"}

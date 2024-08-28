@@ -15,4 +15,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./update-profile.dto"), exports);
+__exportStar(require("./update-email.dto"), exports);
+__exportStar(require("./create-post.dto"), exports);
+__exportStar(require("./delete-post.dto"), exports);
 //# sourceMappingURL=index.js.map

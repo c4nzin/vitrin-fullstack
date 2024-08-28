@@ -19,6 +19,7 @@ const photo_pipe_1 = require("../pipes/photo.pipe");
 const decorators_1 = require("../../../common/decorators");
 const cqrs_1 = require("@nestjs/cqrs");
 const upload_photo_command_1 = require("../cqrs/photo/command/upload-photo.command");
+const authenticated_guard_1 = require("../../../common/guards/authenticated.guard");
 let PhotoController = class PhotoController {
     constructor(commandBus) {
         this.commandBus = commandBus;
@@ -51,6 +52,7 @@ __decorate([
 ], PhotoController.prototype, "updateProfilephoto", null);
 exports.PhotoController = PhotoController = __decorate([
     (0, common_1.Controller)('users'),
+    (0, common_1.UseGuards)(authenticated_guard_1.AuthenticatedGuard),
     __metadata("design:paramtypes", [cqrs_1.CommandBus])
 ], PhotoController);
 //# sourceMappingURL=photo.controller.js.map

@@ -16,4 +16,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./photo.controller"), exports);
 __exportStar(require("./user.controller"), exports);
+__exportStar(require("./follow.controller"), exports);
+__exportStar(require("./post.controller"), exports);
 //# sourceMappingURL=index.js.map

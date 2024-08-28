@@ -1,22 +1,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 
 //add thumbnail
-//add photo
 //add follow
 //add follower
 //add posts
-//add bio DONE
-//add website
 //add location
-//add birthday DONE
-//add isVerified DONE
 
 //*** no needed but good to having those */
 //add blockeduser
-//add role
 export type UserDocument = HydratedDocument<User>;
 
 export enum Gender {
@@ -28,6 +22,7 @@ export enum Gender {
 
 @Schema({
   versionKey: false,
+  collection: 'User',
 })
 export class User {
   @Prop({
@@ -104,6 +99,7 @@ export class User {
   @Prop({
     type: String,
     default: process.env.PROFILE_PICTURE_URL,
+    select: true,
   })
   public profilePicture: string;
 
@@ -114,6 +110,38 @@ export class User {
     },
   })
   public website: string;
+
+  @Prop({
+    type: String,
+    default: process.env.THUMBNAIL_URL,
+  })
+  public thumbnail: string;
+
+  @Prop({
+    type: [Types.ObjectId],
+    default: [],
+  })
+  public follow: Types.ObjectId[];
+
+  @Prop({
+    type: [Types.ObjectId],
+    default: [],
+  })
+  public follower: Types.ObjectId[];
+
+  @Prop({
+    type: [Types.ObjectId],
+    ref: 'Post',
+    default: [],
+  })
+  public posts: Types.ObjectId[];
+
+  @Prop({
+    type: [Types.ObjectId],
+    ref: 'User',
+    default: [],
+  })
+  public blockeduser: Types.ObjectId[];
 }
 
 export const UserSchema = SchemaFactory.createForClass<User>(User);

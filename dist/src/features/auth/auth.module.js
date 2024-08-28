@@ -22,6 +22,7 @@ const bull_1 = require("@nestjs/bull");
 const services_1 = require("../../modules/email/services");
 const otp_module_1 = require("../otp/otp.module");
 const decorators_1 = require("../../common/decorators");
+const verify_account_handler_1 = require("./cqrs/verify-account/handler/verify-account.handler");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
@@ -43,6 +44,7 @@ exports.AuthModule = AuthModule = __decorate([
             cqrs_2.LoginUserHandler,
             auth_profile_1.AuthProfile,
             decorators_1.IsFieldUniqueConstraint,
+            verify_account_handler_1.VerifyAccountCommandHandler,
         ],
         exports: [],
     })

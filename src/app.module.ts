@@ -9,6 +9,8 @@ import { BullModule } from './modules/bull/bull.module';
 import { OtpModule } from './features/otp/otp.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
+import { RequestContextModule } from '@medibloc/nestjs-request-context';
+import { AuthenticatedContext } from './common/contexts/authenticated.context';
 
 @Module({
   imports: [
@@ -37,6 +39,7 @@ import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
     OtpModule,
     ThrottlerModule,
     CloudinaryModule,
+    RequestContextModule.forRoot({ isGlobal: true, contextClass: AuthenticatedContext }),
   ],
 })
 export class AppModule {}

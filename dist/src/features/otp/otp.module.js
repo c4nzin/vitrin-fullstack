@@ -28,7 +28,7 @@ exports.OtpModule = OtpModule = __decorate([
         ],
         providers: [otp_repository_1.OtpRepository, generate_otp_handler_1.GenerateOtpHandler, verify_otp_handler_1.VerifyOtpHandler],
         controllers: [controllers_1.OtpController],
-        exports: [otp_repository_1.OtpRepository],
+        exports: [otp_repository_1.OtpRepository, generate_otp_handler_1.GenerateOtpHandler, verify_otp_handler_1.VerifyOtpHandler],
     })
 ], OtpModule);
 //# sourceMappingURL=otp.module.js.map

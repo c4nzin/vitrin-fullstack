@@ -4,6 +4,7 @@ import { User, UserDocument } from '../schemas/user.schema';
 import { Model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import { BadRequestException } from '@nestjs/common';
+import { Pagination } from 'src/common/decorators/types/pagination.interface';
 
 export class UserRepository extends BaseRepository<User> {
   constructor(@InjectModel(User.name) private readonly userRepository: Model<User>) {
@@ -35,5 +36,43 @@ export class UserRepository extends BaseRepository<User> {
     const user = await this.findOne({ $or: [{ username }, { email }] });
 
     return user;
+  }
+
+  public async isOldEmailCorrect(email: string) {
+    const user = await this.findOne({ email });
+
+    return user;
+  }
+  public async findFollowers(
+    userId: string,
+    pagination: Pagination,
+  ): Promise<UserDocument[]> {
+    const query = { followedBy: userId };
+
+    return this.find(query)
+      .skip(pagination.skip)
+      .limit(pagination.limit)
+      .sort(
+        pagination.sort.reduce((acc, sort) => {
+          acc[sort.field] = sort.by === 'ASC' ? 1 : -1;
+          return acc;
+        }, {}),
+      )
+      .exec();
+  }
+
+  public async getTweetsFromUser(id: string, pagination: Pagination): Promise<any[]> {
+    const query = { userId: id };
+
+    return this.find(query)
+      .skip(pagination.skip)
+      .limit(pagination.skip)
+      .sort(
+        pagination.sort.reduce((acc, sort) => {
+          acc[sort.field] = sort.by === 'ASC' ? 1 : -1;
+          return acc;
+        }, {}),
+      )
+      .exec();
   }
 }

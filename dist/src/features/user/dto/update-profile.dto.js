@@ -12,8 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateProfileDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
-const schemas_1 = require("../schemas");
 const decorators_1 = require("../../../common/decorators");
+const user_schema_1 = require("../schemas/user.schema");
 class UpdateProfileDto {
 }
 exports.UpdateProfileDto = UpdateProfileDto;
@@ -35,8 +35,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsEnum)(schemas_1.Gender),
-    (0, class_validator_1.Length)(3, 15),
+    (0, class_validator_1.IsEnum)(user_schema_1.Gender),
     __metadata("design:type", Number)
 ], UpdateProfileDto.prototype, "gender", void 0);
 __decorate([

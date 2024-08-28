@@ -23,6 +23,10 @@ export class LoginUserHandler implements ICommandHandler<LoginUserCommand> {
       throw new BadRequestException('No user found.');
     }
 
+    if (!user.isEmailVerified) {
+      throw new BadRequestException('You must verify your account!');
+    }
+
     const isValidPassword = await this.userRepository.isCorrectPassword(
       password,
       user.password,

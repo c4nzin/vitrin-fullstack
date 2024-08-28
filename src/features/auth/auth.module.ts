@@ -13,6 +13,7 @@ import { BullModule } from '@nestjs/bull';
 import { EMAIL_QUEUE } from 'src/modules/email/services';
 import { OtpModule } from '../otp/otp.module';
 import { IsFieldUniqueConstraint } from 'src/common/decorators';
+import { VerifyAccountCommandHandler } from './cqrs/verify-account/handler/verify-account.handler';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { IsFieldUniqueConstraint } from 'src/common/decorators';
     LoginUserHandler,
     AuthProfile,
     IsFieldUniqueConstraint,
+    VerifyAccountCommandHandler,
   ],
   exports: [],
 })

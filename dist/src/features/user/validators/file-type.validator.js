@@ -30,9 +30,12 @@ class FileTypeValidator extends common_1.FileValidator {
     constructor(validationOptions) {
         super(validationOptions);
         this.validationOptions = validationOptions;
-        this.allowedMimeTypes = this.validationOptions.mimeType;
+        this.allowedMimeTypes = this.validationOptions.fileType;
     }
     isValid(file) {
+        if (!(file === null || file === void 0 ? void 0 : file.buffer)) {
+            return false;
+        }
         const response = fileType.parse(file.buffer);
         return this.allowedMimeTypes.includes(response.mime);
     }

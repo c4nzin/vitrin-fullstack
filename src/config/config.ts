@@ -16,6 +16,7 @@ const config = {
   CLOUDINARY_API_KEY: str(),
   CLOUDINARY_CLOUD_NAME: str(),
   CLOUDINARY_API_SECRET: str(),
+  PROFILE_PICTURE_URL: str({ default: process.env.PROFILE_PICTURE_URL }),
 };
 
 export const envalidValidator = makeValidators(config);

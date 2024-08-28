@@ -21,11 +21,12 @@ let UploadPhotoCommandHandler = class UploadPhotoCommandHandler {
     }
     async execute(command) {
         const file = await this.cloudinaryService.uploadFile(command.file, {
-            async: true,
-            folder: 'users',
+            folder: 'profile-photos',
+            async: false,
         });
-        await this.userRepository.findByIdAndUpdate(command.id, {
-            $set: { profilePicture: file.url },
+        const fileUrl = file.url || file.secure_url;
+        return this.userRepository.findByIdAndUpdate(command.id, {
+            $set: { profilePicture: fileUrl },
         });
     }
 };

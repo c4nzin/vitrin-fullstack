@@ -18,6 +18,7 @@ const config = {
     CLOUDINARY_API_KEY: (0, envalid_1.str)(),
     CLOUDINARY_CLOUD_NAME: (0, envalid_1.str)(),
     CLOUDINARY_API_SECRET: (0, envalid_1.str)(),
+    PROFILE_PICTURE_URL: (0, envalid_1.str)({ default: process.env.PROFILE_PICTURE_URL }),
 };
 exports.envalidValidator = (0, nestjs_envalid_1.makeValidators)(config);
 exports.ENV = 'EnvalidModuleEnv';

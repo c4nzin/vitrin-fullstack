@@ -16,4 +16,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./base.guard"), exports);
 __exportStar(require("./local-auth.guard"), exports);
+__exportStar(require("./authenticated.guard"), exports);
 //# sourceMappingURL=index.js.map

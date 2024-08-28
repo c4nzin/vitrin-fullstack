@@ -42,6 +42,32 @@ let UserRepository = class UserRepository extends base_repository_1.BaseReposito
         const user = await this.findOne({ $or: [{ username }, { email }] });
         return user;
     }
+    async isOldEmailCorrect(email) {
+        const user = await this.findOne({ email });
+        return user;
+    }
+    async findFollowers(userId, pagination) {
+        const query = { followedBy: userId };
+        return this.find(query)
+            .skip(pagination.skip)
+            .limit(pagination.limit)
+            .sort(pagination.sort.reduce((acc, sort) => {
+            acc[sort.field] = sort.by === 'ASC' ? 1 : -1;
+            return acc;
+        }, {}))
+            .exec();
+    }
+    async getTweetsFromUser(id, pagination) {
+        const query = { userId: id };
+        return this.find(query)
+            .skip(pagination.skip)
+            .limit(pagination.skip)
+            .sort(pagination.sort.reduce((acc, sort) => {
+            acc[sort.field] = sort.by === 'ASC' ? 1 : -1;
+            return acc;
+        }, {}))
+            .exec();
+    }
 };
 exports.UserRepository = UserRepository;
 exports.UserRepository = UserRepository = __decorate([

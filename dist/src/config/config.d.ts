@@ -14,6 +14,7 @@ export declare const envalidValidator: import("nestjs-envalid").MakeValidatorsRe
     CLOUDINARY_API_KEY: string;
     CLOUDINARY_CLOUD_NAME: string;
     CLOUDINARY_API_SECRET: string;
+    PROFILE_PICTURE_URL: string;
 }>;
 export type Config = Static<typeof envalidValidator>;
 export declare const ENV = "EnvalidModuleEnv";

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsOptional, IsString, IsUrl, Length } from 'class-validator';
-import { Gender } from '../schemas';
 import { IsUserFieldUnique } from 'src/common/decorators';
+import { Gender } from '../schemas/user.schema';
 
 export class UpdateProfileDto {
   @IsOptional()
@@ -20,7 +20,6 @@ export class UpdateProfileDto {
   @IsOptional()
   @ApiProperty()
   @IsEnum(Gender)
-  @Length(3, 15)
   public gender: number;
 
   @ApiProperty()

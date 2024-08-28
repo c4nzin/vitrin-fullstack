@@ -25,8 +25,7 @@ const otp_generator_1 = __importDefault(require("otp-generator"));
 const common_1 = require("@nestjs/common");
 const config_1 = require("../../../../../config/config");
 let GenerateOtpHandler = class GenerateOtpHandler {
-    constructor(commandBus, otpRepository, config) {
-        this.commandBus = commandBus;
+    constructor(otpRepository, config) {
         this.otpRepository = otpRepository;
         this.config = config;
     }
@@ -52,8 +51,7 @@ let GenerateOtpHandler = class GenerateOtpHandler {
 exports.GenerateOtpHandler = GenerateOtpHandler;
 exports.GenerateOtpHandler = GenerateOtpHandler = __decorate([
     (0, cqrs_1.CommandHandler)(generate_otp_command_1.GenerateOtpCommand),
-    __param(2, (0, common_1.Inject)(config_1.ENV)),
-    __metadata("design:paramtypes", [cqrs_1.CommandBus,
-        repositories_1.OtpRepository, Object])
+    __param(1, (0, common_1.Inject)(config_1.ENV)),
+    __metadata("design:paramtypes", [repositories_1.OtpRepository, Object])
 ], GenerateOtpHandler);
 //# sourceMappingURL=generate-otp.handler.js.map

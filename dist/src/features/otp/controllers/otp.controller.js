@@ -17,7 +17,7 @@ const common_1 = require("@nestjs/common");
 const dto_1 = require("../dto/");
 const cqrs_1 = require("@nestjs/cqrs");
 const generate_otp_command_1 = require("../cqrs/generate-otp/command/generate-otp.command");
-const verify_otp_command_1 = require("../cqrs/verify-otp/command/verify-otp.command");
+const verify_account_command_1 = require("../../auth/cqrs/verify-account/command/verify-account.command");
 let OtpController = class OtpController {
     constructor(commandBus) {
         this.commandBus = commandBus;
@@ -26,19 +26,19 @@ let OtpController = class OtpController {
         await this.commandBus.execute(new generate_otp_command_1.GenerateOtpCommand(otpDto.email));
     }
     async verifyOtp(otpDto) {
-        await this.commandBus.execute(new verify_otp_command_1.VerifyOtpCommand(otpDto.email, otpDto.otpCode));
+        return this.commandBus.execute(new verify_account_command_1.VerifyAccountCommand(otpDto));
     }
 };
 exports.OtpController = OtpController;
 __decorate([
-    (0, common_1.Post)('sendotp'),
+    (0, common_1.Post)('send-otp'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [dto_1.SendOtpDto]),
     __metadata("design:returntype", Promise)
 ], OtpController.prototype, "sendOtp", null);
 __decorate([
-    (0, common_1.Post)('verifyOtp'),
+    (0, common_1.Post)('verify-account'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [dto_1.OtpDto]),

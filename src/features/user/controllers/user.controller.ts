@@ -1,11 +1,14 @@
-import { Body, Controller, Get, Patch } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post, UseGuards } from '@nestjs/common';
 import { User } from 'src/common/decorators';
 import { UserDocument } from '../schemas';
-import { UpdateProfileDto } from '../dto';
+import { UpdateEmailDto, UpdateProfileDto } from '../dto';
 import { CommandBus } from '@nestjs/cqrs';
 import { UpdateProfileFieldsCommand } from '../cqrs/account/command/update-profile.command';
+import { AuthenticatedGuard } from 'src/common/guards/authenticated.guard';
+import { UpdatEmailCommand } from '../cqrs/account/command/update-email.command';
 
 @Controller('users')
+@UseGuards(AuthenticatedGuard)
 export class UserController {
   constructor(private readonly commandBus: CommandBus) {}
 
@@ -20,5 +23,12 @@ export class UserController {
     @Body() updateProfile: UpdateProfileDto,
   ): Promise<UserDocument> {
     return this.commandBus.execute(new UpdateProfileFieldsCommand(id, updateProfile));
+  }
+  @Post('update-email')
+  public async updateEmail(
+    @Body() updateEmailDto: UpdateEmailDto,
+    @User() user: UserDocument,
+  ): Promise<UserDocument> {
+    return this.commandBus.execute(new UpdatEmailCommand(updateEmailDto, user));
   }
 }

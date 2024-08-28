@@ -27,6 +27,9 @@ let LoginUserHandler = class LoginUserHandler {
         if (!user) {
             throw new common_1.BadRequestException('No user found.');
         }
+        if (!user.isEmailVerified) {
+            throw new common_1.BadRequestException('You must verify your account!');
+        }
         const isValidPassword = await this.userRepository.isCorrectPassword(password, user.password);
         if (user && isValidPassword) {
             return user;

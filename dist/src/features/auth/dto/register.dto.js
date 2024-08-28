@@ -13,10 +13,10 @@ exports.RegisterDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const is_field_unique_decorator_1 = require("../../../common/decorators/is-field-unique.decorator");
-const schemas_1 = require("../../user/schemas");
+const user_schema_1 = require("../../user/schemas/user.schema");
 class RegisterDto {
     constructor() {
-        this.gender = schemas_1.Gender.NOT_KNOWN;
+        this.gender = user_schema_1.Gender.NOT_KNOWN;
     }
 }
 exports.RegisterDto = RegisterDto;
@@ -43,7 +43,7 @@ __decorate([
     __metadata("design:type", String)
 ], RegisterDto.prototype, "password", void 0);
 __decorate([
-    (0, class_validator_1.IsEnum)(schemas_1.Gender),
+    (0, class_validator_1.IsEnum)(user_schema_1.Gender),
     __metadata("design:type", Number)
 ], RegisterDto.prototype, "gender", void 0);
 //# sourceMappingURL=register.dto.js.map

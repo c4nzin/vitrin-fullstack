@@ -13,23 +13,23 @@ exports.VerifyOtpHandler = void 0;
 const cqrs_1 = require("@nestjs/cqrs");
 const verify_otp_command_1 = require("../command/verify-otp.command");
 const repositories_1 = require("../../../repositories");
-const common_1 = require("@nestjs/common");
 let VerifyOtpHandler = class VerifyOtpHandler {
     constructor(otpRepository) {
         this.otpRepository = otpRepository;
     }
     async execute(command) {
-        this.validateOtp(command.email, command.otpCode);
+        return this.validateOtp(command.email, command.otpCode);
     }
     async validateOtp(email, otpCode) {
-        const user = await this.otpRepository.findUserWithEmail(email);
         const otp = await this.otpRepository.findOne({ otpCode });
-        this.verifyOtp(user, otp, otpCode);
-        await user.updateOne({ isEmailVerified: true });
+        return this.verifyOtp(otp, otpCode);
     }
-    verifyOtp(user, otp, otpCode) {
-        if (!otp || !user || otp.otpCode !== otpCode) {
-            throw new common_1.BadRequestException('Otp code or email wrong.');
+    verifyOtp(otp, otpCode) {
+        if (!otp || otp.otpCode !== otpCode) {
+            return false;
+        }
+        else {
+            return true;
         }
     }
 };

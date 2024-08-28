@@ -1,25 +1,25 @@
 import { Module } from '@nestjs/common';
-import { UserRepository } from './repositories';
+import { PostRepository, UserRepository } from './repositories';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from './schemas/';
+import { Post, PostSchema, User, UserSchema } from './schemas/';
 import { PhotoController, UserController } from './controllers';
 import { CloudinaryModule } from 'src/modules/cloudinary/cloudinary.module';
-import { UploadPhotoCommandHandler } from './cqrs/photo/handler/upload-photo.handler';
 import { CqrsModule } from '@nestjs/cqrs';
-import { UpdateProfileFieldsCommandHandler } from './cqrs/account/handler/update-profile.handler';
+import { FollowController } from './controllers/follow.controller';
+import { allHandlers } from './cqrs/all-handlers';
+import { PostController } from './controllers/post.controller';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MongooseModule.forFeature([
+      { name: User.name, schema: UserSchema },
+      { name: Post.name, schema: PostSchema },
+    ]),
     CloudinaryModule,
     CqrsModule,
   ],
-  controllers: [PhotoController, UserController],
-  providers: [
-    UserRepository,
-    UploadPhotoCommandHandler,
-    UpdateProfileFieldsCommandHandler,
-  ],
-  exports: [UserRepository, UploadPhotoCommandHandler, UpdateProfileFieldsCommandHandler],
+  controllers: [PhotoController, UserController, FollowController, PostController],
+  providers: [UserRepository, PostRepository, ...allHandlers],
+  exports: [UserRepository, PostRepository, ...allHandlers],
 })
 export class UserModule {}

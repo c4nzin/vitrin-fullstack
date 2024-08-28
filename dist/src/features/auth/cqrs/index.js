@@ -18,4 +18,6 @@ __exportStar(require("./login/command/login-user.command"), exports);
 __exportStar(require("./login/handler/login-user.handler"), exports);
 __exportStar(require("./register/command/register-user.command"), exports);
 __exportStar(require("./register/handler/register-user.handler"), exports);
+__exportStar(require("./verify-account/command/verify-account.command"), exports);
+__exportStar(require("./verify-account/handler/verify-account.handler"), exports);
 //# sourceMappingURL=index.js.map

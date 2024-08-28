@@ -5,12 +5,15 @@ import { UploadValidatorOptions } from './interfaces/upload-validator-options.in
 export class FileTypeValidator extends FileValidator {
   private allowedMimeTypes: string[];
 
-  constructor(public readonly validationOptions: UploadValidatorOptions) {
+  constructor(public validationOptions: UploadValidatorOptions) {
     super(validationOptions);
-    this.allowedMimeTypes = this.validationOptions.mimeType;
+    this.allowedMimeTypes = this.validationOptions.fileType;
   }
 
-  public isValid(file: Express.Multer.File): boolean {
+  public isValid(file?: Express.Multer.File): boolean {
+    if (!file?.buffer) {
+      return false;
+    }
     const response = fileType.parse(file.buffer);
 
     return this.allowedMimeTypes.includes(response.mime);

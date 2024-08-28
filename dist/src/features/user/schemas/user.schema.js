@@ -16,6 +16,7 @@ exports.UserSchema = exports.User = exports.Gender = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const validator_1 = __importDefault(require("validator"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const mongoose_2 = require("mongoose");
 var Gender;
 (function (Gender) {
     Gender[Gender["MALE"] = 0] = "MALE";
@@ -109,6 +110,7 @@ __decorate([
     (0, mongoose_1.Prop)({
         type: String,
         default: process.env.PROFILE_PICTURE_URL,
+        select: true,
     }),
     __metadata("design:type", String)
 ], User.prototype, "profilePicture", void 0);
@@ -121,9 +123,47 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], User.prototype, "website", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: String,
+        default: process.env.THUMBNAIL_URL,
+    }),
+    __metadata("design:type", String)
+], User.prototype, "thumbnail", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: [mongoose_2.Types.ObjectId],
+        default: [],
+    }),
+    __metadata("design:type", Array)
+], User.prototype, "follow", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: [mongoose_2.Types.ObjectId],
+        default: [],
+    }),
+    __metadata("design:type", Array)
+], User.prototype, "follower", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: [mongoose_2.Types.ObjectId],
+        ref: 'Post',
+        default: [],
+    }),
+    __metadata("design:type", Array)
+], User.prototype, "posts", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: [mongoose_2.Types.ObjectId],
+        ref: 'User',
+        default: [],
+    }),
+    __metadata("design:type", Array)
+], User.prototype, "blockeduser", void 0);
 exports.User = User = __decorate([
     (0, mongoose_1.Schema)({
         versionKey: false,
+        collection: 'User',
     })
 ], User);
 exports.UserSchema = mongoose_1.SchemaFactory.createForClass(User);

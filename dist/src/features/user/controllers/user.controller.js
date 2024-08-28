@@ -18,6 +18,8 @@ const decorators_1 = require("../../../common/decorators");
 const dto_1 = require("../dto");
 const cqrs_1 = require("@nestjs/cqrs");
 const update_profile_command_1 = require("../cqrs/account/command/update-profile.command");
+const authenticated_guard_1 = require("../../../common/guards/authenticated.guard");
+const update_email_command_1 = require("../cqrs/account/command/update-email.command");
 let UserController = class UserController {
     constructor(commandBus) {
         this.commandBus = commandBus;
@@ -27,6 +29,9 @@ let UserController = class UserController {
     }
     async updateProfile(id, updateProfile) {
         return this.commandBus.execute(new update_profile_command_1.UpdateProfileFieldsCommand(id, updateProfile));
+    }
+    async updateEmail(updateEmailDto, user) {
+        return this.commandBus.execute(new update_email_command_1.UpdatEmailCommand(updateEmailDto, user));
     }
 };
 exports.UserController = UserController;
@@ -45,8 +50,17 @@ __decorate([
     __metadata("design:paramtypes", [String, dto_1.UpdateProfileDto]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updateProfile", null);
+__decorate([
+    (0, common_1.Post)('update-email'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, decorators_1.User)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [dto_1.UpdateEmailDto, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updateEmail", null);
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)('users'),
+    (0, common_1.UseGuards)(authenticated_guard_1.AuthenticatedGuard),
     __metadata("design:paramtypes", [cqrs_1.CommandBus])
 ], UserController);
 //# sourceMappingURL=user.controller.js.map

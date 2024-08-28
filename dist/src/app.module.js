@@ -18,6 +18,8 @@ const bull_module_1 = require("./modules/bull/bull.module");
 const otp_module_1 = require("./features/otp/otp.module");
 const throttler_1 = require("@nestjs/throttler");
 const cloudinary_module_1 = require("./modules/cloudinary/cloudinary.module");
+const nestjs_request_context_1 = require("@medibloc/nestjs-request-context");
+const authenticated_context_1 = require("./common/contexts/authenticated.context");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -49,6 +51,7 @@ exports.AppModule = AppModule = __decorate([
             otp_module_1.OtpModule,
             throttler_1.ThrottlerModule,
             cloudinary_module_1.CloudinaryModule,
+            nestjs_request_context_1.RequestContextModule.forRoot({ isGlobal: true, contextClass: authenticated_context_1.AuthenticatedContext }),
         ],
     })
 ], AppModule);

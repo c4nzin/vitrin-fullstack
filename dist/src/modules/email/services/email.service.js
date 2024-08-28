@@ -9,11 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EmailService = exports.USER_REGISTERED = exports.EMAIL_QUEUE = void 0;
+exports.EmailService = exports.UPDATE_EMAIL = exports.USER_REGISTERED = exports.EMAIL_QUEUE = void 0;
 const bull_1 = require("@nestjs/bull");
 const mailer_1 = require("@nestjs-modules/mailer");
 exports.EMAIL_QUEUE = 'email-queue';
 exports.USER_REGISTERED = 'user-registered';
+exports.UPDATE_EMAIL = 'update-email';
 let EmailService = class EmailService {
     constructor(emailService) {
         this.emailService = emailService;
@@ -29,6 +30,18 @@ let EmailService = class EmailService {
       </div>`,
         });
     }
+    async updateEmail(job) {
+        const subject = `email change request`;
+        await this.emailService.sendMail({
+            to: job.data.email,
+            subject,
+            html: `
+      <div> nexus app
+      <h4> otp code : ${job.data.otp}
+      </div>
+      `,
+        });
+    }
 };
 exports.EmailService = EmailService;
 __decorate([
@@ -37,6 +50,12 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], EmailService.prototype, "userRegistered", null);
+__decorate([
+    (0, bull_1.Process)(exports.UPDATE_EMAIL),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], EmailService.prototype, "updateEmail", null);
 exports.EmailService = EmailService = __decorate([
     (0, bull_1.Processor)(exports.EMAIL_QUEUE),
     __metadata("design:paramtypes", [mailer_1.MailerService])
