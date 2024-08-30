@@ -1,1 +1,0 @@
-{"version":3,"file":"follow.command.js","sourceRoot":"","sources":["../../../../../../../src/features/user/cqrs/follow/command/follow.command.ts"],"names":[],"mappings":";;;AAEA,MAAa,aAAa;IACxB,YACS,IAAkB,EAClB,QAAgB;QADhB,SAAI,GAAJ,IAAI,CAAc;QAClB,aAAQ,GAAR,QAAQ,CAAQ;IACtB,CAAC;CACL;AALD,sCAKC"}

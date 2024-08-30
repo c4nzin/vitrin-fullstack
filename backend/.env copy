@@ -1,0 +1,11 @@
+DB_URI=mongodb+srv://squalcan:smack1919@canmert.gzjsydy.mongodb.net/nexus
+PORT=3000
+SESSION_SECRET=secret
+GLOBAL_PREFIX=api
+REDIS_HOST=localhost
+REDIS_PORT=6379
+OTP_LENGTH=6
+MAIL_PORT=587
+MAIL=squalcan@gmail.com
+MAIL_HOST=smpt.gmail.com
+MAIL_PASSWORD=smack19191S1
