@@ -1,4 +1,3 @@
-<script setup></script>
 
 <template>
   <div class="container">
@@ -24,8 +23,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import axios from 'axios'
+<script  lang="ts">
+import axios from "axios"
 
 export default {
   data() {
