@@ -1,0 +1,254 @@
+Date : 2024-09-01 00:46:08
+Directory : c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend
+Total : 137 files,  9415 codes, 17 comments, 2534 blanks, all 11966 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| YAML               |          1 |      6,844 |          0 |      2,030 |      8,874 |
+| TypeScript         |        129 |      2,394 |         17 |        497 |      2,908 |
+| JSON               |          4 |        126 |          0 |          4 |        130 |
+| JavaScript         |          1 |         27 |          0 |          1 |         28 |
+| JSON with Comments |          1 |         23 |          0 |          1 |         24 |
+| Markdown           |          1 |          1 |          0 |          1 |          2 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                   |        137 |      9,415 |         17 |      2,534 |     11,966 |
+| . (Files)                                                                                                                           |          8 |      7,021 |          0 |      2,037 |      9,058 |
+| src                                                                                                                                 |        129 |      2,394 |         17 |        497 |      2,908 |
+| src (Files)                                                                                                                         |          4 |        128 |          0 |         21 |        149 |
+| src\common                                                                                                                          |         14 |        184 |          0 |         46 |        230 |
+| src\common\contexts                                                                                                                 |          1 |          5 |          0 |          2 |          7 |
+| src\common\database                                                                                                                 |          2 |         18 |          0 |          5 |         23 |
+| src\common\decorators                                                                                                               |          6 |        112 |          0 |         25 |        137 |
+| src\common\decorators (Files)                                                                                                       |          5 |        106 |          0 |         24 |        130 |
+| src\common\decorators\types                                                                                                         |          1 |          6 |          0 |          1 |          7 |
+| src\common\guards                                                                                                                   |          4 |         44 |          0 |         13 |         57 |
+| src\common\interfaces                                                                                                               |          1 |          5 |          0 |          1 |          6 |
+| src\config                                                                                                                          |          1 |         22 |          0 |          3 |         25 |
+| src\core                                                                                                                            |          6 |        210 |          0 |         48 |        258 |
+| src\core\filters                                                                                                                    |          1 |         25 |          0 |          5 |         30 |
+| src\core\interceptors                                                                                                               |          2 |         72 |          0 |         16 |         88 |
+| src\core\pipes                                                                                                                      |          1 |         32 |          0 |          6 |         38 |
+| src\core\repositories                                                                                                               |          2 |         81 |          0 |         21 |        102 |
+| src\core\repositories (Files)                                                                                                       |          1 |         62 |          0 |         14 |         76 |
+| src\core\repositories\types                                                                                                         |          1 |         19 |          0 |          7 |         26 |
+| src\features                                                                                                                        |         89 |      1,680 |         14 |        340 |      2,034 |
+| src\features (Files)                                                                                                                |          1 |         17 |          0 |          2 |         19 |
+| src\features\auth                                                                                                                   |         19 |        305 |          5 |         63 |        373 |
+| src\features\auth (Files)                                                                                                           |          1 |         38 |          0 |          2 |         40 |
+| src\features\auth\controllers                                                                                                       |          2 |         42 |          0 |          6 |         48 |
+| src\features\auth\cqrs                                                                                                              |          7 |        114 |          1 |         27 |        142 |
+| src\features\auth\cqrs (Files)                                                                                                      |          1 |          6 |          0 |          1 |          7 |
+| src\features\auth\cqrs\login                                                                                                        |          2 |         39 |          1 |         11 |         51 |
+| src\features\auth\cqrs\login\command                                                                                                |          1 |          4 |          0 |          2 |          6 |
+| src\features\auth\cqrs\login\handler                                                                                                |          1 |         35 |          1 |          9 |         45 |
+| src\features\auth\cqrs\register                                                                                                     |          2 |         41 |          0 |          9 |         50 |
+| src\features\auth\cqrs\register\command                                                                                             |          1 |          4 |          0 |          2 |          6 |
+| src\features\auth\cqrs\register\handler                                                                                             |          1 |         37 |          0 |          7 |         44 |
+| src\features\auth\cqrs\verify-account                                                                                               |          2 |         28 |          0 |          6 |         34 |
+| src\features\auth\cqrs\verify-account\command                                                                                       |          1 |          4 |          0 |          2 |          6 |
+| src\features\auth\cqrs\verify-account\handler                                                                                       |          1 |         24 |          0 |          4 |         28 |
+| src\features\auth\dto                                                                                                               |          3 |         40 |          0 |          9 |         49 |
+| src\features\auth\profiles                                                                                                          |          1 |         15 |          2 |          4 |         21 |
+| src\features\auth\serializer                                                                                                        |          3 |         28 |          2 |          8 |         38 |
+| src\features\auth\strategies                                                                                                        |          2 |         28 |          0 |          7 |         35 |
+| src\features\otp                                                                                                                    |         15 |        184 |          0 |         41 |        225 |
+| src\features\otp (Files)                                                                                                            |          1 |         20 |          0 |          2 |         22 |
+| src\features\otp\controllers                                                                                                        |          2 |         26 |          0 |          5 |         31 |
+| src\features\otp\cqrs                                                                                                               |          5 |         68 |          0 |         16 |         84 |
+| src\features\otp\cqrs (Files)                                                                                                       |          1 |          4 |          0 |          1 |          5 |
+| src\features\otp\cqrs\generate-otp                                                                                                  |          2 |         36 |          0 |          9 |         45 |
+| src\features\otp\cqrs\generate-otp\command                                                                                          |          1 |          3 |          0 |          1 |          4 |
+| src\features\otp\cqrs\generate-otp\handler                                                                                          |          1 |         33 |          0 |          8 |         41 |
+| src\features\otp\cqrs\verify-otp                                                                                                    |          2 |         28 |          0 |          6 |         34 |
+| src\features\otp\cqrs\verify-otp\command                                                                                            |          1 |          6 |          0 |          1 |          7 |
+| src\features\otp\cqrs\verify-otp\handler                                                                                            |          1 |         22 |          0 |          5 |         27 |
+| src\features\otp\dto                                                                                                                |          3 |         16 |          0 |          6 |         22 |
+| src\features\otp\repositories                                                                                                       |          2 |         20 |          0 |          5 |         25 |
+| src\features\otp\schemas                                                                                                            |          2 |         34 |          0 |          7 |         41 |
+| src\features\user                                                                                                                   |         54 |      1,174 |          9 |        234 |      1,417 |
+| src\features\user (Files)                                                                                                           |          1 |         27 |          0 |          2 |         29 |
+| src\features\user\controllers                                                                                                       |          5 |        250 |          1 |         23 |        274 |
+| src\features\user\cqrs                                                                                                              |         28 |        486 |          0 |        124 |        610 |
+| src\features\user\cqrs (Files)                                                                                                      |          2 |         46 |          0 |          3 |         49 |
+| src\features\user\cqrs\account                                                                                                      |          8 |        143 |          0 |         33 |        176 |
+| src\features\user\cqrs\account\command                                                                                              |          4 |         29 |          0 |          8 |         37 |
+| src\features\user\cqrs\account\handler                                                                                              |          4 |        114 |          0 |         25 |        139 |
+| src\features\user\cqrs\follow                                                                                                       |          6 |         91 |          0 |         26 |        117 |
+| src\features\user\cqrs\follow\command                                                                                               |          3 |         21 |          0 |          6 |         27 |
+| src\features\user\cqrs\follow\handler                                                                                               |          3 |         70 |          0 |         20 |         90 |
+| src\features\user\cqrs\photo                                                                                                        |          2 |         28 |          0 |          6 |         34 |
+| src\features\user\cqrs\photo\command                                                                                                |          1 |          6 |          0 |          1 |          7 |
+| src\features\user\cqrs\photo\handler                                                                                                |          1 |         22 |          0 |          5 |         27 |
+| src\features\user\cqrs\tweets                                                                                                       |         10 |        178 |          0 |         56 |        234 |
+| src\features\user\cqrs\tweets\command                                                                                               |          5 |         37 |          0 |         10 |         47 |
+| src\features\user\cqrs\tweets\handler                                                                                               |          5 |        141 |          0 |         46 |        187 |
+| src\features\user\dto                                                                                                               |          5 |         58 |          0 |         14 |         72 |
+| src\features\user\enum                                                                                                              |          1 |          5 |          0 |          1 |          6 |
+| src\features\user\pipes                                                                                                             |          3 |         23 |          0 |          5 |         28 |
+| src\features\user\repositories                                                                                                      |          4 |         89 |          0 |         16 |        105 |
+| src\features\user\schemas                                                                                                           |          4 |        213 |          8 |         41 |        262 |
+| src\features\user\validators                                                                                                        |          3 |         23 |          0 |          8 |         31 |
+| src\features\user\validators (Files)                                                                                                |          1 |         20 |          0 |          6 |         26 |
+| src\features\user\validators\interfaces                                                                                             |          2 |          3 |          0 |          2 |          5 |
+| src\modules                                                                                                                         |         15 |        170 |          3 |         39 |        212 |
+| src\modules\bull                                                                                                                    |          2 |         22 |          0 |          5 |         27 |
+| src\modules\cloudinary                                                                                                              |          4 |         48 |          1 |         10 |         59 |
+| src\modules\cloudinary (Files)                                                                                                      |          2 |          9 |          1 |          4 |         14 |
+| src\modules\cloudinary\services                                                                                                     |          2 |         39 |          0 |          6 |         45 |
+| src\modules\email                                                                                                                   |          7 |         83 |          2 |         20 |        105 |
+| src\modules\email (Files)                                                                                                           |          1 |          9 |          0 |          2 |         11 |
+| src\modules\email\services                                                                                                          |          3 |         69 |          2 |         13 |         84 |
+| src\modules\email\types                                                                                                             |          3 |          5 |          0 |          5 |         10 |
+| src\modules\throttler                                                                                                               |          2 |         17 |          0 |          4 |         21 |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                                            | language           | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\.eslintrc.js                                                                  | JavaScript         |         27 |          0 |          1 |         28 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\.prettierrc                                                                   | JSON               |          5 |          0 |          1 |          6 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\README.md                                                                     | Markdown           |          1 |          0 |          1 |          2 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\nest-cli.json                                                                 | JSON               |         13 |          0 |          1 |         14 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\package.json                                                                  | JSON               |        104 |          0 |          1 |        105 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\pnpm-lock.yaml                                                                | YAML               |      6,844 |          0 |      2,030 |      8,874 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\app.module.ts                                                             | TypeScript         |         47 |          0 |          2 |         49 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\contexts\authenticated.context.ts                                  | TypeScript         |          5 |          0 |          2 |          7 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\database\database.module.ts                                        | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\database\database.service.ts                                       | TypeScript         |         11 |          0 |          3 |         14 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\decorators\index.ts                                                | TypeScript         |          4 |          0 |          1 |          5 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\decorators\is-field-unique.decorator.ts                            | TypeScript         |         39 |          0 |          6 |         45 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\decorators\message.decorator.ts                                    | TypeScript         |          2 |          0 |          2 |          4 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\decorators\paginate.decorator.ts                                   | TypeScript         |         55 |          0 |         12 |         67 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\decorators\types\pagination.interface.ts                           | TypeScript         |          6 |          0 |          1 |          7 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\decorators\user.decorator.ts                                       | TypeScript         |          6 |          0 |          3 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\guards\authenticated.guard.ts                                      | TypeScript         |         23 |          0 |          7 |         30 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\guards\base.guard.ts                                               | TypeScript         |         13 |          0 |          3 |         16 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\guards\index.ts                                                    | TypeScript         |          3 |          0 |          1 |          4 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\guards\local-auth.guard.ts                                         | TypeScript         |          5 |          0 |          2 |          7 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\common\interfaces\payload.interface.ts                                    | TypeScript         |          5 |          0 |          1 |          6 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\config\config.ts                                                          | TypeScript         |         22 |          0 |          3 |         25 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\core\filters\http-exception.filter.ts                                     | TypeScript         |         25 |          0 |          5 |         30 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\core\interceptors\logging.interceptor.ts                                  | TypeScript         |         45 |          0 |         11 |         56 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\core\interceptors\transform.interceptor.ts                                | TypeScript         |         27 |          0 |          5 |         32 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\core\pipes\validation.pipe.ts                                             | TypeScript         |         32 |          0 |          6 |         38 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\core\repositories\base.repository.ts                                      | TypeScript         |         62 |          0 |         14 |         76 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\core\repositories\types\query.types.ts                                    | TypeScript         |         19 |          0 |          7 |         26 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\auth.module.ts                                              | TypeScript         |         38 |          0 |          2 |         40 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\controllers\auth.controller.ts                              | TypeScript         |         41 |          0 |          5 |         46 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\controllers\index.ts                                        | TypeScript         |          1 |          0 |          1 |          2 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\cqrs\index.ts                                               | TypeScript         |          6 |          0 |          1 |          7 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\cqrs\login\command\login-user.command.ts                    | TypeScript         |          4 |          0 |          2 |          6 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\cqrs\login\handler\login-user.handler.ts                    | TypeScript         |         35 |          1 |          9 |         45 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\cqrs\register\command\register-user.command.ts              | TypeScript         |          4 |          0 |          2 |          6 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\cqrs\register\handler\register-user.handler.ts              | TypeScript         |         37 |          0 |          7 |         44 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\cqrs\verify-account\command\verify-account.command.ts       | TypeScript         |          4 |          0 |          2 |          6 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\cqrs\verify-account\handler\verify-account.handler.ts       | TypeScript         |         24 |          0 |          4 |         28 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\dto\index.ts                                                | TypeScript         |          2 |          0 |          1 |          3 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\dto\login.dto.ts                                            | TypeScript         |         14 |          0 |          3 |         17 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\dto\register.dto.ts                                         | TypeScript         |         24 |          0 |          5 |         29 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\profiles\auth.profile.ts                                    | TypeScript         |         15 |          2 |          4 |         21 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\serializer\constants.ts                                     | TypeScript         |          2 |          0 |          1 |          3 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\serializer\session.d.ts                                     | TypeScript         |          6 |          0 |          2 |          8 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\serializer\session.serializer.ts                            | TypeScript         |         20 |          2 |          5 |         27 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\strategies\index.ts                                         | TypeScript         |          1 |          0 |          1 |          2 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\auth\strategies\local.strategy.ts                                | TypeScript         |         27 |          0 |          6 |         33 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\controllers\index.ts                                         | TypeScript         |          1 |          0 |          1 |          2 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\controllers\otp.controller.ts                                | TypeScript         |         25 |          0 |          4 |         29 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\cqrs\generate-otp\command\generate-otp.command.ts            | TypeScript         |          3 |          0 |          1 |          4 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\cqrs\generate-otp\handler\generate-otp.handler.ts            | TypeScript         |         33 |          0 |          8 |         41 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\cqrs\index.ts                                                | TypeScript         |          4 |          0 |          1 |          5 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\cqrs\verify-otp\command\verify-otp.command.ts                | TypeScript         |          6 |          0 |          1 |          7 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\cqrs\verify-otp\handler\verify-otp.handler.ts                | TypeScript         |         22 |          0 |          5 |         27 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\dto\index.ts                                                 | TypeScript         |          2 |          0 |          1 |          3 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\dto\otp.dto.ts                                               | TypeScript         |          8 |          0 |          3 |         11 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\dto\send-otp.dto.ts                                          | TypeScript         |          6 |          0 |          2 |          8 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\otp.module.ts                                                | TypeScript         |         20 |          0 |          2 |         22 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\repositories\index.ts                                        | TypeScript         |          1 |          0 |          1 |          2 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\repositories\otp.repository.ts                               | TypeScript         |         19 |          0 |          4 |         23 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\schemas\index.ts                                             | TypeScript         |          1 |          0 |          1 |          2 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\otp\schemas\otp.schema.ts                                        | TypeScript         |         33 |          0 |          6 |         39 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\routes.ts                                                        | TypeScript         |         17 |          0 |          2 |         19 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\controllers\follow.controller.ts                            | TypeScript         |         69 |          0 |          7 |         76 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\controllers\index.ts                                        | TypeScript         |          4 |          0 |          1 |          5 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\controllers\photo.controller.ts                             | TypeScript         |         44 |          0 |          4 |         48 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\controllers\post.controller.ts                              | TypeScript         |         85 |          1 |          7 |         93 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\controllers\user.controller.ts                              | TypeScript         |         48 |          0 |          4 |         52 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\account\command\accept-friend-request.command.ts       | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\account\command\send-friend-request.command.ts         | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\account\command\update-email.command.ts                | TypeScript         |          8 |          0 |          2 |         10 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\account\command\update-profile.command.ts              | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\account\handler\accept-friend-request.handler.ts       | TypeScript         |         34 |          0 |         11 |         45 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\account\handler\send-friend-request.handler.ts         | TypeScript         |         36 |          0 |          8 |         44 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\account\handler\update-email.handler.ts                | TypeScript         |         24 |          0 |          3 |         27 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\account\handler\update-profile.handler.ts              | TypeScript         |         20 |          0 |          3 |         23 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\all-handlers.ts                                        | TypeScript         |         29 |          0 |          2 |         31 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\follow\command\fetch-followers.command.ts              | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\follow\command\follow.command.ts                       | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\follow\command\unfollow.command.ts                     | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\follow\handler\fetch-followers.handler.ts              | TypeScript         |         30 |          0 |          8 |         38 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\follow\handler\follow.handler.ts                       | TypeScript         |         25 |          0 |          8 |         33 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\follow\handler\unfollow.handler.ts                     | TypeScript         |         15 |          0 |          4 |         19 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\index.ts                                               | TypeScript         |         17 |          0 |          1 |         18 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\photo\command\upload-photo.command.ts                  | TypeScript         |          6 |          0 |          1 |          7 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\photo\handler\upload-photo.handler.ts                  | TypeScript         |         22 |          0 |          5 |         27 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\tweets\command\create-tweet.command.ts                 | TypeScript         |          9 |          0 |          2 |         11 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\tweets\command\delete-tweet.command.ts                 | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\tweets\command\fetch-tweets.command.ts                 | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\tweets\command\like-tweet.command.ts                   | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\tweets\command\unlike-tweet.command.ts                 | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\tweets\handler\create-tweet.handler.ts                 | TypeScript         |         32 |          0 |         10 |         42 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\tweets\handler\delete-tweet.handler.ts                 | TypeScript         |         30 |          0 |         10 |         40 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\tweets\handler\fetch-tweets.handler.ts                 | TypeScript         |         37 |          0 |         10 |         47 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\tweets\handler\like-tweet.handler.ts                   | TypeScript         |         21 |          0 |          8 |         29 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\cqrs\tweets\handler\unlike-tweet.handler.ts                 | TypeScript         |         21 |          0 |          8 |         29 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\dto\create-post.dto.ts                                      | TypeScript         |         11 |          0 |          3 |         14 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\dto\delete-post.dto.ts                                      | TypeScript         |          6 |          0 |          2 |          8 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\dto\index.ts                                                | TypeScript         |          4 |          0 |          1 |          5 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\dto\update-email.dto.ts                                     | TypeScript         |         12 |          0 |          3 |         15 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\dto\update-profile.dto.ts                                   | TypeScript         |         25 |          0 |          5 |         30 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\enum\friend-request.status.ts                               | TypeScript         |          5 |          0 |          1 |          6 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\pipes\index.ts                                              | TypeScript         |          2 |          0 |          1 |          3 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\pipes\photo.pipe.ts                                         | TypeScript         |         10 |          0 |          2 |         12 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\pipes\tweet.pipe.ts                                         | TypeScript         |         11 |          0 |          2 |         13 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\repositories\friend-request.repository.ts                   | TypeScript         |         12 |          0 |          1 |         13 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\repositories\index.ts                                       | TypeScript         |          2 |          0 |          1 |          3 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\repositories\post.repository.ts                             | TypeScript         |          9 |          0 |          1 |         10 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\repositories\user.repository.ts                             | TypeScript         |         66 |          0 |         13 |         79 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\schemas\friend-request.schema.ts                            | TypeScript         |         36 |          0 |          7 |         43 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\schemas\index.ts                                            | TypeScript         |          2 |          0 |          1 |          3 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\schemas\post.schema.ts                                      | TypeScript         |         32 |          0 |          7 |         39 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\schemas\user.schema.ts                                      | TypeScript         |        143 |          8 |         26 |        177 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\user.module.ts                                              | TypeScript         |         27 |          0 |          2 |         29 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\validators\file-type.validator.ts                           | TypeScript         |         20 |          0 |          6 |         26 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\validators\interfaces\index.ts                              | TypeScript         |          0 |          0 |          1 |          1 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\features\user\validators\interfaces\upload-validator-options.interface.ts | TypeScript         |          3 |          0 |          1 |          4 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\main.ts                                                                   | TypeScript         |         16 |          0 |          5 |         21 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\bull\bull.module.ts                                               | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\bull\bull.service.ts                                              | TypeScript         |         15 |          0 |          3 |         18 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\cloudinary\cloudinary.module.ts                                   | TypeScript         |          8 |          0 |          2 |         10 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\cloudinary\constants.ts                                           | TypeScript         |          1 |          1 |          2 |          4 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\cloudinary\services\cloudinary-config.service.ts                  | TypeScript         |         14 |          0 |          2 |         16 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\cloudinary\services\cloudinary.service.ts                         | TypeScript         |         25 |          0 |          4 |         29 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\email\email.module.ts                                             | TypeScript         |          9 |          0 |          2 |         11 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\email\services\email-config.service.ts                            | TypeScript         |         31 |          0 |          4 |         35 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\email\services\email.service.ts                                   | TypeScript         |         36 |          2 |          8 |         46 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\email\services\index.ts                                           | TypeScript         |          2 |          0 |          1 |          3 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\email\types\index.ts                                              | TypeScript         |          1 |          0 |          1 |          2 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\email\types\registered-user.job.ts                                | TypeScript         |          2 |          0 |          2 |          4 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\email\types\update-email.job.ts                                   | TypeScript         |          2 |          0 |          2 |          4 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\throttler\throttler-config.service.ts                             | TypeScript         |         10 |          0 |          2 |         12 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\modules\throttler\throttler.module.ts                                     | TypeScript         |          7 |          0 |          2 |          9 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\setup-app.ts                                                              | TypeScript         |         50 |          0 |          9 |         59 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\src\setup-swagger.ts                                                          | TypeScript         |         15 |          0 |          5 |         20 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\tsconfig.build.json                                                           | JSON               |          4 |          0 |          1 |          5 |
+| c:\Users\squal\OneDrive\Belgeler\GitHub\nexus\backend\tsconfig.json                                                                 | JSON with Comments |         23 |          0 |          1 |         24 |
+| Total                                                                                                                               |                    |      9,415 |         17 |      2,534 |     11,966 |
++-------------------------------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

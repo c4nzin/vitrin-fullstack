@@ -9,6 +9,8 @@ import { DeleteTweetCommandHandler } from './tweets/handler/delete-tweet.handler
 import { FetchTweetsCommandHandler } from './tweets/handler/fetch-tweets.handler';
 import { LikeTweetCommandHandler } from './tweets/handler/like-tweet.handler';
 import { UnlikeTweetCommandHandler } from './tweets/handler/unlike-tweet.handler';
+import { SendFriendRequestCommandHandler } from './account/handler/send-friend-request.handler';
+import { AcceptFriendRequestCommandHandler } from './account/handler/accept-friend-request.handler';
 
 export const allHandlers = [
   UpdateEmailCommandHandler,
@@ -23,4 +25,6 @@ export const allHandlers = [
   FetchTweetsCommandHandler,
   LikeTweetCommandHandler,
   UnlikeTweetCommandHandler,
+  SendFriendRequestCommandHandler,
+  AcceptFriendRequestCommandHandler,
 ];

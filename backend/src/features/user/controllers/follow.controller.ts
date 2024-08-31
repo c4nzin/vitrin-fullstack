@@ -17,6 +17,8 @@ import { Pagination } from 'src/common/decorators/types/pagination.interface';
 import { FetchFollowersCommand } from '../cqrs/follow/command/fetch-followers.command';
 import { AuthenticatedGuard } from 'src/common/guards';
 import { ApiTags } from '@nestjs/swagger';
+import { SendFriendRequestCommand } from '../cqrs';
+import { AcceptFriendRequestCommand } from '../cqrs/account/command/accept-friend-request.command';
 
 @Controller()
 @ApiTags('follow')
@@ -49,5 +51,25 @@ export class FollowController {
   @HttpCode(HttpStatus.OK)
   public async getFollowers(@Param('id') id: string, @Paginate() pagination: Pagination) {
     return this.commandBus.execute(new FetchFollowersCommand(id, pagination));
+  }
+
+  @Post(':id/add-friend')
+  @Message('Sucessfully sent friend request.')
+  @HttpCode(HttpStatus.OK)
+  public async sendFriendRequest(
+    @User() user: UserDocument,
+    @Param('id') id: string,
+  ): Promise<void> {
+    return this.commandBus.execute(new SendFriendRequestCommand(user, id));
+  }
+
+  @Post(':id/accept')
+  @Message('Sucessfully sent friend request.')
+  @HttpCode(HttpStatus.OK)
+  public async acceptFriendRequest(
+    @User() user: UserDocument,
+    @Param('id') id: string,
+  ): Promise<void> {
+    return this.commandBus.execute(new AcceptFriendRequestCommand(user, id));
   }
 }

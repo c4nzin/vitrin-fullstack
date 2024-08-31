@@ -8,18 +8,21 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { FollowController } from './controllers/follow.controller';
 import { allHandlers } from './cqrs/all-handlers';
 import { PostController } from './controllers/post.controller';
+import { FriendRequest, FriendRequestSchema } from './schemas/friend-request.schema';
+import { FriendRequestRepository } from './repositories/friend-request.repository';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: User.name, schema: UserSchema },
       { name: Post.name, schema: PostSchema },
+      { name: FriendRequest.name, schema: FriendRequestSchema },
     ]),
     CloudinaryModule,
     CqrsModule,
   ],
   controllers: [PhotoController, UserController, FollowController, PostController],
-  providers: [UserRepository, PostRepository, ...allHandlers],
-  exports: [UserRepository, PostRepository, ...allHandlers],
+  providers: [FriendRequestRepository, UserRepository, PostRepository, ...allHandlers],
+  exports: [FriendRequestRepository, UserRepository, PostRepository, ...allHandlers],
 })
 export class UserModule {}

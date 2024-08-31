@@ -142,6 +142,27 @@ export class User {
     default: [],
   })
   public blockeduser: Types.ObjectId[];
+
+  @Prop({
+    type: [Types.ObjectId],
+    ref: 'User',
+    default: [],
+  })
+  public friends: Types.ObjectId[];
+
+  @Prop({
+    type: [Types.ObjectId],
+    ref: 'FriendRequest',
+    default: [],
+  })
+  public sentFriendRequests: Types.ObjectId[];
+
+  @Prop({
+    type: [Types.ObjectId],
+    ref: 'FriendRequest',
+    default: [],
+  })
+  public receivedFriendRequests: Types.ObjectId[];
 }
 
 export const UserSchema = SchemaFactory.createForClass<User>(User);

@@ -14,3 +14,4 @@ export * from './tweets/handler/fetch-tweets.handler';
 export * from './tweets/command/like-tweet.command';
 export * from './tweets/handler/like-tweet.handler';
 export * from './tweets/command/unlike-tweet.command';
+export * from './account/command/send-friend-request.command';
