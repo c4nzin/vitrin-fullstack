@@ -40,7 +40,6 @@ export class User {
     required: true,
     type: String,
     minlength: 6,
-    maxlength: 20,
     validate: {
       //maybe i would want to change strong password checker in advance.
       validator: (password: string) => validator.isStrongPassword(password),

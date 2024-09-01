@@ -1,6 +1,5 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { SendFriendRequestCommand } from '../command/send-friend-request.command';
-import { UserRepository } from 'src/features/user/repositories';
 import { FriendRequestRepository } from 'src/features/user/repositories/friend-request.repository';
 import { BadRequestException } from '@nestjs/common';
 import { FriendRequestStatus } from 'src/features/user/enum/friend-request.status';
@@ -11,10 +10,7 @@ import { FriendRequestDocument } from 'src/features/user/schemas/friend-request.
 export class SendFriendRequestCommandHandler
   implements ICommandHandler<SendFriendRequestCommand>
 {
-  constructor(
-    private readonly userRepository: UserRepository,
-    private readonly friendRequestRepository: FriendRequestRepository,
-  ) {}
+  constructor(private readonly friendRequestRepository: FriendRequestRepository) {}
 
   public async execute(
     command: SendFriendRequestCommand,

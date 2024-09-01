@@ -63,8 +63,8 @@ export class FollowController {
     return this.commandBus.execute(new SendFriendRequestCommand(user, id));
   }
 
-  @Post(':id/accept')
-  @Message('Sucessfully sent friend request.')
+  @Post(':id/accept-friend')
+  @Message('Sucessfully accepted friend request.')
   @HttpCode(HttpStatus.OK)
   public async acceptFriendRequest(
     @User() user: UserDocument,
