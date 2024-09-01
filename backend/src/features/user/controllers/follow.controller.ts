@@ -17,7 +17,7 @@ import { Pagination } from 'src/common/decorators/types/pagination.interface';
 import { FetchFollowersCommand } from '../cqrs/follow/command/fetch-followers.command';
 import { AuthenticatedGuard } from 'src/common/guards';
 import { ApiTags } from '@nestjs/swagger';
-import { SendFriendRequestCommand } from '../cqrs';
+import { RejectFriendRequestCommand, SendFriendRequestCommand } from '../cqrs';
 import { AcceptFriendRequestCommand } from '../cqrs/account/command/accept-friend-request.command';
 
 @Controller()
@@ -71,5 +71,12 @@ export class FollowController {
     @Param('id') id: string,
   ): Promise<void> {
     return this.commandBus.execute(new AcceptFriendRequestCommand(user, id));
+  }
+
+  @Delete(':id/reject-friend')
+  @Message('Sucessfully rejected friend request.')
+  @HttpCode(HttpStatus.OK)
+  public async rejectFriendRequest(@Param('id') id: string): Promise<void> {
+    return this.commandBus.execute(new RejectFriendRequestCommand(id));
   }
 }

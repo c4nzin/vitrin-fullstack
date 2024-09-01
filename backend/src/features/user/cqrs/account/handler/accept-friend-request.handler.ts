@@ -19,8 +19,6 @@ export class AcceptFriendRequestCommandHandler
 
     const request = await this.friendRequestRepository.findById(requestId);
 
-    console.log(request);
-
     if (!request) {
       throw new BadRequestException('Friend request not found.');
     }

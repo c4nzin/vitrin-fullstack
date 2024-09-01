@@ -11,6 +11,7 @@ import { LikeTweetCommandHandler } from './tweets/handler/like-tweet.handler';
 import { UnlikeTweetCommandHandler } from './tweets/handler/unlike-tweet.handler';
 import { SendFriendRequestCommandHandler } from './account/handler/send-friend-request.handler';
 import { AcceptFriendRequestCommandHandler } from './account/handler/accept-friend-request.handler';
+import { RejectFriendRequestCommandHandler } from './account/handler/reject-friend-request.handler';
 
 export const allHandlers = [
   UpdateEmailCommandHandler,
@@ -27,4 +28,5 @@ export const allHandlers = [
   UnlikeTweetCommandHandler,
   SendFriendRequestCommandHandler,
   AcceptFriendRequestCommandHandler,
+  RejectFriendRequestCommandHandler,
 ];

@@ -6,8 +6,12 @@
     "deleteOutDir": true,
     "builder": {
       "type": "swc",
-      "options": {}
+      "options": {
+        "watch": true,
+        "extensions": [".ts", ".tsx", "js", "jsx"]
+      }
     },
+    "plugins": [],
     "typeCheck": true
   }
 }
