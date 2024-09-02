@@ -2,7 +2,7 @@ import { AuthModule } from './auth/auth.module';
 import { OtpModule } from './otp/otp.module';
 import { UserModule } from './user/user.module';
 
-export const routes = [
+export default [
   {
     path: 'users',
     module: UserModule,
