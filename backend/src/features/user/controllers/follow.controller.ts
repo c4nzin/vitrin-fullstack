@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { Message, Paginate, User } from 'src/common/decorators';
@@ -19,6 +20,8 @@ import { AuthenticatedGuard } from 'src/common/guards';
 import { ApiTags } from '@nestjs/swagger';
 import { RejectFriendRequestCommand, SendFriendRequestCommand } from '../cqrs';
 import { AcceptFriendRequestCommand } from '../cqrs/account/command/accept-friend-request.command';
+import { PageDto } from 'src/common/pagination/dto';
+import { PageOptionsDto } from 'src/common/pagination/dto/page-options.dto';
 
 @Controller()
 @ApiTags('follow')
@@ -49,8 +52,12 @@ export class FollowController {
   @Get(':id/followers')
   @Message('Sucessfully fetched users.')
   @HttpCode(HttpStatus.OK)
-  public async getFollowers(@Param('id') id: string, @Paginate() pagination: Pagination) {
-    return this.commandBus.execute(new FetchFollowersCommand(id, pagination));
+  public async getFollowers(
+    @Param('id') id: string,
+    @Query() paginate: PageOptionsDto,
+  ): Promise<PageDto<any>> {
+    console.log(paginate, id);
+    return this.commandBus.execute(new FetchFollowersCommand(id, paginate));
   }
 
   @Post(':id/add-friend')

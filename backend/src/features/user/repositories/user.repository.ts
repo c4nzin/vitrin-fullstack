@@ -1,7 +1,7 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { BaseRepository } from 'src/core/repositories/base.repository';
 import { User, UserDocument } from '../schemas/user.schema';
-import { Model } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import { BadRequestException } from '@nestjs/common';
 import { Pagination } from 'src/common/decorators/types/pagination.interface';
@@ -74,5 +74,9 @@ export class UserRepository extends BaseRepository<User> {
         }, {}),
       )
       .exec();
+  }
+
+  public async countDocuments(query: FilterQuery<UserDocument>): Promise<number> {
+    return this.userRepository.countDocuments(query).exec();
   }
 }

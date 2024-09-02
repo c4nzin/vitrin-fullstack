@@ -2,36 +2,38 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { FetchFollowersCommand } from '../command/fetch-followers.command';
 import { UserRepository } from 'src/features/user/repositories';
 import { UserDocument } from 'src/features/user/schemas';
+import { PageDto, PageMetaDto } from 'src/common/pagination/dto';
+import { Types } from 'mongoose';
 
 @CommandHandler(FetchFollowersCommand)
 export class FetchFollowersHandler implements ICommandHandler<FetchFollowersCommand> {
   constructor(private readonly userRepository: UserRepository) {}
 
-  public async execute(command: FetchFollowersCommand): Promise<UserDocument[]> {
+  public async execute(command: FetchFollowersCommand): Promise<PageDto<UserDocument>> {
     const { id, pagination } = command;
 
     const user = await this.userRepository.findById(id);
 
-    const followers = await this.userRepository.find({
+    const followerIds = user.follower.map((id) => new Types.ObjectId(id));
+
+    const followers = await this.userRepository
+      .find({ _id: { $in: followerIds } })
+      .sort(pagination.order)
+      .skip(pagination.skip)
+      .limit(pagination.take)
+      .lean()
+      .select(['-password', '-email'])
+      .exec();
+
+    console.log(followers, 'followers');
+    const itemCount = await this.userRepository.countDocuments({
       _id: { $in: user.follower },
     });
 
-    const sortedFollowers = followers.sort((a, b) => {
-      if (pagination.sort.length) {
-        const sortField = pagination.sort[0].field;
-        const sortOrder = pagination.sort[0].by;
-        return sortOrder === 'ASC'
-          ? a[sortField].localeCompare(b[sortField])
-          : b[sortField].localeCompare(a[sortField]);
-      }
-      return 0;
-    });
+    console.log(itemCount);
 
-    const paginatedFollowers = sortedFollowers.slice(
-      pagination.skip,
-      pagination.skip + pagination.limit,
-    );
+    const pageMetaDto = new PageMetaDto({ pageOptionsDto: pagination, itemCount });
 
-    return paginatedFollowers;
+    return new PageDto(followers, pageMetaDto);
   }
 }
