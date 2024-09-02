@@ -4,6 +4,8 @@ import { Config, ENV } from 'src/config/config';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { join } from 'path';
 
+//TODO : GEREKLİ MAİL KISIMLARINI EKLE VERİYFY PASSWORD FALAN
+
 @Injectable()
 export class EmailConfigService implements MailerOptionsFactory {
   constructor(@Inject(ENV) private readonly config: Config) {}

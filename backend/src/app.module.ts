@@ -12,7 +12,7 @@ import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
 import { RequestContextModule } from '@medibloc/nestjs-request-context';
 import { AuthenticatedContext } from './common/contexts/authenticated.context';
 import { RouterModule } from '@nestjs/core';
-import { routes } from './features/routes';
+import routes from './features/routes';
 
 @Module({
   imports: [

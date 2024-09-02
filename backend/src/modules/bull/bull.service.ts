@@ -8,6 +8,11 @@ export class BullService implements SharedBullConfigurationFactory {
 
   public async createSharedConfiguration(): Promise<BullRootModuleOptions> {
     return {
+      limiter: {
+        duration: 60000,
+        max: 1000,
+      },
+      settings: {},
       redis: {
         host: this.config.REDIS_HOST,
         port: this.config.REDIS_PORT,
