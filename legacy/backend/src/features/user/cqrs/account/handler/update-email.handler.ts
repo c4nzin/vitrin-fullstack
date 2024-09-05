@@ -11,6 +11,9 @@ export class UpdateEmailCommandHandler implements ICommandHandler<UpdatEmailComm
     private readonly commandBus: CommandBus,
   ) {}
   public async execute(command: UpdatEmailCommand): Promise<UserDocument> {
+
+    const {updateEmail, user} = command
+    
     const validateOtp = await this.commandBus.execute(
       new VerifyOtpCommand(command.updateEmail.email, command.updateEmail.otpCode),
     );

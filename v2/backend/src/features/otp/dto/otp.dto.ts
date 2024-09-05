@@ -3,8 +3,8 @@ import { IsEmail, IsNotEmpty } from 'class-validator';
 export class OtpDto {
   @IsNotEmpty()
   @IsEmail()
-  public email: string;
+  public readonly email: string;
 
   @IsNotEmpty()
-  public otpCode: string;
+  public readonly otpCode: string;
 }

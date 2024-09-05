@@ -9,7 +9,7 @@ import {
   User,
   UserSchema,
 } from './schemas/';
-import { PhotoController, UserController } from './controllers';
+import { FriendController, PhotoController, UserController } from './controllers';
 import { CloudinaryModule } from 'src/modules/cloudinary/cloudinary.module';
 import { CqrsModule } from '@nestjs/cqrs';
 import { FollowController } from './controllers/follow.controller';
@@ -31,7 +31,13 @@ import { WebsocketModule } from 'src/modules/websocket/websocket.module';
     CqrsModule,
     WebsocketModule,
   ],
-  controllers: [PhotoController, UserController, FollowController, PostController],
+  controllers: [
+    PhotoController,
+    UserController,
+    FollowController,
+    PostController,
+    FriendController,
+  ],
   providers: [
     FriendRequestRepository,
     UserRepository,

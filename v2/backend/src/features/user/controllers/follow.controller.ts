@@ -17,20 +17,14 @@ import { UnfollowCommand } from '../cqrs/follow/command/unfollow.command';
 import { FetchFollowersCommand } from '../cqrs/follow/command/fetch-followers.command';
 import { AuthenticatedGuard } from 'src/common/guards';
 import { ApiTags } from '@nestjs/swagger';
-import { RejectFriendRequestCommand, SendFriendRequestCommand } from '../cqrs';
-import { AcceptFriendRequestCommand } from '../cqrs/account/command/accept-friend-request.command';
 import { PageDto } from 'src/common/pagination/dto';
 import { PageOptionsDto } from 'src/common/pagination/dto/page-options.dto';
-import { FriendRequestNotification } from 'src/modules/websocket/gateways/fr-notification.gateway';
 
 @Controller()
 @ApiTags('follow')
 @UseGuards(AuthenticatedGuard)
 export class FollowController {
-  constructor(
-    private readonly commandBus: CommandBus,
-    private readonly friendRequestGateway: FriendRequestNotification,
-  ) {}
+  constructor(private readonly commandBus: CommandBus) {}
 
   @Post(':id/follow')
   @Message('Sucessfully followed the user.')
@@ -60,36 +54,5 @@ export class FollowController {
     @Query() paginate: PageOptionsDto,
   ): Promise<PageDto<any>> {
     return this.commandBus.execute(new FetchFollowersCommand(id, paginate));
-  }
-
-  @Post(':id/add-friend')
-  @Message('Sucessfully sent friend request.')
-  @HttpCode(HttpStatus.OK)
-  public async sendFriendRequest(
-    @User() user: UserDocument,
-    @Param('id') id: string,
-  ): Promise<void> {
-    const message = `${user.username} sent a friend request to you.`;
-
-    await this.friendRequestGateway.sendFriendRequestNotification(id, message);
-
-    return this.commandBus.execute(new SendFriendRequestCommand(user, id));
-  }
-
-  @Post(':id/accept-friend')
-  @Message('Sucessfully accepted friend request.')
-  @HttpCode(HttpStatus.OK)
-  public async acceptFriendRequest(
-    @User() user: UserDocument,
-    @Param('id') id: string,
-  ): Promise<void> {
-    return this.commandBus.execute(new AcceptFriendRequestCommand(user, id));
-  }
-
-  @Delete(':id/reject-friend')
-  @Message('Sucessfully rejected friend request.')
-  @HttpCode(HttpStatus.OK)
-  public async rejectFriendRequest(@Param('id') id: string): Promise<void> {
-    return this.commandBus.execute(new RejectFriendRequestCommand(id));
   }
 }

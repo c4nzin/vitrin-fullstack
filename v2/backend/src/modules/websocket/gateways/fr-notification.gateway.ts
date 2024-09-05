@@ -11,7 +11,7 @@ import { UserRepository } from 'src/features/user/repositories';
 import { BadRequestException, Logger } from '@nestjs/common';
 
 @WebSocketGateway({ origin: '*' })
-export class FriendRequestNotification
+export class FriendRequestGateway
   implements OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit
 {
   constructor(private readonly userRepository: UserRepository) {}
