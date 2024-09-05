@@ -22,7 +22,6 @@ import { AcceptFriendRequestCommand } from '../cqrs/account/command/accept-frien
 import { PageDto } from 'src/common/pagination/dto';
 import { PageOptionsDto } from 'src/common/pagination/dto/page-options.dto';
 import { FriendRequestNotification } from 'src/modules/websocket/gateways/fr-notification.gateway';
-import { FRIEND_REQUEST_NOTIFICATION } from 'src/modules/websocket/constants';
 
 @Controller()
 @ApiTags('follow')

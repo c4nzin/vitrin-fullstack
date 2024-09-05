@@ -7,13 +7,13 @@ import { UserModule } from './features/user/user.module';
 import { AuthModule } from './features/auth/auth.module';
 import { BullModule } from './modules/bull/bull.module';
 import { OtpModule } from './features/otp/otp.module';
-import { ThrottlerModule } from '@nestjs/throttler';
 import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
 import { RequestContextModule } from '@medibloc/nestjs-request-context';
 import { AuthenticatedContext } from './common/contexts/authenticated.context';
-import { RouterModule } from '@nestjs/core';
 import routes from './features/routes';
 import { WebsocketModule } from './modules/websocket/websocket.module';
+import { ThrottlerModule } from './modules/throttler/throttler.module';
+import { RouterModule } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -46,5 +46,6 @@ import { WebsocketModule } from './modules/websocket/websocket.module';
     RouterModule.register(routes),
     WebsocketModule,
   ],
+  providers: [],
 })
 export class AppModule {}

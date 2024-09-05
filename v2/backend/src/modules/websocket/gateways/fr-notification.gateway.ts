@@ -17,21 +17,25 @@ export class FriendRequestNotification
   constructor(private readonly userRepository: UserRepository) {}
 
   @WebSocketServer()
-  public server: Server;
+  public readonly server: Server;
 
   public handleDisconnect(client: Server): void {
     Logger.log(`${client} is disconnected`);
   }
 
-  public async sendFriendRequestNotification(userId: string, message: string) {
-    this.server.to(userId).emit(FRIEND_REQUEST_NOTIFICATION, message);
+  public async sendFriendRequestNotification(
+    userId: string,
+    message: string,
+  ): Promise<boolean> {
+    return this.server.to(userId).emit(FRIEND_REQUEST_NOTIFICATION, message);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public afterInit(server: Server): void {
     Logger.log('Websocket gateway initialized.');
   }
 
-  public async handleConnection(client: Socket) {
+  public async handleConnection(client: Socket): Promise<void> {
     try {
       const userId = client.handshake.query['userId'] as string;
 

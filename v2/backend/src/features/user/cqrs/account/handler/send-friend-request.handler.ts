@@ -25,7 +25,7 @@ export class SendFriendRequestCommandHandler
 
     const existingRequest = await this.friendRequestRepository.findOne({
       sender: sender.id,
-      receiver: receiverId,
+      receiver: receiverIdToObjectId,
     });
 
     if (existingRequest) {
