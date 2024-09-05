@@ -8,9 +8,11 @@ import { LoginUserCommand } from '../..';
 @CommandHandler(LoginUserCommand)
 export class LoginUserHandler implements ICommandHandler<LoginUserCommand> {
   constructor(private readonly userRepository: UserRepository) {}
+
   public async execute(command: LoginUserCommand): Promise<any> {
-    await this.login(command.user);
-    return this.validateUser(command.user.username, command.user.password);
+    const { user } = command;
+    await this.login(user);
+    return this.validateUser(user.username, user.password);
   }
 
   public async validateUser(

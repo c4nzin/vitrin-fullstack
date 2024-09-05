@@ -35,7 +35,7 @@ export class RegisterUserHandler implements ICommandHandler<RegisterUserCommand>
         username: command.user.username,
         otp,
       },
-      { lifo: true, delay: 10000, priority: 1 },
+      { lifo: false, delay: 10000, priority: 1 },
     );
 
     return this.userRepository.create(command.user);
