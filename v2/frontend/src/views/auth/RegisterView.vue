@@ -78,8 +78,6 @@
 import axios from 'axios';
 
 export default {
-  name: 'SignUpScreen',
-
   data() {
     return {
       username: '',
@@ -100,6 +98,10 @@ export default {
         throw new Error(error);
       }
     },
+  },
+
+  mounted() {
+    document.title = 'Register';
   },
 };
 </script>

@@ -9,8 +9,12 @@ const routes = [
     component: HomeView,
   },
   {
+    name: 'Register',
     path: '/register',
     component: RegisterView,
+    meta: {
+      title: 'Register Page',
+    },
   },
   {
     path: '/about',
