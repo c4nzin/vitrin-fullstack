@@ -1,8 +1,8 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { VerifyOtpCommand } from '../command/verify-otp.command';
 import { OtpRepository } from 'src/features/otp/repositories';
-import { BadRequestException } from '@nestjs/common';
 import { OTP } from 'src/features/otp/schemas';
+import { BadRequestException } from '@nestjs/common';
 
 @CommandHandler(VerifyOtpCommand)
 export class VerifyOtpHandler implements ICommandHandler<VerifyOtpCommand> {
@@ -13,12 +13,16 @@ export class VerifyOtpHandler implements ICommandHandler<VerifyOtpCommand> {
   }
 
   public async validateOtp(email: string, otpCode: string): Promise<boolean> {
-    const otp: OTP = await this.otpRepository.findOne({ otpCode });
+    const otp = await this.otpRepository.findOne({ otpCode });
 
-    if (otp.otpCode !== otpCode) {
-      throw new BadRequestException('Wrong otp code or email');
+    if (!otp) {
+      throw new BadRequestException('Otps are not matcing.');
     }
 
-    return true;
+    return this.verifyOtp(otp, otpCode);
+  }
+
+  public verifyOtp(otp: OTP, otpCode: string): boolean {
+    return otp.otpCode === otpCode; //as bool
   }
 }
