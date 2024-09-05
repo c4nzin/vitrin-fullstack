@@ -13,16 +13,17 @@ import { RequestContextModule } from '@medibloc/nestjs-request-context';
 import { AuthenticatedContext } from './common/contexts/authenticated.context';
 import { RouterModule } from '@nestjs/core';
 import routes from './features/routes';
+import { WebsocketModule } from './modules/websocket/websocket.module';
 
 @Module({
   imports: [
+    UserModule,
     EnvalidModule.forRoot({
       validators: envalidValidator,
       isGlobal: true,
       useDotenv: true,
     }),
     AuthModule,
-    UserModule,
     LoggerModule.forRoot({
       pinoHttp: {
         transport: {
@@ -43,6 +44,7 @@ import routes from './features/routes';
     CloudinaryModule,
     RequestContextModule.forRoot({ isGlobal: true, contextClass: AuthenticatedContext }),
     RouterModule.register(routes),
+    WebsocketModule,
   ],
 })
 export class AppModule {}

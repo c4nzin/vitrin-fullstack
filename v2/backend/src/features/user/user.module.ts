@@ -1,7 +1,14 @@
 import { Module } from '@nestjs/common';
-import { PostRepository, UserRepository } from './repositories';
+import { NotificationRepository, PostRepository, UserRepository } from './repositories';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Post, PostSchema, User, UserSchema } from './schemas/';
+import {
+  Notification,
+  NotificationSchema,
+  Post,
+  PostSchema,
+  User,
+  UserSchema,
+} from './schemas/';
 import { PhotoController, UserController } from './controllers';
 import { CloudinaryModule } from 'src/modules/cloudinary/cloudinary.module';
 import { CqrsModule } from '@nestjs/cqrs';
@@ -10,6 +17,7 @@ import { allHandlers } from './cqrs/all-handlers';
 import { PostController } from './controllers/post.controller';
 import { FriendRequest, FriendRequestSchema } from './schemas/friend-request.schema';
 import { FriendRequestRepository } from './repositories/friend-request.repository';
+import { WebsocketModule } from 'src/modules/websocket/websocket.module';
 
 @Module({
   imports: [
@@ -17,12 +25,26 @@ import { FriendRequestRepository } from './repositories/friend-request.repositor
       { name: User.name, schema: UserSchema },
       { name: Post.name, schema: PostSchema },
       { name: FriendRequest.name, schema: FriendRequestSchema },
+      { name: Notification.name, schema: NotificationSchema },
     ]),
     CloudinaryModule,
     CqrsModule,
+    WebsocketModule,
   ],
   controllers: [PhotoController, UserController, FollowController, PostController],
-  providers: [FriendRequestRepository, UserRepository, PostRepository, ...allHandlers],
-  exports: [FriendRequestRepository, UserRepository, PostRepository, ...allHandlers],
+  providers: [
+    FriendRequestRepository,
+    UserRepository,
+    NotificationRepository,
+    PostRepository,
+    ...allHandlers,
+  ],
+  exports: [
+    FriendRequestRepository,
+    UserRepository,
+    NotificationRepository,
+    PostRepository,
+    ...allHandlers,
+  ],
 })
 export class UserModule {}

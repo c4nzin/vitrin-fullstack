@@ -9,12 +9,11 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { Message, Paginate, User } from 'src/common/decorators';
+import { Message, User } from 'src/common/decorators';
 import { UserDocument } from '../schemas';
 import { CommandBus } from '@nestjs/cqrs';
 import { FollowCommand } from '../cqrs/follow/command/follow.command';
 import { UnfollowCommand } from '../cqrs/follow/command/unfollow.command';
-import { Pagination } from 'src/common/decorators/types/pagination.interface';
 import { FetchFollowersCommand } from '../cqrs/follow/command/fetch-followers.command';
 import { AuthenticatedGuard } from 'src/common/guards';
 import { ApiTags } from '@nestjs/swagger';
@@ -22,12 +21,17 @@ import { RejectFriendRequestCommand, SendFriendRequestCommand } from '../cqrs';
 import { AcceptFriendRequestCommand } from '../cqrs/account/command/accept-friend-request.command';
 import { PageDto } from 'src/common/pagination/dto';
 import { PageOptionsDto } from 'src/common/pagination/dto/page-options.dto';
+import { FriendRequestNotification } from 'src/modules/websocket/gateways/fr-notification.gateway';
+import { FRIEND_REQUEST_NOTIFICATION } from 'src/modules/websocket/constants';
 
 @Controller()
 @ApiTags('follow')
 @UseGuards(AuthenticatedGuard)
 export class FollowController {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly friendRequestGateway: FriendRequestNotification,
+  ) {}
 
   @Post(':id/follow')
   @Message('Sucessfully followed the user.')
@@ -56,7 +60,6 @@ export class FollowController {
     @Param('id') id: string,
     @Query() paginate: PageOptionsDto,
   ): Promise<PageDto<any>> {
-    console.log(paginate, id);
     return this.commandBus.execute(new FetchFollowersCommand(id, paginate));
   }
 
@@ -67,6 +70,10 @@ export class FollowController {
     @User() user: UserDocument,
     @Param('id') id: string,
   ): Promise<void> {
+    const message = `${user.username} sent a friend request to you.`;
+
+    await this.friendRequestGateway.sendFriendRequestNotification(id, message);
+
     return this.commandBus.execute(new SendFriendRequestCommand(user, id));
   }
 

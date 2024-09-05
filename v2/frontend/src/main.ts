@@ -10,6 +10,9 @@ import axiosPlugin from './plugins/axious.plugin'
 
 const app = createApp(App)
 
+app.use(PrimeVue, {
+  unstyled: true
+})
 
 app.use(axiosPlugin)
 
