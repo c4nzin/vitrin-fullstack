@@ -1,7 +1,7 @@
 <template>
   <section class="h-screen">
     <!-- eslint-disable -->
-    <div class="grid grid-cols-2 h-full">
+    <div class="grid grid-cols-2 h-full border-b-0">
       <!-- First column -->
       <div class="flex mb-2 justify-center items-center bg-white">
         <div class="w-full max-w-md">
@@ -25,7 +25,7 @@
                 v-model="username"
                 type="text"
                 placeholder="Username"
-                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:font-bold"
               />
             </div>
             <div>
@@ -33,7 +33,7 @@
                 v-model="email"
                 type="email"
                 placeholder="Email address"
-                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:font-bold"
               />
             </div>
             <div>
@@ -41,13 +41,13 @@
                 v-model="password"
                 type="password"
                 placeholder="Password"
-                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:font-bold"
               />
             </div>
             <div>
               <button
                 type="submit"
-                class="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-800"
+                class="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-800 text-lg"
               >
                 Sign Up
               </button>
@@ -66,7 +66,9 @@
 
       <!-- Second column -->
       <div class="bg-blue-500 flex justify-center items-center text-white">
-        <h1 class="text-3xl font-bold">Have you miss the old twitter? So do i.</h1>
+        <h1 class="text-3xl font-bold text-5xl" id="slug">
+          Have you miss the old twitter? So do i.
+        </h1>
       </div>
       <!-- Second column -->
     </div>
@@ -106,4 +108,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+#slug {
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+</style>
