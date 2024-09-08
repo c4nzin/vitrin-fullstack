@@ -2,10 +2,8 @@
   <section class="h-screen">
     <!-- eslint-disable -->
     <div class="grid grid-cols-2 h-full border-b-0">
-      <!-- First column -->
       <div class="flex mb-2 justify-center items-center bg-white">
         <div class="w-full max-w-md">
-          <!-- Twitter Logo -->
           <div class="flex justify-center mb-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +16,6 @@
               />
             </svg>
           </div>
-          <!-- Sign Up Form -->
           <form @submit.prevent="handleRegister" class="space-y-4">
             <div>
               <input
@@ -53,27 +50,21 @@
               </button>
             </div>
           </form>
-          <!-- Terms and Conditions -->
           <p class="text-sm text-gray-500 mt-4">
             By signing up, you agree that you accept our
             <a href="#" class="text-blue-500">Terms of Use</a>
           </p>
-          <!-- Already a member -->
           <p class="mt-4 text-sm">Already a member? <a href="#" class="text-blue-500">Login</a></p>
           <h2 class="mt-4 text-lg text-white" v-if="errorMessage">{{ errorMessage }}</h2>
         </div>
       </div>
-      <!-- First column -->
 
-      <!-- Second column -->
       <div class="bg-blue-500 flex justify-center items-center text-white">
         <h1 class="text-3xl font-bold text-5xl" id="slug">
           Have you miss the old twitter? So do i.
         </h1>
       </div>
-      <!-- Second column -->
     </div>
-    <!-- Grid -->
   </section>
 </template>
 
