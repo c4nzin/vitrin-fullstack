@@ -77,10 +77,6 @@ export default {
 
   methods: {
     async handleRegister() {
-      console.log('Username:', this.username);
-      console.log('Email:', this.email);
-      console.log('Password:', this.password);
-
       try {
         await axios.post('http://localhost:3000/api/auth/register', {
           username: this.username,
