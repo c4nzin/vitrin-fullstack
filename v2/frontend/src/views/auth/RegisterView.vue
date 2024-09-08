@@ -16,51 +16,42 @@
               />
             </svg>
           </div>
-          <form @submit.prevent="handleRegister()" class="space-y-4">
-            <div>
-              <input
-                v-model="username"
-                type="text"
-                placeholder="Username"
-                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:font-bold"
-              />
-            </div>
-            <div>
-              <input
-                v-model="email"
-                type="email"
-                placeholder="Email address"
-                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:font-bold"
-              />
-            </div>
-            <div>
-              <input
-                v-model="password"
-                type="password"
-                placeholder="Password"
-                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:font-bold"
-              />
-            </div>
-            <div>
-              <button
-                type="submit"
-                class="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-800 text-lg"
-              >
-                Sign Up
-              </button>
-            </div>
+          <form v-on:keyup.enter="handleRegister()" class="space-y-4">
+            <CustomInput
+              v-model:field="username"
+              inputType="text"
+              placeholder="Username"
+            ></CustomInput>
+
+            <CustomInput
+              v-model:field="email"
+              inputType="email"
+              placeholder="Email"
+            ></CustomInput>
+
+            <CustomInput
+              v-model:field="password"
+              inputType="password"
+              placeholder="Password"
+            ></CustomInput>
+
+            <CustomButton text="Sign Up"></CustomButton>
           </form>
           <p class="text-sm text-gray-500 mt-4">
             By signing up, you agree that you accept our
             <a href="#" class="text-blue-500">Terms of Use</a>
           </p>
-          <p class="mt-4 text-sm">Already a member? <a href="#" class="text-blue-500">Login</a></p>
-          <h2 class="mt-4 text-lg text-white" v-if="errorMessage">{{ errorMessage }}</h2>
+          <p class="mt-4 text-sm">
+            Already a member? <a href="#" class="text-blue-500">Login</a>
+          </p>
+          <h2 class="mt-4 text-lg text-white" v-if="errorMessage">
+            {{ errorMessage }}
+          </h2>
         </div>
       </div>
 
       <div class="bg-blue-500 flex justify-center items-center text-white">
-        <h1 class="text-3xl font-bold text-5xl" id="slug">
+        <h1 class="text-3xl font-bold" id="slug">
           Have you miss the old twitter? So do i.
         </h1>
       </div>
@@ -70,6 +61,8 @@
 
 <script>
 import axios from 'axios';
+import CustomButton from '@/components/Button.vue';
+import CustomInput from '@/components/Input.vue';
 
 export default {
   data() {
@@ -95,6 +88,11 @@ export default {
         throw new Error(error);
       }
     },
+  },
+
+  components: {
+    CustomButton,
+    CustomInput,
   },
 
   mounted() {

@@ -21,23 +21,26 @@
 
           <!--Form side-->
           <form @submit.prevent="handleLogin()" class="space-y-4">
-            <input
+            <CustomInput
+              v-model:field="username"
               placeholder="Username"
-              v-model="username"
-              class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:bg-slate-100"
-            />
-            <input
-              v-model="password"
+              type="text"
+            ></CustomInput>
+            <CustomInput
+              v-model:field="password"
               placeholder="Password"
-              class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:bg-slate-100"
-            />
+              type="password"
+            ></CustomInput>
+            <CustomButton text="Log in"></CustomButton>
           </form>
-          <button
-            type="submit"
-            class="w-full bg-blue-500 p-3 border rounded-md mt-3 items-center text-white hover:bg-blue-800 font-bold"
-          >
-            Log in
-          </button>
+          <h2 class="text-sm text-right mt-4">
+            If you are not a member, Please
+            <a
+              class="text-blue-500 text-sm hover:text-blue-950"
+              href="/register"
+              >Sign up</a
+            >
+          </h2>
         </div>
       </div>
       <!--second section-->
@@ -54,6 +57,8 @@
 
 <script>
 import axios from 'axios';
+import CustomButton from '@/components/Button.vue';
+import CustomInput from '@/components/Input.vue';
 
 export default {
   data() {
@@ -78,6 +83,11 @@ export default {
         throw new Error(error);
       }
     },
+  },
+
+  components: {
+    CustomButton,
+    CustomInput,
   },
 };
 </script>
