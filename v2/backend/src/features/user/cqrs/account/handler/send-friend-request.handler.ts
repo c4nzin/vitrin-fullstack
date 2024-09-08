@@ -5,7 +5,7 @@ import { BadRequestException } from '@nestjs/common';
 import { FriendRequestStatus } from 'src/features/user/enum/friend-request.status';
 import { Types } from 'mongoose';
 import { FriendRequestDocument } from 'src/features/user/schemas/friend-request.schema';
-import { NotificationRepository } from 'src/features/user/repositories';
+import { NotificationRepository, UserRepository } from 'src/features/user/repositories';
 
 @CommandHandler(SendFriendRequestCommand)
 export class SendFriendRequestCommandHandler
@@ -14,6 +14,7 @@ export class SendFriendRequestCommandHandler
   constructor(
     private readonly friendRequestRepository: FriendRequestRepository,
     private readonly notificationRepository: NotificationRepository,
+    private readonly userRepository: UserRepository,
   ) {}
 
   public async execute(
@@ -22,6 +23,10 @@ export class SendFriendRequestCommandHandler
     const { user: sender, id: receiverId } = command;
 
     const receiverIdToObjectId = new Types.ObjectId(receiverId);
+
+    //bad code just for now need refactor
+
+    const receiver = await this.userRepository.findById(receiverId);
 
     const existingRequest = await this.friendRequestRepository.findOne({
       sender: sender.id,
@@ -37,6 +42,9 @@ export class SendFriendRequestCommandHandler
       receiver: receiverIdToObjectId,
       status: FriendRequestStatus.PENDING,
     });
+
+    sender.updateOne({ $push: { sentFriendRequests: receiverId } });
+    receiver.updateOne({ $push: { receivedFriendRequests: sender.id } });
 
     await this.notificationRepository.create({
       isRead: false,

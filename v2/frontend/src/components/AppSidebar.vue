@@ -24,8 +24,8 @@
           </a>
         </li>
         <li>
-          <a
-            href="/register"
+          <router-link
+            to="/login"
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <svg
@@ -44,11 +44,11 @@
               />
             </svg>
             <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <a
-            href="#"
+          <router-link
+            to="/register"
             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
           >
             <svg
@@ -67,7 +67,7 @@
               />
             </svg>
             <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
-          </a>
+          </router-link>
         </li>
         <li>
           <a href="#" class="flex-1 items-center p-2 text-gray-900 rounded-lg text-white">

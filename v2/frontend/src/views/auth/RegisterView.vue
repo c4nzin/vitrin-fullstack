@@ -60,6 +60,7 @@
           </p>
           <!-- Already a member -->
           <p class="mt-4 text-sm">Already a member? <a href="#" class="text-blue-500">Login</a></p>
+          <h2 class="mt-4 text-lg text-white" v-if="errorMessage">{{ errorMessage }}</h2>
         </div>
       </div>
       <!-- First column -->
@@ -85,6 +86,7 @@ export default {
       username: '',
       email: '',
       password: '',
+      errorMessage: '',
     };
   },
 
@@ -97,6 +99,8 @@ export default {
           password: this.password,
         });
       } catch (error) {
+        this.errorMessage = error.response.message;
+        console.log(this.errorMessage);
         throw new Error(error);
       }
     },
