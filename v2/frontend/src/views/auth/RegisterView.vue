@@ -16,27 +16,28 @@
               />
             </svg>
           </div>
-          <form v-on:keyup.enter="handleRegister()" class="space-y-4">
+          <form @submit.prevent="handleRegister" class="space-y-4">
             <CustomInput
-              v-model:field="username"
+              v-model="username"
               inputType="text"
               placeholder="Username"
             ></CustomInput>
 
             <CustomInput
-              v-model:field="email"
+              v-model="email"
               inputType="email"
               placeholder="Email"
             ></CustomInput>
 
             <CustomInput
-              v-model:field="password"
+              v-model="password"
               inputType="password"
               placeholder="Password"
             ></CustomInput>
 
             <CustomButton text="Sign Up"></CustomButton>
           </form>
+
           <p class="text-sm text-gray-500 mt-4">
             By signing up, you agree that you accept our
             <a href="#" class="text-blue-500">Terms of Use</a>
@@ -76,6 +77,10 @@ export default {
 
   methods: {
     async handleRegister() {
+      console.log('Username:', this.username);
+      console.log('Email:', this.email);
+      console.log('Password:', this.password);
+
       try {
         await axios.post('http://localhost:3000/api/auth/register', {
           username: this.username,
@@ -83,9 +88,9 @@ export default {
           password: this.password,
         });
       } catch (error) {
-        this.errorMessage = error.response.message;
+        this.errorMessage =
+          error.response?.data?.message || 'An error occurred';
         console.log(this.errorMessage);
-        throw new Error(error);
       }
     },
   },

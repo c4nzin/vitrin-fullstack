@@ -1,6 +1,7 @@
 <template>
   <input
-    v-model="variableValue"
+    :value="modelValue"
+    @input="updateValue"
     :placeholder="placeholder"
     :type="inputType"
     class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:font-bold"
@@ -9,8 +10,9 @@
 
 <script>
 export default {
+  name: 'CustomInput',
   props: {
-    field: {
+    modelValue: {
       type: String,
       required: true,
     },
@@ -24,14 +26,9 @@ export default {
     },
   },
 
-  computed: {
-    variableValue: {
-      get() {
-        return this.field;
-      },
-      set(value) {
-        this.$emit('update:field', value);
-      },
+  methods: {
+    updateValue(event) {
+      this.$emit('update:modelValue', event.target.value);
     },
   },
 };
