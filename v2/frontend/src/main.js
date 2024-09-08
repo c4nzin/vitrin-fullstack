@@ -14,6 +14,9 @@ app.config.globalProperties.$axios = { ...axiosClient };
 app.provide(AxiosKey, axiosClient);
 
 app.component('AppSideBar', AppSidebar);
+//global button
+//global input
+//incl
 
 app.use(store);
 app.use(router).mount('#app');

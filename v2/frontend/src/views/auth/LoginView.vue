@@ -20,7 +20,7 @@
           </div>
 
           <!--Form side-->
-          <form @submit.prevent="handleLogin" class="space-y-4">
+          <form @submit.prevent="handleLogin()" class="space-y-4">
             <input
               placeholder="Username"
               v-model="username"

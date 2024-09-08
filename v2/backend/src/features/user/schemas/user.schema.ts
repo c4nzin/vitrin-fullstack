@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
 import { HydratedDocument, Types } from 'mongoose';
+import { Gender } from './gender.enum';
 
 //add thumbnail
 //add follow
@@ -12,13 +13,6 @@ import { HydratedDocument, Types } from 'mongoose';
 //*** no needed but good to having those */
 //add blockeduser
 export type UserDocument = HydratedDocument<User>;
-
-export enum Gender {
-  MALE,
-  FEMALE,
-  NON_BINARY,
-  NOT_KNOWN,
-}
 
 @Schema({
   versionKey: false,
@@ -68,20 +62,6 @@ export class User {
     default: false,
   })
   public isEmailVerified: boolean;
-
-  @Prop({
-    type: String,
-  })
-  public GOOGLE_ID: string;
-
-  @Prop({
-    type: Boolean,
-    required: true,
-    default: function () {
-      return this.password !== undefined;
-    },
-  })
-  public hasPassword: boolean;
 
   @Prop({
     type: String,
@@ -170,6 +150,5 @@ UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 
   this.password = await bcrypt.hash(this.password, 10);
-  this.hasPassword = true;
   next();
 });

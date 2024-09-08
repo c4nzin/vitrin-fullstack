@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsOptional, IsString, IsUrl, Length } from 'class-validator';
 import { IsUserFieldUnique } from 'src/common/decorators';
-import { Gender } from '../schemas/user.schema';
+import { Gender } from '../schemas/gender.enum';
 
 export class UpdateProfileDto {
   @IsOptional()

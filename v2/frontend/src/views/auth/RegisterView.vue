@@ -16,7 +16,7 @@
               />
             </svg>
           </div>
-          <form @submit.prevent="handleRegister" class="space-y-4">
+          <form @submit.prevent="handleRegister()" class="space-y-4">
             <div>
               <input
                 v-model="username"
