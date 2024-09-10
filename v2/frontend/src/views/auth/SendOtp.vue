@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       email: '',
-      errorMessage: '', // Hata mesajı için
+      errorMessage: '',
     };
   },
 
