@@ -3,6 +3,7 @@ import RegisterView from '@/views/auth/RegisterView.vue';
 import LoginView from '@/views/auth/LoginView.vue';
 import HomeView from '../views/HomeView.vue';
 import UserProfile from '@/views/user/UserProfile.vue';
+import SendOtp from '@/views/auth/SendOtp.vue';
 
 const routes = [
   {
@@ -35,6 +36,11 @@ const routes = [
     path: '/user/edit',
     name: '/user/edit',
     component: UserProfile,
+  },
+  {
+    path: '/send-otp',
+    name: 'send-otp',
+    component: SendOtp,
   },
 ];
 
