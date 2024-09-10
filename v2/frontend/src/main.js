@@ -13,14 +13,15 @@ const app = createApp(App);
 
 app.config.globalProperties.$axios = { ...axiosClient };
 
+// library.add(faUserSecret); //fix this soon.
+
 app.provide(AxiosKey, axiosClient);
 
 app.component('AppSideBar', AppSidebar);
 app.component('CustomButton', Button);
 app.component('CustomInput', Input);
-//global button
-//global input
-//incl
+
+// app.component('font awesome icon bla', FontAwesomeIcon);
 
 app.use(store);
 app.use(router).mount('#app');

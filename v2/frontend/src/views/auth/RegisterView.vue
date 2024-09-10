@@ -1,7 +1,7 @@
 <template>
   <section class="h-screen">
     <!-- eslint-disable -->
-    <div class="grid grid-cols-2 h-full border-b-0">
+    <div class="flex">
       <div class="flex mb-2 justify-center items-center bg-white">
         <div class="w-full max-w-md">
           <div class="flex justify-center mb-3">
