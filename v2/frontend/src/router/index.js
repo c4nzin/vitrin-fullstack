@@ -55,8 +55,6 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const isAuthenticated = !!document.cookie.includes('sessionId=');
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
     if (!isAuthenticated) {
       next({
         path: '/login',
@@ -66,21 +64,8 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else {
-    next(); // make sure to always call next()!
+    next();
   }
 });
-
-// router.beforeEach((to, from, next) => {
-//   const isAuthenticated = !!document.cookie.includes('sessionId=');
-
-//   if (
-//     to.matched.some((record) => record.meta.requiresAuth) &&
-//     !isAuthenticated
-//   ) {
-//     next({ name: 'Login' });
-//   } else {
-//     next();
-//   }
-// });
 
 export default router;
