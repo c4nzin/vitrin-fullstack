@@ -3,9 +3,7 @@
     <aside class="w-1/5 bg-white border-r border-gray-200">
       <div class="flex flex-col h-full">
         <div class="p-4">
-          <h2 class="text-xl font-bold text-gray-700">
-            Welcome {{ getUsername }}
-          </h2>
+          <h2 class="text-xl font-bold text-gray-700">Welcome {{}}</h2>
           <p class="text-sm text-gray-500">Tue, 07 June 2055</p>
         </div>
         <nav class="mt-6">
@@ -53,7 +51,7 @@
           />
           <div>
             <h2 class="text-lg font-semibold">Can Can</h2>
-            <p class="text-gray-500">squalcan@gmail.com</p>
+            <p class="text-gray-500">{{ user }}</p>
           </div>
           <button class="ml-auto px-4 py-2 bg-blue-500 text-white rounded-lg">
             Edit
@@ -583,14 +581,29 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
-    return {};
+    return {
+      user: null,
+    };
   },
 
-  computed: {
-    getUsername() {
-      return 'canmertinyo';
+  methods: {
+    async getLoggedUser() {
+      try {
+        const user = await axios.get('http://localhost:3000/api/users/me', {
+          withCredentials: true,
+        });
+
+        this.user = user.data;
+        console.log(this.user);
+
+        return this.user;
+      } catch (error) {
+        this.$router.push({ name: 'Login' });
+      }
     },
   },
 };

@@ -16,7 +16,7 @@ import expressMongoSanitize from 'express-mongo-sanitize';
 export async function setupApp(app: NestExpressApplication) {
   const config = app.get<Config>(ENV);
 
-  app.enableCors({ origin: '*' });
+  app.enableCors({ origin: [/localhost(:d+)?$/], credentials: true });
 
   app.use(helmet());
   app.use(compression());

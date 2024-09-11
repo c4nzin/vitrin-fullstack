@@ -1,7 +1,7 @@
 <template>
   <section class="h-screen">
     <!-- eslint-disable -->
-    <div class="flex">
+    <div class="grid grid-cols-2">
       <div class="flex mb-2 justify-center items-center bg-white">
         <div class="w-full max-w-md">
           <div class="flex justify-center mb-3">
@@ -51,7 +51,9 @@
         </div>
       </div>
 
-      <div class="bg-blue-500 flex justify-center items-center text-white">
+      <div
+        class="bg-blue-500 h-screen flex justify-center items-center text-white"
+      >
         <h1 class="text-3xl font-bold" id="slug">
           Have you miss the old twitter? So do i.
         </h1>

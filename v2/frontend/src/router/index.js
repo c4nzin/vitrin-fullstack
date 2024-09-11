@@ -34,8 +34,11 @@ const routes = [
   },
   {
     path: '/user/edit',
-    name: '/user/edit',
+    name: 'Profile',
     component: UserProfile,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/send-otp',
@@ -48,5 +51,18 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+// router.beforeEach((to, from, next) => {
+//   const isAuthenticated = !!document.cookie.includes('sessionId=');
+
+//   if (
+//     to.matched.some((record) => record.meta.requiresAuth) &&
+//     !isAuthenticated
+//   ) {
+//     next({ name: 'Login' });
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;

@@ -20,14 +20,14 @@
           </div>
 
           <!--Form side-->
-          <form @submit.prevent="handleLogin()" class="space-y-4">
+          <form @submit.prevent="handleLogin" class="space-y-4">
             <CustomInput
-              v-model:field="username"
+              v-model="username"
               placeholder="Username"
               type="text"
             ></CustomInput>
             <CustomInput
-              v-model:field="password"
+              v-model="password"
               placeholder="Password"
               type="password"
             ></CustomInput>
@@ -61,6 +61,7 @@ import CustomButton from '@/components/Button.vue';
 import CustomInput from '@/components/Input.vue';
 
 export default {
+  name: 'Login',
   data() {
     return {
       username: '',
@@ -74,11 +75,18 @@ export default {
 
   methods: {
     async handleLogin() {
+      console.log(this.username, this.password);
       try {
-        await axios.post('http://localhost:3000/api/auth/login', {
-          username: this.username,
-          password: this.password,
-        });
+        const response = await axios.post(
+          'http://localhost:3000/api/auth/login',
+          {
+            username: this.username,
+            password: this.password,
+          }
+        );
+        this.$router.push({ name: 'Profile' });
+
+        console.log(response.data);
       } catch (error) {
         throw new Error(error);
       }
