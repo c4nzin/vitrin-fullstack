@@ -42,9 +42,9 @@
             >
             <div
               v-if="errorMessage"
-              class="bg-red-700 text-red-500 rounded-lg flex justify-center items-center ml-4 pl-3"
+              class="bg-red-700 text-white rounded-md flex justify-center items-center p-4"
             >
-              {{ errorMessage }}
+              <p>{{ errorMessage }}</p>
             </div>
           </h2>
         </div>
@@ -88,7 +88,9 @@ export default {
         await this.login(this.username, this.password);
         this.$router.push({ name: 'Profile' });
       } catch (error) {
-        this.errorMessage = error.response?.data?.message;
+        this.errorMessage =
+          error.response?.data?.message[0] ||
+          'Login failed please check your information has given';
       }
     },
   },

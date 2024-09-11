@@ -10,7 +10,7 @@ export default defineStore('user', {
   actions: {
     async login(username, password) {
       try {
-        const response = await axios.post(
+        await axios.post(
           'http://localhost:3000/api/auth/login',
           {
             username,
