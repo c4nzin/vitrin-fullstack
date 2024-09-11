@@ -12,11 +12,18 @@ import passport from 'passport';
 import helmet from 'helmet';
 import compression from 'compression';
 import expressMongoSanitize from 'express-mongo-sanitize';
+import cors from 'cors';
 
 export async function setupApp(app: NestExpressApplication) {
   const config = app.get<Config>(ENV);
 
-  app.enableCors({ origin: [/localhost(:d+)?$/], credentials: true });
+  app.use(
+    cors({
+      origin: 'http://localhost:3001',
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      credentials: true,
+    }),
+  );
 
   app.use(helmet());
   app.use(compression());

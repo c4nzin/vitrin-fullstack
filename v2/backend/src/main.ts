@@ -7,7 +7,7 @@ import { setupSwagger } from './setup-swagger';
 import { useContainer } from 'class-validator';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {});
   const config = app.get<Config>(ENV);
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });

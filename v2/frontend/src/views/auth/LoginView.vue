@@ -40,6 +40,12 @@
               href="/register"
               >Sign up</a
             >
+            <div
+              v-if="errorMessage"
+              class="bg-red-700 text-red-500 rounded-lg flex justify-center items-center ml-4 pl-3"
+            >
+              {{ errorMessage }}
+            </div>
           </h2>
         </div>
       </div>
@@ -56,9 +62,10 @@
 </template>
 
 <script>
-import axios from 'axios';
 import CustomButton from '@/components/Button.vue';
 import CustomInput from '@/components/Input.vue';
+import { mapActions, mapState } from 'pinia';
+import userStore from '@/store/userStore';
 
 export default {
   name: 'Login',
@@ -66,6 +73,7 @@ export default {
     return {
       username: '',
       password: '',
+      errorMessage: '',
     };
   },
 
@@ -74,23 +82,18 @@ export default {
   },
 
   methods: {
+    ...mapActions(userStore, ['login']),
     async handleLogin() {
-      console.log(this.username, this.password);
       try {
-        const response = await axios.post(
-          'http://localhost:3000/api/auth/login',
-          {
-            username: this.username,
-            password: this.password,
-          }
-        );
+        await this.login(this.username, this.password);
         this.$router.push({ name: 'Profile' });
-
-        console.log(response.data);
       } catch (error) {
-        throw new Error(error);
+        this.errorMessage = error.response?.data?.message;
       }
     },
+  },
+  computed: {
+    ...mapState(userStore, ['errorMessage']),
   },
 
   components: {
