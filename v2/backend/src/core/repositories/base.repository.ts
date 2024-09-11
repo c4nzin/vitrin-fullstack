@@ -6,6 +6,7 @@ import {
   FindResult,
   UpdateResult,
 } from './types/query.types';
+import { Pagination } from 'src/common/decorators/types/pagination.interface';
 
 export class BaseRepository<T> {
   constructor(private readonly model: Model<T>) {}
@@ -71,5 +72,27 @@ export class BaseRepository<T> {
 
   public deleteOne(filter: FilterQuery<T>): DeleteResult<T> {
     return this.model.deleteOne(filter);
+  }
+
+  public countDocuments<T>(filter: FilterQuery<T>): FilterQuery<T> {
+    return this.model.countDocuments(filter).exec();
+  }
+
+  public async paginatedResult(
+    condition: string,
+    pagination: Pagination,
+  ): Promise<any[]> {
+    const query = { condition };
+
+    return this.find(query)
+      .skip(pagination.skip)
+      .limit(pagination.limit)
+      .sort(
+        pagination.sort.reduce((acc, sort) => {
+          acc[sort.field] = sort.by === 'ASC' ? 1 : -1;
+          return acc;
+        }, {}),
+      )
+      .exec();
   }
 }
