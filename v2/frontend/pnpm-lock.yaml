@@ -35,6 +35,9 @@ importers:
       vue:
         specifier: ^3.2.13
         version: 3.5.1
+      vue-cookies:
+        specifier: ^1.8.4
+        version: 1.8.4
       vue-router:
         specifier: ^4.0.3
         version: 4.4.3(vue@3.5.1)
@@ -3989,6 +3992,9 @@ packages:
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
+
+  vue-cookies@1.8.4:
+    resolution: {integrity: sha512-9zjvACKE4W0kEb8OQtXzpizKhf6zfFOG/Z1TEUjSJn4Z4rintuAHo8y/FpCUhTWHMmPe8E+Fko+/tiXVM+5jOw==}
 
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
@@ -8623,6 +8629,8 @@ snapshots:
       spdx-expression-parse: 3.0.1
 
   vary@1.1.2: {}
+
+  vue-cookies@1.8.4: {}
 
   vue-demi@0.14.10(vue@3.5.1):
     dependencies:

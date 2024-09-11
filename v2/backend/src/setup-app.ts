@@ -33,6 +33,7 @@ export async function setupApp(app: NestExpressApplication) {
       cookie: {
         httpOnly: false,
         maxAge: 24 * 60 * 60 * 1000, //24hours
+        secure: false,
       },
       secret: config.SESSION_SECRET,
       name: 'sessionId',
