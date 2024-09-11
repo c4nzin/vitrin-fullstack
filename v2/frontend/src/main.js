@@ -8,7 +8,9 @@ import { axiosClient, AxiosKey } from './plugins';
 import AppSidebar from './components/AppSidebar.vue';
 import Button from './components/Button.vue';
 import Input from './components/Input.vue';
+import { createPinia } from 'pinia';
 
+const pinia = createPinia();
 const app = createApp(App);
 
 app.config.globalProperties.$axios = { ...axiosClient };
@@ -24,4 +26,5 @@ app.component('CustomInput', Input);
 // app.component('font awesome icon bla', FontAwesomeIcon);
 
 app.use(store);
+app.use(pinia);
 app.use(router).mount('#app');
