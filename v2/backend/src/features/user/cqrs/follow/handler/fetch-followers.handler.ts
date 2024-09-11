@@ -25,12 +25,9 @@ export class FetchFollowersHandler implements ICommandHandler<FetchFollowersComm
       .select(['-password', '-email'])
       .exec();
 
-    console.log(followers, 'followers');
     const itemCount = await this.userRepository.countDocuments({
       _id: { $in: user.follower },
     });
-
-    console.log(itemCount);
 
     const pageMetaDto = new PageMetaDto({ pageOptionsDto: pagination, itemCount });
 

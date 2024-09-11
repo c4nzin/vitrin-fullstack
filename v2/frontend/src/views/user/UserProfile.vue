@@ -34,12 +34,6 @@
             placeholder="Search"
             class="px-4 py-2 border border-gray-300 rounded-lg"
           />
-          <div class="ml-4">
-            <img
-              src="https://via.placeholder.com/40"
-              class="w-10 h-10 rounded-full"
-            />
-          </div>
         </div>
       </header>
 
