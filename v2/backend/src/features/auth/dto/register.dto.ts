@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsEnum, IsNotEmpty, IsString, Length } from 'class-validator';
 import { IsUserFieldUnique } from 'src/common/decorators/is-field-unique.decorator';
-import { Gender } from 'src/features/user/schemas/gender.enum';
+import { Gender } from 'src/features/user/schemas/enum/gender.enum';
 
 export class RegisterDto {
   @ApiProperty()

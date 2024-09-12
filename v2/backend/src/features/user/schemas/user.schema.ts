@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
 import { HydratedDocument, Types } from 'mongoose';
-import { Gender } from './gender.enum';
+import { Gender } from './enum/gender.enum';
 
 //add thumbnail
 //add follow

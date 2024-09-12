@@ -4,8 +4,8 @@ import {
   SendFriendRequestCommand,
   AcceptFriendRequestCommand,
   RejectFriendRequestCommand,
-} from '../cqrs';
-import { UserDocument } from '../schemas';
+} from '../../user/cqrs';
+import { UserDocument } from '../../user/schemas';
 import { CommandBus } from '@nestjs/cqrs';
 import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notification.gateway';
 

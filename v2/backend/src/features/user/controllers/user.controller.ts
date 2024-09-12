@@ -10,12 +10,13 @@ import {
 } from '@nestjs/common';
 import { Message, User } from 'src/common/decorators';
 import { UserDocument } from '../schemas';
-import { UpdateEmailDto, UpdateProfileDto } from '../dto';
+import { UpdateEmailDto } from '../dto';
 import { CommandBus } from '@nestjs/cqrs';
-import { UpdateProfileFieldsCommand } from '../cqrs/account/command/update-profile.command';
+import { UpdateProfileFieldsCommand } from '../../account/cqrs/command/update-profile.command';
 import { AuthenticatedGuard } from 'src/common/guards/authenticated.guard';
-import { UpdatEmailCommand } from '../cqrs/account/command/update-email.command';
+import { UpdatEmailCommand } from '../../account/cqrs/command/update-email.command';
 import { ApiTags } from '@nestjs/swagger';
+import { UpdateProfileDto } from 'src/features/account/dto/update-profile.dto';
 
 @Controller()
 @ApiTags('user')

@@ -1,6 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { RejectFriendRequestCommand } from '../command/reject-friend-request.command';
-import { FriendRequestRepository } from 'src/features/user/repositories/friend-request.repository';
+import { FriendRequestRepository } from 'src/features/account/repositories/friend-request.repository';
 import { BadRequestException } from '@nestjs/common';
 import { FriendRequestStatus } from 'src/features/user/enum/friend-request.status';
 

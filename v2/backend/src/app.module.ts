@@ -14,6 +14,8 @@ import routes from './features/routes';
 import { WebsocketModule } from './modules/websocket/websocket.module';
 import { ThrottlerModule } from './modules/throttler/throttler.module';
 import { RouterModule } from '@nestjs/core';
+import { AccountModule } from './features/account/account.module';
+import { FollowModule } from './features/follow/follow.module';
 
 @Module({
   imports: [
@@ -45,6 +47,8 @@ import { RouterModule } from '@nestjs/core';
     RequestContextModule.forRoot({ isGlobal: true, contextClass: AuthenticatedContext }),
     RouterModule.register(routes),
     WebsocketModule,
+    AccountModule,
+    FollowModule,
   ],
   providers: [],
 })

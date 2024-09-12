@@ -10,15 +10,15 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Message, User } from 'src/common/decorators';
-import { UserDocument } from '../schemas';
 import { CommandBus } from '@nestjs/cqrs';
-import { FollowCommand } from '../cqrs/follow/command/follow.command';
-import { UnfollowCommand } from '../cqrs/follow/command/unfollow.command';
-import { FetchFollowersCommand } from '../cqrs/follow/command/fetch-followers.command';
+import { FollowCommand } from '../cqrs/command/follow.command';
+import { UnfollowCommand } from '../cqrs/command/unfollow.command';
+import { FetchFollowersCommand } from '../cqrs/command/fetch-followers.command';
 import { AuthenticatedGuard } from 'src/common/guards';
 import { ApiTags } from '@nestjs/swagger';
 import { PageDto } from 'src/common/pagination/dto';
 import { PageOptionsDto } from 'src/common/pagination/dto/page-options.dto';
+import { UserDocument } from 'src/features/user/schemas';
 
 @Controller()
 @ApiTags('follow')

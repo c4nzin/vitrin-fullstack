@@ -1,4 +1,4 @@
-import { UpdateProfileDto } from 'src/features/user/dto';
+import { UpdateProfileDto } from '../../dto/update-profile.dto';
 
 export class UpdateProfileFieldsCommand {
   constructor(

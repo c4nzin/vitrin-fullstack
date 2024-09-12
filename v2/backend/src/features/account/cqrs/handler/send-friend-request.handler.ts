@@ -1,11 +1,11 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { SendFriendRequestCommand } from '../command/send-friend-request.command';
-import { FriendRequestRepository } from 'src/features/user/repositories/friend-request.repository';
+import { FriendRequestRepository } from 'src/features/account/repositories/friend-request.repository';
 import { BadRequestException } from '@nestjs/common';
 import { FriendRequestStatus } from 'src/features/user/enum/friend-request.status';
 import { Types } from 'mongoose';
-import { FriendRequestDocument } from 'src/features/user/schemas/friend-request.schema';
 import { NotificationRepository, UserRepository } from 'src/features/user/repositories';
+import { FriendRequestDocument } from '../../schemas/friend-request.schema';
 
 @CommandHandler(SendFriendRequestCommand)
 export class SendFriendRequestCommandHandler
