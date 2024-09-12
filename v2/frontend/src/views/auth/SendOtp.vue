@@ -19,7 +19,7 @@
           Please verify your account by providing your email and you are good to
           go.
         </h1>
-        <form @submit.prevent="sendOtpCode">
+        <form @submit.prevent="waitBeforeRedirect">
           <div class="relative flex mb-5 justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,6 @@
 import CustomInput from '@/components/Input.vue';
 import CustomButton from '@/components/Button.vue';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 export default {
   data() {
@@ -87,8 +86,16 @@ export default {
           email: this.email,
         });
       } catch (error) {
-        this.errorMessage = error.response.data.message[0]; //getting the first error message from my beatiful backend
+        this.errorMessage = error.response.data.message[0];
       }
+    },
+
+    async waitBeforeRedirect(timeToRedirect = 1000) {
+      await this.sendOtpCode();
+
+      setTimeout(() => {
+        this.$router.push({ name: 'Verify-Otp' });
+      }, timeToRedirect);
     },
   },
 

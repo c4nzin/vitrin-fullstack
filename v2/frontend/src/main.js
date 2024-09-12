@@ -13,7 +13,6 @@ const app = createApp(App);
 
 app.config.globalProperties.$axios = { ...axiosClient };
 
-// library.add(faUserSecret); //fix this soon.
 const pinia = createPinia();
 
 app.provide(AxiosKey, axiosClient);
@@ -21,8 +20,6 @@ app.provide(AxiosKey, axiosClient);
 app.component('AppSideBar', AppSidebar);
 app.component('CustomButton', Button);
 app.component('CustomInput', Input);
-
-// app.component('font awesome icon bla', FontAwesomeIcon);
 
 app.use(pinia);
 app.use(router).mount('#app');

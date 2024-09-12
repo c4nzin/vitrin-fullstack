@@ -4,6 +4,7 @@ import LoginView from '@/views/auth/LoginView.vue';
 import HomeView from '../views/HomeView.vue';
 import UserProfile from '@/views/user/UserProfile.vue';
 import SendOtp from '@/views/auth/SendOtp.vue';
+import VerifyOtp from '@/views/auth/VerifyOtp.vue';
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
     path: '/send-otp',
     name: 'send-otp',
     component: SendOtp,
+  },
+  {
+    path: '/verify-otp',
+    name: 'Verify-Otp',
+    component: VerifyOtp,
   },
 ];
 
