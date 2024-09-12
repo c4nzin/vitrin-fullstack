@@ -85,6 +85,7 @@ export default {
           email: this.email,
           password: this.password,
         });
+        this.$router.push({ name: 'Login' });
       } catch (error) {
         this.errorMessage =
           error.response?.data?.message || 'An error occurred';
