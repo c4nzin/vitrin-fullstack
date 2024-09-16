@@ -2,6 +2,8 @@ import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { Pagination } from './types/pagination.interface';
 import { Request } from 'express';
 
+//OLD PAGINATION
+
 export const Paginate = createParamDecorator(
   (_, context: ExecutionContext): Pagination => {
     const request = context.switchToHttp().getRequest<Request>();

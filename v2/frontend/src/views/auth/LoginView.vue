@@ -1,8 +1,5 @@
 <template>
   <section class="h-screen">
-    <!-- first section-->
-    <!-- eslint-disable -->
-
     <div class="grid grid-cols-2 h-full border-0">
       <div class="flex flex-col justify-center items-center bg-white">
         <div class="w-full max-w-md">
@@ -19,7 +16,6 @@
             </svg>
           </div>
 
-          <!--Form side-->
           <form @submit.prevent="handleLogin" class="space-y-4">
             <CustomInput
               v-model="username"
@@ -49,7 +45,6 @@
           </h2>
         </div>
       </div>
-      <!--second section-->
       <div class="flex justify-center bg-blue-500 text-white">
         <img
           src="../../assets/login-background.jpeg"
@@ -65,7 +60,7 @@
 import CustomButton from '@/components/Button.vue';
 import CustomInput from '@/components/Input.vue';
 import { mapActions, mapState } from 'pinia';
-import userStore from '@/store/userStore';
+import loginStore from '@/store/loginStore';
 
 export default {
   name: 'Login',
@@ -82,7 +77,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(userStore, ['login']),
+    ...mapActions(loginStore, ['login']),
     async handleLogin() {
       try {
         await this.login(this.username, this.password);
@@ -95,7 +90,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(userStore, ['errorMessage']),
+    ...mapState(loginStore, ['errorMessage']),
   },
 
   components: {
