@@ -8,8 +8,10 @@ import {
 import { UserDocument } from '../../user/schemas';
 import { CommandBus } from '@nestjs/cqrs';
 import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notification.gateway';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller()
+@ApiTags('Friends')
 export class FriendController {
   constructor(
     private readonly commandBus: CommandBus,

@@ -18,11 +18,4 @@ export class OtpController {
   public async sendOtp(@Body() otpDto: SendOtpDto): Promise<void> {
     await this.commandBus.execute(new GenerateOtpCommand(otpDto.email));
   }
-
-  @Post('verify-account')
-  @Message('Sucessfully verified the otp.')
-  @HttpCode(HttpStatus.OK)
-  public async verifyOtp(@Body() otpDto: OtpDto): Promise<OtpDocument> {
-    return this.commandBus.execute(new VerifyAccountCommand(otpDto));
-  }
 }
