@@ -16,13 +16,19 @@ export class VerifyOtpHandler implements ICommandHandler<VerifyOtpCommand> {
     const otp = await this.otpRepository.findOne({ otpCode });
 
     if (!otp) {
-      throw new BadRequestException('Otps are not matcing.');
+      throw new BadRequestException('Otp not found.');
     }
 
-    return this.verifyOtp(otp, otpCode);
+    const isValidOtp = this.verifyOtp(otp, otpCode, email);
+
+    if (!isValidOtp) {
+      throw new BadRequestException('Otps are not matching.');
+    }
+
+    return true;
   }
 
-  public verifyOtp(otp: OTP, otpCode: string): boolean {
-    return otp.otpCode === otpCode; //as bool
+  public verifyOtp(otp: OTP, otpCode: string, email: string): boolean {
+    return otp.otpCode === otpCode && otp.email === email; //as bool
   }
 }
