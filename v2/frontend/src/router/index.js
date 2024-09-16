@@ -5,6 +5,7 @@ import HomeView from '../views/HomeView.vue';
 import UserProfile from '@/views/user/UserProfile.vue';
 import SendOtp from '@/views/auth/SendOtp.vue';
 import VerifyOtp from '@/views/auth/VerifyOtp.vue';
+import Profile from '@/views/user/Profile.vue';
 
 const routes = [
   {
@@ -50,6 +51,14 @@ const routes = [
     path: '/verify-otp',
     name: 'Verify-Otp',
     component: VerifyOtp,
+  },
+  {
+    path: '/user/me',
+    name: 'profile',
+    component: Profile,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 
