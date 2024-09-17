@@ -78,7 +78,7 @@ export default {
     async handleLogin() {
       try {
         await this.login(this.username, this.password);
-        this.$router.push({ name: 'Profile' });
+        this.$router.push({ name: 'profile' });
       } catch (error) {
         this.errorMessage =
           error.response?.data?.message[0] ||
