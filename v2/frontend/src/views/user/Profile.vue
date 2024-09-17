@@ -28,9 +28,11 @@
             {{ exampleUserData.fullName }}
           </div>
           <div class="text-xl text-gray-500">
-            @{{ exampleUserData.username }}
+            @{{ user ? user.data.username : 'Loading...' }}
           </div>
-          <div class="text-lg text-gray-400 mt-1">Joined at May 2030</div>
+          <div class="text-lg text-gray-400 mt-1">
+            Joined at {{ convertTime().month }} {{ convertTime().year }}
+          </div>
         </div>
 
         <!-- buttons -->
@@ -72,6 +74,8 @@
 
 <script>
 import CustomButton from '@/components/Button.vue';
+import userStore from '@/store/userStore';
+import getMonthsUtil from '@/utils/get-months.util';
 
 export default {
   data() {
@@ -87,6 +91,30 @@ export default {
         books: 1200,
       },
     };
+  },
+
+  async created() {
+    const useUserStore = userStore();
+    await useUserStore.fetchUser();
+  },
+
+  computed: {
+    user() {
+      const useUserStore = userStore();
+      console.log(useUserStore.user.data);
+      return useUserStore.user;
+    },
+  },
+
+  methods: {
+    convertTime() {
+      const date = new Date(Date.now());
+
+      return {
+        year: date.getFullYear(),
+        month: getMonthsUtil(),
+      };
+    },
   },
   components: {
     CustomButton,

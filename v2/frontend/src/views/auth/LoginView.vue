@@ -4,16 +4,7 @@
       <div class="flex flex-col justify-center items-center bg-white">
         <div class="w-full max-w-md">
           <div class="justify-center flex mb-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              class="w-10 h-10 text-blue-500"
-            >
-              <path
-                d="M23.954 4.569c-.885.392-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.564-2.005.974-3.127 1.195-.897-.957-2.173-1.555-3.591-1.555-2.72 0-4.924 2.204-4.924 4.924 0 .386.043.762.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.423.722-.666 1.561-.666 2.475 0 1.71.87 3.216 2.188 4.099-.807-.026-1.566-.248-2.228-.616v.062c0 2.385 1.693 4.374 3.946 4.827-.413.112-.849.171-1.296.171-.316 0-.624-.03-.927-.087.626 1.955 2.444 3.379 4.6 3.42-1.68 1.318-3.808 2.104-6.102 2.104-.396 0-.788-.023-1.175-.068 2.179 1.397 4.768 2.211 7.557 2.211 9.054 0 14-7.504 14-14 0-.213-.005-.425-.015-.636.964-.695 1.8-1.562 2.46-2.549z"
-              />
-            </svg>
+            <img src="../../assets/logo.png" class="h-40 mb-0" />
           </div>
 
           <form @submit.prevent="handleLogin" class="space-y-4">
@@ -27,12 +18,15 @@
               placeholder="Password"
               type="password"
             ></CustomInput>
-            <CustomButton text="Log in"></CustomButton>
+            <CustomButton
+              text="Log in"
+              class="!bg-black hover:!bg-slate-900 transition ease-in-out delay-50"
+            ></CustomButton>
           </form>
           <h2 class="text-sm text-right mt-4">
             If you are not a member, Please
             <a
-              class="text-blue-500 text-sm hover:text-blue-950"
+              class="text-black bold text-sm hover:text-blue-900"
               href="/register"
               >Sign up</a
             >
@@ -45,12 +39,15 @@
           </h2>
         </div>
       </div>
-      <div class="flex justify-center bg-blue-500 text-white">
+      <div class="flex justify-center bg-white text-white relative">
         <img
-          src="../../assets/login-background.jpeg"
-          class="rounded border-t- flex-col max-w-full max-h-[1000px]"
+          src="https://w0.peakpx.com/wallpaper/394/646/HD-wallpaper-face-art-beauty-colorful-design-female-girl-words.jpg"
+          class="rounded-2xl shadow-2xl shadow-black blur-md w-[600px] h-screen"
           alt=""
         />
+        <h2 class="absolute bottom-1/2 text-4xl text-gray-200">
+          Welcome back, please log in.
+        </h2>
       </div>
     </div>
   </section>

@@ -17,6 +17,7 @@ export type UserDocument = HydratedDocument<User>;
 @Schema({
   versionKey: false,
   collection: 'User',
+  timestamps: true,
 })
 export class User {
   @Prop({
@@ -142,6 +143,13 @@ export class User {
     default: [],
   })
   public receivedFriendRequests: Types.ObjectId[];
+
+  @Prop({
+    type: String,
+    default: 'John Doe',
+    required: true,
+  })
+  public fullName: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass<User>(User);

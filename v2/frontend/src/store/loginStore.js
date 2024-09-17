@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
-export default defineStore('user', {
+export default defineStore('login', {
   state: () => ({
     username: '',
     password: '',
