@@ -63,7 +63,7 @@
         <div v-if="posts.length === 0" class="text-center text-gray-500">
           No posts available
         </div>
-        <PostCard v-for="post in posts" :key="post._id" :post="post" />
+        <PostCard v-for="post in posts" :key="post.id" :post="post" />
       </section>
     </section>
   </AppSidebar>
@@ -102,10 +102,9 @@ export default {
     const useUserStore = userStore();
 
     await useUserStore.fetchUser();
+    await postStore.fetchPosts(useUserStore.user.data._id);
 
-    if (this.user && this.user.data && this.user.data._id) {
-      await postStore.fetchPosts(this.user.data._id);
-    }
+    this.posts = postStore.allPosts;
   },
   computed: {
     user() {

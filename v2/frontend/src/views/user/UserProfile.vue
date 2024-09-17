@@ -592,7 +592,6 @@ export default {
         });
 
         this.user = user.data;
-        console.log(this.user);
 
         return this.user;
       } catch (error) {
