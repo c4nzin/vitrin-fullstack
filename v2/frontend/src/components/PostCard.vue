@@ -39,7 +39,6 @@ export default {
   },
   methods: {
     likePost() {
-      console.log(this.post);
       this.$emit('like', this.post);
     },
   },

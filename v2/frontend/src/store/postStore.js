@@ -13,8 +13,7 @@ export const usePostStore = defineStore('post', {
           { withCredentials: true }
         );
 
-        console.log('Fetched posts:', response.data);
-        this.posts = response.data;
+        this.posts = response.data.data;
       } catch (error) {
         console.error('Failed to fetch posts:', error);
       }
