@@ -1,7 +1,7 @@
 <template>
   <section class="h-screen">
     <div class="grid grid-cols-2 h-full border-0">
-      <div class="flex flex-col justify-center items-center bg-white">
+      <div class="flex flex-col ml-60 justify-center items-center bg-white">
         <div class="w-full max-w-md">
           <div class="justify-center flex mb-3">
             <img src="../../assets/logo.png" class="h-40 mb-0" />
@@ -39,14 +39,14 @@
           </h2>
         </div>
       </div>
-      <div class="flex justify-center bg-white text-white relative">
+      <div class="flex justify-evenly bg-white text-white relative">
         <img
           src="https://w0.peakpx.com/wallpaper/394/646/HD-wallpaper-face-art-beauty-colorful-design-female-girl-words.jpg"
           class="rounded-2xl shadow-2xl shadow-black blur-md w-[600px] h-screen"
           alt=""
         />
-        <h2 class="absolute bottom-1/2 text-4xl text-gray-200">
-          Welcome back, please log in.
+        <h2 class="absolute bottom-1/2 text-4xl text-gray-100">
+          time to dive back in!
         </h2>
       </div>
     </div>
