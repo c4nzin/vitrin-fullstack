@@ -8,6 +8,7 @@ import AppSidebar from './components/AppSidebar.vue';
 import Button from './components/Button.vue';
 import Input from './components/Input.vue';
 import { createPinia } from 'pinia';
+import TopBar from './components/TopBar.vue';
 
 const app = createApp(App);
 
@@ -20,6 +21,7 @@ app.provide(AxiosKey, axiosClient);
 app.component('AppSideBar', AppSidebar);
 app.component('CustomButton', Button);
 app.component('CustomInput', Input);
+app.component('TopBarComponent', TopBar);
 
 app.use(pinia);
 app.use(router).mount('#app');
