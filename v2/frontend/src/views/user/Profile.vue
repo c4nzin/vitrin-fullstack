@@ -16,6 +16,7 @@
               class="flex items-center space-x-4 absolute bottom-[-70px] ml-10"
             >
               <img
+                v-if="user.data"
                 :src="user.data.profilePicture"
                 class="w-40 h-40 rounded-full border-4"
                 alt="profile image"
@@ -28,7 +29,7 @@
               {{ exampleUserData.fullName }}
             </div>
             <div class="text-xl text-gray-500">
-              @{{ user ? user.data.username : 'Loading...' }}
+              @{{ user.data ? user.data.username : 'Loading...' }}
             </div>
             <div class="text-lg text-gray-400 mt-1">
               Joined at {{ convertTime().month }} {{ convertTime().year }}
@@ -49,28 +50,21 @@
           <div class="flex justify-evenly items-center mt-10">
             <div class="text-center">
               <div class="text-2xl font-semibold">{{ statistics.posts }}</div>
-              <div class="text-sm text-gray-500">Post</div>
+              <div class="text-sm text-gray-500">Followers</div>
             </div>
             <div class="text-center">
-              <div class="text-2xl font-semibold">
-                {{ statistics.movies }}
-              </div>
-              <div class="text-sm text-gray-500">Movie</div>
-            </div>
-            <div class="text-center">
-              <div class="text-2xl font-semibold">
-                {{ statistics.series }}
-              </div>
-              <div class="text-sm text-gray-500">Serie</div>
-            </div>
-            <div class="text-center">
-              <div class="text-2xl font-semibold">{{ statistics.books }}</div>
-              <div class="text-sm text-gray-500">Book</div>
+              <div class="text-2xl font-semibold">{{ statistics.movies }}</div>
+              <div class="text-sm text-gray-500">Followings</div>
             </div>
           </div>
         </div>
       </div>
-      <section class="h-full">post section</section>
+      <section class="h-full mt-8 mx-10">
+        <div v-if="posts.length === 0" class="text-center text-gray-500">
+          No posts available
+        </div>
+        <PostCard v-for="post in posts" :key="post._id" :post="post" />
+      </section>
     </section>
   </AppSidebar>
 </template>
@@ -79,7 +73,9 @@
 import AppSidebar from '@/components/AppSidebar.vue';
 import CustomButton from '@/components/Button.vue';
 import TopBar from '@/components/TopBar.vue';
+import PostCard from '@/components/PostCard.vue';
 import userStore from '@/store/userStore';
+import { usePostStore } from '@/store/postStore';
 import getMonthsUtil from '@/utils/get-months.util';
 
 export default {
@@ -87,6 +83,7 @@ export default {
     AppSidebar,
     TopBar,
     CustomButton,
+    PostCard,
   },
   data() {
     return {
@@ -97,19 +94,28 @@ export default {
       statistics: {
         posts: 120,
         movies: 30,
-        series: 3,
-        books: 1200,
       },
     };
   },
   async created() {
+    const postStore = usePostStore();
     const useUserStore = userStore();
+
     await useUserStore.fetchUser();
+
+    if (this.user && this.user.data && this.user.data._id) {
+      await postStore.fetchPosts(this.user.data._id);
+    }
   },
   computed: {
     user() {
       const useUserStore = userStore();
       return useUserStore.user;
+    },
+
+    posts() {
+      const postStore = usePostStore();
+      return postStore.allPosts;
     },
   },
   methods: {
