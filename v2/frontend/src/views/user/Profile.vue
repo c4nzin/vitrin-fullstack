@@ -109,7 +109,6 @@ export default {
   computed: {
     user() {
       const useUserStore = userStore();
-      console.log(useUserStore.user.data);
       return useUserStore.user;
     },
   },
@@ -124,5 +123,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
