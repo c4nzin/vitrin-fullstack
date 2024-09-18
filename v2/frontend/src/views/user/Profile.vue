@@ -81,6 +81,7 @@ import PostCard from '@/components/PostCard.vue';
 import userStore from '@/store/userStore';
 import { usePostStore } from '@/store/postStore';
 import getMonthsUtil from '@/utils/get-months.util';
+import CreateCard from '@/components/CreateCard.vue';
 
 export default {
   components: {

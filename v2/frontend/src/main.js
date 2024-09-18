@@ -10,6 +10,7 @@ import Input from './components/Input.vue';
 import { createPinia } from 'pinia';
 import TopBar from './components/TopBar.vue';
 import PostCard from './components/PostCard.vue';
+import CreateCard from '@/components/CreateCard.vue';
 
 const app = createApp(App);
 
@@ -24,6 +25,8 @@ app.component('CustomButton', Button);
 app.component('CustomInput', Input);
 app.component('TopBarComponent', TopBar);
 app.component('PostCard', PostCard);
+app.component('CreateCard', CreateCard);
 
 app.use(pinia);
-app.use(router).mount('#app');
+app.use(router);
+app.mount('#app');

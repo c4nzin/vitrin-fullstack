@@ -20,11 +20,9 @@
     </div>
     <p class="px-4 pb-2 text-gray-800 mt-10">{{ post.content }}</p>
     <div>
-      <img class="w-1/5 h-auto" :src="post.media || ''" />
+      <img class="w-1/5 h-auto" :src="post.media" />
     </div>
-    <div
-      class="flex justify-between items-center px-4 py-2 text-gray-600 mt-32"
-    >
+    <div class="flex justify-between items-center px-4 py-2 text-gray-600">
       <div class="flex items-center grid-cols-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"
