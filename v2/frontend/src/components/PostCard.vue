@@ -87,8 +87,8 @@ export default {
     },
   },
   created() {
-    const postStore = usePostStore();
-    const userStore = useUserStore();
+    usePostStore();
+    useUserStore();
   },
 };
 </script>
