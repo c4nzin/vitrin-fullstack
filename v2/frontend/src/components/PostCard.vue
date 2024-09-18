@@ -1,34 +1,86 @@
 <template>
-  <div class="bg-white border border-gray-200 rounded-lg shadow-md p-4 mb-4">
-    <div class="flex items-center mb-4">
+  <div
+    class="max-w-xl mx-auto bg-white border border-gray-300 rounded-lg shadow-lg mt-10"
+  >
+    <div class="flex items-center p-4">
       <img
-        :src="post.authorAvatar"
-        alt="Author's avatar"
-        class="w-10 h-10 rounded-full mr-3"
+        class="w-10 h-10 rounded-full"
+        :src="
+          user?.data?.profilePicture ||
+          'https://randomuser.me/api/portraits/men/1.jpg'
+        "
+        alt="User avatar"
       />
-      <div class="font-semibold text-gray-800">{{ post.author }}</div>
+      <div class="ml-3">
+        <p class="text-sm font-semibold text-gray-800">
+          {{ user?.data?.fullName }}
+        </p>
+        <p class="text-xs text-gray-500">@{{ user?.data?.username }}</p>
+      </div>
     </div>
-    <div class="mb-4">
-      <p class="text-gray-700">{{ post.content }}</p>
-      <img
-        v-if="post.media"
-        :src="post.media"
-        alt="Post media"
-        class="mt-2 rounded-lg w-full max-h-60 object-cover"
-      />
+    <p class="px-4 pb-2 text-gray-800">{{ post.content }}</p>
+    <div>
+      <img class="w-full h-auto" :src="post.image || ''" alt="Post image" />
     </div>
-    <div class="flex items-center">
-      <button
-        @click="likePost"
-        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-      >
-        Like
-      </button>
+    <div class="flex justify-between items-center px-4 py-2 text-gray-600">
+      <div class="flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-1"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            d="M5 8c0-1.654 1.346-3 3-3s3 1.346 3 3-1.346 3-3 3S5 9.654 5 8zm7 3a2 2 0 114 0 2 2 0 01-4 0zm-8 5h14c0-4-3-6-7-6s-7 2-7 6z"
+          />
+        </svg>
+        <span>61</span>
+      </div>
+      <div class="flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-1"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            d="M17.207 8.207a1 1 0 00-1.414 0L11 12.793l-4.793-4.793a1 1 0 10-1.414 1.414l5 5a1 1 0 001.414 0l6-6a1 1 0 000-1.414z"
+          />
+        </svg>
+        <span>12</span>
+      </div>
+      <div class="flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-1"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            d="M2.8 4.2A1 1 0 014 3.6h12a1 1 0 010 2H4a1 1 0 01-1.2-.4l-1.5-2a1 1 0 010-1.2l1.5-2zM17 16V6h-1v10h1zm-6 2a2 2 0 100-4 2 2 0 000 4z"
+          />
+        </svg>
+        <span>6.2K</span>
+      </div>
+      <div class="flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 mr-1"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path d="M10 14a5 5 0 00-5-5H4a6 6 0 116 6v-1a5 5 0 000-10V1.8z" />
+        </svg>
+        <span>61</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { usePostStore } from '@/store/postStore';
+import useUserStore from '@/store/userStore';
+
 export default {
   name: 'PostCard',
   props: {
@@ -37,10 +89,15 @@ export default {
       required: true,
     },
   },
-  methods: {
-    likePost() {
-      this.$emit('like', this.post);
+  computed: {
+    user() {
+      const userStore = useUserStore();
+      return userStore.user;
     },
+  },
+  created() {
+    const postStore = usePostStore();
+    const userStore = useUserStore();
   },
 };
 </script>

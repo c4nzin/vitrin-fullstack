@@ -49,11 +49,15 @@
 
           <div class="flex justify-evenly items-center mt-10">
             <div class="text-center">
-              <div class="text-2xl font-semibold">{{ statistics.posts }}</div>
+              <div class="text-2xl font-semibold">
+                {{ user.data.follower.length }}
+              </div>
               <div class="text-sm text-gray-500">Followers</div>
             </div>
             <div class="text-center">
-              <div class="text-2xl font-semibold">{{ statistics.movies }}</div>
+              <div class="text-2xl font-semibold">
+                {{ user.data.follow.length }}
+              </div>
               <div class="text-sm text-gray-500">Followings</div>
             </div>
           </div>
@@ -103,18 +107,27 @@ export default {
 
     await useUserStore.fetchUser();
     await postStore.fetchPosts(useUserStore.user.data._id);
+    await useUserStore.fetchFollowers(useUserStore.user.data._id);
 
     this.posts = postStore.allPosts;
   },
   computed: {
     user() {
       const useUserStore = userStore();
+      // console.log(useUserStore.user.data.follower);
       return useUserStore.user;
     },
 
     posts() {
       const postStore = usePostStore();
       return postStore.allPosts;
+    },
+
+    //not working rn
+    followers() {
+      const followers = userStore();
+      console.log(followers.fetchAllFollowers);
+      return followers.fetchAllFollowers;
     },
   },
   methods: {
