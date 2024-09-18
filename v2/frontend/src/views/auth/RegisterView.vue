@@ -28,7 +28,7 @@
 
             <CustomButton
               text="Sign Up"
-              class="!bg-black hover:!bg-slate-900 transition ease-in-out delay-50"
+              class="!bg-black hover:!bg-slate-900 transition ease-in-out delay-300"
             ></CustomButton>
           </form>
 

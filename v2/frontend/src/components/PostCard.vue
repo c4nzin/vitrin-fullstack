@@ -1,6 +1,6 @@
 <template>
   <div
-    class="max-w-xl mx-auto bg-white border border-gray-300 rounded-lg shadow-lg mt-10"
+    class="max-w-2xl h-1/3 mx-auto bg-white border border-gray-300 rounded-lg shadow-lg mt-10"
   >
     <div class="flex items-center p-4">
       <img
@@ -18,12 +18,14 @@
         <p class="text-xs text-gray-500">@{{ user?.data?.username }}</p>
       </div>
     </div>
-    <p class="px-4 pb-2 text-gray-800">{{ post.content }}</p>
+    <p class="px-4 pb-2 text-gray-800 mt-10">{{ post.content }}</p>
     <div>
-      <img class="w-full h-auto" :src="post.image || ''" alt="Post image" />
+      <img class="w-1/5 h-auto" :src="post.media || ''" />
     </div>
-    <div class="flex justify-between items-center px-4 py-2 text-gray-600">
-      <div class="flex items-center">
+    <div
+      class="flex justify-between items-center px-4 py-2 text-gray-600 mt-32"
+    >
+      <div class="flex items-center grid-cols-3">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-5 w-5 mr-1"
@@ -61,17 +63,6 @@
           />
         </svg>
         <span>6.2K</span>
-      </div>
-      <div class="flex items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5 mr-1"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path d="M10 14a5 5 0 00-5-5H4a6 6 0 116 6v-1a5 5 0 000-10V1.8z" />
-        </svg>
-        <span>61</span>
       </div>
     </div>
   </div>

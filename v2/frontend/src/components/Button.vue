@@ -1,7 +1,7 @@
 <template>
   <button
     type="submit"
-    class="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-800 text-lg"
+    class="w-full p-3 bg-black text-white rounded-md hover:bg-slate-900 transition ease-in-out delay-300 text-lg"
   >
     {{ text }}
   </button>
