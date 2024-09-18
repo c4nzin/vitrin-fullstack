@@ -62,9 +62,8 @@ export default {
     };
   },
   computed: {
-    // Pinia store'dan user bilgilerini al
     user() {
-      const store = useUserStore(); // Doğru şekilde çağır
+      const store = useUserStore();
       return store.user;
     },
     remainingCharacters() {
@@ -76,7 +75,7 @@ export default {
   },
   created() {
     const store = useUserStore();
-    store.fetchUser(); // Kullanıcı bilgilerini almak için fetch çağrısı yap
+    store.fetchUser();
   },
   methods: {
     postTweet() {
