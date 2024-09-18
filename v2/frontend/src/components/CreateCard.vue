@@ -2,12 +2,15 @@
   <section
     class="flex flex-col max-w-3xl p-5 mx-auto bg-white border rounded-lg shadow-md"
   >
-    <img :src="user.data.profilePicture" alt="" class="h-12 w-12 rounded-3xl" />
-    <h2 class="text-xl font-bold mb-4">Create a new tweet.</h2>
+    <img
+      :src="user?.data?.profilePicture || null"
+      class="h-12 w-12 rounded-3xl"
+    />
+    <h2 class="text-xl font-bold mb-4">Create a new tweet</h2>
     <div class="flex flex-col">
       <CustomInput
         v-model="tweetContent"
-        :placeholder="`What are you up to? ` + user.data.username"
+        :placeholder="`What are you up to? ` + user?.data?.username"
         class="mb-4"
       />
       <div class="flex space-x-3 mb-4">
@@ -15,7 +18,7 @@
           @click="addMedia"
           class="px-4 py-2 bg-gray-100 rounded hover:bg-gray-200"
         >
-          📷 Medya
+          📷 Media
         </button>
         <button
           @click="addGif"
@@ -32,14 +35,14 @@
       </div>
       <div class="flex justify-between items-center">
         <span class="text-gray-600"
-          >{{ remainingCharacters }} karakter kaldı</span
+          >{{ remainingCharacters }} characters remaining.</span
         >
         <button
           @click="postTweet"
           :disabled="isTweetEmpty"
           class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400"
         >
-          Tweetle
+          Tweet
         </button>
       </div>
     </div>
@@ -49,9 +52,10 @@
 <script>
 import CustomInput from '@/components/Input.vue';
 import useUserStore from '@/store/userStore';
+import axios from 'axios';
 
 export default {
-  name: 'CreateTweet',
+  name: 'CreateCard',
   components: {
     CustomInput,
   },
@@ -80,16 +84,13 @@ export default {
   methods: {
     postTweet() {
       if (!this.isTweetEmpty) {
-        console.log('Tweet gönderildi:', this.tweetContent);
         this.tweetContent = '';
       }
     },
-    addMedia() {
-      console.log('Medya ekle');
-    },
-    addGif() {
-      console.log('GIF ekle');
-    },
+
+    //not implemented yet..
+    addMedia() {},
+    addGif() {},
     addEmoji() {},
   },
 };
