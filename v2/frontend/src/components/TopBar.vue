@@ -23,13 +23,13 @@
         />
       </svg>
     </div>
-    <a href="#" class="text-black hover:underline">
+    <router-link to="/user/me" class="text-black hover:underline">
       <img
         :src="user?.data?.profilePicture"
         alt="Profile"
         class="w-10 h-10 rounded-full border-2 border-black"
       />
-    </a>
+    </router-link>
   </div>
 </template>
 

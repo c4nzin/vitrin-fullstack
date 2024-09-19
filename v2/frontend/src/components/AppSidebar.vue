@@ -36,6 +36,15 @@
               <span>Books</span>
             </a>
           </li>
+
+          <li class="mb-4">
+            <router-link
+              to="user/me"
+              class="flex items-center px-4 py-2 text-sm text-black rounded-md hover:bg-slate-100"
+            >
+              <span>Profile</span>
+            </router-link>
+          </li>
         </ul>
       </div>
     </div>
