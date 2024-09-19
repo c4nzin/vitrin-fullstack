@@ -1,6 +1,6 @@
 <template>
   <section
-    class="flex flex-col max-w-3xl p-5 mt-10 mx-auto bg-white border rounded-lg shadow-md"
+    class="flex flex-col max-w-2xl p-5 mt-10 mx-auto bg-white border rounded-lg shadow-md"
   >
     <img
       :src="user?.data?.profilePicture || null"
@@ -111,7 +111,6 @@ export default {
       const file = event.target.files[0];
       if (file) {
         this.media = file;
-        console.log('Selected file:', file);
       }
     },
   },
