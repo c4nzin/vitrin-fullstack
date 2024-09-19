@@ -15,23 +15,18 @@
       />
       <div class="flex space-x-3 mb-4">
         <button
-          @click="addMedia"
+          @click="triggerFileInput"
           class="px-4 py-2 bg-gray-100 rounded hover:bg-gray-200"
         >
           📷 Media
         </button>
-        <button
-          @click="addGif"
-          class="px-4 py-2 bg-gray-100 rounded hover:bg-gray-200"
-        >
-          🎞 GIF
-        </button>
-        <button
-          @click="addEmoji"
-          class="px-4 py-2 bg-gray-100 rounded hover:bg-gray-200"
-        >
-          😀 Emoji
-        </button>
+        <input
+          type="file"
+          ref="mediaInput"
+          @change="addMedia"
+          accept="image/*, video/*"
+          style="display: none"
+        />
       </div>
       <div class="flex justify-between items-center">
         <span class="text-gray-600"
@@ -46,6 +41,7 @@
         </button>
       </div>
     </div>
+    <div v-if="status" class="rounded-lg text-green-500">{{ status }}</div>
   </section>
 </template>
 
@@ -62,7 +58,9 @@ export default {
   data() {
     return {
       tweetContent: '',
+      media: null,
       maxCharacters: 280,
+      status: '',
     };
   },
   computed: {
@@ -83,23 +81,38 @@ export default {
   },
   methods: {
     async postTweet() {
-      if (!this.isTweetEmpty) {
-        this.tweetContent = '';
+      const formData = new FormData();
+      formData.append('content', this.tweetContent);
+
+      if (this.media) {
+        formData.append('file', this.media);
       }
 
       try {
-        await axios.post('http://localhost:3000/api/users/tweets', {
+        await axios.post('http://localhost:3000/api/users/tweets', formData, {
           withCredentials: true,
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         });
+
+        this.status = 'Tweet has been sent!';
       } catch (error) {
         throw new Error(error);
       }
     },
 
-    //not implemented yet..
-    addMedia() {},
-    addGif() {},
-    addEmoji() {},
+    triggerFileInput() {
+      this.$refs.mediaInput.click();
+    },
+
+    addMedia(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.media = file;
+        console.log('Selected file:', file);
+      }
+    },
   },
 };
 </script>
