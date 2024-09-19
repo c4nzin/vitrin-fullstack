@@ -1,6 +1,6 @@
 <template>
   <section
-    class="flex flex-col max-w-3xl p-5 mx-auto bg-white border rounded-lg shadow-md"
+    class="flex flex-col max-w-3xl p-5 mt-10 mx-auto bg-white border rounded-lg shadow-md"
   >
     <img
       :src="user?.data?.profilePicture || null"
@@ -13,6 +13,7 @@
         :placeholder="`What are you up to? ` + user?.data?.username"
         class="mb-4"
       />
+
       <div class="flex space-x-3 mb-4">
         <button
           @click="triggerFileInput"
