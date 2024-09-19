@@ -29,7 +29,7 @@ import { AuthenticatedGuard } from 'src/common/guards';
 import { Pagination } from 'src/common/decorators/types/pagination.interface';
 import { ApiTags } from '@nestjs/swagger';
 
-@Controller()
+@Controller('tweets')
 @ApiTags('tweet')
 @UseGuards(AuthenticatedGuard)
 export class PostController {

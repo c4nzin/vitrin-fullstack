@@ -82,9 +82,17 @@ export default {
     store.fetchUser();
   },
   methods: {
-    postTweet() {
+    async postTweet() {
       if (!this.isTweetEmpty) {
         this.tweetContent = '';
+      }
+
+      try {
+        await axios.post('http://localhost:3000/api/users/tweets', {
+          withCredentials: true,
+        });
+      } catch (error) {
+        throw new Error(error);
       }
     },
 
