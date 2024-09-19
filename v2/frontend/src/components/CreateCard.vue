@@ -4,7 +4,7 @@
   >
     <img
       :src="user?.data?.profilePicture || null"
-      class="h-12 w-12 rounded-3xl"
+      class="h-12 w-12 rounded-3xl shadow-lg shadow-slate-500"
     />
     <h2 class="text-xl font-bold mb-4">Create a new tweet</h2>
     <div class="flex flex-col">
