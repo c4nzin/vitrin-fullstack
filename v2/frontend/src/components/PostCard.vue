@@ -6,16 +6,16 @@
       <img
         class="w-10 h-10 rounded-full"
         :src="
-          user?.data?.profilePicture ||
+          user?.profilePicture ||
           'https://randomuser.me/api/portraits/men/1.jpg'
         "
         alt="User avatar"
       />
       <div class="ml-3">
         <p class="text-sm font-semibold text-gray-800">
-          {{ user?.data?.fullName }}
+          {{ user?.username || 'John  Doe' }}
         </p>
-        <p class="text-xs text-gray-500">@{{ user?.data?.username }}</p>
+        <p class="text-xs text-gray-500">@{{ user?.username }}</p>
       </div>
     </div>
     <p class="px-4 pb-2 text-gray-800 mt-10">{{ post.content }}</p>
@@ -81,7 +81,9 @@ export default {
   computed: {
     user() {
       const userStore = useUserStore();
-      return userStore.user;
+      console.log(this.post, 'a');
+
+      return userStore.user.data;
     },
   },
   created() {

@@ -1,8 +1,8 @@
-import { PageOptionsDto } from 'src/common/pagination/dto/page-options.dto';
+import { Pagination } from 'src/common/decorators/types/pagination.interface';
 
 export class FetchFollowersCommand {
   constructor(
     public id: string,
-    public pagination: PageOptionsDto,
+    public pagination: Pagination,
   ) {}
 }

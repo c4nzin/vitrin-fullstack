@@ -76,7 +76,7 @@ export class UserRepository extends BaseRepository<User> {
       .exec();
   }
 
-  public async countDocuments(query: FilterQuery<UserDocument>): Promise<number> {
-    return this.userRepository.countDocuments(query).exec();
+  public countDocuments(query: FilterQuery<UserDocument>): Promise<any> {
+    return this.userRepository.countDocuments(query);
   }
 }

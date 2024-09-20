@@ -7,6 +7,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Query,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -28,6 +29,7 @@ import { DeleteResult } from 'src/core/repositories/types/query.types';
 import { AuthenticatedGuard } from 'src/common/guards';
 import { Pagination } from 'src/common/decorators/types/pagination.interface';
 import { ApiTags } from '@nestjs/swagger';
+import { PageOptionsDto } from 'src/common/pagination/dto/page-options.dto';
 
 @Controller('tweets')
 @ApiTags('tweet')

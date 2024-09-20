@@ -67,6 +67,7 @@ export default {
   computed: {
     user() {
       const store = useUserStore();
+
       return store.user;
     },
     remainingCharacters() {
