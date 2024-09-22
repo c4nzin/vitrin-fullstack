@@ -4,13 +4,9 @@ import './registerServiceWorker';
 import router from './router';
 import './index.css';
 import { axiosClient, AxiosKey } from './plugins';
-import AppSidebar from './components/AppSidebar.vue';
-import Button from './components/Button.vue';
-import Input from './components/Input.vue';
 import { createPinia } from 'pinia';
-import TopBar from './components/TopBar.vue';
-import PostCard from './components/PostCard.vue';
-import CreateCard from '@/components/CreateCard.vue';
+
+const requireComponent = require.context('./components', true, /\.vue$/);
 
 const app = createApp(App);
 
@@ -20,12 +16,16 @@ const pinia = createPinia();
 
 app.provide(AxiosKey, axiosClient);
 
-app.component('AppSideBar', AppSidebar);
-app.component('CustomButton', Button);
-app.component('CustomInput', Input);
-app.component('TopBarComponent', TopBar);
-app.component('PostCard', PostCard);
-app.component('CreateCard', CreateCard);
+requireComponent.keys().forEach((fileName) => {
+  const componentConfig = requireComponent(fileName);
+
+  const componentName = fileName
+    .split('/')
+    .pop()
+    .replace(/\.\w+$/, '');
+
+  app.component(componentName, componentConfig.default || componentConfig);
+});
 
 app.use(pinia);
 app.use(router);

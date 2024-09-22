@@ -37,7 +37,7 @@ const routes = [
   {
     path: '/user/edit',
     name: 'edit-profile',
-    component: UserProfile,
+    component: () => import('../views/user/UserProfile.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -55,7 +55,7 @@ const routes = [
   {
     path: '/user/me',
     name: 'profile',
-    component: Profile,
+    component: () => import('../views/user/Profile.vue'),
     meta: {
       requiresAuth: true,
     },

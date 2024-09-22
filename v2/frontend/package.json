@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "webpack serve --mode development",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
@@ -21,17 +21,27 @@
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-pwa": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "@vue/compiler-sfc": "^3.5.8",
     "autoprefixer": "^10.4.20",
+    "babel-loader": "^9.2.1",
+    "css-loader": "^7.1.2",
+    "node-sass": "^9.0.0",
     "postcss": "^8.4.45",
     "sass": "^1.32.7",
-    "sass-loader": "^12.0.0",
-    "tailwindcss": "^3.4.10"
+    "sass-loader": "^12.6.0",
+    "style-loader": "^4.0.0",
+    "tailwindcss": "^3.4.10",
+    "vue-loader": "^17.4.2",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
   },
   "browserslist": [
     "> 1%",
