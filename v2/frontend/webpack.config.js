@@ -46,10 +46,9 @@ module.exports = {
   plugins: [new VueLoaderPlugin()],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'src'),
+      directory: path.join(__dirname, 'dist'),
     },
     hot: true,
     port: 3001,
-    historyApiFallback: true,
   },
 };
