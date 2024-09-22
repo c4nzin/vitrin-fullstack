@@ -24,6 +24,7 @@ requireComponent.keys().forEach((fileName) => {
     .pop()
     .replace(/\.\w+$/, '');
 
+  //not working iguess
   app.component(componentName, componentConfig.default || componentConfig);
 });
 
