@@ -20,10 +20,6 @@ module.exports = {
         loader: 'vue-loader',
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        type: 'asset/resource',
-      },
-      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -32,6 +28,11 @@ module.exports = {
             presets: ['@babel/preset-env'],
           },
         },
+      },
+
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
       },
       {
         test: /\.scss$/,
