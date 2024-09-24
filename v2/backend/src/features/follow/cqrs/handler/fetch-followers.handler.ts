@@ -1,11 +1,11 @@
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, ICommandHandler, QueryHandler } from '@nestjs/cqrs';
 import { FetchFollowersCommand } from '../command/fetch-followers.command';
 import { UserRepository } from 'src/features/user/repositories';
 import { UserDocument } from 'src/features/user/schemas';
 import { PageDto, PageMetaDto } from 'src/common/pagination/dto';
 import { Types } from 'mongoose';
 
-@CommandHandler(FetchFollowersCommand)
+@QueryHandler(FetchFollowersCommand)
 export class FetchFollowersHandler implements ICommandHandler<FetchFollowersCommand> {
   constructor(private readonly userRepository: UserRepository) {}
 

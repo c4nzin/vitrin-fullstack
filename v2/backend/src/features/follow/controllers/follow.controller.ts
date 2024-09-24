@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Message, User } from 'src/common/decorators';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { FollowCommand } from '../cqrs/command/follow.command';
 import { UnfollowCommand } from '../cqrs/command/unfollow.command';
 import { FetchFollowersCommand } from '../cqrs/command/fetch-followers.command';
@@ -24,7 +24,10 @@ import { UserDocument } from 'src/features/user/schemas';
 @ApiTags('follow')
 @UseGuards(AuthenticatedGuard)
 export class FollowController {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+  ) {}
 
   @Post(':id/follow')
   @Message('Sucessfully followed the user.')
@@ -53,6 +56,6 @@ export class FollowController {
     @Param('id') id: string,
     @Query() paginate: PageOptionsDto,
   ): Promise<PageDto<any>> {
-    return this.commandBus.execute(new FetchFollowersCommand(id, paginate));
+    return this.queryBus.execute(new FetchFollowersCommand(id, paginate));
   }
 }
