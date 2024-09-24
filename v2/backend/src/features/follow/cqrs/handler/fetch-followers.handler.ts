@@ -17,17 +17,19 @@ export class FetchFollowersHandler implements ICommandHandler<FetchFollowersComm
     const followerIds = user.follower.map((id) => new Types.ObjectId(id));
 
     const followers = await this.userRepository
-      .find({ _id: { $in: followerIds } })
+      .find({ follower: { $in: user.follower } })
       .sort(pagination.order)
       .skip(pagination.skip)
       .limit(pagination.take)
-      .lean()
-      .select(['-password', '-email'])
-      .exec();
+      .select(['-password', '-email']);
+
+    console.log(followers);
 
     const itemCount = await this.userRepository.countDocuments({
       _id: { $in: user.follower },
     });
+
+    console.log(itemCount);
 
     const pageMetaDto = new PageMetaDto({ pageOptionsDto: pagination, itemCount });
 
