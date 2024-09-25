@@ -7,12 +7,11 @@ import {
   HttpStatus,
   Param,
   Post,
-  Query,
   UploadedFile,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { Message, Paginate, User } from 'src/common/decorators';
 import { PostDocument, UserDocument } from '../schemas';
 import { CreatePostDto } from '../dto';
@@ -29,13 +28,15 @@ import { DeleteResult } from 'src/core/repositories/types/query.types';
 import { AuthenticatedGuard } from 'src/common/guards';
 import { Pagination } from 'src/common/decorators/types/pagination.interface';
 import { ApiTags } from '@nestjs/swagger';
-import { PageOptionsDto } from 'src/common/pagination/dto/page-options.dto';
 
 @Controller('tweets')
 @ApiTags('tweet')
 @UseGuards(AuthenticatedGuard)
 export class PostController {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+  ) {}
 
   @Post()
   @Message('Sucessfully created the tweet.')
@@ -69,7 +70,7 @@ export class PostController {
     @Param('id') id: string,
     @Paginate() paginate: Pagination,
   ): Promise<PostDocument[]> {
-    return this.commandBus.execute(new FetchTweetsCommand(id, paginate));
+    return this.queryBus.execute(new FetchTweetsCommand(id, paginate));
   }
 
   @Post(':id/like')
