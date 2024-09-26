@@ -61,6 +61,26 @@
               Explore
             </router-link>
           </li>
+
+          <li>
+            <router-link
+              to="#"
+              class="flex items-center px-4 py-2 text-base text-gray-800 rounded-md hover:bg-gray-100"
+            >
+              <span class="material-icons">messages</span>
+              Messages
+            </router-link>
+          </li>
+
+          <li>
+            <router-link
+              to="#"
+              class="flex items-center px-4 py-2 text-base text-gray-800 rounded-md hover:bg-gray-100"
+            >
+              <span class="material-icons pr-4">notifications</span>
+              Notifications
+            </router-link>
+          </li>
           <li>
             <router-link
               to="#"
