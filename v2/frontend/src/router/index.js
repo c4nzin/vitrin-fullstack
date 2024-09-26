@@ -36,7 +36,7 @@ const routes = [
   },
   {
     path: '/user/edit',
-    name: 'edit-profile',
+    name: 'EditProfile',
     component: EditProfile,
     // meta: {
     //   requiresAuth: true,

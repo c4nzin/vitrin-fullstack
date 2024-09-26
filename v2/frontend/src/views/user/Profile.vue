@@ -37,12 +37,13 @@
           </div>
 
           <div class="flex justify-center items-center space-x-4 mt-8 mx-10">
-            <CustomButton
-              class="text-sm py-2 px-4 !text-black !bg-white !border-2 hover:!bg-slate-300 font-bold"
+            <router-link
+              to="edit"
+              class="text-sm py-2 px-4 text-black bg-white border-2 hover:bg-slate-300 font-bold"
               text="Edit Profile"
             />
-            <CustomButton
-              class="text-sm py-2 px-4 !text-black !bg-white !border-2 hover:!bg-slate-300 font-bold"
+            <router-link
+              class="text-sm py-2 px-4 text-black bg-white border-2 hover:!bg-slate-300 font-bold"
               text="Statistics"
             />
           </div>
