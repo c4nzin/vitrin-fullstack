@@ -78,10 +78,7 @@ export class BaseRepository<T> {
     return this.model.countDocuments(filter).exec();
   }
 
-  public async paginatedResult(
-    condition: string,
-    pagination: Pagination,
-  ): Promise<any[]> {
+  public paginatedResult(condition: string, pagination: Pagination): Promise<any> {
     const query = { condition };
 
     return this.find(query)

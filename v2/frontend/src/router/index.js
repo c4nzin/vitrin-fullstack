@@ -2,10 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router';
 import RegisterView from '@/views/auth/RegisterView.vue';
 import LoginView from '@/views/auth/LoginView.vue';
 import HomeView from '../views/HomeView.vue';
-import UserProfile from '@/views/user/UserProfile.vue';
 import SendOtp from '@/views/auth/SendOtp.vue';
 import VerifyOtp from '@/views/auth/VerifyOtp.vue';
 import Profile from '@/views/user/Profile.vue';
+import EditProfile from '@/views/user/EditProfile.vue';
 
 const routes = [
   {
@@ -37,10 +37,10 @@ const routes = [
   {
     path: '/user/edit',
     name: 'edit-profile',
-    component: UserProfile,
-    meta: {
-      requiresAuth: true,
-    },
+    component: EditProfile,
+    // meta: {
+    //   requiresAuth: true,
+    // },
   },
   {
     path: '/send-otp',
