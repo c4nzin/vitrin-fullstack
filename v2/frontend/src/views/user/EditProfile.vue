@@ -3,7 +3,10 @@
     <div class="h-screen flex justify-center items-center">
       <TopBar />
 
-      <img src="../../assets/logo.png" class="justify-center mb-6" />
+      <img
+        src="../../assets/logo.png"
+        class="justify-center mb-6 h-40 max-w-md"
+      />
 
       <div class="flex mb-2 max-w-md">
         <div class="flex space-y-6 mb-6">
@@ -81,6 +84,7 @@ export default {
   async created() {
     const useUserStore = userStore();
     await useUserStore.fetchUser();
+
     this.gender = this.user.data.gender;
   },
 
