@@ -1,19 +1,14 @@
-const fs = require('fs');
-const path = require('path');
+export function registerComponents(app) {
+  const requireComponent = require.context('../components', true, /\.vue$/);
 
-const regex = /\.vue$/;
+  requireComponent.keys().forEach((fileName) => {
+    const componentName = fileName
+      .split('/')
+      .pop()
+      .replace(/\.\w+$/, ''); //removing file extension eg : blabla.vue => "blabla"
 
-export async function registerComponents(dir) {
-  const files = await fs.readdir(dir, { withFileTypes: true });
-  let vueComponents = [];
+    console.log(typeof componentName);
 
-  for (const file of files) {
-    const filePath = path.join(dir, file.name);
-
-    if (file.isFile() && regex.test(file.name)) {
-      vueComponents.push(filePath);
-    }
-  }
-
-  return vueComponents;
+    app.component(componentName, componentName);
+  });
 }
