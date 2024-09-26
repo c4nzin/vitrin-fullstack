@@ -3,7 +3,6 @@ import { FetchFollowersCommand } from '../command/fetch-followers.command';
 import { UserRepository } from 'src/features/user/repositories';
 import { UserDocument } from 'src/features/user/schemas';
 import { PageDto, PageMetaDto } from 'src/common/pagination/dto';
-import { Types } from 'mongoose';
 
 @QueryHandler(FetchFollowersCommand)
 export class FetchFollowersHandler implements IQueryHandler<FetchFollowersCommand> {

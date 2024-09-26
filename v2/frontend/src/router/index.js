@@ -6,6 +6,7 @@ import SendOtp from '@/views/auth/SendOtp.vue';
 import VerifyOtp from '@/views/auth/VerifyOtp.vue';
 import Profile from '@/views/user/Profile.vue';
 import EditProfile from '@/views/user/EditProfile.vue';
+import Notification from '@/views/Notification.vue';
 
 const routes = [
   {
@@ -56,6 +57,14 @@ const routes = [
     path: '/user/me',
     name: 'profile',
     component: Profile,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/notifications',
+    name: 'notifications',
+    component: Notification,
     meta: {
       requiresAuth: true,
     },

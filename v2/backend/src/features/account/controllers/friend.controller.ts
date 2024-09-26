@@ -1,4 +1,13 @@
-import { Controller, Delete, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { Message, User } from 'src/common/decorators';
 import {
   SendFriendRequestCommand,
@@ -6,9 +15,11 @@ import {
   RejectFriendRequestCommand,
 } from '../../user/cqrs';
 import { UserDocument } from '../../user/schemas';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notification.gateway';
 import { ApiTags } from '@nestjs/swagger';
+import { PageDto, PageOptionsDto } from 'src/common/pagination/dto';
+import { FetchRequestCommand } from '../cqrs/command/fetch-requests.command';
 
 @Controller()
 @ApiTags('Friends')
@@ -16,6 +27,7 @@ export class FriendController {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly friendRequestGateway: FriendRequestGateway,
+    private readonly queryBus: QueryBus,
   ) {}
 
   @Post(':id/add-friend')
@@ -47,5 +59,15 @@ export class FriendController {
   @HttpCode(HttpStatus.OK)
   public async rejectFriendRequest(@Param('id') id: string): Promise<void> {
     return this.commandBus.execute(new RejectFriendRequestCommand(id));
+  }
+
+  @Get('notifications')
+  @Message('Sucessfully fetched the notifications.')
+  @HttpCode(HttpStatus.OK)
+  public async fetchNotifications(
+    @User() user: UserDocument,
+    @Query() paginate: PageOptionsDto,
+  ): Promise<PageDto<any>> {
+    return this.queryBus.execute(new FetchRequestCommand(user, paginate));
   }
 }

@@ -12,6 +12,7 @@ import { RejectFriendRequestCommandHandler } from 'src/features/account/cqrs/han
 import { SendFriendRequestCommandHandler } from 'src/features/account/cqrs/handler/send-friend-request.handler';
 import { UpdateEmailCommandHandler } from 'src/features/account/cqrs/handler/update-email.handler';
 import { UpdateProfileFieldsCommandHandler } from 'src/features/account/cqrs/handler/update-profile.handler';
+import { FetchRequestCommandHandler } from 'src/features/account/cqrs/handler/fetch-requests.handler';
 
 export const allHandlers = [
   UpdateEmailCommandHandler,
@@ -29,4 +30,5 @@ export const allHandlers = [
   SendFriendRequestCommandHandler,
   AcceptFriendRequestCommandHandler,
   RejectFriendRequestCommandHandler,
+  FetchRequestCommandHandler,
 ];
