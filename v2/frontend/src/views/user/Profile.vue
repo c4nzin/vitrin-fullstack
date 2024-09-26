@@ -62,6 +62,7 @@
               <div class="text-sm text-gray-500">Followings</div>
             </div>
           </div>
+          <p class="flex m-12 justify-center">{{ user.data.bio }}</p>
         </div>
       </div>
       <section class="h-full mt-8 mx-10">

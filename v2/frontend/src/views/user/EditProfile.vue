@@ -3,6 +3,8 @@
     <div class="h-screen flex justify-center items-center">
       <TopBar />
 
+      <img src="../../assets/logo.png" class="justify-center mb-6" />
+
       <div class="flex mb-2 max-w-md">
         <div class="flex space-y-6 mb-6">
           <form @submit.prevent="submitEdit" class="justify-center">
