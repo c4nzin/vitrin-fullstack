@@ -37,7 +37,16 @@
             <div
               v-if="errorMessage"
               class="bg-red-700 text-white rounded-md flex justify-center items-center p-4"
-            ></div>
+            >
+              <span>{{ errorMessage }}</span>
+            </div>
+
+            <div
+              v-if="!errorMessage"
+              class="bg-green-500 text-white rounded-md justify-center items-center p-4 mt-6"
+            >
+              <span>Profile Updated!</span>
+            </div>
 
             <CustomButton class="mt-6" text="Update Profile"></CustomButton>
           </form>
@@ -117,7 +126,8 @@ export default {
           withCredentials: true,
         });
       } catch (error) {
-        this.errorMessage = error.response?.data?.message[0];
+        console.log(error.response.data.message[0]);
+        this.errorMessage = error.response.data.message[0];
       }
     },
   },
