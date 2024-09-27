@@ -19,6 +19,12 @@ export class UpdateProfileDto {
 
   @IsOptional()
   @ApiProperty()
+  @IsString()
+  @Length(3, 30)
+  public fullName: string;
+
+  @IsOptional()
+  @ApiProperty()
   @IsEnum(Gender)
   public gender: number;
 

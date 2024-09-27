@@ -16,6 +16,7 @@ export class UpdateProfileFieldsCommandHandler
         gender: command.updateProfileDto.gender,
         username: command.updateProfileDto.username,
         website: command.updateProfileDto.website,
+        fullName: command.updateProfileDto.fullName,
       },
     });
   }

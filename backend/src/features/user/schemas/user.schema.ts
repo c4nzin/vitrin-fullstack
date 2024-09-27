@@ -146,7 +146,6 @@ export class User {
 
   @Prop({
     type: String,
-    default: 'John Doe',
     required: true,
   })
   public fullName: string;

@@ -26,7 +26,7 @@
 
           <div class="flex flex-col items-center mt-6">
             <div class="text-2xl font-semibold">
-              {{ exampleUserData.fullName }}
+              {{ user.data.fullName }}
             </div>
             <div class="text-xl text-gray-500">
               @{{ user.data ? user.data.username : 'Loading...' }}
@@ -99,16 +99,7 @@ export default {
     PostCard,
   },
   data() {
-    return {
-      exampleUserData: {
-        username: 'silentwarrior',
-        fullName: 'Can Sön',
-      },
-      statistics: {
-        posts: 120,
-        movies: 30,
-      },
-    };
+    return {};
   },
   async created() {
     const postStore = usePostStore();

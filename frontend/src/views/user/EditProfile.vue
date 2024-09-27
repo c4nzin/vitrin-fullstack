@@ -14,6 +14,9 @@
             <label class="text-lg">Username</label>
             <CustomInput v-model="username" :placeholder="user.data.username" />
 
+            <label class="text-lg">Full Name</label>
+            <CustomInput v-model="fullName" :placeholder="user.data.fullName" />
+
             <label class="text-lg">Biography</label>
             <CustomInput
               v-model="bio"
@@ -114,6 +117,7 @@ export default {
       const requestBody = {
         username: this.username,
         bio: this.bio,
+        fullName: this.fullName,
         website: this.website,
         gender: this.gender,
       };
