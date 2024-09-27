@@ -13,8 +13,8 @@
           </div>
           <ul>
             <li
-              v-for="(notification, index) in notifications"
-              :key="index"
+              v-for="(notification, id) in notifications"
+              :key="id"
               class="flex items-center justify-between p-3 border-b border-gray-300 hover:bg-gray-100"
             >
               <div class="flex items-start space-x-3">
@@ -71,12 +71,16 @@ export default {
     async acceptFriendRequest(id) {
       try {
         await axios.post(`/api/${id}/accept-friend`);
-      } catch (error) {}
+      } catch (error) {
+        throw new Error(error);
+      }
     },
     async rejectFriendRequest(id) {
       try {
         await axios.delete(`/api/${id}/reject-friend`);
-      } catch (error) {}
+      } catch (error) {
+        throw new Error(error);
+      }
     },
 
     async fetchUserAndNotifications() {
@@ -93,12 +97,16 @@ export default {
             withCredentials: true,
           }
         );
+
+        //loop required
         const notificationsData = response.data.data;
 
         this.notifications.push({
           message: notificationsData.data.message,
         });
-      } catch (error) {}
+      } catch (error) {
+        throw new Error(error);
+      }
     },
   },
 };
