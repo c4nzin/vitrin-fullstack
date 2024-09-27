@@ -13,6 +13,8 @@ import { SendFriendRequestCommandHandler } from 'src/features/account/cqrs/handl
 import { UpdateEmailCommandHandler } from 'src/features/account/cqrs/handler/update-email.handler';
 import { UpdateProfileFieldsCommandHandler } from 'src/features/account/cqrs/handler/update-profile.handler';
 import { FetchRequestCommandHandler } from 'src/features/account/cqrs/handler/fetch-requests.handler';
+import { UploadThumbnailPhotoCommand } from './photo/command/upload-thumbnail.command';
+import { UploadThumbnailPhotoCommandHandler } from './photo/handler/upload-thumbnail.handler';
 
 export const allHandlers = [
   UpdateEmailCommandHandler,
@@ -31,4 +33,5 @@ export const allHandlers = [
   AcceptFriendRequestCommandHandler,
   RejectFriendRequestCommandHandler,
   FetchRequestCommandHandler,
+  UploadThumbnailPhotoCommandHandler,
 ];

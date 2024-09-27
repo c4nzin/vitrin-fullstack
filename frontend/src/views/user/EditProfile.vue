@@ -3,12 +3,7 @@
     <div class="h-screen flex justify-center items-center">
       <TopBar />
 
-      <img
-        src="../../assets/logo.png"
-        class="justify-center mb-6 h-40 max-w-md"
-      />
-
-      <div class="flex mb-2 max-w-md">
+      <div class="flex mb-2 max-w-lg">
         <div class="flex space-y-6 mb-6">
           <form @submit.prevent="submitEdit" class="justify-center">
             <label class="text-lg">Username</label>
@@ -57,6 +52,31 @@
 
             <CustomButton class="mt-6" text="Update Profile"></CustomButton>
           </form>
+
+          <form @submit.prevent="uploadThumbnail" class="mt-6 h-auto">
+            <label class="text-lg">Update Thumbnail Photo</label>
+            <input
+              type="file"
+              @change="onFileChange"
+              accept="image/*"
+              class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md shadow-sm sm:text-sm"
+            />
+            <CustomButton class="mt-4" text="Upload Thumbnail"></CustomButton>
+
+            <div
+              v-if="thumbnailErrorMessage"
+              class="bg-red-700 text-white rounded-md flex justify-center items-center p-4 mt-4"
+            >
+              <span>{{ thumbnailErrorMessage }}</span>
+            </div>
+
+            <div
+              v-if="thumbnailSuccessMessage"
+              class="bg-green-500 text-white rounded-md justify-center items-center p-4 mt-4"
+            >
+              <span>{{ thumbnailSuccessMessage }}</span>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -79,15 +99,17 @@ export default {
       fullName: '',
       gender: '',
       bio: '',
+      file: null,
       GenderEnum: {
         MALE: 0,
         FEMALE: 1,
         NON_BINARY: 2,
         NOT_KNOWN: 3,
       },
-
       errorMessage: '',
       successMessage: '',
+      thumbnailErrorMessage: '',
+      thumbnailSuccessMessage: '',
     };
   },
 
@@ -137,6 +159,37 @@ export default {
         this.successMessage = 'Profile updated!';
       } catch (error) {
         this.errorMessage = error.response.data.message[0];
+      }
+    },
+
+    onFileChange(event) {
+      this.file = event.target.files[0];
+    },
+
+    async uploadThumbnail() {
+      if (!this.file) {
+        this.thumbnailErrorMessage = 'Please select a file.';
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', this.file);
+
+      try {
+        await axios.put(
+          'http://localhost:3000/api/users/me/thumbnail-photo',
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+            withCredentials: true,
+          }
+        );
+
+        this.thumbnailSuccessMessage = 'Thumbnail uploaded successfully!';
+      } catch (error) {
+        this.thumbnailErrorMessage = 'Failed to upload thumbnail.';
       }
     },
   },

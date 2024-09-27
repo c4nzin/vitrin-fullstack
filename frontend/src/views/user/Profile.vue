@@ -9,7 +9,7 @@
           <div class="flex w-full h-64 relative rounded">
             <img
               class="w-full rounded"
-              src="https://c4.wallpaperflare.com/wallpaper/390/7/649/cartoon-gun-minigun-illustration-wallpaper-preview.jpg"
+              :src="user.data.thumbnail"
               alt="background image"
             />
             <div

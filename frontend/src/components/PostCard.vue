@@ -5,15 +5,12 @@
     <div class="flex items-center p-4">
       <img
         class="w-10 h-10 rounded-full"
-        :src="
-          user?.profilePicture ||
-          'https://randomuser.me/api/portraits/men/1.jpg'
-        "
+        :src="user.profilePicture"
         alt="User avatar"
       />
       <div class="ml-3">
         <p class="text-sm font-semibold text-gray-800">
-          {{ user?.username || 'John  Doe' }}
+          {{ user.username }}
         </p>
         <p class="text-xs text-gray-500">@{{ user?.username }}</p>
       </div>
@@ -81,6 +78,8 @@ export default {
   computed: {
     user() {
       const userStore = useUserStore();
+
+      console.log(userStore.user.data, 'lp');
 
       return userStore.user.data;
     },

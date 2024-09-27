@@ -16,6 +16,7 @@ import { CommandBus } from '@nestjs/cqrs';
 import { UploadPhotoCommand } from '../cqrs/photo/command/upload-photo.command';
 import { AuthenticatedGuard } from 'src/common/guards/authenticated.guard';
 import { ApiTags } from '@nestjs/swagger';
+import { UploadThumbnailPhotoCommand } from '../cqrs/photo/command/upload-thumbnail.command';
 
 @Controller()
 @ApiTags('photo')
@@ -43,5 +44,16 @@ export class PhotoController {
     @User('id') id: string,
   ): Promise<UserDocument> {
     return this.commandBus.execute(new UploadPhotoCommand(file, id));
+  }
+
+  @Put('me/thumbnail-photo')
+  @Message('Sucessfully updated the thumbnail picture.')
+  @HttpCode(HttpStatus.OK)
+  @UseInterceptors(FileInterceptor('file'))
+  public async updateThumbnailPhoto(
+    @UploadedFile(PhotoPipe) file: Express.Multer.File,
+    @User('id') id: string,
+  ): Promise<any> {
+    return this.commandBus.execute(new UploadThumbnailPhotoCommand(file, id));
   }
 }

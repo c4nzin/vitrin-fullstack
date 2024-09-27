@@ -11,6 +11,7 @@ const config = {
   OTP_LENGTH: num(),
   MAIL_PORT: num(),
   MAIL_HOST: str(),
+  THUMBNAIL_URL: str({ default: process.env.THUMBNAIL_URL }),
   MAIL_PASSWORD: str(),
   MAIL: str(),
   CLOUDINARY_API_KEY: str(),
