@@ -81,7 +81,6 @@ export default {
   computed: {
     user() {
       const userStore = useUserStore();
-      console.log(this.post, 'a');
 
       return userStore.user.data;
     },

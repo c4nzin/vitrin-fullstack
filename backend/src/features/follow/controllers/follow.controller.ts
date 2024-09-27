@@ -56,7 +56,6 @@ export class FollowController {
     @Param('id') id: string,
     @Query() paginate: PageOptionsDto,
   ): Promise<PageDto<any>> {
-    console.log(paginate);
     return this.queryBus.execute(new FetchFollowersCommand(id, paginate));
   }
 }

@@ -8,7 +8,6 @@ export function registerComponents(app) {
       .replace(/\.\w+$/, ''); //removing file extension eg : blabla.vue => "blabla"
 
     console.log(typeof componentName);
-
     app.component(componentName, componentName);
   });
 }

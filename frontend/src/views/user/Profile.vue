@@ -127,14 +127,12 @@ export default {
 
     posts() {
       const postStore = usePostStore();
-      console.log(postStore.posts);
       return postStore.allPosts;
     },
 
     //not working rn
     followers() {
       const followers = userStore();
-      console.log(followers.fetchAllFollowers);
       return followers.fetchAllFollowers;
     },
   },

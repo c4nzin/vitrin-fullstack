@@ -23,13 +23,52 @@
         />
       </svg>
     </div>
-    <router-link to="/user/me" class="text-black hover:underline">
+
+    <div class="relative">
       <img
+        @click="toggleMenu"
         :src="user?.data?.profilePicture"
         alt="Profile"
-        class="w-10 h-10 rounded-full border-2 border-black"
+        class="w-10 h-10 rounded-full border-2 border-black cursor-pointer"
       />
-    </router-link>
+      <div
+        v-if="isMenuOpen"
+        class="absolute right-0 mt-2 w-56 bg-white border border-gray-300 rounded-lg shadow-lg z-20"
+      >
+        <ul class="py-1">
+          <li>
+            <router-link
+              :to="{ name: 'EditProfile' }"
+              class="flex items-center px-4 py-2 text-base text-gray-800 rounded-md hover:bg-gray-100"
+              @click="toggleMenu"
+            >
+              <span class="material-icons mr-3">edit</span>
+              Edit Profile
+            </router-link>
+          </li>
+
+          <li>
+            <router-link
+              :to="{ name: 'notifications' }"
+              class="flex items-center px-4 py-2 text-base text-gray-800 rounded-md hover:bg-gray-100"
+              @click="toggleMenu"
+            >
+              <span class="material-icons mr-3">notifications</span>
+              Notifications
+            </router-link>
+          </li>
+          <li>
+            <button
+              @click="handleLogout"
+              class="flex items-center w-full text-left px-4 py-2 text-base text-gray-800 rounded-md hover:bg-gray-100"
+            >
+              <span class="material-icons mr-3">logout</span>
+              Log Out
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,16 +77,37 @@ import userStore from '@/store/userStore';
 
 export default {
   name: 'TopBar',
+  data() {
+    return {
+      isMenuOpen: false,
+    };
+  },
   async created() {
     const useUserStore = userStore();
     await useUserStore.fetchUser();
   },
-
   computed: {
     user() {
       const useUserStore = userStore();
       return useUserStore.user;
     },
   },
+  methods: {
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+    },
+
+    //TODO : add logout feature
+    handleLogout() {
+      this.toggleMenu();
+      console.log('Logged out');
+    },
+  },
 };
 </script>
+
+<style scoped>
+body {
+  overflow-x: hidden;
+}
+</style>

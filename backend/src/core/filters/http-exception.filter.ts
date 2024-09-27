@@ -11,7 +11,6 @@ import {
 @Catch()
 export class HttpExceptionFilter<T> implements ExceptionFilter {
   public catch(exception: T, host: ArgumentsHost): void {
-    console.log(exception);
     const res = host.switchToHttp().getResponse<Response>();
 
     const status =

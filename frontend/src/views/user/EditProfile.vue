@@ -128,7 +128,6 @@ export default {
         });
         this.successMessage = 'Profile updated!';
       } catch (error) {
-        console.log(error.response.data.message[0]);
         this.errorMessage = error.response.data.message[0];
       }
     },
