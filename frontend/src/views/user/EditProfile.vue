@@ -42,10 +42,10 @@
             </div>
 
             <div
-              v-if="!errorMessage"
+              v-if="successMessage"
               class="bg-green-500 text-white rounded-md justify-center items-center p-4 mt-6"
             >
-              <span>Profile Updated!</span>
+              <span>{{ successMessage }}</span>
             </div>
 
             <CustomButton class="mt-6" text="Update Profile"></CustomButton>
@@ -80,6 +80,7 @@ export default {
       },
 
       errorMessage: '',
+      successMessage: '',
     };
   },
 
@@ -125,6 +126,7 @@ export default {
         await axios.patch('http://localhost:3000/api/users/update', body, {
           withCredentials: true,
         });
+        this.successMessage = 'Profile updated!';
       } catch (error) {
         console.log(error.response.data.message[0]);
         this.errorMessage = error.response.data.message[0];
