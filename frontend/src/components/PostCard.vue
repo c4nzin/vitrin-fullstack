@@ -79,8 +79,6 @@ export default {
     user() {
       const userStore = useUserStore();
 
-      console.log(userStore.user.data, 'lp');
-
       return userStore.user.data;
     },
   },

@@ -89,7 +89,8 @@ export default {
   computed: {
     user() {
       const useUserStore = userStore();
-      return useUserStore.user;
+      console.log(useUserStore.user.data.profilePicture);
+      return useUserStore.user.data;
     },
   },
   methods: {
