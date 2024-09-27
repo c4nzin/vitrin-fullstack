@@ -15,7 +15,11 @@
             <CustomInput v-model="username" :placeholder="user.data.username" />
 
             <label class="text-lg">Biography</label>
-            <CustomInput v-model="bio" placeholder="Bio" />
+            <CustomInput
+              v-model="bio"
+              :placeholder="user.data.bio"
+              v-text="user.data.bio"
+            />
 
             <label class="text-lg">Gender</label>
             <select

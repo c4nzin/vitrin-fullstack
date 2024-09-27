@@ -14,11 +14,11 @@ export class FetchFollowersHandler implements IQueryHandler<FetchFollowersComman
     const user = await this.userRepository.findById(id);
 
     const followers = await this.userRepository
-      .find({ follower: { $in: user.follower } })
+      .find({ _id: { $in: user.follower } })
       .sort(pagination.order)
       .skip(pagination.skip)
       .limit(pagination.take)
-      .select(['-password', '-email']);
+      .select(['-password', '-email', '+profilePicture']);
 
     const itemCount = await this.userRepository.countDocuments({
       _id: { $in: user.follower },

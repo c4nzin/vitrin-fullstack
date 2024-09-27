@@ -27,7 +27,7 @@ export default defineStore('user', {
           { withCredentials: true }
         );
 
-        this.followers = response.data;
+        this.followers = response.data.data;
       } catch (error) {
         throw new Error(
           'Something went wrong while fetching followers.',

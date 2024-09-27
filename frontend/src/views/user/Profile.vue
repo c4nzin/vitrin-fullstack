@@ -53,7 +53,14 @@
               <div class="text-2xl font-semibold">
                 {{ user.data.follower.length }}
               </div>
-              <div class="text-sm text-gray-500">Followers</div>
+              <div class="text-sm text-gray-500">
+                <router-link
+                  to="/followers"
+                  class="text-sm text-gray-500 cursor-pointer"
+                >
+                  Followers
+                </router-link>
+              </div>
             </div>
             <div class="text-center">
               <div class="text-2xl font-semibold">

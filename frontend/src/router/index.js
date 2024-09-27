@@ -7,6 +7,7 @@ import VerifyOtp from '@/views/auth/VerifyOtp.vue';
 import Profile from '@/views/user/Profile.vue';
 import EditProfile from '@/views/user/EditProfile.vue';
 import Notification from '@/views/Notification.vue';
+import FollowerList from '@/views/user/FollowerList.vue';
 
 const routes = [
   {
@@ -68,6 +69,11 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: '/followers',
+    name: 'FollowersList',
+    component: FollowerList,
   },
 ];
 
