@@ -10,6 +10,7 @@ import Notification from '@/views/Notification.vue';
 import FollowerList from '@/views/user/FollowerList.vue';
 import UpdateEmail from '@/views/user/UpdateEmail.vue';
 import VerifyEmail from '@/views/user/VerifyEmail.vue';
+import ChangePassword from '@/views/user/ChangePassword.vue';
 
 const routes = [
   {
@@ -47,12 +48,12 @@ const routes = [
     // },
   },
   {
-    path: '/send-otp',
+    path: '/user/send-otp',
     name: 'send-otp',
     component: SendOtp,
   },
   {
-    path: '/verify-otp',
+    path: '/user/verify-otp',
     name: 'Verify-Otp',
     component: VerifyOtp,
   },
@@ -65,7 +66,7 @@ const routes = [
     },
   },
   {
-    path: '/notifications',
+    path: '/user/notifications',
     name: 'notifications',
     component: Notification,
     meta: {
@@ -73,13 +74,13 @@ const routes = [
     },
   },
   {
-    path: '/followers',
+    path: '/user/followers',
     name: 'FollowersList',
     component: FollowerList,
   },
 
   {
-    path: '/send-email',
+    path: '/user/send-email',
     name: 'SendEmail',
     component: UpdateEmail,
     meta: {
@@ -88,9 +89,18 @@ const routes = [
   },
 
   {
-    path: '/verify-email',
+    path: '/user/verify-email',
     name: 'VerifyEmail',
     component: VerifyEmail,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+
+  {
+    path: '/user/change-password',
+    name: 'ChangePassword',
+    component: ChangePassword,
     meta: {
       requiresAuth: true,
     },

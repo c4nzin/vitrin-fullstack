@@ -17,6 +17,8 @@ import { AuthenticatedGuard } from 'src/common/guards/authenticated.guard';
 import { UpdatEmailCommand } from '../../account/cqrs/command/update-email.command';
 import { ApiTags } from '@nestjs/swagger';
 import { UpdateProfileDto } from 'src/features/account/dto/update-profile.dto';
+import { ChangePasswordDto } from '../dto/change-password.dto';
+import { ChangePasswordCommand } from '../cqrs/user/command/change-password.command';
 
 @Controller()
 @ApiTags('user')
@@ -49,4 +51,17 @@ export class UserController {
   ): Promise<UserDocument> {
     return this.commandBus.execute(new UpdatEmailCommand(updateEmailDto, user));
   }
+
+  @Post('change-password')
+  @Message('Sucessfully changed the password.')
+  @HttpCode(HttpStatus.OK)
+  public async changePassword(
+    @User() user: UserDocument,
+    @Body() changePasswordDto: ChangePasswordDto,
+  ): Promise<UserDocument> {
+    console.log(changePasswordDto);
+    return this.commandBus.execute(new ChangePasswordCommand(user, changePasswordDto));
+  }
+
+  //add reset password
 }
