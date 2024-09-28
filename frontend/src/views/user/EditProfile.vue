@@ -77,6 +77,34 @@
               <span>{{ thumbnailSuccessMessage }}</span>
             </div>
           </form>
+
+          <form @submit.prevent="uploadProfilePicture" class="mt-6 h-auto">
+            <label class="text-lg">Update Profile Picture</label>
+            <input
+              type="file"
+              @change="onFileChange"
+              accept="image/*"
+              class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md shadow-sm sm:text-sm"
+            />
+            <CustomButton
+              class="mt-4"
+              text="Upload Profile Picture"
+            ></CustomButton>
+
+            <div
+              v-if="profilePictureErrorMessage"
+              class="bg-red-700 text-white rounded-md flex justify-center items-center p-4 mt-4"
+            >
+              <span>{{ profilePictureErrorMessage }}</span>
+            </div>
+
+            <div
+              v-if="profilePictureSuccessMessage"
+              class="bg-green-500 text-white rounded-md justify-center items-center p-4 mt-4"
+            >
+              <span>{{ profilePictureSuccessMessage }}</span>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -98,6 +126,7 @@ export default {
       username: '',
       fullName: '',
       gender: '',
+      profilePicture: null,
       bio: '',
       file: null,
       GenderEnum: {
@@ -110,6 +139,8 @@ export default {
       successMessage: '',
       thumbnailErrorMessage: '',
       thumbnailSuccessMessage: '',
+      profilePictureErrorMessage: '',
+      profilePictureSuccessMessage: '',
     };
   },
 
@@ -190,6 +221,34 @@ export default {
         this.thumbnailSuccessMessage = 'Thumbnail uploaded successfully!';
       } catch (error) {
         this.thumbnailErrorMessage = 'Failed to upload thumbnail.';
+      }
+    },
+
+    async uploadProfilePicture() {
+      if (!this.file) {
+        this.profilePictureErrorMessage = 'Please select a file.';
+      }
+
+      const formData = new FormData();
+
+      formData.append('file', this.file);
+
+      try {
+        await axios.post(
+          'http://localhost:3000/api/users/me/profile-photo',
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+            withCredentials: true,
+          }
+        );
+
+        this.profilePictureSuccessMessage =
+          'Profile picture uploaded successfully!';
+      } catch (error) {
+        this.profilePictureErrorMessage = 'Failed to upload profile picture!';
       }
     },
   },
