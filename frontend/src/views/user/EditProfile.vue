@@ -107,6 +107,9 @@
           </form>
         </div>
       </div>
+      <div class="text-lg flex rounded-md items-center">
+        <router-link :to="{ name: 'SendEmail' }"> Update Email </router-link>
+      </div>
     </div>
   </AppSidebar>
 </template>
