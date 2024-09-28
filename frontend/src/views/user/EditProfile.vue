@@ -1,120 +1,146 @@
 <template>
   <AppSidebar>
-    <div class="h-screen flex justify-center items-center">
+    <div
+      class="min-h-screen flex flex-col lg:flex-row justify-center items-center"
+    >
       <TopBar />
 
-      <div class="flex mb-2 max-w-lg">
-        <div class="flex space-y-6 mb-6">
-          <form @submit.prevent="submitEdit" class="justify-center">
-            <label class="text-lg">Username</label>
-            <CustomInput v-model="username" :placeholder="user.data.username" />
+      <div
+        class="flex flex-col lg:flex-row lg:space-x-8 w-full max-w-4xl mt-8 lg:mt-0 bg-white p-6 rounded-lg shadow-md"
+      >
+        <!-- Profile Edit Form -->
+        <form @submit.prevent="submitEdit" class="flex-1 space-y-6">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+            Edit Profile
+          </h2>
 
-            <label class="text-lg">Full Name</label>
-            <CustomInput v-model="fullName" :placeholder="user.data.fullName" />
+          <label class="text-sm font-medium !text-gray-600">Username</label>
+          <CustomInput v-model="username" :placeholder="user.data.username" />
 
-            <label class="text-lg">Biography</label>
-            <CustomInput
-              v-model="bio"
-              :placeholder="user.data.bio"
-              v-text="user.data.bio"
-            />
+          <label class="text-sm font-medium text-gray-600">Full Name</label>
+          <CustomInput v-model="fullName" :placeholder="user.data.fullName" />
 
-            <label class="text-lg">Gender</label>
-            <select
-              v-model="gender"
-              class="block w-full px-4 py-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          <label class="text-sm font-medium text-gray-600">Biography</label>
+          <CustomInput
+            v-model="bio"
+            :placeholder="user.data.bio"
+            v-text="user.data.bio"
+          />
+
+          <label class="text-sm font-medium text-gray-600">Gender</label>
+          <select
+            v-model="gender"
+            class="block w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option :value="GenderEnum.MALE">Male</option>
+            <option :value="GenderEnum.FEMALE">Female</option>
+            <option :value="GenderEnum.NON_BINARY">Non-binary</option>
+            <option :value="GenderEnum.NOT_KNOWN">Not Known</option>
+          </select>
+
+          <label class="text-sm font-medium text-gray-600">Website</label>
+          <CustomInput
+            v-model="user.data.website"
+            :placeholder="user.data.website"
+          />
+
+          <!-- Success and Error Messages -->
+          <div
+            v-if="errorMessage"
+            class="bg-red-100 text-red-700 rounded-md p-3 mt-4"
+          >
+            <span>{{ errorMessage }}</span>
+          </div>
+
+          <div
+            v-if="successMessage"
+            class="bg-green-100 text-green-700 rounded-md p-3 mt-4"
+          >
+            <span>{{ successMessage }}</span>
+          </div>
+
+          <CustomButton class="mt-6" text="Update Profile" />
+
+          <!-- Update Email and Change Password Links -->
+          <div class="flex flex-col mt-6 space-y-2">
+            <router-link
+              :to="{ name: 'SendEmail' }"
+              class="text-sm font-medium text-blue-500 hover:underline"
             >
-              <option :value="GenderEnum.MALE">Male</option>
-              <option :value="GenderEnum.FEMALE">Female</option>
-              <option :value="GenderEnum.NON_BINARY">Non-binary</option>
-              <option :value="GenderEnum.NOT_KNOWN">Not Known</option>
-            </select>
+              Update Email
+            </router-link>
 
-            <label class="text-lg">Website</label>
-            <CustomInput
-              v-model="user.data.website"
-              :placeholder="user.data.website"
-            />
-
-            <div
-              v-if="errorMessage"
-              class="bg-red-700 text-white rounded-md flex justify-center items-center p-4"
+            <router-link
+              :to="{ name: 'ChangePassword' }"
+              class="text-sm font-medium text-blue-500 hover:underline"
             >
-              <span>{{ errorMessage }}</span>
-            </div>
+              Change Password
+            </router-link>
+          </div>
+        </form>
 
-            <div
-              v-if="successMessage"
-              class="bg-green-500 text-white rounded-md justify-center items-center p-4 mt-6"
-            >
-              <span>{{ successMessage }}</span>
-            </div>
-
-            <CustomButton class="mt-6" text="Update Profile"></CustomButton>
-          </form>
-
-          <form @submit.prevent="uploadThumbnail" class="mt-6 h-auto">
-            <label class="text-lg">Update Thumbnail Photo</label>
+        <!-- Thumbnail and Profile Picture Uploads -->
+        <div class="flex-1 space-y-6">
+          <form
+            @submit.prevent="uploadThumbnail"
+            class="flex flex-col bg-gray-100 p-4 rounded-lg shadow-inner"
+          >
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">
+              Update Thumbnail Photo
+            </h3>
             <input
               type="file"
               @change="onFileChange"
               accept="image/*"
-              class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md shadow-sm sm:text-sm"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg"
             />
-            <CustomButton class="mt-4" text="Upload Thumbnail"></CustomButton>
+            <CustomButton class="mt-4" text="Upload Thumbnail" />
 
             <div
               v-if="thumbnailErrorMessage"
-              class="bg-red-700 text-white rounded-md flex justify-center items-center p-4 mt-4"
+              class="bg-red-100 text-red-700 rounded-md p-3 mt-4"
             >
               <span>{{ thumbnailErrorMessage }}</span>
             </div>
 
             <div
               v-if="thumbnailSuccessMessage"
-              class="bg-green-500 text-white rounded-md justify-center items-center p-4 mt-4"
+              class="bg-green-100 text-green-700 rounded-md p-3 mt-4"
             >
               <span>{{ thumbnailSuccessMessage }}</span>
             </div>
           </form>
 
-          <form @submit.prevent="uploadProfilePicture" class="mt-6 h-auto">
-            <label class="text-lg">Update Profile Picture</label>
+          <form
+            @submit.prevent="uploadProfilePicture"
+            class="flex flex-col bg-gray-100 p-4 rounded-lg shadow-inner"
+          >
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">
+              Update Profile Picture
+            </h3>
             <input
               type="file"
               @change="onFileChange"
               accept="image/*"
-              class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md shadow-sm sm:text-sm"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg"
             />
-            <CustomButton
-              class="mt-4"
-              text="Upload Profile Picture"
-            ></CustomButton>
+            <CustomButton class="mt-4" text="Upload Profile Picture" />
 
             <div
               v-if="profilePictureErrorMessage"
-              class="bg-red-700 text-white rounded-md flex justify-center items-center p-4 mt-4"
+              class="bg-red-100 text-red-700 rounded-md p-3 mt-4"
             >
               <span>{{ profilePictureErrorMessage }}</span>
             </div>
 
             <div
               v-if="profilePictureSuccessMessage"
-              class="bg-green-500 text-white rounded-md justify-center items-center p-4 mt-4"
+              class="bg-green-100 text-green-700 rounded-md p-3 mt-4"
             >
               <span>{{ profilePictureSuccessMessage }}</span>
             </div>
           </form>
         </div>
-      </div>
-      <div class="text-lg flex rounded-md items-center">
-        <router-link :to="{ name: 'SendEmail' }"> Update Email </router-link>
-      </div>
-
-      <div class="text-lg flex rounded-md items-center">
-        <router-link :to="{ name: 'ChangePassword' }">
-          Change Password
-        </router-link>
       </div>
     </div>
   </AppSidebar>
@@ -126,7 +152,6 @@ import CustomButton from '@/components/Button.vue';
 import TopBar from '@/components/TopBar.vue';
 import AppSidebar from '@/components/AppSidebar.vue';
 import userStore from '@/store/userStore';
-
 import axios from 'axios';
 
 export default {

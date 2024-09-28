@@ -55,7 +55,7 @@
               </div>
               <div class="text-sm text-gray-500">
                 <router-link
-                  to="/followers"
+                  :to="{ name: 'FollowersList' }"
                   class="text-sm text-gray-500 cursor-pointer"
                 >
                   Followers
