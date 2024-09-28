@@ -1,6 +1,6 @@
 <template>
   <div
-    class="max-w-2xl h-1/3 mx-auto bg-white border border-gray-300 rounded-lg shadow-lg mt-10"
+    class="max-w-2xl mx-auto bg-white border border-gray-300 rounded-lg shadow-lg mt-10"
   >
     <div class="flex items-center p-4">
       <img
@@ -15,12 +15,16 @@
         <p class="text-xs text-gray-500">@{{ user?.username }}</p>
       </div>
     </div>
-    <p class="px-4 pb-2 text-gray-800 mt-10">{{ post.content }}</p>
-    <div>
-      <img class="w-1/5 h-auto" :src="post.media" />
+    <p class="px-4 pb-2 text-gray-800">{{ post.content }}</p>
+    <div class="px-4 pb-2">
+      <img
+        class="w-full h-auto object-cover rounded-lg max-h-60"
+        :src="post.media"
+        alt="Post media"
+      />
     </div>
     <div class="flex justify-between items-center px-4 py-2 text-gray-600">
-      <div class="flex items-center grid-cols-3">
+      <div class="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-5 w-5 mr-1"
@@ -88,3 +92,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@media (max-width: 768px) {
+  .max-w-2xl {
+    max-width: 100%;
+  }
+  img {
+    max-width: 100%;
+  }
+}
+</style>
