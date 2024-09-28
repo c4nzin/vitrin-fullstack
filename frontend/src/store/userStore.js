@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { defineStore } from 'pinia';
+import config from '@/config/index';
 
 export default defineStore('user', {
   state: () => ({
@@ -23,7 +24,7 @@ export default defineStore('user', {
     async fetchFollowers(id) {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/${id}/followers`,
+          `${config.BACKEND_URL}${id}/followers`,
           { withCredentials: true }
         );
 
