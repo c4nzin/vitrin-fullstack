@@ -27,7 +27,7 @@
     <div class="relative">
       <img
         @click="toggleMenu"
-        :src="user?.data?.profilePicture"
+        :src="user?.data?.profilePicture || ''"
         alt="Profile"
         class="w-10 h-10 rounded-full border-2 border-black cursor-pointer"
       />
@@ -84,12 +84,12 @@ export default {
   },
   async created() {
     const useUserStore = userStore();
+
     await useUserStore.fetchUser();
   },
   computed: {
     user() {
       const useUserStore = userStore();
-      console.log(useUserStore.user.data.profilePicture);
       return useUserStore.user.data;
     },
   },
