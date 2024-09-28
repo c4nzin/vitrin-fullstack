@@ -9,7 +9,8 @@
                 <img src="../../assets/logo.png" class="h-40 ml-6 mb-0" />
               </div>
               <h1 class="text-2xl">
-                Verify Your one time password that you have received
+                Please provide otp code and new password to change your current
+                password
               </h1>
               <CustomInput
                 placeholder="One Time Password (OTP)"
