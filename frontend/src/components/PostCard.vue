@@ -16,7 +16,7 @@
       </div>
     </div>
     <p class="px-4 pb-2 text-gray-800">{{ post.content }}</p>
-    <div class="px-4 pb-2">
+    <div v-if="post.media" class="px-4 pb-2">
       <img
         class="w-full h-auto object-cover rounded-lg max-h-60"
         :src="post.media"
