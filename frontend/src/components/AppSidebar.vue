@@ -137,7 +137,7 @@ export default {
   },
 
   mounted() {
-    this.userStore.fetchUser();
+    this.isLoggedIn ? this.userStore.fetchUser() : null;
   },
 };
 </script>
