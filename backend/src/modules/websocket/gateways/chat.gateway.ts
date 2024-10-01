@@ -6,7 +6,9 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
+import { CreateMessageDto } from 'src/features/user/dto';
 import { ChatRepository } from 'src/features/user/repositories';
+import { RECEIVE_MESSAGE } from '../constants';
 
 @WebSocketGateway({ namespace: '/chat' })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
@@ -23,19 +25,10 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   public async handleDisconnect(client: Socket) {}
 
   @SubscribeMessage('sendMessage')
-  public async handleMessage(
-    client: Socket,
-    payload: { receiverId: string; senderId: string; message: string },
-  ) {
-    const { senderId, receiverId, message } = payload;
+  public async handleMessage(client: Socket, payload: CreateMessageDto) {
+    const savedMessage = await this.chatRepository.saveMessage(payload);
 
-    const savedMessage = await this.chatRepository.saveMessage(
-      senderId,
-      receiverId,
-      message,
-    );
-
-    this.server.to(senderId).emit('receiveMessage', savedMessage);
-    this.server.to(receiverId).emit('receiveMessage', savedMessage);
+    this.server.to(payload.senderId).emit(RECEIVE_MESSAGE, savedMessage);
+    this.server.to(payload.receiverId).emit(RECEIVE_MESSAGE, savedMessage);
   }
 }
