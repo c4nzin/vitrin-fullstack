@@ -18,6 +18,7 @@ const config = {
   CLOUDINARY_CLOUD_NAME: str(),
   CLOUDINARY_API_SECRET: str(),
   PROFILE_PICTURE_URL: str({ default: process.env.PROFILE_PICTURE_URL }),
+  HASH_SALT_ROUNDS: num({ default: 10 }),
 };
 
 export const envalidValidator = makeValidators(config);
