@@ -6,7 +6,6 @@
     >
       <div class="p-4 mt-8">
         <ul class="space-y-4">
-          <!-- Register -->
           <li>
             <router-link
               :to="{ name: 'Register' }"
@@ -16,7 +15,6 @@
               Register
             </router-link>
           </li>
-          <!-- Login -->
           <li>
             <router-link
               :to="{ name: 'Login' }"
