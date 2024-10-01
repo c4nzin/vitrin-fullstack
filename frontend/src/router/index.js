@@ -11,6 +11,7 @@ import FollowerList from '@/views/user/FollowerList.vue';
 import UpdateEmail from '@/views/user/UpdateEmail.vue';
 import VerifyEmail from '@/views/user/VerifyEmail.vue';
 import ChangePassword from '@/views/user/ChangePassword.vue';
+import ResetPassword from '@/views/user/ResetPassword.vue';
 
 const routes = [
   {
@@ -43,9 +44,9 @@ const routes = [
     path: '/user/edit',
     name: 'EditProfile',
     component: EditProfile,
-    // meta: {
-    //   requiresAuth: true,
-    // },
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/user/send-otp',
@@ -103,6 +104,15 @@ const routes = [
     component: ChangePassword,
     meta: {
       requiresAuth: true,
+    },
+  },
+
+  {
+    path: '/user/reset-password',
+    name: 'ResetPassword',
+    component: ResetPassword,
+    meta: {
+      requiresAuth: false,
     },
   },
 ];

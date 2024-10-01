@@ -38,6 +38,16 @@ export class UserRepository extends BaseRepository<User> {
     return user;
   }
 
+  public async findByEmail(email: string): Promise<UserDocument> {
+    const user = await this.findOne({ email });
+
+    if (!user) {
+      throw new BadRequestException('No user found by this email.');
+    }
+
+    return user;
+  }
+
   public async isOldEmailCorrect(email: string) {
     const user = await this.findOne({ email });
 

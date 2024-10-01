@@ -23,11 +23,11 @@ import { ResetPasswordCommand } from '../cqrs/user/command/reset-password.comman
 
 @Controller()
 @ApiTags('user')
-@UseGuards(AuthenticatedGuard)
 export class UserController {
   constructor(private readonly commandBus: CommandBus) {}
 
   @Get('me')
+  @UseGuards(AuthenticatedGuard)
   @Message('Sucessfully fetched the user.')
   @HttpCode(HttpStatus.OK)
   public async getUser(@User() user: UserDocument): Promise<UserDocument> {
@@ -35,6 +35,7 @@ export class UserController {
   }
 
   @Patch('update')
+  @UseGuards(AuthenticatedGuard)
   @Message('Sucessfully updated the profile.')
   @HttpCode(HttpStatus.OK)
   public async updateProfile(
@@ -43,7 +44,9 @@ export class UserController {
   ): Promise<UserDocument> {
     return this.commandBus.execute(new UpdateProfileFieldsCommand(id, updateProfile));
   }
+
   @Post('update-email')
+  @UseGuards(AuthenticatedGuard)
   @Message('Sucessfully updated the email.')
   @HttpCode(HttpStatus.OK)
   public async updateEmail(
@@ -54,6 +57,7 @@ export class UserController {
   }
 
   @Post('change-password')
+  @UseGuards(AuthenticatedGuard)
   @Message('Sucessfully changed the password.')
   @HttpCode(HttpStatus.OK)
   public async changePassword(
@@ -64,15 +68,10 @@ export class UserController {
     return this.commandBus.execute(new ChangePasswordCommand(user, changePasswordDto));
   }
 
-  //add reset password
-
   @Post('reset-password')
   @Message('Sucessfully resetted your password.')
   @HttpCode(HttpStatus.OK)
-  public async resetPassword(
-    @User() user: UserDocument,
-    @Body() resetPasswordDto: ResetPasswordDto,
-  ) {
-    return this.commandBus.execute(new ResetPasswordCommand(user, resetPasswordDto));
+  public async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
+    return this.commandBus.execute(new ResetPasswordCommand(resetPasswordDto));
   }
 }

@@ -26,7 +26,6 @@ import { FollowModule } from '../follow/follow.module';
 import { AccountModule } from '../account/account.module';
 import { ChatController } from './controllers/chat.controller';
 import { ChatRepository } from './repositories/chat.repository';
-import { ChatGateway } from 'src/modules/websocket/gateways/chat.gateway';
 
 @Module({
   imports: [

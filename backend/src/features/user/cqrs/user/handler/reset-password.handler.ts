@@ -18,17 +18,17 @@ export class ResetPasswordCommandHandler
   ) {}
 
   public async execute(command: ResetPasswordCommand): Promise<UserDocument | null> {
-    const { resetPasswordDto, user } = command;
+    const { resetPasswordDto } = command;
 
     const validatedOtp = await this.commandBus.execute(
-      new VerifyOtpCommand(user.email, resetPasswordDto.otpCode),
+      new VerifyOtpCommand(resetPasswordDto.email, resetPasswordDto.otpCode),
     );
 
     if (!validatedOtp) {
       return;
     }
 
-    await this.isOldPassword(resetPasswordDto.newPassword, user.password);
+    const user = await this.userRepository.findByEmail(resetPasswordDto.email);
 
     const hashedPassword = await bcrypt.hash(
       resetPasswordDto.newPassword,
