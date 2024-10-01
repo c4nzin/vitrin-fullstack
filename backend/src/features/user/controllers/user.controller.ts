@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { Message, User } from 'src/common/decorators';
 import { UserDocument } from '../schemas';
-import { UpdateEmailDto } from '../dto';
+import { ResetPasswordDto, UpdateEmailDto } from '../dto';
 import { CommandBus } from '@nestjs/cqrs';
 import { UpdateProfileFieldsCommand } from '../../account/cqrs/command/update-profile.command';
 import { AuthenticatedGuard } from 'src/common/guards/authenticated.guard';
@@ -19,6 +19,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { UpdateProfileDto } from 'src/features/account/dto/update-profile.dto';
 import { ChangePasswordDto } from '../dto/change-password.dto';
 import { ChangePasswordCommand } from '../cqrs/user/command/change-password.command';
+import { ResetPasswordCommand } from '../cqrs/user/command/reset-password.command';
 
 @Controller()
 @ApiTags('user')
@@ -64,4 +65,14 @@ export class UserController {
   }
 
   //add reset password
+
+  @Post('reset-password')
+  @Message('Sucessfully resetted your password.')
+  @HttpCode(HttpStatus.OK)
+  public async resetPassword(
+    @User() user: UserDocument,
+    @Body() resetPasswordDto: ResetPasswordDto,
+  ) {
+    return this.commandBus.execute(new ResetPasswordCommand(user, resetPasswordDto));
+  }
 }

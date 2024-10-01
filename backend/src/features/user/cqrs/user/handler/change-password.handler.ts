@@ -3,13 +3,17 @@ import { ChangePasswordCommand } from '../command/change-password.command';
 import { VerifyOtpCommand } from 'src/features/otp/cqrs';
 import bcrypt from 'bcrypt';
 import { UserDocument } from 'src/features/user/schemas';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, Inject } from '@nestjs/common';
+import { Config, ENV } from 'src/config/config';
 
 @CommandHandler(ChangePasswordCommand)
 export class ChangePasswordCommandHandler
   implements ICommandHandler<ChangePasswordCommand>
 {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    @Inject(ENV) private readonly config: Config,
+  ) {}
 
   public async execute(command: ChangePasswordCommand): Promise<UserDocument> {
     const { changePasswordDto, user } = command;
@@ -23,7 +27,10 @@ export class ChangePasswordCommandHandler
     if (!validateOtp) {
       return;
     } else {
-      const hashedPassword = await bcrypt.hash(changePasswordDto.newPassword, 10);
+      const hashedPassword = await bcrypt.hash(
+        changePasswordDto.newPassword,
+        this.config.HASH_SALT_ROUNDS,
+      );
 
       return user.updateOne({ password: hashedPassword });
     }
