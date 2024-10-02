@@ -50,6 +50,12 @@ export class BookRepository extends BaseRepository<Book> {
     const books = await this.searchBooks(query);
     const bookData = books[0];
 
+    const existingBook = await this.bookModel.findOne({ bookId: bookData.bookId });
+
+    if (existingBook) {
+      return existingBook;
+    }
+
     const createBookDto: CreateBookDto = {
       title: bookData.title,
       authors: bookData.authors || [],

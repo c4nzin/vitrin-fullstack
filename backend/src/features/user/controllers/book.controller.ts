@@ -11,6 +11,12 @@ export class BooksController {
   @Get('search/:query')
   async searchBooks(@Param('query') query: string) {
     const books = await this.bookRepository.searchBooks(query);
+
+    if (books && books.length > 0) {
+      const bookToSave = books[0];
+      await this.bookRepository.createBookFromGoogle(bookToSave);
+    }
+
     return books;
   }
 
