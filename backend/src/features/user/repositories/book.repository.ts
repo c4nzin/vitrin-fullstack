@@ -41,7 +41,7 @@ export class BookRepository extends BaseRepository<Book> {
         };
       });
     } catch (error) {
-      console.error('Error fetching data from Google Books API:', error);
+      console.log('Error fetching data from Google Books API:', error);
       throw new BadRequestException('Failed to fetch books from Google Books API');
     }
   }
