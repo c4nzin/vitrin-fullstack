@@ -2,7 +2,7 @@ import { BaseRepository } from 'src/core/repositories/base.repository';
 import { Book, BookDocument } from '../schemas';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Inject } from '@nestjs/common';
+import { BadRequestException, Inject } from '@nestjs/common';
 import { Config, ENV } from 'src/config/config';
 import axios from 'axios';
 import { CreateBookDto } from '../dto';
@@ -42,7 +42,7 @@ export class BookRepository extends BaseRepository<Book> {
       });
     } catch (error) {
       console.error('Error fetching data from Google Books API:', error);
-      throw new Error('Failed to fetch books from Google Books API');
+      throw new BadRequestException('Failed to fetch books from Google Books API');
     }
   }
 
