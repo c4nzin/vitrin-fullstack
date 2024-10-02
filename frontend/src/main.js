@@ -17,6 +17,6 @@ app.provide(AxiosKey, axiosClient);
 
 registerComponents(app);
 
-app.use(pinia);
 app.use(router);
+app.use(pinia);
 app.mount('#app');

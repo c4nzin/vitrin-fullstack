@@ -19,6 +19,7 @@ const config = {
   CLOUDINARY_API_SECRET: str(),
   PROFILE_PICTURE_URL: str({ default: process.env.PROFILE_PICTURE_URL }),
   HASH_SALT_ROUNDS: num({ default: 10 }),
+  GOOGLE_BOOKS_API_KEY: str(),
 };
 
 export const envalidValidator = makeValidators(config);

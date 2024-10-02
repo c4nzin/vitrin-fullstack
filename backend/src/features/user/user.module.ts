@@ -1,7 +1,14 @@
 import { Module } from '@nestjs/common';
-import { NotificationRepository, PostRepository, UserRepository } from './repositories';
+import {
+  BookRepository,
+  NotificationRepository,
+  PostRepository,
+  UserRepository,
+} from './repositories';
 import { MongooseModule } from '@nestjs/mongoose';
 import {
+  Book,
+  BookSchema,
   Message,
   MessageSchema,
   Notification,
@@ -26,6 +33,7 @@ import { FollowModule } from '../follow/follow.module';
 import { AccountModule } from '../account/account.module';
 import { ChatController } from './controllers/chat.controller';
 import { ChatRepository } from './repositories/chat.repository';
+import { BooksController } from './controllers/book.controller';
 
 @Module({
   imports: [
@@ -34,6 +42,7 @@ import { ChatRepository } from './repositories/chat.repository';
       { name: Post.name, schema: PostSchema },
       { name: Notification.name, schema: NotificationSchema },
       { name: Message.name, schema: MessageSchema },
+      { name: Book.name, schema: BookSchema },
     ]),
     CloudinaryModule,
     CqrsModule,
@@ -46,6 +55,7 @@ import { ChatRepository } from './repositories/chat.repository';
     UserController,
     PostController,
     FriendController,
+    BooksController,
     ChatController,
     MessageController,
   ],
@@ -54,6 +64,7 @@ import { ChatRepository } from './repositories/chat.repository';
     NotificationRepository,
     PostRepository,
     ChatRepository,
+    BookRepository,
     ...allHandlers,
   ],
   exports: [
@@ -61,6 +72,7 @@ import { ChatRepository } from './repositories/chat.repository';
     NotificationRepository,
     PostRepository,
     ChatRepository,
+    BookRepository,
     ...allHandlers,
   ],
 })

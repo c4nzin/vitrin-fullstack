@@ -12,6 +12,7 @@ import UpdateEmail from '@/views/user/UpdateEmail.vue';
 import VerifyEmail from '@/views/user/VerifyEmail.vue';
 import ChangePassword from '@/views/user/ChangePassword.vue';
 import ResetPassword from '@/views/user/ResetPassword.vue';
+import BooksView from '@/views/books/BooksView.vue';
 
 const routes = [
   {
@@ -113,6 +114,15 @@ const routes = [
     component: ResetPassword,
     meta: {
       requiresAuth: false,
+    },
+  },
+
+  {
+    path: '/books',
+    name: 'Book',
+    component: BooksView,
+    meta: {
+      requiresAuth: true,
     },
   },
 ];

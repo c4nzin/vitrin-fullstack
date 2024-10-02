@@ -5,23 +5,11 @@
     <div class="relative left-0">
       <input
         type="text"
-        placeholder="Search..."
+        v-model="searchQuery"
+        placeholder="Kitap ara..."
         class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        @keyup.enter="performSearch"
       />
-      <svg
-        class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-4.35-4.35"
-        />
-      </svg>
     </div>
 
     <div class="relative">
@@ -46,7 +34,6 @@
               Edit Profile
             </router-link>
           </li>
-
           <li>
             <router-link
               :to="{ name: 'notifications' }"
@@ -73,6 +60,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import userStore from '@/store/userStore';
 
 export default {
@@ -80,11 +68,11 @@ export default {
   data() {
     return {
       isMenuOpen: false,
+      searchQuery: '',
     };
   },
   async created() {
     const useUserStore = userStore();
-
     await useUserStore.fetchUser();
   },
   computed: {
@@ -98,10 +86,28 @@ export default {
       this.isMenuOpen = !this.isMenuOpen;
     },
 
-    //TODO : add logout feature
     handleLogout() {
       this.toggleMenu();
       console.log('Logged out');
+    },
+
+    async performSearch() {
+      try {
+        const formattedQuery = encodeURIComponent(this.searchQuery.trim());
+        const response = await axios.get(
+          `http://localhost:3000/api/users/books/search/${formattedQuery}`
+        );
+
+        console.log(response.data.data);
+        if (response.data.data) {
+          this.$router.push({
+            name: 'Book',
+            query: { books: JSON.stringify(response.data.data) },
+          });
+        }
+      } catch (error) {
+        console.error('Error searching books:', error);
+      }
     },
   },
 };
