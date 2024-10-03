@@ -6,6 +6,7 @@ import { NotificationRepository } from './repositories/notification.repository';
 import { FriendModule } from '../friend/friend.module';
 import { CqrsModule } from '@nestjs/cqrs';
 import { UserModule } from '../user/user.module';
+import { NotificationController } from './controllers/notification.controller';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UserModule } from '../user/user.module';
     CqrsModule,
     forwardRef(() => UserModule),
   ],
+  controllers: [NotificationController],
   providers: [NotificationRepository],
   exports: [NotificationRepository],
 })

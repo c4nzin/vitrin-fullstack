@@ -20,8 +20,10 @@ import { ChangePasswordDto } from '../dto/change-password.dto';
 import { ChangePasswordCommand } from '../command/change-password.command';
 import { ResetPasswordDto } from '../dto/reset-password.dto';
 import { ResetPasswordCommand } from '../command/reset-password.command';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('account')
+@ApiTags('account')
 export class AccountController {
   constructor(private readonly commandBus: CommandBus) {}
 

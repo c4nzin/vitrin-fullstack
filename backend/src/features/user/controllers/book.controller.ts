@@ -1,10 +1,8 @@
 import { Controller, Get, Param, Post, Body, UseGuards } from '@nestjs/common';
 import { BookRepository } from '../repositories';
 import { CreateBookDto } from '../dto';
-import { AuthenticatedGuard } from 'src/common/guards';
 
 @Controller('books')
-// @UseGuards(AuthenticatedGuard)
 export class BooksController {
   constructor(private readonly bookRepository: BookRepository) {}
 

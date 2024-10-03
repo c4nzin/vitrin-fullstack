@@ -9,15 +9,14 @@ import {
 } from '@nestjs/common';
 import { LoginDto, RegisterDto } from '../dto';
 import { CommandBus } from '@nestjs/cqrs';
-import { Message, User } from 'src/common/decorators';
-import { UserDocument } from 'src/features/user/schemas';
+import { Message } from 'src/common/decorators';
 import { LocalAuthGuard } from 'src/common/guards';
 import { LoginUserCommand, RegisterUserCommand, VerifyAccountCommand } from '../cqrs';
 import { ApiTags } from '@nestjs/swagger';
 import { OtpDto } from 'src/features/otp/dto';
 import { OtpDocument } from 'src/features/otp/schemas';
 
-@Controller()
+@Controller('auth')
 @ApiTags('auth')
 export class AuthController {
   constructor(private readonly commandBus: CommandBus) {}
@@ -35,14 +34,6 @@ export class AuthController {
   @HttpCode(HttpStatus.CREATED)
   public async register(@Body() registerDto: RegisterDto) {
     return this.commandBus.execute(new RegisterUserCommand(registerDto));
-  }
-
-  @Get('me')
-  @Message('Sucessfully fetched the user.')
-  @HttpCode(HttpStatus.OK)
-  @UseGuards(LocalAuthGuard)
-  public async getme(@User() user: UserDocument) {
-    return user;
   }
 
   @Post('verify-account')

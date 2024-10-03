@@ -11,12 +11,7 @@ import {
   User,
   UserSchema,
 } from './schemas';
-import {
-  FriendController,
-  MessageController,
-  PhotoController,
-  UserController,
-} from './controllers';
+import { MessageController, PhotoController, UserController } from './controllers';
 import { CloudinaryModule } from 'src/modules/cloudinary/cloudinary.module';
 import { CqrsModule } from '@nestjs/cqrs';
 import { allHandlers } from './cqrs/all-handlers';
@@ -24,7 +19,6 @@ import { PostController } from './controllers/post.controller';
 import { WebsocketModule } from 'src/modules/websocket/websocket.module';
 import { FollowModule } from '../follow/follow.module';
 import { AccountModule } from '../account/account.module';
-import { ChatController } from './controllers/chat.controller';
 import { ChatRepository } from './repositories/chat.repository';
 import { BooksController } from './controllers/book.controller';
 import { NotificationModule } from '../notification/notification.module';
@@ -47,10 +41,9 @@ import { NotificationModule } from '../notification/notification.module';
   controllers: [
     PhotoController,
     PostController,
-    FriendController,
     BooksController,
-    ChatController,
     MessageController,
+    UserController,
   ],
   providers: [
     UserRepository,

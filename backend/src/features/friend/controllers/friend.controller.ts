@@ -60,14 +60,4 @@ export class FriendController {
   public async rejectFriendRequest(@Param('id') id: string): Promise<void> {
     return this.commandBus.execute(new RejectFriendRequestCommand(id));
   }
-
-  @Get('notifications')
-  @Message('Sucessfully fetched the notifications.')
-  @HttpCode(HttpStatus.OK)
-  public async fetchNotifications(
-    @User() user: UserDocument,
-    @Query() paginate: PageOptionsDto,
-  ): Promise<PageDto<any>> {
-    return this.queryBus.execute(new FetchRequestCommand(user, paginate));
-  }
 }

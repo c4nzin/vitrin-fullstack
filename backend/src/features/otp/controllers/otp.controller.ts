@@ -6,7 +6,7 @@ import { Message } from 'src/common/decorators';
 import { ApiTags } from '@nestjs/swagger';
 import { VerifyOtpCommand } from '../cqrs';
 
-@Controller()
+@Controller('otp')
 @ApiTags('otp')
 export class OtpController {
   constructor(private readonly commandBus: CommandBus) {}
