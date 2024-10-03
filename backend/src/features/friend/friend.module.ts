@@ -9,6 +9,7 @@ import { UserModule } from '../user/user.module';
 import { FriendController } from './controllers/friend.controller';
 import { allFriendHandlers } from './handler/all-friend.handlers';
 import { FriendRequestRepository } from './repositories/friend-request.repository';
+import { NotificationModule } from '../notification/notification.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { FriendRequestRepository } from './repositories/friend-request.repositor
     CloudinaryModule,
     FollowModule,
     WebsocketModule,
+    forwardRef(() => NotificationModule),
   ],
   controllers: [FriendController],
   providers: [FriendRequestRepository, ...allFriendHandlers],

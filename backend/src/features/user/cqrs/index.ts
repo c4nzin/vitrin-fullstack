@@ -1,4 +1,3 @@
-export * from '../../account/cqrs/command/update-email.command';
 export * from './photo/command/upload-photo.command';
 export * from './photo/handler/upload-photo.handler';
 export * from './tweets/command/create-tweet.command';

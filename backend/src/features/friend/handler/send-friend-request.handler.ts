@@ -2,10 +2,10 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { BadRequestException } from '@nestjs/common';
 import { FriendRequestStatus } from 'src/features/user/enum/friend-request.status';
 import { Types } from 'mongoose';
-import { NotificationRepository, UserRepository } from 'src/features/user/repositories';
 import { FriendRequestDocument } from 'src/features/friend/schemas/friend-request.schema';
 import { SendFriendRequestCommand } from '../command/send-friend-request.command';
 import { FriendRequestRepository } from '../repositories/friend-request.repository';
+import { NotificationRepository, UserRepository } from 'src/features/user/repositories';
 
 @CommandHandler(SendFriendRequestCommand)
 export class SendFriendRequestCommandHandler
@@ -13,8 +13,8 @@ export class SendFriendRequestCommandHandler
 {
   constructor(
     private readonly friendRequestRepository: FriendRequestRepository,
-    private readonly notificationRepository: NotificationRepository,
     private readonly userRepository: UserRepository,
+    private readonly notificationRepository: NotificationRepository,
   ) {}
 
   public async execute(

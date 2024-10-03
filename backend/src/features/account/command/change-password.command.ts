@@ -1,5 +1,5 @@
-import { ChangePasswordDto } from 'src/features/user/dto';
 import { UserDocument } from 'src/features/user/schemas';
+import { ChangePasswordDto } from '../dto/change-password.dto';
 
 export class ChangePasswordCommand {
   constructor(

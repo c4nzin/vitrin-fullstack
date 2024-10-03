@@ -1,5 +1,5 @@
-import { UpdateEmailDto } from 'src/features/user/dto';
 import { UserDocument } from 'src/features/user/schemas';
+import { UpdateEmailDto } from '../dto/update-email.dto';
 
 export class UpdatEmailCommand {
   constructor(

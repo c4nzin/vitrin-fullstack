@@ -1,18 +1,11 @@
 import { Module } from '@nestjs/common';
-import {
-  BookRepository,
-  NotificationRepository,
-  PostRepository,
-  UserRepository,
-} from './repositories';
+import { BookRepository, PostRepository, UserRepository } from './repositories';
 import { MongooseModule } from '@nestjs/mongoose';
 import {
   Book,
   BookSchema,
   Message,
   MessageSchema,
-  Notification,
-  NotificationSchema,
   Post,
   PostSchema,
   User,
@@ -34,13 +27,13 @@ import { AccountModule } from '../account/account.module';
 import { ChatController } from './controllers/chat.controller';
 import { ChatRepository } from './repositories/chat.repository';
 import { BooksController } from './controllers/book.controller';
+import { NotificationModule } from '../notification/notification.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: User.name, schema: UserSchema },
       { name: Post.name, schema: PostSchema },
-      { name: Notification.name, schema: NotificationSchema },
       { name: Message.name, schema: MessageSchema },
       { name: Book.name, schema: BookSchema },
     ]),
@@ -49,10 +42,10 @@ import { BooksController } from './controllers/book.controller';
     WebsocketModule,
     FollowModule,
     AccountModule,
+    NotificationModule,
   ],
   controllers: [
     PhotoController,
-    UserController,
     PostController,
     FriendController,
     BooksController,
@@ -61,7 +54,6 @@ import { BooksController } from './controllers/book.controller';
   ],
   providers: [
     UserRepository,
-    NotificationRepository,
     PostRepository,
     ChatRepository,
     BookRepository,
@@ -69,7 +61,6 @@ import { BooksController } from './controllers/book.controller';
   ],
   exports: [
     UserRepository,
-    NotificationRepository,
     PostRepository,
     ChatRepository,
     BookRepository,

@@ -17,6 +17,7 @@ import { RouterModule } from '@nestjs/core';
 import { AccountModule } from './features/account/account.module';
 import { FollowModule } from './features/follow/follow.module';
 import { FriendModule } from './features/friend/friend.module';
+import { NotificationModule } from './features/notification/notification.module';
 
 @Module({
   imports: [
@@ -42,6 +43,8 @@ import { FriendModule } from './features/friend/friend.module';
     }),
     DatabaseModule,
     FriendModule,
+    NotificationModule,
+    AccountModule,
     BullModule,
     OtpModule,
     ThrottlerModule,

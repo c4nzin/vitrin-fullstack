@@ -1,8 +1,8 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { BaseRepository } from 'src/core/repositories/base.repository';
-import { Notification } from '../schemas';
 import { Model } from 'mongoose';
 import { BadRequestException } from '@nestjs/common';
+import { Notification } from '../schemas';
 
 export class NotificationRepository extends BaseRepository<Notification> {
   constructor(
