@@ -1,5 +1,5 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { SendFriendRequestCommand } from '../command/send-friend-request.command';
+import { SendFriendRequestCommand } from '../../../friend/command/send-friend-request.command';
 import { FriendRequestRepository } from 'src/features/account/repositories/friend-request.repository';
 import { BadRequestException } from '@nestjs/common';
 import { FriendRequestStatus } from 'src/features/user/enum/friend-request.status';

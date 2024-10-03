@@ -19,7 +19,7 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notification.gateway';
 import { ApiTags } from '@nestjs/swagger';
 import { PageDto, PageOptionsDto } from 'src/common/pagination/dto';
-import { FetchRequestCommand } from '../cqrs/command/fetch-requests.command';
+import { FetchRequestCommand } from '../command/fetch-requests.command';
 
 @Controller()
 @ApiTags('Friends')

@@ -118,6 +118,7 @@
 
 <script>
 import useUserStore from '@/store/userStore';
+import { mapActions } from 'pinia';
 
 export default {
   name: 'AppSidebar',
