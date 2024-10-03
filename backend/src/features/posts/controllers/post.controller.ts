@@ -13,21 +13,20 @@ import {
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { Message, Paginate, User } from 'src/common/decorators';
-import { PostDocument, UserDocument } from '../schemas';
-import { CreatePostDto } from '../dto';
+import { UserDocument } from '../../user/schemas';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { TweetPipe } from '../pipes';
-import {
-  CreateTweetCommand,
-  DeleteTweetCommand,
-  FetchTweetsCommand,
-  LikeTweetCommand,
-  UnlikeTweetCommand,
-} from '../cqrs';
+import { TweetPipe } from '../../user/pipes';
 import { DeleteResult } from 'src/core/repositories/types/query.types';
 import { AuthenticatedGuard } from 'src/common/guards';
 import { Pagination } from 'src/common/decorators/types/pagination.interface';
 import { ApiTags } from '@nestjs/swagger';
+import { PostDocument } from '../schemas/post.schema';
+import { DeleteTweetCommand } from '../command/delete-tweet.command';
+import { FetchTweetsCommand } from '../command/fetch-tweets.command';
+import { LikeTweetCommand } from '../command/like-tweet.command';
+import { UnlikeTweetCommand } from '../command/unlike-tweet.command';
+import { CreatePostDto } from '../dto/create-post.dto';
+import { CreateTweetCommand } from '../command/create-tweet.command';
 
 @Controller('tweets')
 @ApiTags('tweet')

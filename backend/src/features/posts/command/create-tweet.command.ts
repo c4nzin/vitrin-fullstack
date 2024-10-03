@@ -1,5 +1,5 @@
-import { CreatePostDto } from 'src/features/user/dto';
 import { UserDocument } from 'src/features/user/schemas';
+import { CreatePostDto } from '../dto/create-post.dto';
 
 export class CreateTweetCommand {
   constructor(

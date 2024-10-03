@@ -1,21 +1,11 @@
 import { Module } from '@nestjs/common';
-import { BookRepository, PostRepository, UserRepository } from './repositories';
+import { BookRepository, UserRepository } from './repositories';
 import { MongooseModule } from '@nestjs/mongoose';
-import {
-  Book,
-  BookSchema,
-  Message,
-  MessageSchema,
-  Post,
-  PostSchema,
-  User,
-  UserSchema,
-} from './schemas';
+import { Book, BookSchema, Message, MessageSchema, User, UserSchema } from './schemas';
 import { MessageController, PhotoController, UserController } from './controllers';
 import { CloudinaryModule } from 'src/modules/cloudinary/cloudinary.module';
 import { CqrsModule } from '@nestjs/cqrs';
 import { allHandlers } from './cqrs/all-handlers';
-import { PostController } from './controllers/post.controller';
 import { WebsocketModule } from 'src/modules/websocket/websocket.module';
 import { FollowModule } from '../follow/follow.module';
 import { AccountModule } from '../account/account.module';
@@ -27,7 +17,6 @@ import { NotificationModule } from '../notification/notification.module';
   imports: [
     MongooseModule.forFeature([
       { name: User.name, schema: UserSchema },
-      { name: Post.name, schema: PostSchema },
       { name: Message.name, schema: MessageSchema },
       { name: Book.name, schema: BookSchema },
     ]),
@@ -38,26 +27,8 @@ import { NotificationModule } from '../notification/notification.module';
     AccountModule,
     NotificationModule,
   ],
-  controllers: [
-    PhotoController,
-    PostController,
-    BooksController,
-    MessageController,
-    UserController,
-  ],
-  providers: [
-    UserRepository,
-    PostRepository,
-    ChatRepository,
-    BookRepository,
-    ...allHandlers,
-  ],
-  exports: [
-    UserRepository,
-    PostRepository,
-    ChatRepository,
-    BookRepository,
-    ...allHandlers,
-  ],
+  controllers: [PhotoController, BooksController, MessageController, UserController],
+  providers: [UserRepository, ChatRepository, BookRepository, ...allHandlers],
+  exports: [UserRepository, ChatRepository, BookRepository, ...allHandlers],
 })
 export class UserModule {}

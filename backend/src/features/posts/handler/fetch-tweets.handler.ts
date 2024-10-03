@@ -1,8 +1,8 @@
-import { ICommandHandler, IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { FetchTweetsCommand } from '../command/fetch-tweets.command';
-import { PostDocument } from 'src/features/user/schemas';
 import { PostRepository, UserRepository } from 'src/features/user/repositories';
 import { BadRequestException } from '@nestjs/common';
+import { PostDocument } from '../schemas/post.schema';
 
 @QueryHandler(FetchTweetsCommand)
 export class FetchTweetsCommandHandler implements IQueryHandler<FetchTweetsCommand> {

@@ -1,8 +1,8 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UnlikeTweetCommand } from '../command/unlike-tweet.command';
 import { PostRepository } from 'src/features/user/repositories';
-import { PostDocument } from 'src/features/user/schemas';
 import { BadRequestException } from '@nestjs/common';
+import { PostDocument } from '../schemas/post.schema';
 
 @CommandHandler(UnlikeTweetCommand)
 export class UnlikeTweetCommandHandler implements ICommandHandler<UnlikeTweetCommand> {

@@ -16,10 +16,12 @@ import { AccountModule } from './features/account/account.module';
 import { FollowModule } from './features/follow/follow.module';
 import { FriendModule } from './features/friend/friend.module';
 import { NotificationModule } from './features/notification/notification.module';
+import { PostModule } from './features/posts/post.module';
 
 @Module({
   imports: [
     UserModule,
+    PostModule,
     EnvalidModule.forRoot({
       validators: envalidValidator,
       isGlobal: true,

@@ -2,7 +2,7 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateTweetCommand } from '../command/create-tweet.command';
 import { PostRepository } from 'src/features/user/repositories';
 import { CloudinaryService } from 'src/modules/cloudinary/services/cloudinary.service';
-import { PostDocument } from 'src/features/user/schemas';
+import { PostDocument } from '../schemas/post.schema';
 
 @CommandHandler(CreateTweetCommand)
 export class CreateTweetCommandHandler implements ICommandHandler<CreateTweetCommand> {
