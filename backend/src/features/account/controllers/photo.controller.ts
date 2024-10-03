@@ -9,17 +9,17 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { PhotoPipe } from '../pipes/photo.pipe';
-import { Message, User } from 'src/common/decorators';
-import { UserDocument } from '../schemas';
+import { UserDocument } from '../../user/schemas';
 import { CommandBus } from '@nestjs/cqrs';
-import { UploadPhotoCommand } from '../cqrs/photo/command/upload-photo.command';
-import { AuthenticatedGuard } from 'src/common/guards/authenticated.guard';
 import { ApiTags } from '@nestjs/swagger';
-import { UploadThumbnailPhotoCommand } from '../cqrs/photo/command/upload-thumbnail.command';
+import { AuthenticatedGuard } from 'src/common/guards';
+import { Message, User } from 'src/common/decorators';
+import { PhotoPipe } from '../pipes/photo.pipe';
+import { UploadPhotoCommand } from '../command/upload-photo.command';
+import { UploadThumbnailPhotoCommand } from '../command/upload-thumbnail.command';
 
-@Controller()
-@ApiTags('photo')
+@Controller('account')
+@ApiTags('photo/account')
 @UseGuards(AuthenticatedGuard)
 export class PhotoController {
   constructor(private readonly commandBus: CommandBus) {}

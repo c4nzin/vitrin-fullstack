@@ -1,5 +1,5 @@
 import { MaxFileSizeValidator, ParseFilePipe } from '@nestjs/common';
-import { FileTypeValidator } from '../validators/file-type.validator';
+import { FileTypeValidator } from '../../account/validators/file-type.validator';
 
 export const TweetPipe = new ParseFilePipe({
   validators: [

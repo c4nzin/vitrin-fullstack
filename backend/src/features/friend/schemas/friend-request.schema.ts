@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
-import { FriendRequestStatus } from 'src/features/user/enum/friend-request.status';
+import { FriendRequestStatus } from 'src/features/friend/enum/friend-request.status';
 
 export type FriendRequestDocument = HydratedDocument<FriendRequest>;
 

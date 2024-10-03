@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { BookRepository, UserRepository } from './repositories';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Book, BookSchema, Message, MessageSchema, User, UserSchema } from './schemas';
-import { MessageController, PhotoController, UserController } from './controllers';
+import { MessageController, UserController } from './controllers';
 import { CloudinaryModule } from 'src/modules/cloudinary/cloudinary.module';
 import { CqrsModule } from '@nestjs/cqrs';
 import { allHandlers } from './cqrs/all-handlers';
@@ -27,7 +27,7 @@ import { NotificationModule } from '../notification/notification.module';
     AccountModule,
     NotificationModule,
   ],
-  controllers: [PhotoController, BooksController, MessageController, UserController],
+  controllers: [BooksController, MessageController, UserController],
   providers: [UserRepository, ChatRepository, BookRepository, ...allHandlers],
   exports: [UserRepository, ChatRepository, BookRepository, ...allHandlers],
 })

@@ -1,6 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { BadRequestException } from '@nestjs/common';
-import { FriendRequestStatus } from 'src/features/user/enum/friend-request.status';
+import { FriendRequestStatus } from 'src/features/friend/enum/friend-request.status';
 import { Types } from 'mongoose';
 import { FriendRequestDocument } from 'src/features/friend/schemas/friend-request.schema';
 import { SendFriendRequestCommand } from '../command/send-friend-request.command';
