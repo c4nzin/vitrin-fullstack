@@ -7,12 +7,8 @@ import { DeleteTweetCommandHandler } from './tweets/handler/delete-tweet.handler
 import { FetchTweetsCommandHandler } from './tweets/handler/fetch-tweets.handler';
 import { LikeTweetCommandHandler } from './tweets/handler/like-tweet.handler';
 import { UnlikeTweetCommandHandler } from './tweets/handler/unlike-tweet.handler';
-import { AcceptFriendRequestCommandHandler } from 'src/features/account/cqrs/handler/accept-friend-request.handler';
-import { RejectFriendRequestCommandHandler } from 'src/features/account/cqrs/handler/reject-friend-request.handler';
-import { SendFriendRequestCommandHandler } from 'src/features/account/cqrs/handler/send-friend-request.handler';
 import { UpdateEmailCommandHandler } from 'src/features/account/cqrs/handler/update-email.handler';
 import { UpdateProfileFieldsCommandHandler } from 'src/features/account/cqrs/handler/update-profile.handler';
-import { FetchRequestCommandHandler } from 'src/features/account/cqrs/handler/fetch-requests.handler';
 import { UploadThumbnailPhotoCommandHandler } from './photo/handler/upload-thumbnail.handler';
 import { ChangePasswordCommandHandler } from './user/handler/change-password.handler';
 import { ResetPasswordCommandHandler } from './user/handler/reset-password.handler';
@@ -30,10 +26,6 @@ export const allHandlers = [
   FetchTweetsCommandHandler,
   LikeTweetCommandHandler,
   UnlikeTweetCommandHandler,
-  SendFriendRequestCommandHandler,
-  AcceptFriendRequestCommandHandler,
-  RejectFriendRequestCommandHandler,
-  FetchRequestCommandHandler,
   UploadThumbnailPhotoCommandHandler,
   ChangePasswordCommandHandler,
   ResetPasswordCommandHandler,

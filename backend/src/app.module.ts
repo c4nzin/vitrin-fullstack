@@ -16,6 +16,7 @@ import { ThrottlerModule } from './modules/throttler/throttler.module';
 import { RouterModule } from '@nestjs/core';
 import { AccountModule } from './features/account/account.module';
 import { FollowModule } from './features/follow/follow.module';
+import { FriendModule } from './features/friend/friend.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { FollowModule } from './features/follow/follow.module';
       },
     }),
     DatabaseModule,
+    FriendModule,
     BullModule,
     OtpModule,
     ThrottlerModule,
