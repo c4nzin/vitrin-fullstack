@@ -15,7 +15,7 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { Message, Paginate, User } from 'src/common/decorators';
 import { UserDocument } from '../../user/schemas';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { TweetPipe } from '../../user/pipes';
+import { TweetPipe } from '../pipes';
 import { DeleteResult } from 'src/core/repositories/types/query.types';
 import { AuthenticatedGuard } from 'src/common/guards';
 import { Pagination } from 'src/common/decorators/types/pagination.interface';
