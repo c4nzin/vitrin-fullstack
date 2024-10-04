@@ -1,7 +1,7 @@
 import { CommandBus, CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UserRepository } from 'src/features/user/repositories';
-import { VerifyOtpCommand } from 'src/features/otp/cqrs';
 import { VerifyAccountCommand } from '../command/verify-account.command';
+import { VerifyOtpCommand } from 'src/features/otp/command/verify-otp.command';
 
 @CommandHandler(VerifyAccountCommand)
 export class VerifyAccountCommandHandler

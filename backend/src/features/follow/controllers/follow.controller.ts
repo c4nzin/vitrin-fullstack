@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common';
 import { Message, User } from 'src/common/decorators';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { FollowCommand } from '../cqrs/command/follow.command';
-import { UnfollowCommand } from '../cqrs/command/unfollow.command';
-import { FetchFollowersCommand } from '../cqrs/command/fetch-followers.command';
+import { FollowCommand } from '../command/follow.command';
+import { UnfollowCommand } from '../command/unfollow.command';
+import { FetchFollowersCommand } from '../command/fetch-followers.command';
 import { AuthenticatedGuard } from 'src/common/guards';
 import { ApiTags } from '@nestjs/swagger';
 import { PageDto } from 'src/common/pagination/dto';

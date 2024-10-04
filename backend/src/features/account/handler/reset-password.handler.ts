@@ -5,7 +5,7 @@ import { BadRequestException, Inject } from '@nestjs/common';
 import { UserDocument } from 'src/features/user/schemas';
 import bcrypt from 'bcrypt';
 import { Config, ENV } from 'src/config/config';
-import { VerifyOtpCommand } from 'src/features/otp/cqrs';
+import { VerifyOtpCommand } from 'src/features/otp/command/verify-otp.command';
 
 @CommandHandler(ResetPasswordCommand)
 export class ResetPasswordCommandHandler

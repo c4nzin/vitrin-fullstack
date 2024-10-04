@@ -1,10 +1,10 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { OtpDto, SendOtpDto } from '../dto';
 import { CommandBus } from '@nestjs/cqrs';
-import { GenerateOtpCommand } from '../cqrs/generate-otp/command/generate-otp.command';
+import { GenerateOtpCommand } from '../command/generate-otp.command';
 import { Message } from 'src/common/decorators';
 import { ApiTags } from '@nestjs/swagger';
-import { VerifyOtpCommand } from '../cqrs';
+import { VerifyOtpCommand } from '../command/verify-otp.command';
 
 @Controller('otp')
 @ApiTags('otp')

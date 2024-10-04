@@ -4,9 +4,8 @@ import { OTP, OtpSchema } from './schemas/otp.schema';
 import { OtpRepository } from './repositories/otp.repository';
 import { OtpController } from './controllers';
 import { UserModule } from '../user/user.module';
-import { GenerateOtpHandler } from './cqrs/generate-otp/handler/generate-otp.handler';
 import { CqrsModule } from '@nestjs/cqrs';
-import { VerifyOtpHandler } from './cqrs/verify-otp/handler/verify-otp.handler';
+import { allOtpHandlers } from './handler/all-otp.handlers';
 
 @Module({
   imports: [
@@ -14,8 +13,8 @@ import { VerifyOtpHandler } from './cqrs/verify-otp/handler/verify-otp.handler';
     UserModule,
     CqrsModule,
   ],
-  providers: [OtpRepository, GenerateOtpHandler, VerifyOtpHandler],
   controllers: [OtpController],
-  exports: [OtpRepository, GenerateOtpHandler, VerifyOtpHandler],
+  providers: [OtpRepository, ...allOtpHandlers],
+  exports: [OtpRepository, ...allOtpHandlers],
 })
 export class OtpModule {}

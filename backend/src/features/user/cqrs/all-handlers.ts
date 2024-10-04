@@ -1,6 +1,6 @@
-import { FetchFollowersHandler } from '../../follow/cqrs/handler/fetch-followers.handler';
-import { FollowCommandHandler } from '../../follow/cqrs/handler/follow.handler';
-import { UnfollowCommandHandler } from '../../follow/cqrs/handler/unfollow.handler';
+import { FetchFollowersHandler } from '../../follow/handler/fetch-followers.handler';
+import { FollowCommandHandler } from '../../follow/handler/follow.handler';
+import { UnfollowCommandHandler } from '../../follow/handler/unfollow.handler';
 import { UpdateEmailCommandHandler } from 'src/features/account/handler/update-email.handler';
 import { UpdateProfileFieldsCommandHandler } from 'src/features/account/handler/update-profile.handler';
 import { ChangePasswordCommandHandler } from '../../account/handler/change-password.handler';

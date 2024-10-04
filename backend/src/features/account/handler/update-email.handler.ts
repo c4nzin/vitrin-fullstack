@@ -1,8 +1,8 @@
 import { CommandBus, CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UpdatEmailCommand } from '../command/update-email.command';
 import { UserRepository } from 'src/features/user/repositories';
-import { VerifyOtpCommand } from 'src/features/otp/cqrs';
 import { UserDocument } from 'src/features/user/schemas';
+import { VerifyOtpCommand } from 'src/features/otp/command/verify-otp.command';
 
 @CommandHandler(UpdatEmailCommand)
 export class UpdateEmailCommandHandler implements ICommandHandler<UpdatEmailCommand> {

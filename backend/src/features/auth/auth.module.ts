@@ -31,6 +31,6 @@ import { allAuthHandlers } from './handler/all-auth.handlers';
     IsFieldUniqueConstraint,
     ...allAuthHandlers,
   ],
-  exports: [],
+  exports: [...allAuthHandlers],
 })
 export class AuthModule {}

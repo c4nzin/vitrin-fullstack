@@ -1,8 +1,8 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { VerifyOtpCommand } from '../command/verify-otp.command';
 import { OtpRepository } from 'src/features/otp/repositories';
 import { OTP } from 'src/features/otp/schemas';
 import { BadRequestException } from '@nestjs/common';
+import { VerifyOtpCommand } from '../command/verify-otp.command';
 
 @CommandHandler(VerifyOtpCommand)
 export class VerifyOtpHandler implements ICommandHandler<VerifyOtpCommand> {

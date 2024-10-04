@@ -1,11 +1,11 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { GenerateOtpCommand } from '../command/generate-otp.command';
 import { plainToInstance } from 'class-transformer';
 import { OTP } from 'src/features/otp/schemas';
 import { OtpRepository } from 'src/features/otp/repositories';
 import otpGenerator from 'otp-generator';
 import { Inject } from '@nestjs/common';
 import { Config, ENV } from 'src/config/config';
+import { GenerateOtpCommand } from '../command/generate-otp.command';
 
 @CommandHandler(GenerateOtpCommand)
 export class GenerateOtpHandler implements ICommandHandler<GenerateOtpCommand> {

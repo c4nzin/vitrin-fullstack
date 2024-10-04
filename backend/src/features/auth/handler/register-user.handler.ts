@@ -5,8 +5,8 @@ import { BadRequestException } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bull';
 import { EMAIL_QUEUE, USER_REGISTERED } from 'src/modules/email/services';
 import { Queue } from 'bull';
-import { GenerateOtpCommand } from 'src/features/otp/cqrs';
 import { RegisterUserCommand } from '../command/register-user.command';
+import { GenerateOtpCommand } from 'src/features/otp/command/generate-otp.command';
 
 @CommandHandler(RegisterUserCommand)
 export class RegisterUserHandler implements ICommandHandler<RegisterUserCommand> {
