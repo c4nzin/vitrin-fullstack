@@ -5,7 +5,6 @@ import { PassportModule } from '@nestjs/passport';
 import { UserModule } from '../user/user.module';
 import { LocalStrategy } from './strategies';
 import { CqrsModule } from '@nestjs/cqrs';
-import { LoginUserHandler, RegisterUserHandler } from './cqrs';
 import { AuthProfile } from './profiles/auth.profile';
 import { classes } from '@automapper/classes';
 import { AutomapperModule } from '@automapper/nestjs';
@@ -13,7 +12,7 @@ import { BullModule } from '@nestjs/bull';
 import { EMAIL_QUEUE } from 'src/modules/email/services';
 import { OtpModule } from '../otp/otp.module';
 import { IsFieldUniqueConstraint } from 'src/common/decorators';
-import { VerifyAccountCommandHandler } from './cqrs/verify-account/handler/verify-account.handler';
+import { allAuthHandlers } from './handler/all-auth.handlers';
 
 @Module({
   imports: [
@@ -28,11 +27,9 @@ import { VerifyAccountCommandHandler } from './cqrs/verify-account/handler/verif
   providers: [
     SessionSerializer,
     LocalStrategy,
-    RegisterUserHandler,
-    LoginUserHandler,
     AuthProfile,
     IsFieldUniqueConstraint,
-    VerifyAccountCommandHandler,
+    ...allAuthHandlers,
   ],
   exports: [],
 })

@@ -3,7 +3,7 @@ import { UserRepository } from 'src/features/user/repositories';
 import { LoginDto } from 'src/features/auth/dto';
 import { BadRequestException } from '@nestjs/common';
 import { UserDocument } from 'src/features/user/schemas';
-import { LoginUserCommand } from '../..';
+import { LoginUserCommand } from '../command/login-user.command';
 
 @CommandHandler(LoginUserCommand)
 export class LoginUserHandler implements ICommandHandler<LoginUserCommand> {

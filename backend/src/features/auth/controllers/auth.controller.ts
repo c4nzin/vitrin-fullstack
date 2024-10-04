@@ -1,20 +1,14 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Post,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { LoginDto, RegisterDto } from '../dto';
 import { CommandBus } from '@nestjs/cqrs';
 import { Message } from 'src/common/decorators';
 import { LocalAuthGuard } from 'src/common/guards';
-import { LoginUserCommand, RegisterUserCommand, VerifyAccountCommand } from '../cqrs';
 import { ApiTags } from '@nestjs/swagger';
 import { OtpDto } from 'src/features/otp/dto';
 import { OtpDocument } from 'src/features/otp/schemas';
+import { LoginUserCommand } from '../command/login-user.command';
+import { RegisterUserCommand } from '../command/register-user.command';
+import { VerifyAccountCommand } from '../command/verify-account.command';
 
 @Controller('auth')
 @ApiTags('auth')

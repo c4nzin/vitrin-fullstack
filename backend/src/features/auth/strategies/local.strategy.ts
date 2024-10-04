@@ -4,10 +4,10 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 import { CommandBus } from '@nestjs/cqrs';
 import { LoginDto } from '../dto';
-import { LoginUserCommand } from '../cqrs';
 import { Mapper } from '@automapper/core';
 import { InjectMapper } from '@automapper/nestjs';
 import { plainToInstance } from 'class-transformer';
+import { LoginUserCommand } from '../command/login-user.command';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy, LOCAL_STRATEGY) {
