@@ -5,7 +5,6 @@ import { Book, BookSchema, Message, MessageSchema, User, UserSchema } from './sc
 import { MessageController, UserController } from './controllers';
 import { CloudinaryModule } from 'src/modules/cloudinary/cloudinary.module';
 import { CqrsModule } from '@nestjs/cqrs';
-import { allHandlers } from './cqrs/all-handlers';
 import { WebsocketModule } from 'src/modules/websocket/websocket.module';
 import { FollowModule } from '../follow/follow.module';
 import { AccountModule } from '../account/account.module';
@@ -28,7 +27,7 @@ import { NotificationModule } from '../notification/notification.module';
     NotificationModule,
   ],
   controllers: [BooksController, MessageController, UserController],
-  providers: [UserRepository, ChatRepository, BookRepository, ...allHandlers],
-  exports: [UserRepository, ChatRepository, BookRepository, ...allHandlers],
+  providers: [UserRepository, ChatRepository, BookRepository],
+  exports: [UserRepository, ChatRepository, BookRepository],
 })
 export class UserModule {}

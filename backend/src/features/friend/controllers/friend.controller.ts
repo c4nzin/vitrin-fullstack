@@ -1,25 +1,12 @@
-import {
-  Controller,
-  Delete,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Param,
-  Post,
-  Query,
-} from '@nestjs/common';
+import { Controller, Delete, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
 import { Message, User } from 'src/common/decorators';
-import {
-  SendFriendRequestCommand,
-  AcceptFriendRequestCommand,
-  RejectFriendRequestCommand,
-} from '../../user/cqrs';
 import { UserDocument } from '../../user/schemas';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notification.gateway';
 import { ApiTags } from '@nestjs/swagger';
-import { PageDto, PageOptionsDto } from 'src/common/pagination/dto';
-import { FetchRequestCommand } from '../command/fetch-requests.command';
+import { SendFriendRequestCommand } from '../command/send-friend-request.command';
+import { RejectFriendRequestCommand } from '../command/reject-friend-request.command';
+import { AcceptFriendRequestCommand } from '../command/accept-friend-request.command';
 
 @Controller()
 @ApiTags('Friends')
