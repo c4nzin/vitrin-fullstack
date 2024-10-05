@@ -15,43 +15,51 @@ import {
   User,
 } from 'src/features/message/interfaces';
 import { BadRequestException, Logger } from '@nestjs/common';
+import { Client } from 'socket.io/dist/client';
 
-@WebSocketGateway({ cors: { origin: '*' } })
+@WebSocketGateway()
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   private logger = new Logger('ChatGateway');
 
-  @WebSocketServer() server: Server = new Server<IServerToClient, IClientToServer>();
+  @WebSocketServer() server: Server = new Server();
 
   constructor(private readonly roomService: RoomService) {}
 
   @SubscribeMessage('chat')
   public async handleChatEvent(
+    socket: Socket,
     @MessageBody()
     payload: IMessage,
   ): Promise<IMessage> {
-    this.logger.log(payload);
+    this.logger.log(payload, socket);
     this.server.to(payload.roomName).emit('chat', payload);
     return payload;
   }
 
-  @SubscribeMessage('join_room')
+  @SubscribeMessage('joinRoom')
   public async handleSetClientDataEvent(
     @MessageBody() payload: { roomName: string; user: User },
   ) {
     const room = await this.roomService.getRoomByName(payload.roomName);
 
+    console.log(room);
+
     if (!room) {
       throw new BadRequestException('Room not found.');
     }
 
-    const isParticipant = room.users.some(
-      (existingUser) => existingUser.userId === payload.user.userId,
-    );
+    // console.log(payload);
+    // const isParticipant = room.users.find((existingUser) => {
+    //   console.log(existingUser, 'existingUser');
 
-    if (!isParticipant) {
-      throw new BadRequestException('You are not allowed to join this room.');
-    }
+    //   existingUser.userId === payload.user.userId;
+    // });
 
+    // if (!isParticipant) {
+    //   throw new BadRequestException('You are not allowed to join this room.');
+    // }
+
+    console.log(payload);
     if (payload.user.socketId) {
       this.logger.log(`${payload.user.socketId} is joining ${payload.roomName}`);
       await this.server.in(payload.user.socketId).socketsJoin(payload.roomName);

@@ -49,11 +49,15 @@ export class RoomService {
     return this.roomRepository.find({});
   }
   public async getRoomByName(roomName: string): Promise<RoomDocument> {
-    return await this.roomRepository.findRoomByName(roomName);
+    return this.roomRepository.findRoomByName(roomName);
   }
 
   public async isUserInRoom(roomName: string, userId: string): Promise<boolean> {
     const room = await this.getRoomByName(roomName);
     return room.users.some((user) => user.userId === userId);
+  }
+
+  public async createRoom(roomName: string, host: User): Promise<RoomDocument> {
+    return this.roomRepository.createRoom(roomName, host);
   }
 }

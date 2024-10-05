@@ -1,4 +1,4 @@
-import { User } from 'src/features/user/schemas';
+import { User } from './user.interface';
 
 export interface IMessage {
   user: User;

@@ -1,5 +1,5 @@
-import { User } from 'src/features/user/schemas';
 import { IMessage } from './message.interface';
+import { User } from './user.interface';
 
 export interface IServerToClient {
   chat: (e: IMessage) => void;

@@ -4,13 +4,17 @@ import {
   Param,
   NotFoundException,
   ForbiddenException,
+  Post,
+  Body,
+  BadRequestException,
 } from '@nestjs/common';
 import { RoomService } from '../services/room.service';
-import { Room } from '../schemas/room.schema';
-import { User } from 'src/common/decorators';
+import { Room, RoomDocument } from '../schemas/room.schema';
+import { User as LoggedUser } from 'src/common/decorators';
+import { User } from '../interfaces';
 
 @Controller('rooms')
-export class UserController {
+export class MessageController {
   constructor(private readonly roomService: RoomService) {}
 
   @Get()
@@ -21,12 +25,12 @@ export class UserController {
   @Get(':roomName')
   async getRoom(
     @Param('roomName') roomName: string,
-    @User('id') userId: string,
+    @LoggedUser('id') userId: string,
   ): Promise<Room> {
     const room = await this.roomService.getRoomByName(roomName);
 
     if (!room) {
-      throw new NotFoundException('Room not found');
+      throw new NotFoundException('Room not found.');
     }
 
     const isParticipant = await this.roomService.isUserInRoom(roomName, userId);
@@ -35,5 +39,17 @@ export class UserController {
     }
 
     return room;
+  }
+
+  @Post('create')
+  async createRoom(
+    @Body() body: { roomName: string; host: User },
+  ): Promise<RoomDocument> {
+    const existingRoom = await this.roomService.getRoomByName(body.roomName);
+    if (existingRoom) {
+      throw new BadRequestException('Room with this name already exists.');
+    }
+
+    return this.roomService.createRoom(body.roomName, body.host);
   }
 }

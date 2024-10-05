@@ -1,17 +1,21 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Message, MessageSchema } from './schemas/message.schema';
 import { CqrsModule } from '@nestjs/cqrs';
 import { WebsocketModule } from 'src/modules/websocket/websocket.module';
-import { MessageController } from '../user/controllers';
 import { RoomRepository } from './repositories/room.repository';
 import { RoomService } from './services/room.service';
+import { MessageController } from './controllers/message.controller';
+import { Room, RoomSchema } from './schemas/room.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Message.name, schema: MessageSchema }]),
+    forwardRef(() => WebsocketModule),
+    MongooseModule.forFeature([
+      { name: Message.name, schema: MessageSchema },
+      { name: Room.name, schema: RoomSchema },
+    ]),
     CqrsModule,
-    WebsocketModule,
   ],
   controllers: [MessageController],
   providers: [RoomRepository, RoomService],

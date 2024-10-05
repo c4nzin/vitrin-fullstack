@@ -19,10 +19,6 @@ export class RoomRepository extends BaseRepository<Room> {
   public async findRoomByName(roomName: string): Promise<RoomDocument> {
     const room = await this.findOne({ name: roomName });
 
-    if (!room) {
-      throw new BadRequestException('Room not found.');
-    }
-
     return room;
   }
 

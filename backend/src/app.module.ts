@@ -17,11 +17,13 @@ import { FollowModule } from './features/follow/follow.module';
 import { FriendModule } from './features/friend/friend.module';
 import { NotificationModule } from './features/notification/notification.module';
 import { PostModule } from './features/posts/post.module';
+import { MessageModule } from './features/message/message.module';
 
 @Module({
   imports: [
     UserModule,
     PostModule,
+    MessageModule,
     EnvalidModule.forRoot({
       validators: envalidValidator,
       isGlobal: true,
@@ -42,7 +44,6 @@ import { PostModule } from './features/posts/post.module';
       },
     }),
     DatabaseModule,
-    FriendModule,
     NotificationModule,
     AccountModule,
     BullModule,
