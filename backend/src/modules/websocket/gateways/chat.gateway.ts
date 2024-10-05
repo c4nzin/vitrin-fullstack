@@ -1,4 +1,5 @@
 import {
+  MessageBody,
   OnGatewayConnection,
   OnGatewayDisconnect,
   SubscribeMessage,
@@ -6,29 +7,64 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { CreateMessageDto } from 'src/features/user/dto';
-import { ChatRepository } from 'src/features/user/repositories';
-import { RECEIVE_MESSAGE } from '../constants';
+import { RoomService } from 'src/features/message/services/room.service';
+import {
+  IClientToServer,
+  IMessage,
+  IServerToClient,
+  User,
+} from 'src/features/message/interfaces';
+import { BadRequestException, Logger } from '@nestjs/common';
 
-@WebSocketGateway({ namespace: '/chat' })
+@WebSocketGateway({ cors: { origin: '*' } })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
-  @WebSocketServer() server: Server;
+  private logger = new Logger('ChatGateway');
 
-  constructor(private readonly chatRepository: ChatRepository) {}
+  @WebSocketServer() server: Server = new Server<IServerToClient, IClientToServer>();
 
-  public async handleConnection(client: Socket) {
-    const userId = client.handshake.query.userId;
+  constructor(private readonly roomService: RoomService) {}
 
-    client.join(userId);
+  @SubscribeMessage('chat')
+  public async handleChatEvent(
+    @MessageBody()
+    payload: IMessage,
+  ): Promise<IMessage> {
+    this.logger.log(payload);
+    this.server.to(payload.roomName).emit('chat', payload);
+    return payload;
   }
 
-  public async handleDisconnect(client: Socket) {}
+  @SubscribeMessage('join_room')
+  public async handleSetClientDataEvent(
+    @MessageBody() payload: { roomName: string; user: User },
+  ) {
+    const room = await this.roomService.getRoomByName(payload.roomName);
 
-  @SubscribeMessage('sendMessage')
-  public async handleMessage(client: Socket, payload: CreateMessageDto) {
-    const savedMessage = await this.chatRepository.saveMessage(payload);
+    if (!room) {
+      throw new BadRequestException('Room not found.');
+    }
 
-    this.server.to(payload.senderId).emit(RECEIVE_MESSAGE, savedMessage);
-    this.server.to(payload.receiverId).emit(RECEIVE_MESSAGE, savedMessage);
+    const isParticipant = room.users.some(
+      (existingUser) => existingUser.userId === payload.user.userId,
+    );
+
+    if (!isParticipant) {
+      throw new BadRequestException('You are not allowed to join this room.');
+    }
+
+    if (payload.user.socketId) {
+      this.logger.log(`${payload.user.socketId} is joining ${payload.roomName}`);
+      await this.server.in(payload.user.socketId).socketsJoin(payload.roomName);
+      await this.roomService.addUserToRoom(payload.roomName, payload.user);
+    }
+  }
+
+  public async handleConnection(socket: Socket): Promise<void> {
+    this.logger.log(`Socket connected: ${socket.id}`);
+  }
+
+  public async handleDisconnect(socket: Socket): Promise<void> {
+    await this.roomService.removeUserFromAllRooms(socket.id);
+    this.logger.log(`Socket disconnected: ${socket.id}`);
   }
 }

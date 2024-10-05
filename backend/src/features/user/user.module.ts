@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { BookRepository, UserRepository } from './repositories';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Book, BookSchema, Message, MessageSchema, User, UserSchema } from './schemas';
+import { Book, BookSchema, User, UserSchema } from './schemas';
 import { MessageController, UserController } from './controllers';
 import { CloudinaryModule } from 'src/modules/cloudinary/cloudinary.module';
 import { CqrsModule } from '@nestjs/cqrs';
@@ -16,7 +16,6 @@ import { NotificationModule } from '../notification/notification.module';
   imports: [
     MongooseModule.forFeature([
       { name: User.name, schema: UserSchema },
-      { name: Message.name, schema: MessageSchema },
       { name: Book.name, schema: BookSchema },
     ]),
     CloudinaryModule,
@@ -26,7 +25,7 @@ import { NotificationModule } from '../notification/notification.module';
     AccountModule,
     NotificationModule,
   ],
-  controllers: [BooksController, MessageController, UserController],
+  controllers: [BooksController, UserController],
   providers: [UserRepository, ChatRepository, BookRepository],
   exports: [UserRepository, ChatRepository, BookRepository],
 })
