@@ -5,17 +5,12 @@ import {
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
+  ConnectedSocket,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { RoomService } from 'src/features/message/services/room.service';
-import {
-  IClientToServer,
-  IMessage,
-  IServerToClient,
-  User,
-} from 'src/features/message/interfaces';
+import { IMessage, User } from 'src/features/message/interfaces';
 import { BadRequestException, Logger } from '@nestjs/common';
-import { Client } from 'socket.io/dist/client';
 
 @WebSocketGateway()
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
@@ -27,43 +22,56 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   @SubscribeMessage('chat')
   public async handleChatEvent(
-    socket: Socket,
-    @MessageBody()
-    payload: IMessage,
+    @ConnectedSocket() socket: Socket,
+    @MessageBody() payload: IMessage,
   ): Promise<IMessage> {
-    this.logger.log(payload, socket);
+    this.logger.log(`Message received: ${JSON.stringify(payload)}`);
+
     this.server.to(payload.roomName).emit('chat', payload);
+    socket.broadcast.to(payload.roomName).emit('chat', payload);
+
+    console.log(this.server.sockets.adapter.rooms);
+
     return payload;
   }
 
   @SubscribeMessage('joinRoom')
   public async handleSetClientDataEvent(
+    @ConnectedSocket() socket: Socket,
     @MessageBody() payload: { roomName: string; user: User },
   ) {
     const room = await this.roomService.getRoomByName(payload.roomName);
-
-    console.log(room);
 
     if (!room) {
       throw new BadRequestException('Room not found.');
     }
 
-    // console.log(payload);
-    // const isParticipant = room.users.find((existingUser) => {
-    //   console.log(existingUser, 'existingUser');
+    this.logger.log(
+      `User ${payload.user.userId} is attempting to join room: ${payload.roomName}`,
+    );
+    const isParticipant = room.users.some((existingUser) => {
+      return existingUser.userId === payload.user.userId;
+    });
 
-    //   existingUser.userId === payload.user.userId;
-    // });
+    if (!isParticipant) {
+      throw new BadRequestException('You are not allowed to join this room.');
+    }
 
-    // if (!isParticipant) {
-    //   throw new BadRequestException('You are not allowed to join this room.');
-    // }
-
-    console.log(payload);
     if (payload.user.socketId) {
       this.logger.log(`${payload.user.socketId} is joining ${payload.roomName}`);
-      await this.server.in(payload.user.socketId).socketsJoin(payload.roomName);
+
+      socket.join(payload.roomName);
       await this.roomService.addUserToRoom(payload.roomName, payload.user);
+
+      socket.emit('joinedRoom', {
+        roomName: payload.roomName,
+        message: 'You have joined the room.',
+      });
+
+      socket.to(payload.roomName).emit('userJoined', {
+        userId: payload.user.userId,
+        message: 'A new user has joined the room.',
+      });
     }
   }
 
