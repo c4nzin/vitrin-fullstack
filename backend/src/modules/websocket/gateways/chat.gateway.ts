@@ -37,7 +37,11 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @ConnectedSocket() socket: Socket,
     @MessageBody() payload: { roomName: string; user: User },
   ) {
-    const room = await this.roomService.getRoomByName(payload.roomName);
+    let room = await this.roomService.getRoomByName(payload.roomName);
+
+    if (!room) {
+      room = await this.roomService.createRoom(payload.roomName, payload.user);
+    }
 
     this.logger.log(
       `User ${payload.user.userId} is attempting to join room: ${payload.roomName}`,
@@ -53,7 +57,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     if (payload.user.socketId) {
       this.logger.log(`${payload.user.socketId} is joining ${payload.roomName}`);
 
-      await this.server.in(payload.user.socketId).socketsJoin(payload.roomName);
+      this.server.in(payload.user.socketId).socketsJoin(payload.roomName);
 
       socket.join(payload.roomName);
       await this.roomService.addUserToRoom(payload.roomName, payload.user);

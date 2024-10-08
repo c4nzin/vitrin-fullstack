@@ -12,12 +12,12 @@ export class RoomRepository extends BaseRepository<Room> {
     super(roomModel);
   }
 
-  public async createRoom(roomName: string, host?: User): Promise<RoomDocument> {
+  public async createRoom(roomName: string, host: User): Promise<RoomDocument> {
     const room = this.findRoomByName(roomName);
 
-    if (!room) {
-      return this.roomModel.create({ name: roomName, host, users: [host] });
-    }
+    // if (!room) {
+    //   return this.roomModel.create({ name: roomName, host, users: [host] });
+    // }
 
     return this.roomModel.create({ name: roomName, host, users: [host] });
   }
