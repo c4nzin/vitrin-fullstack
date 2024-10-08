@@ -1,9 +1,10 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { BaseRepository } from 'src/core/repositories/base.repository';
 import { Room, RoomDocument } from '../schemas/room.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from '../interfaces';
+import { DeleteResult } from 'src/core/repositories/types/query.types';
 
 @Injectable()
 export class RoomRepository extends BaseRepository<Room> {
@@ -11,8 +12,13 @@ export class RoomRepository extends BaseRepository<Room> {
     super(roomModel);
   }
 
-  public async createRoom(roomName: string, host: User): Promise<RoomDocument> {
-    await this.findRoomByName(roomName);
+  public async createRoom(roomName: string, host?: User): Promise<RoomDocument> {
+    const room = this.findRoomByName(roomName);
+
+    if (!room) {
+      return this.roomModel.create({ name: roomName, host, users: [host] });
+    }
+
     return this.roomModel.create({ name: roomName, host, users: [host] });
   }
 
@@ -22,12 +28,8 @@ export class RoomRepository extends BaseRepository<Room> {
     return room;
   }
 
-  public async removeRoom(roomName: string): Promise<any> {
+  public async removeRoom(roomName: string): Promise<DeleteResult<any>> {
     const room = await this.findRoomByName(roomName);
     return room.deleteOne();
-  }
-
-  public async findRoomsByUserSocketId(socketId: string): Promise<Room[]> {
-    return this.roomModel.find({ 'users.socketId': socketId });
   }
 }

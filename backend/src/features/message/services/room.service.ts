@@ -38,10 +38,10 @@ export class RoomService {
     return room.host;
   }
 
-  public async removeUserFromAllRooms(socketId: string): Promise<void> {
-    const rooms = await this.roomRepository.findRoomsByUserSocketId(socketId);
+  public async removeUserFromAllRooms(userId: string): Promise<void> {
+    const rooms = await this.roomRepository.find({ users: userId });
     for (const room of rooms) {
-      await this.removeUserFromRoom(socketId, room.name);
+      await this.removeUserFromRoom(userId, room.name);
     }
   }
 

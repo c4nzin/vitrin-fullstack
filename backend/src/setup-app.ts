@@ -13,6 +13,8 @@ import helmet from 'helmet';
 import compression from 'compression';
 import expressMongoSanitize from 'express-mongo-sanitize';
 import cors from 'cors';
+import { Server } from 'socket.io';
+import sharedSession from 'socket.io-express-session';
 
 export async function setupApp(app: NestExpressApplication) {
   const config = app.get<Config>(ENV);
@@ -35,20 +37,18 @@ export async function setupApp(app: NestExpressApplication) {
     }),
   );
 
-  app.use(
-    session({
-      cookie: {
-        httpOnly: false,
-        maxAge: 24 * 60 * 60 * 1000, //24hours
-        secure: false,
-      },
-      secret: config.SESSION_SECRET,
-      name: 'sessionId',
-      resave: false,
-      saveUninitialized: false,
-      store: connectMongo.create({ mongoUrl: config.DB_URI, ttl: 7 * 24 * 60 * 60 }),
-    }),
-  );
+  const sessionMiddleware = session({
+    cookie: {
+      httpOnly: false,
+      maxAge: 24 * 60 * 60 * 1000, //24hours
+      secure: false,
+    },
+    secret: config.SESSION_SECRET,
+    name: 'sessionId',
+    resave: false,
+    saveUninitialized: false,
+    store: connectMongo.create({ mongoUrl: config.DB_URI, ttl: 7 * 24 * 60 * 60 }),
+  });
 
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());

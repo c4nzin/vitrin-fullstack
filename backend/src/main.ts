@@ -8,12 +8,13 @@ import { useContainer } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {});
+  await setupApp(app);
+
   const config = app.get<Config>(ENV);
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   setupSwagger(app);
-  await setupApp(app);
 
   await app.listen(config.PORT);
 }

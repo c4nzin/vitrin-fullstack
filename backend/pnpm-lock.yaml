@@ -170,6 +170,9 @@ importers:
       socket.io:
         specifier: ^4.7.5
         version: 4.7.5
+      socket.io-express-session:
+        specifier: ^0.1.3
+        version: 0.1.3
       streamifier:
         specifier: ^0.1.1
         version: 0.1.1
@@ -3792,6 +3795,9 @@ packages:
 
   socket.io-adapter@2.5.5:
     resolution: {integrity: sha512-eLDQas5dzPgOWCk9GuuJC2lBqItuhKI4uxGgo9aIV7MYbk2h9Q6uULEh8WBzThoI7l+qU9Ast9fVUmkqPP9wYg==}
+
+  socket.io-express-session@0.1.3:
+    resolution: {integrity: sha512-E3GAhMDTux5wcejsKXD8Kv31S2veOI6ayHSdce3x/7mTAf2A5bPNJLfntMTtUx0iQV17yvZnbgkB0ewRGuoqww==}
 
   socket.io-parser@4.2.4:
     resolution: {integrity: sha512-/GbIKmo8ioc+NIWIhwdecY0ge+qVBSMdgxGygevmdHj24bsfgtCmcUUcQ5ZzcylGFHsN3k4HB4Cgkl96KVnuew==}
@@ -8459,6 +8465,8 @@ snapshots:
       - bufferutil
       - supports-color
       - utf-8-validate
+
+  socket.io-express-session@0.1.3: {}
 
   socket.io-parser@4.2.4:
     dependencies:

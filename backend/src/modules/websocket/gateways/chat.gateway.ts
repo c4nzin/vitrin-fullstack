@@ -16,7 +16,7 @@ import { BadRequestException, Logger } from '@nestjs/common';
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   private logger = new Logger('ChatGateway');
 
-  @WebSocketServer() server: Server = new Server();
+  @WebSocketServer() server: Server;
 
   constructor(private readonly roomService: RoomService) {}
 
@@ -28,9 +28,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     this.logger.log(`Message received: ${JSON.stringify(payload)}`);
 
     this.server.to(payload.roomName).emit('chat', payload);
-    socket.broadcast.to(payload.roomName).emit('chat', payload);
-
-    console.log(this.server.sockets.adapter.rooms);
 
     return payload;
   }
@@ -41,10 +38,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @MessageBody() payload: { roomName: string; user: User },
   ) {
     const room = await this.roomService.getRoomByName(payload.roomName);
-
-    if (!room) {
-      throw new BadRequestException('Room not found.');
-    }
 
     this.logger.log(
       `User ${payload.user.userId} is attempting to join room: ${payload.roomName}`,
@@ -59,6 +52,8 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     if (payload.user.socketId) {
       this.logger.log(`${payload.user.socketId} is joining ${payload.roomName}`);
+
+      await this.server.in(payload.user.socketId).socketsJoin(payload.roomName);
 
       socket.join(payload.roomName);
       await this.roomService.addUserToRoom(payload.roomName, payload.user);
