@@ -1,85 +1,64 @@
 import {
   MessageBody,
-  OnGatewayConnection,
-  OnGatewayDisconnect,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
   ConnectedSocket,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { RoomService } from 'src/features/message/services/room.service';
-import { IMessage, User } from 'src/features/message/interfaces';
-import { BadRequestException, Logger } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
+import { MessageService } from 'src/features/message/services/message.service';
 
 @WebSocketGateway()
-export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
+export class ChatGateway {
+  @WebSocketServer() server: Server;
   private logger = new Logger('ChatGateway');
 
-  @WebSocketServer() server: Server;
+  constructor(private readonly messageService: MessageService) {}
 
-  constructor(private readonly roomService: RoomService) {}
-
-  @SubscribeMessage('chat')
-  public async handleChatEvent(
+  @SubscribeMessage('sendMessage')
+  async handleMessage(
     @ConnectedSocket() socket: Socket,
-    @MessageBody() payload: IMessage,
-  ): Promise<IMessage> {
-    this.logger.log(`Message received: ${JSON.stringify(payload)}`);
+    @MessageBody() payload: { senderId: string; receiverId: string; content: string },
+  ): Promise<void> {
+    const { senderId, receiverId, content } = payload;
 
-    this.server.to(payload.roomName).emit('chat', payload);
+    const message = await this.messageService.createMessage(
+      senderId,
+      receiverId,
+      content,
+    );
 
-    return payload;
+    this.server.to(receiverId).emit('receiveMessage', message);
+
+    this.logger.log(`Message from ${senderId} to ${receiverId}: ${content}`);
   }
 
   @SubscribeMessage('joinRoom')
-  public async handleSetClientDataEvent(
+  async handleJoinRoom(
     @ConnectedSocket() socket: Socket,
-    @MessageBody() payload: { roomName: string; user: User },
-  ) {
-    let room = await this.roomService.getRoomByName(payload.roomName);
+    @MessageBody() payload: { userId: string },
+  ): Promise<void> {
+    const { userId } = payload;
 
-    if (!room) {
-      room = await this.roomService.createRoom(payload.roomName, payload.user);
-    }
+    socket.join(userId);
+    this.logger.log(`User ${userId} joined room.`);
+  }
 
-    this.logger.log(
-      `User ${payload.user.userId} is attempting to join room: ${payload.roomName}`,
+  @SubscribeMessage('getMessages')
+  async handleGetMessages(
+    @ConnectedSocket() socket: Socket,
+    @MessageBody() payload: { senderId: string; receiverId: string },
+  ): Promise<void> {
+    const { senderId, receiverId } = payload;
+
+    const messages = await this.messageService.getMessagesBetweenUsers(
+      senderId,
+      receiverId,
     );
-    const isParticipant = room.users.some((existingUser) => {
-      return existingUser.userId === payload.user.userId;
-    });
 
-    if (!isParticipant) {
-      throw new BadRequestException('You are not allowed to join this room.');
-    }
+    console.log(messages);
 
-    if (payload.user.socketId) {
-      this.logger.log(`${payload.user.socketId} is joining ${payload.roomName}`);
-
-      this.server.in(payload.user.socketId).socketsJoin(payload.roomName);
-
-      socket.join(payload.roomName);
-      await this.roomService.addUserToRoom(payload.roomName, payload.user);
-
-      socket.emit('joinedRoom', {
-        roomName: payload.roomName,
-        message: 'You have joined the room.',
-      });
-
-      socket.to(payload.roomName).emit('userJoined', {
-        userId: payload.user.userId,
-        message: 'A new user has joined the room.',
-      });
-    }
-  }
-
-  public async handleConnection(socket: Socket): Promise<void> {
-    this.logger.log(`Socket connected: ${socket.id}`);
-  }
-
-  public async handleDisconnect(socket: Socket): Promise<void> {
-    await this.roomService.removeUserFromAllRooms(socket.id);
-    this.logger.log(`Socket disconnected: ${socket.id}`);
+    socket.emit('receiveMessages', messages);
   }
 }

@@ -3,22 +3,16 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Message, MessageSchema } from './schemas/message.schema';
 import { CqrsModule } from '@nestjs/cqrs';
 import { WebsocketModule } from 'src/modules/websocket/websocket.module';
-import { RoomRepository } from './repositories/room.repository';
-import { RoomService } from './services/room.service';
-import { MessageController } from './controllers/message.controller';
-import { Room, RoomSchema } from './schemas/room.schema';
+import { MessageService } from './services/message.service';
+import { MessageRepository } from './repositories/message.repository';
 
 @Module({
   imports: [
     forwardRef(() => WebsocketModule),
-    MongooseModule.forFeature([
-      { name: Message.name, schema: MessageSchema },
-      { name: Room.name, schema: RoomSchema },
-    ]),
+    MongooseModule.forFeature([{ name: Message.name, schema: MessageSchema }]),
     CqrsModule,
   ],
-  controllers: [MessageController],
-  providers: [RoomRepository, RoomService],
-  exports: [RoomService, RoomRepository],
+  providers: [MessageService, MessageRepository],
+  exports: [MessageService, MessageRepository],
 })
 export class MessageModule {}
