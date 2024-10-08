@@ -37,18 +37,20 @@ export async function setupApp(app: NestExpressApplication) {
     }),
   );
 
-  const sessionMiddleware = session({
-    cookie: {
-      httpOnly: false,
-      maxAge: 24 * 60 * 60 * 1000, //24hours
-      secure: false,
-    },
-    secret: config.SESSION_SECRET,
-    name: 'sessionId',
-    resave: false,
-    saveUninitialized: false,
-    store: connectMongo.create({ mongoUrl: config.DB_URI, ttl: 7 * 24 * 60 * 60 }),
-  });
+  app.use(
+    session({
+      cookie: {
+        httpOnly: false,
+        maxAge: 24 * 60 * 60 * 1000, //24hours
+        secure: false,
+      },
+      secret: config.SESSION_SECRET,
+      name: 'sessionId',
+      resave: false,
+      saveUninitialized: false,
+      store: connectMongo.create({ mongoUrl: config.DB_URI, ttl: 7 * 24 * 60 * 60 }),
+    }),
+  );
 
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());

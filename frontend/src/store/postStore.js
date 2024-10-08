@@ -10,7 +10,7 @@ export const usePostStore = defineStore('post', {
     async fetchPosts(id) {
       try {
         const response = await axios.get(
-          `${config.BACKEND_URL}users/tweets/${id}/tweets`,
+          `${config.BACKEND_URL}tweets/${id}/tweets`,
           {
             withCredentials: true,
           }

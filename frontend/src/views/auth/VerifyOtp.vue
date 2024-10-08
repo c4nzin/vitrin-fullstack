@@ -62,7 +62,7 @@ export default {
   methods: {
     async verifyOtp() {
       try {
-        await axios.post('http://localhost:3000/api/auth/verify-otp', {
+        await axios.post('http://localhost:3000/api/otp/verify-otp', {
           email: this.email,
           otpCode: this.otpCode,
         });

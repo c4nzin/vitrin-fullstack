@@ -34,17 +34,6 @@ export class ChatGateway {
     this.logger.log(`Message from ${senderId} to ${receiverId}: ${content}`);
   }
 
-  @SubscribeMessage('joinRoom')
-  async handleJoinRoom(
-    @ConnectedSocket() socket: Socket,
-    @MessageBody() payload: { userId: string },
-  ): Promise<void> {
-    const { userId } = payload;
-
-    socket.join(userId);
-    this.logger.log(`User ${userId} joined room.`);
-  }
-
   @SubscribeMessage('getMessages')
   async handleGetMessages(
     @ConnectedSocket() socket: Socket,

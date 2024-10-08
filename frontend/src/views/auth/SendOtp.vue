@@ -73,7 +73,7 @@ export default {
       try {
         this.errorMessage = '';
 
-        await axios.post('http://localhost:3000/api/auth/send-otp', {
+        await axios.post('http://localhost:3000/api/otp/send-otp', {
           email: this.email,
         });
       } catch (error) {

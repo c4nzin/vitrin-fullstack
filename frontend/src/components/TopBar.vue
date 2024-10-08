@@ -109,7 +109,7 @@ export default {
       try {
         const formattedQuery = encodeURIComponent(this.searchQuery.trim());
         const response = await axios.get(
-          `http://localhost:3000/api/users/books/search/${formattedQuery}`
+          `http://localhost:3000/api/books/search/${formattedQuery}`
         );
 
         console.log(response.data.data);

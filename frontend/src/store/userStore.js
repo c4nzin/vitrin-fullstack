@@ -11,9 +11,12 @@ export default defineStore('user', {
   actions: {
     async fetchUser() {
       try {
-        const response = await axios.get('http://localhost:3000/api/users/me', {
-          withCredentials: true,
-        });
+        const response = await axios.get(
+          'http://localhost:3000/api/account/me',
+          {
+            withCredentials: true,
+          }
+        );
 
         this.user = response.data;
       } catch (error) {
