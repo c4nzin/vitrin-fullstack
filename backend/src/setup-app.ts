@@ -13,8 +13,6 @@ import helmet from 'helmet';
 import compression from 'compression';
 import expressMongoSanitize from 'express-mongo-sanitize';
 import cors from 'cors';
-import { Server } from 'socket.io';
-import sharedSession from 'socket.io-express-session';
 
 export async function setupApp(app: NestExpressApplication) {
   const config = app.get<Config>(ENV);
