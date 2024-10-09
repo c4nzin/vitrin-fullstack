@@ -46,8 +46,6 @@ export class ChatGateway {
       receiverId,
     );
 
-    console.log(messages);
-
     socket.emit('receiveMessages', messages);
   }
 }

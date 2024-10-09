@@ -16,6 +16,7 @@ export class MessageService {
       receiverId,
       content,
     });
+
     return newMessage.save();
   }
 
