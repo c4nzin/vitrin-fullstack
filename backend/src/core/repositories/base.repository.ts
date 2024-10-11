@@ -7,6 +7,10 @@ import {
   UpdateResult,
 } from './types/query.types';
 import { Pagination } from 'src/common/decorators/types/pagination.interface';
+import { PaginationDto } from 'src/common/pagination/dto/pagination.dto';
+import { PaginationResult } from 'src/common/pagination/interfaces/pagination-result.interface';
+import { timestamp } from 'rxjs';
+import { createPaginationResult } from 'src/common/pagination/utils/create-pagination.result';
 
 export class BaseRepository<T> {
   constructor(private readonly model: Model<T>) {}
@@ -91,5 +95,23 @@ export class BaseRepository<T> {
         }, {}),
       )
       .exec();
+  }
+
+  public async paginate({ page, limit }: PaginationDto): Promise<PaginationResult<T[]>> {
+    let query = this.model.find();
+
+    if (page && limit) {
+      query = query.skip((page - 1) * limit);
+    }
+
+    if (limit) {
+      query = query.sort({ timestamp: -1 }).limit(limit);
+    }
+
+    const records = (await query.exec()) as T[];
+
+    const totalRecords = await this.model.countDocuments();
+
+    return createPaginationResult<T>(records, { page, limit }, totalRecords);
   }
 }
