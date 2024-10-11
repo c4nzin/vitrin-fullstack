@@ -13,6 +13,7 @@ import VerifyEmail from '@/views/user/VerifyEmail.vue';
 import ChangePassword from '@/views/user/ChangePassword.vue';
 import ResetPassword from '@/views/user/ResetPassword.vue';
 import BooksView from '@/views/books/BooksView.vue';
+import ChatView from '@/views/chat/ChatView.vue';
 
 const routes = [
   {
@@ -121,6 +122,14 @@ const routes = [
     path: '/books',
     name: 'Book',
     component: BooksView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/chat/:receiverId',
+    name: 'Chat',
+    component: ChatView,
     meta: {
       requiresAuth: true,
     },

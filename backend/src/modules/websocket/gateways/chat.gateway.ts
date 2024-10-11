@@ -4,17 +4,28 @@ import {
   WebSocketGateway,
   WebSocketServer,
   ConnectedSocket,
+  OnGatewayConnection,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { Logger } from '@nestjs/common';
 import { MessageService } from 'src/features/message/services/message.service';
 
-@WebSocketGateway()
-export class ChatGateway {
+@WebSocketGateway({
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+  },
+})
+export class ChatGateway implements OnGatewayConnection {
   @WebSocketServer() server: Server;
   private logger = new Logger('ChatGateway');
 
   constructor(private readonly messageService: MessageService) {}
+
+  handleConnection(socket: Socket) {
+    const userId = socket.handshake.query.userId as string;
+    this.logger.log(`User connected: ${userId}, socket ID: ${socket.id}`);
+  }
 
   @SubscribeMessage('sendMessage')
   async handleMessage(

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
@@ -50,10 +51,10 @@ export class AuthController {
     return this.commandBus.execute(new VerifyAccountCommand(otpDto));
   }
 
-  @Post('fetch-user')
+  @Get('fetch-user')
   @Message('Sucessfully fetched the user.')
   @HttpCode(HttpStatus.OK)
-  public async getByUsername(@Query('username') username: string): Promise<UserDocument> {
-    return this.queryBus.execute(new FetchUserCommand(username));
+  public async getByUsername(@Query('id') id: string): Promise<UserDocument> {
+    return this.queryBus.execute(new FetchUserCommand(id));
   }
 }

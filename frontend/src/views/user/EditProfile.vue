@@ -8,7 +8,6 @@
       <div
         class="flex flex-col lg:flex-row lg:space-x-8 w-full max-w-4xl mt-8 lg:mt-0 bg-white p-6 rounded-lg shadow-md"
       >
-        <!-- Profile Edit Form -->
         <form @submit.prevent="submitEdit" class="flex-1 space-y-6">
           <h2 class="text-2xl font-semibold text-gray-800 mb-4">
             Edit Profile
@@ -44,7 +43,6 @@
             :placeholder="user.data.website"
           />
 
-          <!-- Success and Error Messages -->
           <div
             v-if="errorMessage"
             class="bg-red-100 text-red-700 rounded-md p-3 mt-4"
@@ -61,7 +59,6 @@
 
           <CustomButton class="mt-6" text="Update Profile" />
 
-          <!-- Update Email and Change Password Links -->
           <div class="flex flex-col mt-6 space-y-2">
             <router-link
               :to="{ name: 'SendEmail' }"
@@ -79,7 +76,6 @@
           </div>
         </form>
 
-        <!-- Thumbnail and Profile Picture Uploads -->
         <div class="flex-1 space-y-6">
           <form
             @submit.prevent="uploadThumbnail"

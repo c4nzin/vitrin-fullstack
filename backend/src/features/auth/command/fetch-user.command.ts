@@ -1,3 +1,3 @@
 export class FetchUserCommand {
-  constructor(public username: string) {}
+  constructor(public id: string) {}
 }

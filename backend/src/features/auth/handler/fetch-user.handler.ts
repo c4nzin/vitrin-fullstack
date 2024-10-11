@@ -9,9 +9,9 @@ export class FetchUserCommandHandler implements IQueryHandler<FetchUserCommand> 
   constructor(private readonly userRepository: UserRepository) {}
 
   public async execute(query: FetchUserCommand): Promise<UserDocument> {
-    const { username } = query;
+    const { id } = query;
 
-    const user = await this.userRepository.findByUsername(username);
+    const user = await this.userRepository.findById(id);
 
     if (!user) {
       throw new BadRequestException('User not found with credentials that you provide.');

@@ -91,7 +91,7 @@ export default {
       }
 
       try {
-        await axios.post('http://localhost:3000/api/users/tweets', formData, {
+        await axios.post('http://localhost:3000/api/tweets', formData, {
           withCredentials: true,
           headers: {
             'Content-Type': 'multipart/form-data',
