@@ -24,6 +24,7 @@ export class ChatGateway implements OnGatewayConnection {
 
   handleConnection(socket: Socket) {
     const userId = socket.handshake.query.userId as string;
+    socket.join(userId);
     this.logger.log(`User connected: ${userId}, socket ID: ${socket.id}`);
   }
 
@@ -47,16 +48,13 @@ export class ChatGateway implements OnGatewayConnection {
 
   @SubscribeMessage('getMessages')
   async handleGetMessages(
-    @ConnectedSocket() socket: Socket,
     @MessageBody() payload: { senderId: string; receiverId: string },
+    @ConnectedSocket() socket: Socket,
   ): Promise<void> {
-    const { senderId, receiverId } = payload;
-
     const messages = await this.messageService.getMessagesBetweenUsers(
-      senderId,
-      receiverId,
+      payload.senderId,
+      payload.receiverId,
     );
-
     socket.emit('receiveMessages', messages);
   }
 }

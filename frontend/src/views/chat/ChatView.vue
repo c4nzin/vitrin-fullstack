@@ -33,8 +33,9 @@
                     message.senderId === user.data._id,
                   'text-gray-500': message.senderId !== user.data._id,
                 }"
-                >{{ new Date(message.timestamp).toLocaleTimeString() }}</span
               >
+                {{ formatTimestamp(message.createdAt) }}
+              </span>
             </div>
           </div>
         </div>
@@ -62,7 +63,6 @@
 <script>
 import { io } from 'socket.io-client';
 import useUserStore from '@/store/userStore';
-import { ref } from 'vue';
 
 export default {
   props: {
@@ -95,15 +95,19 @@ export default {
 
     const userId = this.$route.params.receiverId;
     const fetchedUser = await userStore.fetchUserById(userId);
-
     if (fetchedUser) {
       this.localReceiverId = fetchedUser.data._id;
+      this.username = fetchedUser.data.username;
     }
 
-    this.username = fetchedUser.data.username;
-
     this.initializeSocket();
-    await this.fetchMessages();
+    this.fetchMessages();
+  },
+
+  beforeDestroy() {
+    if (this.socket) {
+      this.socket.disconnect();
+    }
   },
 
   methods: {
@@ -112,13 +116,18 @@ export default {
         query: { userId: this.user.data._id },
       });
 
-      // this.socket.on('connect', () => {
-      //   console.log('Connected to the server:', this.socket.id);
-      // });
+      this.socket.on('connect', () => {
+        console.log('Connected to the server:', this.socket.id);
+      });
 
       this.socket.on('receiveMessage', (message) => {
         console.log('Received message:', message);
         this.messages.push(message);
+      });
+
+      this.socket.on('receiveMessages', (messages) => {
+        console.log('All messages:', messages);
+        this.messages = messages;
       });
     },
 
@@ -132,10 +141,15 @@ export default {
         timestamp: new Date(),
       };
 
-      console.log('Sending message:', messagePayload);
       this.socket.emit('sendMessage', messagePayload);
-      // this.messages.push(messagePayload);
+
+      this.messages.push(messagePayload);
       this.newMessage = '';
+    },
+
+    formatTimestamp(timestamp) {
+      const date = new Date(timestamp);
+      return date.toLocaleString([], { hour: '2-digit', minute: '2-digit' });
     },
 
     async fetchMessages() {
@@ -145,11 +159,6 @@ export default {
       };
 
       this.socket.emit('getMessages', messagePayload);
-
-      this.socket.on('receiveMessages', (messages) => {
-        console.log('all msgs', messages);
-        this.messages = messages;
-      });
     },
   },
 };
