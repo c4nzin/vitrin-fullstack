@@ -5,6 +5,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { WebsocketModule } from 'src/modules/websocket/websocket.module';
 import { MessageService } from './services/message.service';
 import { MessageRepository } from './repositories/message.repository';
+import { MessageController } from './controller/message.controller';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { MessageRepository } from './repositories/message.repository';
     MongooseModule.forFeature([{ name: Message.name, schema: MessageSchema }]),
     CqrsModule,
   ],
+  controllers: [MessageController],
   providers: [MessageService, MessageRepository],
   exports: [MessageService, MessageRepository],
 })

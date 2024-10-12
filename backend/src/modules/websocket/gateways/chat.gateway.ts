@@ -57,4 +57,14 @@ export class ChatGateway implements OnGatewayConnection {
     );
     socket.emit('receiveMessages', messages);
   }
+
+  @SubscribeMessage('getConversations')
+  async handleGetConversations(
+    @MessageBody() payload: { userId: string },
+    @ConnectedSocket() socket: Socket,
+  ): Promise<void> {
+    const conversations = await this.messageService.getConversations(payload.userId);
+
+    socket.emit('receiveConversations', conversations);
+  }
 }

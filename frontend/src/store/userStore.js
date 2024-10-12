@@ -42,7 +42,7 @@ export default defineStore('user', {
         const response = await axios.get(
           'http://localhost:3000/api/auth/fetch-user',
           {
-            params: { id }, // params'ı burada doğru bir şekilde ayarlıyoruz
+            params: { id },
             withCredentials: true,
           }
         );

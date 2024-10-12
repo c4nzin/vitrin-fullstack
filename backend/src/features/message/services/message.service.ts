@@ -33,4 +33,21 @@ export class MessageService {
       })
       .sort({ createdAt: 1 });
   }
+
+  public async getConversations(userId: string): Promise<any[]> {
+    const messages = await this.messageRepository.find({
+      $or: [{ senderId: userId }, { receiverId: userId }],
+    });
+
+    const conversationUsers = new Set();
+    messages.forEach((message) => {
+      if (message.senderId !== userId) {
+        conversationUsers.add(message.senderId);
+      } else {
+        conversationUsers.add(message.receiverId);
+      }
+    });
+
+    return Array.from(conversationUsers);
+  }
 }

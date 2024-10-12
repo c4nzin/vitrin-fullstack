@@ -14,6 +14,7 @@ import ChangePassword from '@/views/user/ChangePassword.vue';
 import ResetPassword from '@/views/user/ResetPassword.vue';
 import BooksView from '@/views/books/BooksView.vue';
 import ChatView from '@/views/chat/ChatView.vue';
+import Conversation from '@/components/Conversation.vue';
 
 const routes = [
   {
@@ -130,6 +131,14 @@ const routes = [
     path: '/chat/:receiverId',
     name: 'Chat',
     component: ChatView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/conversations',
+    name: 'Conversations',
+    component: Conversation,
     meta: {
       requiresAuth: true,
     },

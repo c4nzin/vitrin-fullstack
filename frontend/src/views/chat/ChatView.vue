@@ -1,68 +1,74 @@
 <template>
-  <div class="min-h-screen bg-gray-100 flex justify-center items-center p-6">
-    <div
-      class="w-full max-w-2xl bg-white rounded-lg shadow-md p-6 flex flex-col"
-    >
-      <div class="border-b pb-3 mb-4">
-        <h2 class="text-xl font-semibold text-gray-800">
-          Chat with {{ username }}
-        </h2>
-        <span class="text-sm text-gray-500">Last message: </span>
-      </div>
+  <AppSidebar>
+    <TopBar></TopBar>
+    <div class="min-h-screen bg-gray-100 flex justify-center items-center p-6">
+      <div
+        class="w-full max-w-2xl bg-white rounded-lg shadow-md p-6 flex flex-col"
+      >
+        <div class="border-b pb-3 mb-4">
+          <h2 class="text-xl font-semibold text-gray-800">
+            Chat with {{ username }}
+          </h2>
+          <span class="text-sm text-gray-500">Last message: </span>
+        </div>
 
-      <div class="flex-1 overflow-y-auto space-y-4 messages">
-        <div v-for="message in messages" :key="message.id">
-          <div
-            :class="{
-              'flex justify-end': message.senderId === user.data._id,
-              'flex justify-start': message.senderId !== user.data._id,
-            }"
-          >
+        <div class="flex-1 overflow-y-auto space-y-4 messages">
+          <div v-for="message in messages" :key="message.id">
             <div
               :class="{
-                'bg-blue-500 text-white': message.senderId === user.data._id,
-                'bg-gray-200 text-gray-800': message.senderId !== user.data._id,
+                'flex justify-end': message.senderId === user.data._id,
+                'flex justify-start': message.senderId !== user.data._id,
               }"
-              class="p-4 rounded-lg max-w-xs w-fit shadow-lg"
             >
-              <p>{{ message.content }}</p>
-              <span
-                class="block text-xs"
+              <div
                 :class="{
-                  'text-gray-200 text-right':
-                    message.senderId === user.data._id,
-                  'text-gray-500': message.senderId !== user.data._id,
+                  'bg-blue-500 text-white': message.senderId === user.data._id,
+                  'bg-gray-200 text-gray-800':
+                    message.senderId !== user.data._id,
                 }"
+                class="p-4 rounded-lg max-w-xs w-fit shadow-lg"
               >
-                {{ formatTimestamp(message.createdAt) }}
-              </span>
+                <p>{{ message.content }}</p>
+                <span
+                  class="block text-xs"
+                  :class="{
+                    'text-gray-200 text-right':
+                      message.senderId === user.data._id,
+                    'text-gray-500': message.senderId !== user.data._id,
+                  }"
+                >
+                  {{ formatTimestamp(message.createdAt) }}
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="border-t pt-4 mt-4 flex space-x-3">
-        <input
-          v-model="newMessage"
-          type="text"
-          placeholder="Type a message..."
-          class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          @keyup.enter="sendMessage"
-        />
-        <button
-          @click="sendMessage"
-          class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none"
-        >
-          Send
-        </button>
+        <div class="border-t pt-4 mt-4 flex space-x-3">
+          <input
+            v-model="newMessage"
+            type="text"
+            placeholder="Type a message..."
+            class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            @keyup.enter="sendMessage"
+          />
+          <button
+            @click="sendMessage"
+            class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none"
+          >
+            Send
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  </AppSidebar>
 </template>
 
 <script>
 import { io } from 'socket.io-client';
 import useUserStore from '@/store/userStore';
+import TopBar from '@/components/TopBar.vue';
+import AppSidebar from '@/components/AppSidebar.vue';
 
 export default {
   props: {
@@ -87,6 +93,11 @@ export default {
       const userStore = useUserStore();
       return userStore.user;
     },
+  },
+
+  components: {
+    TopBar,
+    AppSidebar,
   },
 
   async created() {
