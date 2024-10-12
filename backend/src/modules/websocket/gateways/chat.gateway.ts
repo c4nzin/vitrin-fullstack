@@ -24,6 +24,7 @@ export class ChatGateway implements OnGatewayConnection {
 
   handleConnection(socket: Socket) {
     const userId = socket.handshake.query.userId as string;
+
     socket.join(userId);
     this.logger.log(`User connected: ${userId}, socket ID: ${socket.id}`);
   }
@@ -63,7 +64,9 @@ export class ChatGateway implements OnGatewayConnection {
     @MessageBody() payload: { userId: string },
     @ConnectedSocket() socket: Socket,
   ): Promise<void> {
-    const conversations = await this.messageService.getConversations(payload.userId);
+    const conversations = await this.messageService.getLatestConversationsForUser(
+      payload.userId,
+    );
 
     socket.emit('receiveConversations', conversations);
   }

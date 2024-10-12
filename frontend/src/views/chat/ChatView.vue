@@ -1,66 +1,71 @@
 <template>
   <AppSidebar>
-    <TopBar></TopBar>
-    <div class="min-h-screen bg-gray-100 flex justify-center items-center p-6">
+    <Conversation>
+      <TopBar></TopBar>
       <div
-        class="w-full max-w-2xl bg-white rounded-lg shadow-md p-6 flex flex-col"
+        class="min-h-screen bg-gray-100 flex justify-center items-center p-6"
       >
-        <div class="border-b pb-3 mb-4">
-          <h2 class="text-xl font-semibold text-gray-800">
-            Chat with {{ username }}
-          </h2>
-          <span class="text-sm text-gray-500">Last message: </span>
-        </div>
+        <div
+          class="w-full max-w-2xl bg-white rounded-lg shadow-md p-6 flex flex-col"
+        >
+          <div class="border-b pb-3 mb-4">
+            <h2 class="text-xl font-semibold text-gray-800">
+              Chat with {{ username }}
+            </h2>
+            <span class="text-sm text-gray-500">Last message: </span>
+          </div>
 
-        <div class="flex-1 overflow-y-auto space-y-4 messages">
-          <div v-for="message in messages" :key="message.id">
-            <div
-              :class="{
-                'flex justify-end': message.senderId === user.data._id,
-                'flex justify-start': message.senderId !== user.data._id,
-              }"
-            >
+          <div class="flex-1 overflow-y-auto space-y-4 messages">
+            <div v-for="message in messages" :key="message.id">
               <div
                 :class="{
-                  'bg-blue-500 text-white': message.senderId === user.data._id,
-                  'bg-gray-200 text-gray-800':
-                    message.senderId !== user.data._id,
+                  'flex justify-end': message.senderId === user.data._id,
+                  'flex justify-start': message.senderId !== user.data._id,
                 }"
-                class="p-4 rounded-lg max-w-xs w-fit shadow-lg"
               >
-                <p>{{ message.content }}</p>
-                <span
-                  class="block text-xs"
+                <div
                   :class="{
-                    'text-gray-200 text-right':
+                    'bg-green-100 text-black':
                       message.senderId === user.data._id,
-                    'text-gray-500': message.senderId !== user.data._id,
+                    'bg-gray-200 text-gray-800':
+                      message.senderId !== user.data._id,
                   }"
+                  class="p-4 rounded-lg max-w-xs w-fit shadow-lg"
                 >
-                  {{ formatTimestamp(message.createdAt) }}
-                </span>
+                  <p>{{ message.content }}</p>
+                  <span
+                    class="block text-xs"
+                    :class="{
+                      'text-black text-right':
+                        message.senderId === user.data._id,
+                      'text-gray-500': message.senderId !== user.data._id,
+                    }"
+                  >
+                    {{ formatTimestamp(message.createdAt) }}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="border-t pt-4 mt-4 flex space-x-3">
-          <input
-            v-model="newMessage"
-            type="text"
-            placeholder="Type a message..."
-            class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            @keyup.enter="sendMessage"
-          />
-          <button
-            @click="sendMessage"
-            class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none"
-          >
-            Send
-          </button>
+          <div class="border-t pt-4 mt-4 flex space-x-3">
+            <input
+              v-model="newMessage"
+              type="text"
+              placeholder="Type a message..."
+              class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              @keyup.enter="sendMessage"
+            />
+            <button
+              @click="sendMessage"
+              class="bg-green-100 text-black px-4 py-2 rounded-lg shadow-md hover:bg-green-200 focus:outline-none send-btn"
+            >
+              Send
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </Conversation>
   </AppSidebar>
 </template>
 
@@ -69,6 +74,9 @@ import { io } from 'socket.io-client';
 import useUserStore from '@/store/userStore';
 import TopBar from '@/components/TopBar.vue';
 import AppSidebar from '@/components/AppSidebar.vue';
+import Conversation from '@/components/Conversation.vue';
+
+//add newyork times font
 
 export default {
   props: {
@@ -187,5 +195,11 @@ export default {
 .messages::-webkit-scrollbar-thumb {
   background-color: #ccc;
   border-radius: 4px;
+}
+
+.send-btn {
+  font-family: 'Open Sans', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 </style>

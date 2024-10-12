@@ -265,7 +265,7 @@ export default {
 
       try {
         await axios.post(
-          'http://localhost:3000/api/users/me/profile-photo',
+          'http://localhost:3000/api/account/me/profile-photo',
           formData,
           {
             headers: {

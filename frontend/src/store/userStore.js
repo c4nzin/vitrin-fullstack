@@ -6,6 +6,7 @@ export default defineStore('user', {
   state: () => ({
     user: null,
     followers: [],
+    users: [],
   }),
 
   actions: {
@@ -57,5 +58,6 @@ export default defineStore('user', {
 
   getters: {
     fetchAllFollowers: (state) => state.followers,
+    fetchAllUsers: (state) => state.users,
   },
 });

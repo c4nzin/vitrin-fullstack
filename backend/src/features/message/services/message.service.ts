@@ -34,20 +34,24 @@ export class MessageService {
       .sort({ createdAt: 1 });
   }
 
-  public async getConversations(userId: string): Promise<any[]> {
-    const messages = await this.messageRepository.find({
-      $or: [{ senderId: userId }, { receiverId: userId }],
-    });
+  public async getLatestConversationsForUser(userId: string): Promise<any[]> {
+    const messages = await this.messageRepository
+      .find({
+        $or: [{ senderId: userId }, { receiverId: userId }],
+      })
+      .sort({ createdAt: -1 });
 
-    const conversationUsers = new Set();
-    messages.forEach((message) => {
-      if (message.senderId !== userId) {
-        conversationUsers.add(message.senderId);
-      } else {
-        conversationUsers.add(message.receiverId);
+    const groupedConversations = messages.reduce((acc, message) => {
+      const otherUserId =
+        message.senderId === userId ? message.receiverId : message.senderId;
+
+      if (!acc[otherUserId]) {
+        acc[otherUserId] = { ...message, otherUserId };
       }
-    });
 
-    return Array.from(conversationUsers);
+      return acc;
+    }, {});
+
+    return Object.values(groupedConversations);
   }
 }

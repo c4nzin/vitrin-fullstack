@@ -10,6 +10,6 @@ export class MessageController {
 
   @Get('conversations')
   public async getConversations(@User() user: UserDocument): Promise<any[]> {
-    return this.messageService.getConversations(user.id);
+    return this.messageService.getLatestConversationsForUser(user.id);
   }
 }
