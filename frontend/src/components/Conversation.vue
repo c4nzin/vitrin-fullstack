@@ -1,5 +1,6 @@
 <template>
   <TopBar></TopBar>
+
   <AppSidebar>
     <div class="flex h-screen pt-6">
       <div class="w-64 bg-white shadow-lg h-full p-4">
@@ -110,14 +111,11 @@ export default {
             conversation.otherUserId
           );
 
-          //might be change in advance because this is just hardcoded.
           conversation.username = user.data.username;
           conversation.profilePicture = user.data.profilePicture;
 
           this.conversations.push(conversation);
         }
-
-        console.log(this.conversations);
       });
     },
 
