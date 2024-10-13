@@ -3,34 +3,46 @@
 
   <AppSidebar>
     <div class="flex h-screen pt-6">
-      <div class="w-64 bg-white shadow-lg h-full p-4">
-        <h3 class="text-xl font-semibold mb-4">Conversations</h3>
-        <ul class="space-y-6 flex-col">
+      <div class="w-80 bg-white shadow-lg h-full p-4">
+        <div class="mb-4">
+          <div class="flex justify-between mt-2 text-sm text-gray-500">
+            <span>Sort by</span>
+            <select class="text-blue-600">
+              <option>Newest</option>
+              <option>Oldest</option>
+            </select>
+          </div>
+        </div>
+
+        <ul class="space-y-4">
           <li
             v-for="conversation in conversations"
             :key="conversation.otherUserId"
             @click="selectConversation(conversation)"
-            class="cursor-pointer p-y-4 rounded-2xl hover:bg-gray-100 border-solid border-2"
+            class="cursor-pointer flex items-center p-4 rounded-xl transition duration-200 hover:bg-green-200 max-w-fit max-h-fit"
             :class="{
               'bg-gray-200':
                 selectedConversationId === conversation.otherUserId,
             }"
           >
             <img
-              class="rounded-2xl w-12 max-w-12 max-h-12 flex items-center"
+              class="rounded-full w-12 h-12 object-cover mr-4 shadow-sm shadow-black"
               :src="conversation.profilePicture"
-              alt="asdads"
+              alt="Profile Picture"
             />
-            <span class="rounded-lg block mt[-12]"
-              >@{{ conversation.username }}</span
-            >
-
-            <span class="block"
-              >Last Message: {{ conversation._doc.content }}</span
-            >
-            <small class="text-gray-500" text-xs>{{
+            <small class="text-gray-500 p-2">{{
               formatDate(conversation._doc.createdAt)
             }}</small>
+            <div class="flex-grow">
+              <div class="flex justify-between items-center">
+                <span class="font-semibold text-base"
+                  >@{{ conversation.username }}</span
+                >
+              </div>
+              <p class="text-gray-500 text-sm">
+                {{ conversation._doc.content }}
+              </p>
+            </div>
           </li>
         </ul>
       </div>
@@ -74,6 +86,7 @@ export default {
     TopBar,
     AppSidebar,
   },
+
   methods: {
     async fetchUserAndConnectSocket() {
       const userStore = useUserStore();
@@ -142,9 +155,6 @@ export default {
 
     formatDate(date) {
       const options = {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
         hour: '2-digit',
         minute: '2-digit',
       };
