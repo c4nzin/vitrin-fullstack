@@ -13,6 +13,7 @@ import { ConversationModule } from '../conversation/conversation.module';
     forwardRef(() => WebsocketModule),
     MongooseModule.forFeature([{ name: Message.name, schema: MessageSchema }]),
     CqrsModule,
+    forwardRef(() => ConversationModule),
   ],
   controllers: [MessageController],
   providers: [MessageService, MessageRepository],

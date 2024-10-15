@@ -74,8 +74,6 @@ import useUserStore from '@/store/userStore';
 import TopBar from '@/components/TopBar.vue';
 import AppSidebar from '@/components/AppSidebar.vue';
 
-//add newyork times font
-
 export default {
   props: {
     receiverId: {
@@ -155,7 +153,7 @@ export default {
         senderId: this.user.data._id,
         receiverId: this.localReceiverId,
         content: this.newMessage,
-        timestamp: new Date(),
+        createdAt: new Date(),
       };
 
       this.socket.emit('sendMessage', messagePayload);
@@ -175,7 +173,7 @@ export default {
         receiverId: this.localReceiverId,
       };
 
-      this.socket.emit('getMessages', messagePayload);
+      this.socket.emit('fetchMessages', messagePayload);
     },
   },
 };
@@ -187,17 +185,13 @@ export default {
   overflow-y: auto;
   margin-bottom: 20px;
 }
+
 .messages::-webkit-scrollbar {
   width: 8px;
 }
+
 .messages::-webkit-scrollbar-thumb {
   background-color: #ccc;
   border-radius: 4px;
-}
-
-.send-btn {
-  font-family: 'Open Sans', sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
 }
 </style>

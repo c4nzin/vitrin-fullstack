@@ -61,9 +61,11 @@ export class ChatGateway implements OnGatewayConnection {
         senderId,
         receiverId,
         lastMessage: content,
-        profilePhoto: '',
+        profilePhoto: '', //buralarınasıl doldurcam bullshit
         username: '',
       });
+
+      console.log(conversation);
     }
 
     this.server.to(receiverId).emit('receiveConversation', conversation);
