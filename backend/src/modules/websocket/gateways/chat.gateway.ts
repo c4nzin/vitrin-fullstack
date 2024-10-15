@@ -9,6 +9,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { Logger } from '@nestjs/common';
 import { MessageService } from 'src/features/message/services/message.service';
+import { ConversationRepository } from 'src/features/conversation/repositories/conversation.repository';
 
 @WebSocketGateway({
   cors: {
@@ -20,7 +21,10 @@ export class ChatGateway implements OnGatewayConnection {
   @WebSocketServer() server: Server;
   private logger = new Logger('ChatGateway');
 
-  constructor(private readonly messageService: MessageService) {}
+  constructor(
+    private readonly messageService: MessageService,
+    private readonly conversationRepository: ConversationRepository,
+  ) {}
 
   handleConnection(socket: Socket) {
     const userId = socket.handshake.query.userId as string;
@@ -44,6 +48,25 @@ export class ChatGateway implements OnGatewayConnection {
 
     this.server.to(receiverId).emit('receiveMessage', message);
 
+    let conversation = await this.conversationRepository.findConversationByUserIds(
+      senderId,
+      receiverId,
+    );
+
+    if (conversation) {
+      conversation.lastMessage = content;
+      await conversation.save();
+    } else {
+      conversation = await this.conversationRepository.createConversation({
+        senderId,
+        receiverId,
+        lastMessage: content,
+        profilePhoto: '',
+        username: '',
+      });
+    }
+
+    this.server.to(receiverId).emit('receiveConversation', conversation);
     this.logger.log(`Message from ${senderId} to ${receiverId}: ${content}`);
   }
 
