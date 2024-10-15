@@ -12,7 +12,7 @@ import { MessageModule } from '../message/message.module';
     CqrsModule,
     forwardRef(() => UserModule),
     MongooseModule.forFeature([{ name: Conversation.name, schema: ConversationSchema }]),
-    forwardRef(() => MessageModule),
+    MessageModule,
   ],
   controllers: [ConversationController],
   providers: [ConversationRepository],

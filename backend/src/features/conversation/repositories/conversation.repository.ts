@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { BaseRepository } from 'src/core/repositories/base.repository';
 import { Conversation, ConversationDocument } from '../schemas/conversation.schema';
 import { InjectModel } from '@nestjs/mongoose';
@@ -21,23 +21,17 @@ export class ConversationRepository extends BaseRepository<Conversation> {
     profilePhoto: string;
     username: string;
   }): Promise<ConversationDocument> {
-    const conversationId = uuidv4(); //bunun yerine zaten documentin içinde id olan veriyi kullanabilirim?
+    const conversationId = uuidv4();
     return this.conversationModel.create({ ...payload, conversationId });
   }
 
   public async findConversationById(
     conversationId: string,
   ): Promise<ConversationDocument | null> {
-    const conversation = await this.conversationModel
+    return this.conversationModel
       .findOne({ conversationId })
-      .populate('senderId', 'username profilePicture')
-      .populate('receiverId', 'username profilePicture');
-
-    if (!conversation) {
-      throw new NotFoundException('No conversation found.');
-    }
-
-    return conversation;
+      .populate('senderId', 'username profilePhoto')
+      .populate('receiverId', 'username profilePhoto');
   }
 
   public async findConversationByUserIds(

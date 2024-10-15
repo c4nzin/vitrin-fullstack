@@ -63,6 +63,7 @@ export default {
       selectedConversation: null,
       selectedConversationId: null,
       userId: '',
+      users: [],
     };
   },
   mounted() {
@@ -81,6 +82,7 @@ export default {
 
       if (this.userId) {
         this.connectSocket();
+        this.fetchUsers();
       }
     },
 
@@ -94,26 +96,48 @@ export default {
       });
 
       this.socket.on('receiveConversations', (data) => {
-        console.log(data);
-        this.conversations = data.map((conversation) => {
-          return {
-            ...conversation,
-            profilePicture: conversation.profilePhoto,
-            username: conversation.username,
-          };
-        });
+        this.conversations = data;
       });
     },
 
     fetchConversations() {
       this.socket.emit('getConversations', { userId: this.userId });
+
+      this.socket.on('receiveConversations', async (data) => {
+        this.conversations = [];
+
+        for (const conversation of data) {
+          const user = await useUserStore().fetchUserById(
+            conversation.otherUserId
+          );
+
+          conversation.username = user.data.username;
+          conversation.profilePicture = user.data.profilePicture;
+
+          this.conversations.push(conversation);
+        }
+      });
+    },
+
+    async fetchUsers() {
+      const userStore = useUserStore();
+
+      this.socket.on('receiveConversations', (data) => {
+        this.conversations = data;
+
+        this.conversations.forEach(async (data) => {
+          const user = await userStore.fetchUserById(data.otherUserId);
+
+          this.users.push(user);
+        });
+      });
     },
 
     selectConversation(conversation) {
       this.selectedConversation = conversation;
       this.selectedConversationId = conversation.otherUserId;
 
-      this.$router.push(`/conversation/${conversation.otherUserId}`);
+      this.$router.push(`/chat/${conversation.otherUserId}`);
     },
 
     formatDate(date) {
