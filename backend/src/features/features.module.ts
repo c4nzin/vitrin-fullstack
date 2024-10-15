@@ -7,7 +7,6 @@ import { NotificationModule } from './notification/notification.module';
 import { OtpModule } from './otp/otp.module';
 import { PostModule } from './posts/post.module';
 import { UserModule } from './user/user.module';
-import { ConversationModule } from './conversation/conversation.module';
 
 @Module({
   imports: [
@@ -19,7 +18,6 @@ import { ConversationModule } from './conversation/conversation.module';
     OtpModule,
     PostModule,
     UserModule,
-    ConversationModule,
     // FriendModule
   ],
 })
