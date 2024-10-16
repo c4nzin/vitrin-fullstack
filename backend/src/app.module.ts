@@ -11,6 +11,7 @@ import { AuthenticatedContext } from './common/contexts/authenticated.context';
 import { WebsocketModule } from './modules/websocket/websocket.module';
 import { ThrottlerModule } from './modules/throttler/throttler.module';
 import { FeaturesModule } from './features/features.module';
+import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
@@ -40,6 +41,11 @@ import { FeaturesModule } from './features/features.module';
     CloudinaryModule,
     RequestContextModule.forRoot({ isGlobal: true, contextClass: AuthenticatedContext }),
     WebsocketModule,
+    CacheModule.register({
+      host: 'localhost',
+      port: 6379,
+      isGlobal: true,
+    }),
   ],
   providers: [],
 })

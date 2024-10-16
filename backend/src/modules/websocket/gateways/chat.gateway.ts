@@ -1,14 +1,16 @@
 import {
-  MessageBody,
-  SubscribeMessage,
   WebSocketGateway,
+  SubscribeMessage,
   WebSocketServer,
   ConnectedSocket,
   OnGatewayConnection,
+  OnGatewayDisconnect,
+  MessageBody,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { Logger } from '@nestjs/common';
-import { MessageService } from 'src/features/message/services/message.service';
+import { Inject, Logger } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 @WebSocketGateway({
   cors: {
@@ -16,58 +18,32 @@ import { MessageService } from 'src/features/message/services/message.service';
     methods: ['GET', 'POST'],
   },
 })
-export class ChatGateway implements OnGatewayConnection {
+export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer() server: Server;
   private logger = new Logger('ChatGateway');
 
-  constructor(private readonly messageService: MessageService) {}
+  constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
-  handleConnection(socket: Socket) {
+  public handleConnection(socket: Socket) {
     const userId = socket.handshake.query.userId as string;
-
     socket.join(userId);
-    this.logger.log(`User connected: ${userId}, socket ID: ${socket.id}`);
+    this.logger.log(`user connected: ${userId}, socket ID: ${socket.id}`);
+
+    this.cacheManager.set(`user:${userId}`, socket.id);
   }
 
-  @SubscribeMessage('sendMessage')
-  async handleMessage(
-    @ConnectedSocket() socket: Socket,
-    @MessageBody() payload: { senderId: string; receiverId: string; content: string },
-  ): Promise<void> {
-    const { senderId, receiverId, content } = payload;
-
-    const message = await this.messageService.createMessage(
-      senderId,
-      receiverId,
-      content,
-    );
-
-    this.server.to(receiverId).emit('receiveMessage', message);
-
-    this.logger.log(`Message from ${senderId} to ${receiverId}: ${content}`);
+  public handleDisconnect(socket: Socket) {
+    const userId = socket.handshake.query.userId as string;
+    this.cacheManager.del(`user:${userId}`);
+    this.logger.log(`user disconnected: ${userId}, socket ID: ${socket.id}`);
   }
 
-  @SubscribeMessage('getMessages')
-  async handleGetMessages(
-    @MessageBody() payload: { senderId: string; receiverId: string },
+  @SubscribeMessage('join-conversation')
+  public async handleJoinConversation(
+    @MessageBody() conversationId: string,
     @ConnectedSocket() socket: Socket,
-  ): Promise<void> {
-    const messages = await this.messageService.getMessagesBetweenUsers(
-      payload.senderId,
-      payload.receiverId,
-    );
-    socket.emit('receiveMessages', messages);
-  }
-
-  @SubscribeMessage('getConversations')
-  async handleGetConversations(
-    @MessageBody() payload: { userId: string },
-    @ConnectedSocket() socket: Socket,
-  ): Promise<void> {
-    const conversations = await this.messageService.getLatestConversationsForUser(
-      payload.userId,
-    );
-
-    socket.emit('receiveConversations', conversations);
+  ) {
+    socket.join(conversationId);
+    this.logger.log(`User joined conversation: ${conversationId}`);
   }
 }

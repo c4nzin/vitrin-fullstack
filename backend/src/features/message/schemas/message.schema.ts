@@ -1,29 +1,33 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
+import { User } from 'src/features/user/schemas';
 
 export type MessageDocument = HydratedDocument<Message>;
 
-@Schema()
+@Schema({
+  timestamps: true,
+  versionKey: false,
+})
 export class Message {
   @Prop({
+    type: Types.ObjectId,
+    ref: 'User',
     required: true,
   })
-  public receiverId: string;
+  public sender: Types.ObjectId;
 
   @Prop({
+    type: Types.ObjectId,
+    ref: 'Conversation',
     required: true,
   })
-  public senderId: string;
+  public conversation: Types.ObjectId;
 
   @Prop({
+    type: String,
     required: true,
   })
   public content: string;
-
-  @Prop({
-    default: Date.now(),
-  })
-  public createdAt: Date;
 }
 
 export const MessageSchema = SchemaFactory.createForClass<Message>(Message);

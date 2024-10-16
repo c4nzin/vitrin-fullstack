@@ -1,17 +1,29 @@
-import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
-import { QueryBus } from '@nestjs/cqrs';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
 import { Message, User } from 'src/common/decorators';
-import { PaginationResult } from 'src/common/pagination/interfaces/pagination-result.interface';
 import { UserDocument } from 'src/features/user/schemas';
+import { ConversationService } from '../services/conversation.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('conversations')
+@ApiTags('conversations')
 export class ConversationController {
-  constructor(private readonly queryBus: QueryBus) {}
+  constructor(private readonly conversationService: ConversationService) {}
 
-  //   @Get()
-  //   @Message('Sucessfully fetched the conversations.')
-  //   @HttpCode(HttpStatus.OK)
-  //   public async fetchConversations(
-  //     @User() user: UserDocument,
-  //   ): Promise<PaginationResult<UserDocument[]>> {}
+  @Post()
+  @Message('Sucessfully created the conversation.')
+  @HttpCode(HttpStatus.CREATED)
+  public async createConversation(
+    @User() user: UserDocument,
+    @Body('receivers') receivers: string[],
+  ) {
+    const participants = [user.id, ...receivers];
+    return this.conversationService.createConversation(participants);
+  }
+
+  @Get()
+  @Message('Sucessfully fetched all conversations.')
+  @HttpCode(HttpStatus.OK)
+  public async getConversations(@User() user: UserDocument) {
+    return this.conversationService.getConversations(user.id);
+  }
 }

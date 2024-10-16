@@ -4,14 +4,6 @@ import bcrypt from 'bcrypt';
 import { HydratedDocument, Types } from 'mongoose';
 import { Gender } from './enum/gender.enum';
 
-//add thumbnail
-//add follow
-//add follower
-//add posts
-//add location
-
-//*** no needed but good to having those */
-//add blockeduser
 export type UserDocument = HydratedDocument<User>;
 
 @Schema({
@@ -36,7 +28,6 @@ export class User {
     type: String,
     minlength: 6,
     validate: {
-      //maybe i would want to change strong password checker in advance.
       validator: (password: string) => validator.isStrongPassword(password),
     },
   })

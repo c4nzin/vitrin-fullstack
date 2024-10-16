@@ -1,57 +1,46 @@
 import { Injectable } from '@nestjs/common';
 import { MessageRepository } from '../repositories/message.repository';
 import { MessageDocument } from '../schemas/message.schema';
+import { Types } from 'mongoose';
+import { ConversationRepository } from 'src/features/conversation/repositories/conversation.repository';
+import { ChatGateway } from 'src/modules/websocket/gateways/chat.gateway';
 
 @Injectable()
 export class MessageService {
-  constructor(private readonly messageRepository: MessageRepository) {}
+  constructor(
+    private readonly messageRepository: MessageRepository,
+    private readonly conversationRepository: ConversationRepository,
+  ) {}
 
   public async createMessage(
+    conversationId: string,
     senderId: string,
-    receiverId: string,
     content: string,
   ): Promise<MessageDocument> {
-    const newMessage = await this.messageRepository.create({
-      senderId,
-      receiverId,
+    const message = await this.messageRepository.create({
+      conversation: new Types.ObjectId(conversationId),
+      sender: new Types.ObjectId(senderId),
       content,
     });
 
-    return newMessage.save();
+    await this.conversationRepository.findByIdAndUpdate(conversationId, {
+      lastMessage: message._id,
+    });
+
+    return message;
   }
 
-  public async getMessagesBetweenUsers(
-    senderId: string,
-    receiverId: string,
-  ): Promise<MessageDocument[]> {
-    return this.messageRepository
-      .find({
-        $or: [
-          { senderId, receiverId },
-          { senderId: receiverId, receiverId: senderId },
-        ],
-      })
-      .sort({ createdAt: 1 });
-  }
-
-  public async getLatestConversationsForUser(userId: string): Promise<any[]> {
+  public async getMessages(conversationId: string): Promise<any> {
     const messages = await this.messageRepository
-      .find({
-        $or: [{ senderId: userId }, { receiverId: userId }],
+      .find({ conversation: new Types.ObjectId(conversationId) })
+      .populate({
+        path: 'sender',
+        select: 'username profilePicture',
       })
-      .sort({ createdAt: -1 });
+      .exec();
 
-    const groupedConversations = messages.reduce((acc, message) => {
-      const otherUserId =
-        message.senderId === userId ? message.receiverId : message.senderId;
-
-      if (!acc[otherUserId]) {
-        acc[otherUserId] = { ...message, otherUserId };
-      }
-
-      return acc;
-    }, {});
-
-    return Object.values(groupedConversations);
+    return messages;
   }
+
+  //KULLANILACAK
 }
