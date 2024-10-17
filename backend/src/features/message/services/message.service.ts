@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { MessageRepository } from '../repositories/message.repository';
 import { MessageDocument } from '../schemas/message.schema';
 import { Types } from 'mongoose';
@@ -10,6 +10,7 @@ export class MessageService {
   constructor(
     private readonly messageRepository: MessageRepository,
     private readonly conversationRepository: ConversationRepository,
+    private readonly chatGateway: ChatGateway,
   ) {}
 
   public async createMessage(
@@ -17,6 +18,14 @@ export class MessageService {
     senderId: string,
     content: string,
   ): Promise<MessageDocument> {
+    const isUserParticipant = await this.conversationRepository.find({
+      participants: { $in: new Types.ObjectId(conversationId) },
+    });
+
+    if (!isUserParticipant) {
+      throw new UnauthorizedException('You are not participant of this chat.');
+    }
+
     const message = await this.messageRepository.create({
       conversation: new Types.ObjectId(conversationId),
       sender: new Types.ObjectId(senderId),
@@ -43,6 +52,4 @@ export class MessageService {
 
     return messages;
   }
-
-  //KULLANILACAK
 }
