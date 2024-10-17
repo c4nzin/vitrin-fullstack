@@ -24,17 +24,16 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
-  public handleConnection(socket: Socket) {
+  public async handleConnection(socket: Socket) {
     const userId = socket.handshake.query.userId as string;
-    socket.join(userId);
+    await this.cacheManager.set(`user:${userId}`, socket.id);
     this.logger.log(`user connected: ${userId}, socket ID: ${socket.id}`);
-
-    this.cacheManager.set(`user:${userId}`, socket.id);
   }
 
   public handleDisconnect(socket: Socket) {
     const userId = socket.handshake.query.userId as string;
     this.cacheManager.del(`user:${userId}`);
+
     this.logger.log(`user disconnected: ${userId}, socket ID: ${socket.id}`);
   }
 
@@ -43,7 +42,8 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @MessageBody() conversationId: string,
     @ConnectedSocket() socket: Socket,
   ) {
-    socket.join(conversationId);
-    this.logger.log(`User joined conversation: ${conversationId}`);
+    const conversation = JSON.stringify(conversationId);
+    socket.join(JSON.stringify(conversationId));
+    this.logger.log(`User joined conversation: ${conversation}`);
   }
 }

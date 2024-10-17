@@ -27,6 +27,8 @@ export class MessageService {
       lastMessage: message._id,
     });
 
+    this.chatGateway.server.to(conversationId).emit('newMessage', message);
+
     return message;
   }
 

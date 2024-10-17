@@ -22,13 +22,10 @@ export class ConversationService {
       participants: participantIds,
     });
 
-    for (const participantId of participants) {
-      const socketId = await this.cacheManager.get<string>(`user:${participantId}`);
-      if (socketId) {
-        this.chatGateway.server.to(socketId).emit('newConversation', conversation);
-      }
-    }
+    const userKeys = participants.map((p) => `user:${p}`);
+    const socketIds = (await this.cacheManager.store.mget(...userKeys)) as string[];
 
+    this.chatGateway.server.to(socketIds).emit('newConversation', conversation);
     return conversation;
   }
 
