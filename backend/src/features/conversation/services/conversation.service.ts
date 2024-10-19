@@ -38,7 +38,6 @@ export class ConversationService {
     return conversations;
   }
 
-  //BUNU MESSAGE SERVİS İÇİNE DAHİL ET
   public emitNewMessage(conversationId: string, message: MessageDocument): void {
     this.chatGateway.server.to(conversationId).emit('newMessage', message);
   }

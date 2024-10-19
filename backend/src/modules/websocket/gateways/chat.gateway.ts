@@ -27,12 +27,13 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   public async handleConnection(socket: Socket) {
     const userId = socket.handshake.query.userId as string;
     await this.cacheManager.set(`user:${userId}`, socket.id);
+
     this.logger.log(`user connected: ${userId}, socket ID: ${socket.id}`);
   }
 
-  public handleDisconnect(socket: Socket) {
+  public async handleDisconnect(socket: Socket) {
     const userId = socket.handshake.query.userId as string;
-    this.cacheManager.del(`user:${userId}`);
+    await this.cacheManager.del(`user:${userId}`);
 
     this.logger.log(`user disconnected: ${userId}, socket ID: ${socket.id}`);
   }

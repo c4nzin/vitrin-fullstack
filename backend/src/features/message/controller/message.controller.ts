@@ -1,13 +1,24 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { MessageService } from '../services/message.service';
 import { Message, User } from 'src/common/decorators';
 import { UserDocument } from 'src/features/user/schemas';
 import { ApiTags } from '@nestjs/swagger';
 import { ConversationService } from 'src/features/conversation/services/conversation.service';
 import { MessageDocument } from '../schemas/message.schema';
+import { LocalAuthGuard } from 'src/common/guards';
 
 @Controller('conversations')
 @ApiTags('conservations')
+@UseGuards(LocalAuthGuard)
 export class MessageController {
   constructor(
     private readonly messageService: MessageService,

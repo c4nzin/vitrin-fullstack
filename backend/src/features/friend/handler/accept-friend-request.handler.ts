@@ -18,6 +18,7 @@ export class AcceptFriendRequestCommandHandler
     const { requestId, user } = command;
 
     const request = await this.friendRequestRepository.findById(requestId);
+    const requestReceiverId = request.receiver as unknown as string;
 
     if (!request) {
       throw new BadRequestException('Friend request not found.');
@@ -27,14 +28,12 @@ export class AcceptFriendRequestCommandHandler
     request.respondedAt = new Date();
 
     if (request.status == FriendRequestStatus.ACCEPTED) {
-      const receiver = await this.userRepository.findById(
-        request.receiver._id.toString(),
-      );
+      const receiver = await this.userRepository.findById(requestReceiverId);
 
-      await user.updateOne({ friends: request.receiver.id });
-      await receiver.updateOne({ friends: request.sender.id });
-
-      await request.deleteOne();
+      await user.updateOne({ $push: { friends: requestId } });
+      await receiver.updateOne({ $push: { friends: request.sender.id } });
     }
+
+    await request.deleteOne();
   }
 }

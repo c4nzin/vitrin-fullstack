@@ -5,7 +5,7 @@ import { Types } from 'mongoose';
 import { FriendRequestDocument } from 'src/features/friend/schemas/friend-request.schema';
 import { SendFriendRequestCommand } from '../command/send-friend-request.command';
 import { FriendRequestRepository } from '../repositories/friend-request.repository';
-import { NotificationRepository, UserRepository } from 'src/features/user/repositories';
+import { UserRepository } from 'src/features/user/repositories';
 
 @CommandHandler(SendFriendRequestCommand)
 export class SendFriendRequestCommandHandler
@@ -14,7 +14,6 @@ export class SendFriendRequestCommandHandler
   constructor(
     private readonly friendRequestRepository: FriendRequestRepository,
     private readonly userRepository: UserRepository,
-    private readonly notificationRepository: NotificationRepository,
   ) {}
 
   public async execute(
@@ -24,8 +23,6 @@ export class SendFriendRequestCommandHandler
 
     const receiverIdToObjectId = new Types.ObjectId(receiverId);
 
-    //bad code just for now need refactor
-
     const receiver = await this.userRepository.findById(receiverId);
 
     const existingRequest = await this.friendRequestRepository.findOne({
@@ -34,7 +31,7 @@ export class SendFriendRequestCommandHandler
     });
 
     if (existingRequest) {
-      throw new BadRequestException('Friend request already sent.');
+      throw new BadRequestException('Friend request has already sent.');
     }
 
     const friendRequest = await this.friendRequestRepository.create({
@@ -45,13 +42,6 @@ export class SendFriendRequestCommandHandler
 
     sender.updateOne({ $push: { sentFriendRequests: receiverId } });
     receiver.updateOne({ $push: { receivedFriendRequests: sender.id } });
-
-    await this.notificationRepository.create({
-      isRead: false,
-      message: `${sender.username} sent a friend request to you.`,
-      userId: sender.id,
-      receiver: receiverId,
-    });
 
     return friendRequest.save();
   }

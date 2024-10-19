@@ -1,11 +1,21 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { Message, User } from 'src/common/decorators';
 import { UserDocument } from 'src/features/user/schemas';
 import { ConversationService } from '../services/conversation.service';
 import { ApiTags } from '@nestjs/swagger';
+import { LocalAuthGuard } from 'src/common/guards';
 
 @Controller('conversations')
 @ApiTags('conversations')
+@UseGuards(LocalAuthGuard)
 export class ConversationController {
   constructor(private readonly conversationService: ConversationService) {}
 

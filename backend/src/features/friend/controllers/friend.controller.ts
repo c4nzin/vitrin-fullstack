@@ -1,20 +1,29 @@
-import { Controller, Delete, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { Message, User } from 'src/common/decorators';
 import { UserDocument } from '../../user/schemas';
-import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { CommandBus } from '@nestjs/cqrs';
 import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notification.gateway';
 import { ApiTags } from '@nestjs/swagger';
 import { SendFriendRequestCommand } from '../command/send-friend-request.command';
 import { RejectFriendRequestCommand } from '../command/reject-friend-request.command';
 import { AcceptFriendRequestCommand } from '../command/accept-friend-request.command';
+import { LocalAuthGuard } from 'src/common/guards';
 
-@Controller()
+@Controller('users')
+@UseGuards(LocalAuthGuard)
 @ApiTags('Friends')
 export class FriendController {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly friendRequestGateway: FriendRequestGateway,
-    private readonly queryBus: QueryBus,
   ) {}
 
   @Post(':id/add-friend')
@@ -24,10 +33,6 @@ export class FriendController {
     @User() user: UserDocument,
     @Param('id') id: string,
   ): Promise<void> {
-    const message = `${user.username} sent a friend request to you.`;
-
-    await this.friendRequestGateway.sendFriendRequestNotification(id, message);
-
     return this.commandBus.execute(new SendFriendRequestCommand(user, id));
   }
 
