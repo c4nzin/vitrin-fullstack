@@ -72,7 +72,9 @@ export class AccountController {
   @Post('reset-password')
   @Message('Sucessfully resetted your password.')
   @HttpCode(HttpStatus.OK)
-  public async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
+  public async resetPassword(
+    @Body() resetPasswordDto: ResetPasswordDto,
+  ): Promise<UserDocument> {
     return this.commandBus.execute(new ResetPasswordCommand(resetPasswordDto));
   }
 }

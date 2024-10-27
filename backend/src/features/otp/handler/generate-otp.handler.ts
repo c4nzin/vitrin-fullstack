@@ -14,7 +14,7 @@ export class GenerateOtpHandler implements ICommandHandler<GenerateOtpCommand> {
     @Inject(ENV) private readonly config: Config,
   ) {}
 
-  public async execute(command: GenerateOtpCommand): Promise<any> {
+  public async execute(command: GenerateOtpCommand): Promise<void> {
     this.generateOtp(command.email);
     this.createOtp(command.email);
   }

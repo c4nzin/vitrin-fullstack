@@ -33,14 +33,14 @@ export class AuthController {
   @Message('Sucessfully logged in.')
   @HttpCode(HttpStatus.OK)
   @UseGuards(LocalAuthGuard)
-  public async login(@Body() loginDto: LoginDto) {
+  public async login(@Body() loginDto: LoginDto): Promise<void> {
     return this.commandBus.execute(new LoginUserCommand(loginDto));
   }
 
   @Post('register')
   @Message('Sucessfully registered.')
   @HttpCode(HttpStatus.CREATED)
-  public async register(@Body() registerDto: RegisterDto) {
+  public async register(@Body() registerDto: RegisterDto): Promise<UserDocument> {
     return this.commandBus.execute(new RegisterUserCommand(registerDto));
   }
 

@@ -49,7 +49,7 @@ export class MessageController {
   @HttpCode(HttpStatus.OK)
   public async getMessages(
     @Param('conversationId') conversationId: string,
-  ): Promise<MessageDocument> {
+  ): Promise<any> {
     return this.messageService.getMessages(conversationId);
   }
 }

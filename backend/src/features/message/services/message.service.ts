@@ -41,7 +41,7 @@ export class MessageService {
     return message;
   }
 
-  public async getMessages(conversationId: string): Promise<any> {
+  public async getMessages(conversationId: string): Promise<MessageDocument[]> {
     const messages = await this.messageRepository
       .find({ conversation: new Types.ObjectId(conversationId) })
       .populate({

@@ -53,7 +53,7 @@ export class PhotoController {
   public async updateThumbnailPhoto(
     @UploadedFile(PhotoPipe) file: Express.Multer.File,
     @User('id') id: string,
-  ): Promise<any> {
+  ): Promise<UserDocument> {
     return this.commandBus.execute(new UploadThumbnailPhotoCommand(file, id));
   }
 }

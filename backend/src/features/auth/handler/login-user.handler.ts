@@ -9,7 +9,7 @@ import { LoginUserCommand } from '../command/login-user.command';
 export class LoginUserHandler implements ICommandHandler<LoginUserCommand> {
   constructor(private readonly userRepository: UserRepository) {}
 
-  public async execute(command: LoginUserCommand): Promise<any> {
+  public async execute(command: LoginUserCommand): Promise<UserDocument> {
     const { user } = command;
     await this.login(user);
     return this.validateUser(user.username, user.password);
