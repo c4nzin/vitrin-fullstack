@@ -11,11 +11,12 @@ import { PaginationDto } from 'src/common/pagination/dto/pagination.dto';
 import { PaginationResult } from 'src/common/pagination/interfaces/pagination-result.interface';
 import { timestamp } from 'rxjs';
 import { createPaginationResult } from 'src/common/pagination/utils/create-pagination.result';
+import { BadRequestException } from '@nestjs/common';
 
 export class BaseRepository<T> {
   constructor(private readonly model: Model<T>) {}
 
-  public async create(object: Partial<T>): Promise<CreateResult<T>> {
+  public async create(object: Partial<T>, session?: any): Promise<CreateResult<T>> {
     return this.model.create(object);
   }
 
@@ -127,7 +128,7 @@ export class BaseRepository<T> {
       return result;
     } catch (error) {
       await session.abortTransaction();
-      throw error;
+      throw new BadRequestException('Transaction failed.', error.message);
     } finally {
       session.endSession();
     }

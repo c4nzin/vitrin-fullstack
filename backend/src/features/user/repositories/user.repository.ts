@@ -29,7 +29,7 @@ export class UserRepository extends BaseRepository<User> {
 
     return user;
   }
-  public async findByUsernameAndEmail(
+  public async findByUsernameOrEmail(
     username: string,
     email: string,
   ): Promise<UserDocument> {

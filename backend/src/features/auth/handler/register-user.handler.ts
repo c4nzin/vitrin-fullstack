@@ -17,7 +17,7 @@ export class RegisterUserHandler implements ICommandHandler<RegisterUserCommand>
   ) {}
 
   public async execute(command: RegisterUserCommand): Promise<UserDocument> {
-    const user = await this.userRepository.findByUsernameAndEmail(
+    const user = await this.userRepository.findByUsernameOrEmail(
       command.user.username,
       command.user.email,
     );
@@ -28,16 +28,22 @@ export class RegisterUserHandler implements ICommandHandler<RegisterUserCommand>
 
     const otp = await this.commandBus.execute(new GenerateOtpCommand(command.user.email));
 
-    await this.emailQueue.add(
-      USER_REGISTERED,
-      {
-        email: command.user.email,
-        username: command.user.username,
-        otp,
-      },
-      { lifo: false, delay: 10000, priority: 1 },
-    );
+    const result = await this.userRepository.executeTransaction(async (session) => {
+      const createdUser = await this.userRepository.create(command.user, session);
 
-    return this.userRepository.create(command.user);
+      await this.emailQueue.add(
+        USER_REGISTERED,
+        {
+          email: command.user.email,
+          username: command.user.username,
+          otp,
+        },
+        { lifo: false, delay: 10000, priority: 1 },
+      );
+
+      return createdUser;
+    });
+
+    return result;
   }
 }
