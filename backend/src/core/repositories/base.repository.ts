@@ -114,4 +114,22 @@ export class BaseRepository<T> {
 
     return createPaginationResult<T>(records, { page, limit }, totalRecords);
   }
+
+  public async executeTransaction(
+    operations: (session: any) => Promise<any>,
+  ): Promise<any> {
+    const session = await this.model.db.startSession();
+    session.startTransaction();
+
+    try {
+      const result = await operations(session);
+      await session.commitTransaction();
+      return result;
+    } catch (error) {
+      await session.abortTransaction();
+      throw error;
+    } finally {
+      session.endSession();
+    }
+  }
 }
