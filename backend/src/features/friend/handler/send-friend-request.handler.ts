@@ -5,7 +5,8 @@ import { Types } from 'mongoose';
 import { FriendRequestDocument } from 'src/features/friend/schemas/friend-request.schema';
 import { SendFriendRequestCommand } from '../command/send-friend-request.command';
 import { FriendRequestRepository } from '../repositories/friend-request.repository';
-import { UserRepository } from 'src/features/user/repositories';
+import { NotificationRepository, UserRepository } from 'src/features/user/repositories';
+import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notification.gateway';
 
 @CommandHandler(SendFriendRequestCommand)
 export class SendFriendRequestCommandHandler
@@ -14,6 +15,8 @@ export class SendFriendRequestCommandHandler
   constructor(
     private readonly friendRequestRepository: FriendRequestRepository,
     private readonly userRepository: UserRepository,
+    private readonly notificationRepository: NotificationRepository,
+    private readonly friendRequestGateway: FriendRequestGateway,
   ) {}
 
   public async execute(
@@ -33,6 +36,16 @@ export class SendFriendRequestCommandHandler
     if (existingRequest) {
       throw new BadRequestException('Friend request has already sent.');
     }
+
+    const message = `${sender.username} sent a friend request.`;
+
+    await this.notificationRepository.create({
+      userId: sender.id,
+      receiver: receiverId,
+      message,
+    });
+
+    await this.friendRequestGateway.sendFriendRequestNotification(receiverId, message);
 
     const friendRequest = await this.friendRequestRepository.create({
       sender: sender.id,

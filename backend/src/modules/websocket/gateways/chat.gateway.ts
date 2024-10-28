@@ -44,7 +44,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @ConnectedSocket() socket: Socket,
   ) {
     const conversation = JSON.stringify(conversationId);
-    socket.join(JSON.stringify(conversationId));
+    socket.join(conversationId);
     this.logger.log(`User joined conversation: ${conversation}`);
   }
 }
