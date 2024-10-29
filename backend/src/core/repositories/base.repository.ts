@@ -141,6 +141,6 @@ export class BaseRepository<T> {
   }
 
   public aggregate(pipeline: PipelineStage[], options: any = {}): Promise<any[]> {
-    return this.model.aggregate(pipeline).option(options).exec();
+    return this.model.aggregate(pipeline).option(options);
   }
 }
