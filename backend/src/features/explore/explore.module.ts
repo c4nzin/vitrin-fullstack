@@ -5,11 +5,13 @@ import { ExploreController } from './controllers/explore.controller';
 import { ExploreRepository } from './repositories/explore.repository';
 import { allExploreHandlers } from './handler/all-explore.handlers';
 import { CqrsModule } from '@nestjs/cqrs';
+import { PostModule } from '../posts/post.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Explore.name, schema: ExploreSchema }]),
     CqrsModule,
+    PostModule,
   ],
   providers: [ExploreRepository, ...allExploreHandlers],
   controllers: [ExploreController],

@@ -1,11 +1,11 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { ExploreCommand } from '../command/explore.command';
-import { ExploreDocument } from '../schemas/explore.schema';
 import { ExploreRepository } from '../repositories/explore.repository';
+import { PostRepository } from 'src/features/user/repositories';
 
 @QueryHandler(ExploreCommand)
 export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
-  constructor(private readonly exploreRepository: ExploreRepository) {}
+  constructor(private readonly postRepository: PostRepository) {}
 
   public async execute(query: ExploreCommand): Promise<any[]> {
     const { limit } = query;
@@ -27,7 +27,7 @@ export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
       },
     ];
 
-    const results = await this.exploreRepository.aggregate(pipeline);
+    const results = await this.postRepository.aggregate(pipeline);
 
     if (!results || results.length === 0) {
       console.warn('No data found or aggregation pipeline returned an empty array.');
