@@ -12,12 +12,7 @@ export class Explore {
   @Prop({
     type: String,
     required: true,
-  })
-  public userId: string;
-
-  @Prop({
-    type: String,
-    required: true,
+    ref: 'Post',
   })
   public postId: string;
 
