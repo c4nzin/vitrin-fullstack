@@ -7,10 +7,10 @@ import { ExploreRepository } from '../repositories/explore.repository';
 export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
   constructor(private readonly exploreRepository: ExploreRepository) {}
 
-  public execute(query: ExploreCommand): Promise<ExploreDocument[]> {
+  public async execute(query: ExploreCommand): Promise<any[]> {
     const { limit } = query;
 
-    return this.exploreRepository.aggregate([
+    const pipeline = [
       { $sample: { size: limit } },
       {
         $lookup: {
@@ -21,8 +21,18 @@ export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
         },
       },
       {
-        $unwind: '$Post',
+        $unwind: {
+          path: '$Post',
+        },
       },
-    ]);
+    ];
+
+    const results = await this.exploreRepository.aggregate(pipeline);
+
+    if (!results || results.length === 0) {
+      console.warn('No data found or aggregation pipeline returned an empty array.');
+    }
+
+    return results;
   }
 }
