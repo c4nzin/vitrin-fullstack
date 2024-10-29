@@ -1,4 +1,10 @@
-import { FilterQuery, Model, UpdateQuery, UpdateWithAggregationPipeline } from 'mongoose';
+import {
+  FilterQuery,
+  Model,
+  PipelineStage,
+  UpdateQuery,
+  UpdateWithAggregationPipeline,
+} from 'mongoose';
 import {
   CreateResult,
   DeleteResult,
@@ -132,5 +138,9 @@ export class BaseRepository<T> {
     } finally {
       session.endSession();
     }
+  }
+
+  public aggregate(pipeline: PipelineStage[], options: any = {}): Promise<any[]> {
+    return this.model.aggregate(pipeline).option(options).exec();
   }
 }

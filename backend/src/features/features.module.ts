@@ -9,6 +9,7 @@ import { PostModule } from './posts/post.module';
 import { UserModule } from './user/user.module';
 import { ConversationModule } from './conversation/conversation.module';
 import { FriendModule } from './friend/friend.module';
+import { ExploreModule } from './explore/explore.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { FriendModule } from './friend/friend.module';
     ConversationModule,
     MessageModule,
     FriendModule,
+    ExploreModule,
   ],
 })
 export class FeaturesModule {}
