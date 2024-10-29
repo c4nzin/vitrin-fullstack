@@ -2,10 +2,14 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { NotificationRepository } from 'src/features/user/repositories';
 import { PageDto, PageMetaDto } from 'src/common/pagination/dto';
 import { FetchRequestCommand } from '../command/fetch-requests.command';
+import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notification.gateway';
 
 @QueryHandler(FetchRequestCommand)
 export class FetchRequestCommandHandler implements IQueryHandler<FetchRequestCommand> {
-  constructor(private readonly notificationRepository: NotificationRepository) {}
+  constructor(
+    private readonly notificationRepository: NotificationRepository,
+    private readonly friendRequestGateway: FriendRequestGateway,
+  ) {}
 
   public async execute(query: FetchRequestCommand): Promise<any> {
     const { user, pagination } = query;
@@ -16,8 +20,12 @@ export class FetchRequestCommandHandler implements IQueryHandler<FetchRequestCom
       _id: { $in: notifications.id },
     });
 
-    const pageDto = new PageMetaDto({ pageOptionsDto: pagination, itemCount });
+    const pageMetaDto = new PageMetaDto({ pageOptionsDto: pagination, itemCount });
 
-    return new PageDto(notifications, pageDto);
+    const pageDto = new PageDto(notifications, pageMetaDto);
+
+    return this.friendRequestGateway.server
+      .to(user.id)
+      .emit('all-notifications', pageDto.data);
   }
 }

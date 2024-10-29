@@ -1,26 +1,36 @@
 import {
   OnGatewayConnection,
   OnGatewayDisconnect,
-  SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { Server } from 'socket.io';
-import { UserRepository } from 'src/features/user/repositories';
-import { Logger } from '@nestjs/common';
+import { Server, Socket } from 'socket.io';
+import { Inject, Logger } from '@nestjs/common';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
-@WebSocketGateway({ origin: '*' })
+@WebSocketGateway({
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+  },
+})
 export class FriendRequestGateway implements OnGatewayConnection, OnGatewayDisconnect {
-  constructor(private readonly userRepository: UserRepository) {}
+  private readonly logger = new Logger('FriendRequestGateway');
+  constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
   @WebSocketServer()
   public readonly server: Server;
 
-  public handleDisconnect(client: Server): void {
-    Logger.log(`${client} is disconnected`);
+  public async handleDisconnect(socket: Socket): Promise<void> {
+    const userId = socket.handshake.query.userId as string;
+    await this.cacheManager.del(`user:${userId}`);
+    this.logger.log(`User disconnected ${userId} socketId : ${socket.id}`);
   }
 
-  handleConnection(client: any, ...args: any[]) {
-    throw new Error('Method not implemented.');
+  public async handleConnection(socket: Socket): Promise<void> {
+    const userId = socket.handshake.query.userId as string;
+    await this.cacheManager.set(`user${userId}`, socket.id);
+    this.logger.log(`User connected ${userId} socketId : ${socket.id}`);
   }
 }
