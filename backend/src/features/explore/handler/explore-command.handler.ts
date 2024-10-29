@@ -1,6 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { ExploreCommand } from '../command/explore.command';
 import { PostRepository } from 'src/features/user/repositories';
+import { PipelineStage } from 'mongoose';
 
 @QueryHandler(ExploreCommand)
 export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
@@ -9,7 +10,7 @@ export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
   public async execute(query: ExploreCommand): Promise<any[]> {
     const { limit } = query;
 
-    const pipeline = [
+    const pipeline: PipelineStage[] = [
       {
         $lookup: {
           from: 'Post',
@@ -23,6 +24,9 @@ export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
           path: '$postDetails',
           preserveNullAndEmptyArrays: true,
         },
+      },
+      {
+        $sort: { 'postDetails.createdAt': -1 },
       },
       {
         $sample: { size: limit },
