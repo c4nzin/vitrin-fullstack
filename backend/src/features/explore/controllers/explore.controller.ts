@@ -14,7 +14,7 @@ export class ExploreController {
   @Message('Sucessfully fetched posts.')
   @HttpCode(HttpStatus.OK)
   public async fetchPosts(
-    @Query('limit') limit: number = 10,
+    @Query('limit') limit: number = 30,
   ): Promise<ExploreDocument[]> {
     return this.queryBus.execute(new ExploreCommand(limit));
   }
