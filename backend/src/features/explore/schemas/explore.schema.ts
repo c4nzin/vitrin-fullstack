@@ -7,7 +7,6 @@ export type ExploreDocument = HydratedDocument<Explore>;
   timestamps: true,
   collection: 'Explore',
   autoIndex: true,
-  versionKey: true,
 })
 export class Explore {
   @Prop({
