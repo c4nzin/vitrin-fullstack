@@ -10,19 +10,22 @@ export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
     const { limit } = query;
 
     const pipeline = [
-      { $sample: { size: limit } },
       {
         $lookup: {
           from: 'Post',
           localField: 'postId',
           foreignField: '_id',
-          as: 'Post',
+          as: 'postDetails',
         },
       },
       {
         $unwind: {
-          path: '$Post',
+          path: '$postDetails',
+          preserveNullAndEmptyArrays: true,
         },
+      },
+      {
+        $sample: { size: limit },
       },
     ];
 
