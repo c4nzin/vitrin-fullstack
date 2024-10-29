@@ -28,14 +28,14 @@ export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
       {
         $lookup: {
           from: 'User',
-          localField: 'postDetails.author',
+          localField: 'userId',
           foreignField: '_id',
-          as: 'authorDetails',
+          as: 'User',
         },
       },
       {
         $unwind: {
-          path: '$authorDetails',
+          path: '$User',
           preserveNullAndEmptyArrays: true,
         },
       },
@@ -47,21 +47,20 @@ export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
       },
       {
         $project: {
-          _id: 0,
-          postId: '$postDetails._id',
+          _id: '$postDetails._id',
           content: '$postDetails.content',
           media: '$postDetails.media',
-          createdAt: '$postDetails.createdAt',
-          author: {
-            id: '$authorDetails._id',
-            username: '$authorDetails.username',
-            profilePicture: '$authorDetails.profilePicture',
-          },
+          authorId: '$User._id',
+          authorName: '$User.username',
+          profilePicture: '$User.profilePicture',
+          likes: '$postDetails.likes',
         },
       },
     ];
 
     const results = await this.postRepository.aggregate(pipeline);
+
+    console.log(results);
 
     return results;
   }

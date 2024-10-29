@@ -17,6 +17,13 @@ export class Explore {
   public postId: Types.ObjectId;
 
   @Prop({
+    type: Types.ObjectId,
+    required: true,
+    ref: 'User',
+  })
+  public userId: Types.ObjectId;
+
+  @Prop({
     type: Number,
     default: 0,
   })
