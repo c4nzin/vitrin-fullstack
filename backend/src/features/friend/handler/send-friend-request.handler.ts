@@ -1,5 +1,5 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, Inject } from '@nestjs/common';
 import { FriendRequestStatus } from 'src/features/friend/enum/friend-request.status';
 import { Types } from 'mongoose';
 import { FriendRequestDocument } from 'src/features/friend/schemas/friend-request.schema';
@@ -7,6 +7,8 @@ import { SendFriendRequestCommand } from '../command/send-friend-request.command
 import { FriendRequestRepository } from '../repositories/friend-request.repository';
 import { NotificationRepository, UserRepository } from 'src/features/user/repositories';
 import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notification.gateway';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 @CommandHandler(SendFriendRequestCommand)
 export class SendFriendRequestCommandHandler
@@ -17,6 +19,7 @@ export class SendFriendRequestCommandHandler
     private readonly userRepository: UserRepository,
     private readonly notificationRepository: NotificationRepository,
     private readonly friendRequestGateway: FriendRequestGateway,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
   public async execute(
@@ -45,9 +48,15 @@ export class SendFriendRequestCommandHandler
       message,
     });
 
-    this.friendRequestGateway.server
-      .to(receiverId)
-      .emit('new-friend-request', { message });
+    const receivedSocketUser = (await this.cacheManager.get(
+      `user:${receiverId}`,
+    )) as string;
+
+    if (receivedSocketUser) {
+      this.friendRequestGateway.server
+        .to(receivedSocketUser)
+        .emit('new-friend-request', { message });
+    }
 
     const friendRequest = await this.friendRequestRepository.create({
       sender: sender.id,

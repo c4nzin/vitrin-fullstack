@@ -16,6 +16,7 @@ export class User {
     required: true,
     type: String,
     minlength: 3,
+    unique: true,
     maxlength: 15,
     validate: {
       validator: (username: string) => validator.isAlphanumeric(username),
@@ -150,3 +151,5 @@ UserSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
   next();
 });
+
+UserSchema.index({ username: 'text', fullName: 'text', profilePicture: 'text' });

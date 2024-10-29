@@ -17,6 +17,7 @@ import { Cache } from 'cache-manager';
 })
 export class FriendRequestGateway implements OnGatewayConnection, OnGatewayDisconnect {
   private readonly logger = new Logger('FriendRequestGateway');
+
   constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
   @WebSocketServer()
