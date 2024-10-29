@@ -11,6 +11,7 @@ import { UserDocument } from 'src/features/user/schemas';
 export class NotificationController {
   constructor(private readonly queryBus: QueryBus) {}
 
+  //şuanlık sadece arkadaş isteklerini gösteriyor. ileride bunu bütün tür notificationlara çevirmek gerek.
   @Get()
   @Message('Sucessfully fetched the notifications.')
   @HttpCode(HttpStatus.OK)

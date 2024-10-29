@@ -8,6 +8,7 @@ import { OtpModule } from './otp/otp.module';
 import { PostModule } from './posts/post.module';
 import { UserModule } from './user/user.module';
 import { ConversationModule } from './conversation/conversation.module';
+import { FriendModule } from './friend/friend.module';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { ConversationModule } from './conversation/conversation.module';
     UserModule,
     ConversationModule,
     MessageModule,
-    // FriendModule
+    FriendModule,
   ],
 })
 export class FeaturesModule {}

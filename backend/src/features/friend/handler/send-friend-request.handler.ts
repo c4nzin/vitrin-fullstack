@@ -45,7 +45,9 @@ export class SendFriendRequestCommandHandler
       message,
     });
 
-    await this.friendRequestGateway.sendFriendRequestNotification(receiverId, message);
+    this.friendRequestGateway.server
+      .to(receiverId)
+      .emit('new-friend-request', { message });
 
     const friendRequest = await this.friendRequestRepository.create({
       sender: sender.id,
