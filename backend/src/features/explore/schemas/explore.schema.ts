@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 
 export type ExploreDocument = HydratedDocument<Explore>;
 
@@ -10,11 +10,11 @@ export type ExploreDocument = HydratedDocument<Explore>;
 })
 export class Explore {
   @Prop({
-    type: String,
+    type: Types.ObjectId,
     required: true,
     ref: 'Post',
   })
-  public postId: string;
+  public postId: Types.ObjectId;
 
   @Prop({
     type: Number,

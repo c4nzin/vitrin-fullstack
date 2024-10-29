@@ -28,6 +28,10 @@ export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
 
     const results = await this.postRepository.aggregate(pipeline);
 
+    if (!results || results.length === 0) {
+      console.warn('No data found or aggregation pipeline returned an empty array.');
+    }
+
     return results;
   }
 }
