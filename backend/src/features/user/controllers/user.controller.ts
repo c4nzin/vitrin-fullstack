@@ -7,7 +7,7 @@ import { UserDocument } from '../schemas';
 import { SearchUserCommand } from '../command/search-user.command';
 
 @Controller('users')
-@ApiTags('user')
+@ApiTags('users')
 export class UserController {
   constructor(private readonly queryBus: QueryBus) {}
 

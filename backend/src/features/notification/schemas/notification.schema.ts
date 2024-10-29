@@ -19,7 +19,7 @@ export class Notification {
     ref: 'User',
     required: true,
   })
-  public receiver: string;
+  public receiverId: string;
 
   @Prop({
     type: String,

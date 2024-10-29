@@ -44,7 +44,7 @@ export class SendFriendRequestCommandHandler
 
     await this.notificationRepository.create({
       userId: sender.id,
-      receiver: receiverId,
+      receiverId: receiverId,
       message,
     });
 
