@@ -26,18 +26,42 @@ export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
         },
       },
       {
+        $lookup: {
+          from: 'User',
+          localField: 'postDetails.author',
+          foreignField: '_id',
+          as: 'authorDetails',
+        },
+      },
+      {
+        $unwind: {
+          path: '$authorDetails',
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
         $sort: { 'postDetails.createdAt': -1 },
       },
       {
         $sample: { size: limit },
       },
+      {
+        $project: {
+          _id: 0,
+          postId: '$postDetails._id',
+          content: '$postDetails.content',
+          media: '$postDetails.media',
+          createdAt: '$postDetails.createdAt',
+          author: {
+            id: '$authorDetails._id',
+            username: '$authorDetails.username',
+            profilePicture: '$authorDetails.profilePicture',
+          },
+        },
+      },
     ];
 
     const results = await this.postRepository.aggregate(pipeline);
-
-    if (!results || results.length === 0) {
-      console.warn('No data found or aggregation pipeline returned an empty array.');
-    }
 
     return results;
   }
