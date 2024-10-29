@@ -14,7 +14,7 @@ export class SearchUserCommandHandler implements IQueryHandler<SearchUserCommand
       .find({
         $text: { $search: userInput.query },
       })
-      .select('profilePicture username fullname ');
+      .select('profilePicture username fullName ');
 
     return searchQuery;
   }
