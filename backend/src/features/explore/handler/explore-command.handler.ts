@@ -5,63 +5,58 @@ import { PipelineStage } from 'mongoose';
 
 @QueryHandler(ExploreCommand)
 export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
+  public readonly limit: number = 50;
+
   constructor(private readonly postRepository: PostRepository) {}
 
-  public async execute(query: ExploreCommand): Promise<any[]> {
-    const { limit } = query;
-
+  public async execute(): Promise<any[]> {
     const pipeline: PipelineStage[] = [
       {
         $lookup: {
           from: 'Post',
-          localField: 'postId',
           foreignField: '_id',
+          localField: 'postId',
           as: 'postDetails',
         },
       },
       {
         $unwind: {
-          path: '$postDetails',
           preserveNullAndEmptyArrays: true,
+          path: '$postDetails',
         },
+      },
+      {
+        $sample: { size: this.limit },
       },
       {
         $lookup: {
           from: 'User',
-          localField: 'userId',
+          localField: 'author',
           foreignField: '_id',
-          as: 'User',
+          as: 'authorDetails',
         },
       },
       {
         $unwind: {
-          path: '$User',
+          path: '$authorDetails',
           preserveNullAndEmptyArrays: true,
         },
       },
       {
-        $sort: { 'postDetails.createdAt': -1 },
-      },
-      {
-        $sample: { size: limit },
-      },
-      {
         $project: {
-          _id: '$postDetails._id',
-          content: '$postDetails.content',
-          media: '$postDetails.media',
-          authorId: '$User._id',
-          authorName: '$User.username',
-          profilePicture: '$User.profilePicture',
-          likes: '$postDetails.likes',
+          _id: 1,
+          content: 1,
+          media: 1,
+          likes: 1,
+          'authorDetails.username': 1,
+          'authorDetails.profilePicture': 1,
+          'authorDetails.fullName': 1,
         },
       },
     ];
 
-    const results = await this.postRepository.aggregate(pipeline);
-
-    console.log(results);
-
-    return results;
+    return this.postRepository.aggregate(pipeline, {
+      allowDiskUse: true,
+    });
   }
 }

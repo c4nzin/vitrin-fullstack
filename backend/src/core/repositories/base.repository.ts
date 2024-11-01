@@ -1,4 +1,5 @@
 import {
+  AggregateOptions,
   FilterQuery,
   Model,
   PipelineStage,
@@ -140,7 +141,10 @@ export class BaseRepository<T> {
     }
   }
 
-  public aggregate(pipeline: PipelineStage[], options: any = {}): Promise<any[]> {
+  public aggregate(
+    pipeline: PipelineStage[],
+    options?: AggregateOptions,
+  ): Promise<any[]> {
     return this.model.aggregate(pipeline).option(options);
   }
 }
