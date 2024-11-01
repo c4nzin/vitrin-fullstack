@@ -14,11 +14,11 @@ import { UserDocument } from 'src/features/user/schemas';
 import { ApiTags } from '@nestjs/swagger';
 import { ConversationService } from 'src/features/conversation/services/conversation.service';
 import { MessageDocument } from '../schemas/message.schema';
-import { LocalAuthGuard } from 'src/common/guards';
+import { AuthenticatedGuard } from 'src/common/guards';
 
 @Controller('conversations')
 @ApiTags('conservations')
-@UseGuards(LocalAuthGuard)
+@UseGuards(AuthenticatedGuard)
 export class MessageController {
   constructor(
     private readonly messageService: MessageService,

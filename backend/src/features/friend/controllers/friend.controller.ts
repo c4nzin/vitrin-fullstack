@@ -15,10 +15,10 @@ import { ApiTags } from '@nestjs/swagger';
 import { SendFriendRequestCommand } from '../command/send-friend-request.command';
 import { RejectFriendRequestCommand } from '../command/reject-friend-request.command';
 import { AcceptFriendRequestCommand } from '../command/accept-friend-request.command';
-import { LocalAuthGuard } from 'src/common/guards';
+import { AuthenticatedGuard } from 'src/common/guards';
 
 @Controller('users')
-@UseGuards(LocalAuthGuard)
+@UseGuards(AuthenticatedGuard)
 @ApiTags('Friends')
 export class FriendController {
   constructor(
