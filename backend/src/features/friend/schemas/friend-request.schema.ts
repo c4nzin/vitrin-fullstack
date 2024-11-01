@@ -11,18 +11,18 @@ export type FriendRequestDocument = HydratedDocument<FriendRequest>;
 })
 export class FriendRequest {
   @Prop({
-    type: Types.ObjectId,
+    type: String,
     required: true,
     ref: 'User',
   })
-  public sender: Types.ObjectId;
+  public sender: string;
 
   @Prop({
-    type: Types.ObjectId,
+    type: String,
     required: true,
     ref: 'User',
   })
-  public receiver: Types.ObjectId;
+  public receiver: string;
 
   @Prop({
     required: true,

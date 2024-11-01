@@ -38,13 +38,13 @@ export class FriendController {
   }
 
   @Post(':id/accept-friend')
-  @Message('Sucessfully accepted friend request.')
+  @Message('Successfully accepted friend request.')
   @HttpCode(HttpStatus.OK)
   public async acceptFriendRequest(
     @User() user: UserDocument,
-    @Param('id') id: string,
+    @Param('id') requestId: string,
   ): Promise<void> {
-    return this.commandBus.execute(new AcceptFriendRequestCommand(user, id));
+    return this.commandBus.execute(new AcceptFriendRequestCommand(requestId, user)); // Parametrelerin sırasını kontrol edin
   }
 
   @Delete(':id/reject-friend')

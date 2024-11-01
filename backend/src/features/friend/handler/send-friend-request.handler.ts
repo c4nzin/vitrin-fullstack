@@ -60,7 +60,7 @@ export class SendFriendRequestCommandHandler
 
     const friendRequest = await this.friendRequestRepository.create({
       sender: sender.id,
-      receiver: receiverIdToObjectId,
+      receiver: receiverId,
       status: FriendRequestStatus.PENDING,
     });
 

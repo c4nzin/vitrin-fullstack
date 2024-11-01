@@ -90,7 +90,14 @@ export default {
     },
     async acceptFriendRequest(id) {
       try {
-        await axios.post(`/api/${id}/accept-friend`);
+        await axios.post(
+          `http://localhost:3000/api/users/${id}/accept-friend`,
+          null,
+          {
+            withCredentials: true,
+          }
+        );
+
         this.fetchNotifications();
       } catch (error) {
         console.error('Error accepting friend request:', error);
@@ -98,7 +105,10 @@ export default {
     },
     async rejectFriendRequest(id) {
       try {
-        await axios.delete(`/api/${id}/reject-friend`);
+        await axios.delete(
+          `http://localhost:3000/api/users/${id}/reject-friend`
+        );
+
         this.fetchNotifications();
       } catch (error) {
         console.error('Error rejecting friend request:', error);
