@@ -21,11 +21,14 @@ export class FetchRequestCommandHandler implements IQueryHandler<FetchRequestCom
     });
 
     const pageMetaDto = new PageMetaDto({ pageOptionsDto: pagination, itemCount });
-
     const pageDto = new PageDto(notifications, pageMetaDto);
 
-    return this.friendRequestGateway.server
-      .to(user.id)
-      .emit('all-notifications', pageDto.data);
+    this.notifyNewFriendRequest(user.id, notifications);
+
+    return pageDto;
+  }
+
+  public async notifyNewFriendRequest(userId: string, notification: any) {
+    this.friendRequestGateway.server.to(userId).emit('all-notifications', notification);
   }
 }

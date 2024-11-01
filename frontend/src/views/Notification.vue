@@ -13,8 +13,8 @@
           </div>
           <ul>
             <li
-              v-for="(notification, id) in notifications"
-              :key="id"
+              v-for="(notification, index) in notifications"
+              :key="index"
               class="flex items-center justify-between p-3 border-b border-gray-300 hover:bg-gray-100"
             >
               <div class="flex items-start space-x-3">
@@ -53,6 +53,7 @@ import AppSidebar from '@/components/AppSidebar.vue';
 import TopBar from '@/components/TopBar.vue';
 import axios from 'axios';
 import useUserStore from '@/store/userStore';
+import { io } from 'socket.io-client';
 
 export default {
   components: {
@@ -62,31 +63,50 @@ export default {
   data() {
     return {
       notifications: [],
+      socket: null,
     };
   },
   mounted() {
     this.fetchUserAndNotifications();
+    this.initializeSocket();
+  },
+  computed: {
+    user() {
+      const userStore = useUserStore();
+      return userStore.user || {};
+    },
   },
   methods: {
+    async initializeSocket() {
+      if (!this.user.data || !this.user.data._id) return;
+      this.socket = io('http://localhost:3000', {
+        query: { userId: this.user.data._id },
+      });
+
+      this.socket.on('all-notifications', (data) => {
+        this.notifications.push(data);
+        console.log('New Notification:', data);
+      });
+    },
     async acceptFriendRequest(id) {
       try {
         await axios.post(`/api/${id}/accept-friend`);
+        this.fetchNotifications();
       } catch (error) {
-        throw new Error(error);
+        console.error('Error accepting friend request:', error);
       }
     },
     async rejectFriendRequest(id) {
       try {
         await axios.delete(`/api/${id}/reject-friend`);
+        this.fetchNotifications();
       } catch (error) {
-        throw new Error(error);
+        console.error('Error rejecting friend request:', error);
       }
     },
-
     async fetchUserAndNotifications() {
       const userStore = useUserStore();
       await userStore.fetchUser();
-
       this.fetchNotifications();
     },
     async fetchNotifications() {
@@ -98,14 +118,10 @@ export default {
           }
         );
 
-        //loop required
-        const notificationsData = response.data.data;
-
-        this.notifications.push({
-          message: notificationsData.data.message,
-        });
+        this.notifications = response.data.data;
+        console.log(this.notifications);
       } catch (error) {
-        throw new Error(error);
+        console.error('Error fetching notifications:', error);
       }
     },
   },
