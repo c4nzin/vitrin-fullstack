@@ -5,7 +5,7 @@ import { PipelineStage } from 'mongoose';
 
 @QueryHandler(ExploreCommand)
 export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
-  public readonly limit: number = 50;
+  public readonly limit: number = 10;
 
   constructor(private readonly postRepository: PostRepository) {}
 
@@ -50,7 +50,6 @@ export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
           likes: 1,
           'authorDetails.username': 1,
           'authorDetails.profilePicture': 1,
-          'authorDetails.fullName': 1,
         },
       },
     ];

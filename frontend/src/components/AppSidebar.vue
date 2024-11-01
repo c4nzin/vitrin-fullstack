@@ -52,7 +52,7 @@
           </li>
           <li>
             <router-link
-              to="#"
+              :to="{ name: 'Explore' }"
               class="flex items-center px-4 py-2 text-base text-gray-800 rounded-md hover:bg-gray-100"
             >
               <span class="material-icons mr-4">search</span>
