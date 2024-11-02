@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Post,
   Query,
+  Redirect,
   UseGuards,
 } from '@nestjs/common';
 import { LoginDto, RegisterDto } from '../dto';
@@ -20,6 +21,7 @@ import { RegisterUserCommand } from '../command/register-user.command';
 import { VerifyAccountCommand } from '../command/verify-account.command';
 import { UserDocument } from 'src/features/user/schemas';
 import { FetchUserCommand } from '../command/fetch-user.command';
+import { GoogleGuard } from 'src/common/guards/google.guard';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -36,6 +38,19 @@ export class AuthController {
   public async login(@Body() loginDto: LoginDto): Promise<void> {
     return this.commandBus.execute(new LoginUserCommand(loginDto));
   }
+
+  @Get('google')
+  @Message('Sucessfully logged in with google.')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(GoogleGuard)
+  public loginWithGoogle(): void {}
+
+  @Get('google/callback')
+  @Message('Sucessfully logged in with google.')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(GoogleGuard)
+  @Redirect('http://localhost:3001', 302)
+  public async googleCallback(): Promise<void> {}
 
   @Post('register')
   @Message('Sucessfully registered.')
