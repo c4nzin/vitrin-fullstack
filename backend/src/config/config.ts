@@ -20,6 +20,9 @@ const config = {
   PROFILE_PICTURE_URL: str({ default: process.env.PROFILE_PICTURE_URL }),
   HASH_SALT_ROUNDS: num({ default: 10 }),
   GOOGLE_BOOKS_API_KEY: str(),
+  GOOGLE_CLIENT_SECRET: str(),
+  GOOGLE_CLIENT_ID: str(),
+  GOOGLE_CALLBACK_URL: str(),
 };
 
 export const envalidValidator = makeValidators(config);
