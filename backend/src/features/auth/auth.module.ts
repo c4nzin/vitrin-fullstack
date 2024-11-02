@@ -13,6 +13,7 @@ import { EMAIL_QUEUE } from 'src/modules/email/services';
 import { OtpModule } from '../otp/otp.module';
 import { IsFieldUniqueConstraint } from 'src/common/decorators';
 import { allAuthHandlers } from './handler/all-auth.handlers';
+import { GoogleStrategy } from './strategies/google.strategy';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { allAuthHandlers } from './handler/all-auth.handlers';
     LocalStrategy,
     AuthProfile,
     IsFieldUniqueConstraint,
+    GoogleStrategy,
     ...allAuthHandlers,
   ],
   exports: [...allAuthHandlers],

@@ -1,2 +1,2 @@
-export const GOOGLE = 'google';
+export const GOOGLE_STRATEGY = 'google';
 export const LOCAL_STRATEGY = 'local';

@@ -25,7 +25,6 @@ export class User {
   public username: string;
 
   @Prop({
-    required: true,
     type: String,
     minlength: 6,
     validate: {

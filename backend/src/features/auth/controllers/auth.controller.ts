@@ -45,7 +45,7 @@ export class AuthController {
   @UseGuards(GoogleGuard)
   public loginWithGoogle(): void {}
 
-  @Get('google/callback')
+  @Get('login/google/callback')
   @Message('Sucessfully logged in with google.')
   @HttpCode(HttpStatus.OK)
   @UseGuards(GoogleGuard)
