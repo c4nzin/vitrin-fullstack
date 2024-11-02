@@ -4,7 +4,6 @@ import { FriendRequestStatus } from 'src/features/friend/enum/friend-request.sta
 import { UserRepository } from 'src/features/user/repositories';
 import { AcceptFriendRequestCommand } from '../command/accept-friend-request.command';
 import { FriendRequestRepository } from '../repositories/friend-request.repository';
-import { Types } from 'mongoose';
 
 @CommandHandler(AcceptFriendRequestCommand)
 export class AcceptFriendRequestCommandHandler

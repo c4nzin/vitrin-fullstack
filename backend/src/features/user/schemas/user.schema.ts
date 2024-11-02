@@ -141,6 +141,19 @@ export class User {
     required: true,
   })
   public fullName: string;
+
+  @Prop({
+    type: String,
+  })
+  public googleID: string;
+
+  @Prop({
+    type: Boolean,
+    default: function () {
+      return this.password !== undefined;
+    },
+  })
+  public hasPassword: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass<User>(User);
