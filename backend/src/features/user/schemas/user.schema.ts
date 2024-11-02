@@ -151,6 +151,7 @@ export class User {
     default: function () {
       return this.password !== undefined;
     },
+    required: true,
   })
   public hasPassword: string;
 }

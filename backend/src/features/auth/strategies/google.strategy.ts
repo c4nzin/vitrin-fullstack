@@ -29,17 +29,15 @@ export class GoogleStrategy extends PassportStrategy(Strategy, GOOGLE_STRATEGY) 
 
     let user = await this.userRepository.findOne({ googleID: id });
 
-    if (user) {
-      throw new BadRequestException('User is already registered.');
+    if (!user) {
+      user = await this.userRepository.create({
+        email: emails[0].value,
+        username: displayName,
+        fullName: this.fullNameConverter(name.givenName, name.familyName),
+        profilePicture: photos[0].value,
+        googleID: id,
+      });
     }
-
-    user = await this.userRepository.create({
-      email: emails[0].value,
-      username: displayName,
-      fullName: this.fullNameConverter(name.givenName, name.familyName),
-      profilePicture: photos[0].value,
-      googleID: id,
-    });
 
     done(null, user);
   }
