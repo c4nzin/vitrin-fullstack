@@ -1,4 +1,4 @@
-import { CommandBus, CommandHandler, ICommandBus, ICommandHandler } from '@nestjs/cqrs';
+import { CommandBus, CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { ChangePasswordCommand } from '../command/change-password.command';
 import bcrypt from 'bcrypt';
 import { UserDocument } from 'src/features/user/schemas';

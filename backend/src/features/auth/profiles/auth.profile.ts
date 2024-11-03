@@ -1,6 +1,3 @@
-//Not using because i am getting error..
-//TODO : fix errors
-
 import { createMap, Mapper } from '@automapper/core';
 import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import { Injectable } from '@nestjs/common';
