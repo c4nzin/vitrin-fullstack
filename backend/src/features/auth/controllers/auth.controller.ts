@@ -24,7 +24,7 @@ import { VerifyAccountCommand } from '../command/verify-account.command';
 import { UserDocument } from 'src/features/user/schemas';
 import { FetchUserCommand } from '../command/fetch-user.command';
 import { GoogleGuard } from 'src/common/guards/google.guard';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
 @Controller('auth')
 @ApiTags('auth')
