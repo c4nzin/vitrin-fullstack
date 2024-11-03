@@ -6,13 +6,15 @@ import {
   HttpStatus,
   Post,
   Query,
+  Req,
   Res,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { LoginDto, RegisterDto } from '../dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { Message } from 'src/common/decorators';
-import { LocalAuthGuard } from 'src/common/guards';
+import { AuthenticatedGuard, LocalAuthGuard } from 'src/common/guards';
 import { ApiTags } from '@nestjs/swagger';
 import { OtpDto } from 'src/features/otp/dto';
 import { OtpDocument } from 'src/features/otp/schemas';
@@ -22,7 +24,7 @@ import { VerifyAccountCommand } from '../command/verify-account.command';
 import { UserDocument } from 'src/features/user/schemas';
 import { FetchUserCommand } from '../command/fetch-user.command';
 import { GoogleGuard } from 'src/common/guards/google.guard';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -73,5 +75,28 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   public async getByUsername(@Query('id') id: string): Promise<UserDocument> {
     return this.queryBus.execute(new FetchUserCommand(id));
+  }
+
+  @Post('logout')
+  @Message('Successfully logged out.')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthenticatedGuard)
+  public async logout(@Req() request: Request, @Res() response: Response): Promise<void> {
+    await new Promise<void>((resolve, reject) => {
+      request.logOut((err) => {
+        if (err) return reject(new UnauthorizedException(err));
+        resolve();
+      });
+    });
+
+    await new Promise<void>((resolve, reject) => {
+      request.session.destroy((err) => {
+        if (err) return reject(new UnauthorizedException(err));
+        resolve();
+      });
+    });
+
+    response.clearCookie('sessionId');
+    response.send({ message: 'Successfully logged out.' });
   }
 }
