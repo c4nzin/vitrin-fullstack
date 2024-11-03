@@ -214,7 +214,7 @@ export default {
       }, {});
 
       try {
-        await axios.patch('http://localhost:3000/api/users/update', body, {
+        await axios.patch('http://localhost:3000/api/account/update', body, {
           withCredentials: true,
         });
         this.successMessage = 'Profile updated!';
@@ -238,7 +238,7 @@ export default {
 
       try {
         await axios.put(
-          'http://localhost:3000/api/users/me/thumbnail-photo',
+          'http://localhost:3000/api/account/me/thumbnail-photo',
           formData,
           {
             headers: {

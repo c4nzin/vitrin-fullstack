@@ -23,6 +23,19 @@
               class="!bg-black hover:!bg-slate-900 transition ease-in-out delay-50"
             ></CustomButton>
           </form>
+
+          <div
+            @click="handleGoogleLogin"
+            class="flex items-center justify-center bg-white border border-gray-300 rounded-lg mt-4 py-2 px-4 cursor-pointer hover:shadow-md transition-all"
+          >
+            <img
+              src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png"
+              alt="Google Logo"
+              class="h-8 w-8 mr-2"
+            />
+            <span class="text-gray-600 font-medium">Log in with Google</span>
+          </div>
+
           <h2 class="text-sm text-right mt-4">
             If you are not a member, Please
             <a
@@ -32,7 +45,7 @@
             >
             <div
               v-if="errorMessage"
-              class="bg-red-700 text-white rounded-md flex justify-center items-center p-4"
+              class="bg-red-700 text-white rounded-md flex justify-center items-center p-4 mt-4"
             >
               <p>{{ errorMessage }}</p>
             </div>
@@ -82,8 +95,12 @@ export default {
       } catch (error) {
         this.errorMessage =
           error.response?.data?.message[0] ||
-          'Login failed please check your information has given';
+          'Login failed, please check your information.';
       }
+    },
+
+    handleGoogleLogin() {
+      window.location.href = 'http://localhost:3000/api/auth/google';
     },
   },
   computed: {
