@@ -8,7 +8,10 @@ export function BaseGuard(type: string): Type<IAuthGuard> {
       const request = context.switchToHttp().getRequest<Request>();
       const result = await super.canActivate(context);
 
-      await super.logIn(request);
+      if (request && result) {
+        await super.logIn(request);
+      }
+
       return !!result;
     }
   };

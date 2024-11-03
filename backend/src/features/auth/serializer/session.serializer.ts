@@ -16,7 +16,8 @@ export class SessionSerializer extends PassportSerializer {
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   public async deserializeUser(userId: string, done: Function): Promise<void> {
-    const user = await this.userRepository.findById(userId).select(`+password`);
+    // const user = await this.userRepository.findById(userId).select(`+password`);
+    const user = await this.userRepository.findById(userId);
 
     if (!user) {
       return done(null, false);

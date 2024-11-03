@@ -25,7 +25,7 @@ export class UserRepository extends BaseRepository<User> {
   }
 
   public async findByUsername(username: string): Promise<UserDocument> {
-    const user = await this.findOne({ username });
+    const user = await this.findOne({ username }).select('+password');
 
     return user;
   }

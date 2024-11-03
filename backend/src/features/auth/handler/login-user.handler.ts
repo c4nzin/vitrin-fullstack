@@ -19,9 +19,7 @@ export class LoginUserHandler implements ICommandHandler<LoginUserCommand> {
     username: string,
     password: string,
   ): Promise<UserDocument | null> {
-    const user = await (
-      await this.userRepository.findByUsername(username)
-    ).populate('+password');
+    const user = await this.userRepository.findByUsername(username);
 
     if (!user) {
       throw new BadRequestException('No user found.');
