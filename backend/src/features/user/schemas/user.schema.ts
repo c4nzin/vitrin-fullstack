@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import validator from 'validator';
 import bcrypt from 'bcrypt';
-import { HydratedDocument, Types } from 'mongoose';
+import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { Gender } from './enum/gender.enum';
 
 export type UserDocument = HydratedDocument<User>;
@@ -27,6 +27,7 @@ export class User {
   @Prop({
     type: String,
     minlength: 6,
+    select: false,
     validate: {
       validator: (password: string) => validator.isStrongPassword(password),
     },
@@ -166,3 +167,5 @@ UserSchema.pre('save', async function (next) {
 });
 
 UserSchema.index({ username: 'text', fullName: 'text', profilePicture: 'text' });
+
+mongoose.set('strictPopulate', false);
