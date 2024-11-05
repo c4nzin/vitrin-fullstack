@@ -11,10 +11,8 @@ import { AuthenticatedContext } from './common/contexts/authenticated.context';
 import { WebsocketModule } from './modules/websocket/websocket.module';
 import { ThrottlerModule } from './modules/throttler/throttler.module';
 import { FeaturesModule } from './features/features.module';
-import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
-import * as redisStore from 'cache-manager-redis-store';
-import { IRedisCacheOptions } from './utils/redis-cache.options';
+import { CronModule } from './modules/cron/cron.module';
 
 @Module({
   imports: [
@@ -44,12 +42,7 @@ import { IRedisCacheOptions } from './utils/redis-cache.options';
     CloudinaryModule,
     RequestContextModule.forRoot({ isGlobal: true, contextClass: AuthenticatedContext }),
     WebsocketModule,
-    CacheModule.register<IRedisCacheOptions>({
-      host: 'localhost',
-      store: redisStore,
-      port: 6379,
-      isGlobal: true,
-    }),
+    CronModule,
     ScheduleModule.forRoot(),
   ],
   providers: [],
