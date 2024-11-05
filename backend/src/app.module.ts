@@ -13,8 +13,12 @@ import { ThrottlerModule } from './modules/throttler/throttler.module';
 import { FeaturesModule } from './features/features.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
+<<<<<<< Updated upstream
 import * as redisStore from 'cache-manager-redis-store';
 import { IRedisCacheOptions } from './utils/redis-cache.options';
+=======
+import { RedisModule } from './modules/redis/redis.module';
+>>>>>>> Stashed changes
 
 @Module({
   imports: [
@@ -44,12 +48,16 @@ import { IRedisCacheOptions } from './utils/redis-cache.options';
     CloudinaryModule,
     RequestContextModule.forRoot({ isGlobal: true, contextClass: AuthenticatedContext }),
     WebsocketModule,
+<<<<<<< Updated upstream
     CacheModule.register<IRedisCacheOptions>({
       host: 'localhost',
       store: redisStore,
       port: 6379,
       isGlobal: true,
     }),
+=======
+    RedisModule,
+>>>>>>> Stashed changes
     ScheduleModule.forRoot(),
   ],
   providers: [],
