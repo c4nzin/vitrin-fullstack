@@ -12,6 +12,7 @@ import { WebsocketModule } from './modules/websocket/websocket.module';
 import { ThrottlerModule } from './modules/throttler/throttler.module';
 import { FeaturesModule } from './features/features.module';
 import { CacheModule } from '@nestjs/cache-manager';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { CacheModule } from '@nestjs/cache-manager';
       port: 6379,
       isGlobal: true,
     }),
+    ScheduleModule.forRoot(),
   ],
   providers: [],
 })
