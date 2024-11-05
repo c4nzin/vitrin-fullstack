@@ -13,6 +13,7 @@ import { ThrottlerModule } from './modules/throttler/throttler.module';
 import { FeaturesModule } from './features/features.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
+import * as redisStore from 'cache-manager-redis-store';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     WebsocketModule,
     CacheModule.register({
       host: 'localhost',
+      store: redisStore,
       port: 6379,
       isGlobal: true,
     }),
