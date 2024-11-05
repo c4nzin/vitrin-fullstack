@@ -7,7 +7,8 @@ import { EXPLORE_CACHE_KEY } from '../constants';
 
 @Injectable()
 export class ExploreCronService {
-  private logger = new Logger('CronJob');
+  private logger = new Logger(ExploreCronService.name);
+
   constructor(
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private readonly exploreCronCommandHandler: ExploreCommandHandler,
