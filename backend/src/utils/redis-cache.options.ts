@@ -5,7 +5,6 @@ export interface IRedisCacheOptions extends CacheModuleOptions {
   port: number;
   password?: string;
   db?: number;
-  isGlobal: boolean;
   store: string | CacheStoreFactory | CacheStore;
   isCacheableValue?: (value: any) => boolean;
   max?: number;
