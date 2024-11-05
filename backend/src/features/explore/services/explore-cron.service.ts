@@ -16,7 +16,9 @@ export class ExploreCronService {
 
   @Cron(CronExpression.EVERY_10_MINUTES)
   public async updateExploreCache(): Promise<void> {
-    this.logger.log('Explore cronjob to update posts cache.');
+    this.logger.log(
+      'Executing the explore cron job to update the explore cache periodically.',
+    );
 
     const posts = await this.exploreCronCommandHandler.execute();
 
