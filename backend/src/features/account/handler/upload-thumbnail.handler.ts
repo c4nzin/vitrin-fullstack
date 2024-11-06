@@ -16,7 +16,6 @@ export class UploadThumbnailPhotoCommandHandler
   public async execute(command: UploadThumbnailPhotoCommand): Promise<UserDocument> {
     const file = await this.cloudinaryService.uploadFile(command.file, {
       folder: 'thumbnail-photos',
-      async: false,
     });
 
     const fileUrl = file.url || file.secure_url;

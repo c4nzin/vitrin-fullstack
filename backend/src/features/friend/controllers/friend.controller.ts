@@ -10,7 +10,6 @@ import {
 import { Message, User } from 'src/common/decorators';
 import { UserDocument } from '../../user/schemas';
 import { CommandBus } from '@nestjs/cqrs';
-import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notification.gateway';
 import { ApiTags } from '@nestjs/swagger';
 import { SendFriendRequestCommand } from '../command/send-friend-request.command';
 import { RejectFriendRequestCommand } from '../command/reject-friend-request.command';
@@ -21,10 +20,7 @@ import { AuthenticatedGuard } from 'src/common/guards';
 @UseGuards(AuthenticatedGuard)
 @ApiTags('Friends')
 export class FriendController {
-  constructor(
-    private readonly commandBus: CommandBus,
-    private readonly friendRequestGateway: FriendRequestGateway,
-  ) {}
+  constructor(private readonly commandBus: CommandBus) {}
 
   @Post(':id/add-friend')
   @Message('Sucessfully sent friend request.')

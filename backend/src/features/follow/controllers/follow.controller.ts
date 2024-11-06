@@ -20,7 +20,7 @@ import { PageDto } from 'src/common/pagination/dto';
 import { PageOptionsDto } from 'src/common/pagination/dto/page-options.dto';
 import { UserDocument } from 'src/features/user/schemas';
 
-@Controller()
+@Controller('users')
 @ApiTags('follow')
 @UseGuards(AuthenticatedGuard)
 export class FollowController {

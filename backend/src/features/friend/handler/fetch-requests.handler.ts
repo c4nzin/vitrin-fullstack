@@ -1,8 +1,8 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { NotificationRepository } from 'src/features/user/repositories';
 import { PageDto, PageMetaDto } from 'src/common/pagination/dto';
 import { FetchRequestCommand } from '../command/fetch-requests.command';
 import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notification.gateway';
+import { NotificationRepository } from 'src/features/notification/repositories/notification.repository';
 
 @QueryHandler(FetchRequestCommand)
 export class FetchRequestCommandHandler implements IQueryHandler<FetchRequestCommand> {

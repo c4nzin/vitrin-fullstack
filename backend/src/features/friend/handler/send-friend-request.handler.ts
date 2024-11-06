@@ -5,10 +5,11 @@ import { Types } from 'mongoose';
 import { FriendRequestDocument } from 'src/features/friend/schemas/friend-request.schema';
 import { SendFriendRequestCommand } from '../command/send-friend-request.command';
 import { FriendRequestRepository } from '../repositories/friend-request.repository';
-import { NotificationRepository, UserRepository } from 'src/features/user/repositories';
+import { UserRepository } from 'src/features/user/repositories';
 import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notification.gateway';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
+import { NotificationRepository } from 'src/features/notification/repositories/notification.repository';
 
 @CommandHandler(SendFriendRequestCommand)
 export class SendFriendRequestCommandHandler

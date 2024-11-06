@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty, Length } from 'class-validator';
 
 export class OtpDto {
   @IsNotEmpty()
@@ -6,5 +6,6 @@ export class OtpDto {
   public readonly email: string;
 
   @IsNotEmpty()
+  @Length(6.6)
   public readonly otpCode: string;
 }

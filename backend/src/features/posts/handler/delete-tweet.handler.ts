@@ -1,10 +1,11 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeleteTweetCommand } from '../command/delete-tweet.command';
-import { PostRepository, UserRepository } from 'src/features/user/repositories';
+import { UserRepository } from 'src/features/user/repositories';
 import { BadRequestException } from '@nestjs/common';
 import { DeleteResult } from 'src/core/repositories/types/query.types';
 import { Types } from 'mongoose';
 import { PostDocument } from '../schemas/post.schema';
+import { PostRepository } from '../repositories/post.repository';
 
 @CommandHandler(DeleteTweetCommand)
 export class DeleteTweetCommandHandler implements ICommandHandler<DeleteTweetCommand> {

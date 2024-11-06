@@ -11,14 +11,14 @@ import { VerifyOtpCommand } from '../command/verify-otp.command';
 export class OtpController {
   constructor(private readonly commandBus: CommandBus) {}
 
-  @Post('send-otp')
+  @Post('send')
   @Message('Otp sucessfully sent.')
   @HttpCode(HttpStatus.OK)
   public async sendOtp(@Body() otpDto: SendOtpDto): Promise<void> {
     await this.commandBus.execute(new GenerateOtpCommand(otpDto.email));
   }
 
-  @Post('verify-otp')
+  @Post('verify')
   @Message('Sucessfully verified the otp.')
   @HttpCode(HttpStatus.OK)
   public async verifyOtp(@Body() otpDto: OtpDto): Promise<void> {

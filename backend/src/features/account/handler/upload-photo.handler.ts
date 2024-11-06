@@ -14,7 +14,6 @@ export class UploadPhotoCommandHandler implements ICommandHandler<UploadPhotoCom
   public async execute(command: UploadPhotoCommand): Promise<UserDocument> {
     const file = await this.cloudinaryService.uploadFile(command.file, {
       folder: 'profile-photos',
-      async: false,
     });
 
     const fileUrl = file.url || file.secure_url;

@@ -5,7 +5,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { WebsocketModule } from 'src/modules/websocket/websocket.module';
 import { MessageService } from './services/message.service';
 import { MessageRepository } from './repositories/message.repository';
-import { MessageController } from './controller/message.controller';
+import { MessageController } from './controllers/message.controller';
 import { ConversationModule } from '../conversation/conversation.module';
 
 @Module({
