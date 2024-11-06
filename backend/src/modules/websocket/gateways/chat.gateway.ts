@@ -8,9 +8,7 @@ import {
   MessageBody,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { Inject, Logger } from '@nestjs/common';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Cache } from 'cache-manager';
+import { Logger } from '@nestjs/common';
 import { RedisService } from 'src/modules/redis/services/redis.service';
 
 @WebSocketGateway({

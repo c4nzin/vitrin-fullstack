@@ -1,6 +1,4 @@
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Inject, Injectable, Logger } from '@nestjs/common';
-import { Cache } from 'cache-manager';
+import { Injectable, Logger } from '@nestjs/common';
 import { ExploreCommandHandler } from '../handler/explore-command.handler';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { EXPLORE_CACHE_KEY } from '../constants';
