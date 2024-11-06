@@ -25,7 +25,7 @@ export class ResetPasswordCommandHandler
     );
 
     if (!validatedOtp) {
-      return;
+      throw new BadRequestException('Invalid OTP.');
     }
 
     const user = await this.userRepository.findByEmail(resetPasswordDto.email);
@@ -35,22 +35,12 @@ export class ResetPasswordCommandHandler
       this.config.HASH_SALT_ROUNDS,
     );
 
-    return user.updateOne({ password: hashedPassword });
-  }
+    const updateResult = await user.updateOne({ password: hashedPassword });
 
-  private async isOldPassword(
-    oldPassword: string,
-    hashedPassword: string,
-  ): Promise<boolean> {
-    const password = await this.userRepository.isCorrectPassword(
-      oldPassword,
-      hashedPassword,
-    );
-
-    if (password) {
-      throw new BadRequestException('Passwords are the same.');
+    if (!updateResult.modifiedCount) {
+      throw new BadRequestException('Something went wrong while resetting the password.');
     }
 
-    return false;
+    return user;
   }
 }

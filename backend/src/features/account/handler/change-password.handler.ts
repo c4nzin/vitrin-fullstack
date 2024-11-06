@@ -23,7 +23,7 @@ export class ChangePasswordCommandHandler
     );
 
     if (!validateOtp) {
-      throw new BadRequestException('Invalid OTP');
+      throw new BadRequestException('Invalid OTP.');
     }
 
     await this.isSamePassword(changePasswordDto.newPassword, user.password);
