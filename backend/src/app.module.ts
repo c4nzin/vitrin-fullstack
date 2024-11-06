@@ -14,7 +14,8 @@ import { FeaturesModule } from './features/features.module';
 import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
 import * as redisStore from 'cache-manager-redis-store';
-import { IRedisCacheOptions } from './utils/redis-cache.options';
+import { IRedisCacheOptions } from './modules/redis/interfaces/redis-cache.options';
+import { RedisModule } from './modules/redis/redis.module';
 
 @Module({
   imports: [
@@ -44,12 +45,7 @@ import { IRedisCacheOptions } from './utils/redis-cache.options';
     CloudinaryModule,
     RequestContextModule.forRoot({ isGlobal: true, contextClass: AuthenticatedContext }),
     WebsocketModule,
-    CacheModule.register<IRedisCacheOptions>({
-      host: 'localhost',
-      store: redisStore,
-      port: 6379,
-      isGlobal: true,
-    }),
+    RedisModule,
     ScheduleModule.forRoot(),
   ],
   providers: [],
