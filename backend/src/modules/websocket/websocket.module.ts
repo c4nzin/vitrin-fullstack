@@ -5,6 +5,7 @@ import { ConversationModule } from 'src/features/conversation/conversation.modul
 import { ChatGateway } from './gateways/chat.gateway';
 import { FriendRequestGateway } from './gateways/fr-notification.gateway';
 import { RedisModule } from '../redis/redis.module';
+import { GatewayInstance } from './gateway.instance';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { RedisModule } from '../redis/redis.module';
     ConversationModule,
     RedisModule,
   ],
-  providers: [ChatGateway, FriendRequestGateway],
+  providers: [ChatGateway, FriendRequestGateway, GatewayInstance],
   exports: [ChatGateway, FriendRequestGateway],
 })
 export class WebsocketModule {}

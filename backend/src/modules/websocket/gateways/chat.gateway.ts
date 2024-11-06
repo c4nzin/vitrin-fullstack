@@ -10,6 +10,7 @@ import {
 import { Server, Socket } from 'socket.io';
 import { Logger } from '@nestjs/common';
 import { RedisService } from 'src/modules/redis/services/redis.service';
+import { GatewayInstance } from '../gateway.instance';
 
 @WebSocketGateway({
   cors: {
@@ -18,10 +19,17 @@ import { RedisService } from 'src/modules/redis/services/redis.service';
   },
 })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
-  @WebSocketServer() server: Server;
   private logger = new Logger('ChatGateway');
 
-  constructor(private readonly redisService: RedisService) {}
+  constructor(
+    private readonly redisService: RedisService,
+    private readonly gatewayInstance: GatewayInstance,
+  ) {}
+
+  @WebSocketServer()
+  public get server(): Server {
+    return this.gatewayInstance.server;
+  }
 
   public async handleConnection(socket: Socket) {
     const userId = socket.handshake.query.userId as string;
