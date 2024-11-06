@@ -12,9 +12,9 @@ export class UserController {
   constructor(private readonly queryBus: QueryBus) {}
 
   @Get('search')
-  @Message('Sucessfully fetched the user.')
+  @Message('Sucessfully fetched users.')
   @HttpCode(HttpStatus.OK)
-  public async searchUser(@Query('query') query: SearchUserDto): Promise<UserDocument> {
+  public async searchUser(@Query('user') query: string): Promise<UserDocument> {
     return this.queryBus.execute(new SearchUserCommand(query));
   }
 }

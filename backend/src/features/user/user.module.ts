@@ -9,6 +9,7 @@ import { WebsocketModule } from 'src/modules/websocket/websocket.module';
 import { FollowModule } from '../follow/follow.module';
 import { AccountModule } from '../account/account.module';
 import { NotificationModule } from '../notification/notification.module';
+import { SearchUserCommandHandler } from './handler/search-user-command.handler';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { NotificationModule } from '../notification/notification.module';
     NotificationModule,
   ],
   controllers: [UserController],
-  providers: [UserRepository],
+  providers: [UserRepository, SearchUserCommandHandler],
   exports: [UserRepository],
 })
 export class UserModule {}
