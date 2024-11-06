@@ -22,6 +22,6 @@ export class ExploreCronService {
 
     const posts = await this.exploreCronCommandHandler.execute();
 
-    await this.cacheManager.set(EXPLORE_CACHE_KEY, posts, 600);
+    await this.cacheManager.set(EXPLORE_CACHE_KEY, posts, 600000);
   }
 }
