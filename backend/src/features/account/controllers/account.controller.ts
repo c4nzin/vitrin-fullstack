@@ -35,18 +35,18 @@ export class AccountController {
     return user;
   }
 
-  @Patch('update')
+  @Patch('profile')
   @UseGuards(AuthenticatedGuard)
   @Message('Sucessfully updated the profile.')
   @HttpCode(HttpStatus.OK)
   public async updateProfile(
     @User('id') id: string,
-    @Body() updateProfile: UpdateProfileDto,
+    @Body() updateProfileDto: UpdateProfileDto,
   ): Promise<UserDocument> {
-    return this.commandBus.execute(new UpdateProfileFieldsCommand(id, updateProfile));
+    return this.commandBus.execute(new UpdateProfileFieldsCommand(id, updateProfileDto));
   }
 
-  @Post('update-email')
+  @Patch('email')
   @UseGuards(AuthenticatedGuard)
   @Message('Sucessfully updated the email.')
   @HttpCode(HttpStatus.OK)
@@ -57,7 +57,7 @@ export class AccountController {
     return this.commandBus.execute(new UpdatEmailCommand(updateEmailDto, user));
   }
 
-  @Post('change-password')
+  @Patch('password')
   @UseGuards(AuthenticatedGuard)
   @Message('Sucessfully changed the password.')
   @HttpCode(HttpStatus.OK)
@@ -69,7 +69,7 @@ export class AccountController {
     return this.commandBus.execute(new ChangePasswordCommand(user, changePasswordDto));
   }
 
-  @Post('reset-password')
+  @Post('password/reset')
   @Message('Sucessfully resetted your password.')
   @HttpCode(HttpStatus.OK)
   public async resetPassword(
