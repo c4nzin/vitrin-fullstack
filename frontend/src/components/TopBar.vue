@@ -100,9 +100,18 @@ export default {
       this.isMenuOpen = !this.isMenuOpen;
     },
 
-    handleLogout() {
+    async handleLogout() {
       this.toggleMenu();
-      console.log('Logged out');
+      await axios.post(
+        'http://localhost:3000/api/auth/logout',
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      userStore().$dispose;
+
+      this.$router.push({ name: 'Login' });
     },
 
     async performSearch() {
