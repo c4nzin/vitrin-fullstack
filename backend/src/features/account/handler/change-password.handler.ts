@@ -11,8 +11,8 @@ export class ChangePasswordCommandHandler
   implements ICommandHandler<ChangePasswordCommand>
 {
   constructor(
-    private readonly commandBus: CommandBus,
     @Inject(ENV) private readonly config: Config,
+    private readonly commandBus: CommandBus,
   ) {}
 
   public async execute(command: ChangePasswordCommand): Promise<UserDocument> {
@@ -22,17 +22,23 @@ export class ChangePasswordCommandHandler
       new VerifyOtpCommand(user.email, changePasswordDto.otpCode),
     );
 
+    if (!validateOtp) {
+      throw new BadRequestException('Invalid OTP');
+    }
+
     await this.isSamePassword(changePasswordDto.newPassword, user.password);
 
-    if (!validateOtp) {
-      return;
-    } else {
-      const hashedPassword = await bcrypt.hash(
-        changePasswordDto.newPassword,
-        this.config.HASH_SALT_ROUNDS,
-      );
+    const hashedPassword = await bcrypt.hash(
+      changePasswordDto.newPassword,
+      this.config.HASH_SALT_ROUNDS,
+    );
 
-      return user.updateOne({ password: hashedPassword });
+    const updateResult = await user.updateOne({ password: hashedPassword });
+
+    if (updateResult.modifiedCount > 0) {
+      return user;
+    } else {
+      throw new BadRequestException('Failed to change password');
     }
   }
 
