@@ -25,7 +25,7 @@ export class UpdateProfileDto {
 
   @IsOptional()
   @ApiProperty()
-  @IsEnum(Gender)
+  @IsEnum(() => Gender) //using lazy loading here to avoid circular dependecy issue.
   public gender: number;
 
   @ApiProperty()

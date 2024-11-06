@@ -19,7 +19,7 @@ import { UploadPhotoCommand } from '../command/upload-photo.command';
 import { UploadThumbnailPhotoCommand } from '../command/upload-thumbnail.command';
 
 @Controller('account')
-@ApiTags('photo/account')
+@ApiTags('account')
 @UseGuards(AuthenticatedGuard)
 export class PhotoController {
   constructor(private readonly commandBus: CommandBus) {}
@@ -39,7 +39,7 @@ export class PhotoController {
   @Message('Sucessfully updated profile picture.')
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(FileInterceptor('file'))
-  public async updateProfilephoto(
+  public async updateProfilePhoto(
     @UploadedFile(PhotoPipe) file: Express.Multer.File,
     @User('id') id: string,
   ): Promise<UserDocument> {
