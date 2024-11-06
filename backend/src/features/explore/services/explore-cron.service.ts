@@ -4,13 +4,14 @@ import { Cache } from 'cache-manager';
 import { ExploreCommandHandler } from '../handler/explore-command.handler';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { EXPLORE_CACHE_KEY } from '../constants';
+import { RedisService } from 'src/modules/redis/services/redis.service';
 
 @Injectable()
 export class ExploreCronService {
   private logger = new Logger(ExploreCronService.name);
 
   constructor(
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private readonly redisService: RedisService,
     private readonly exploreCronCommandHandler: ExploreCommandHandler,
   ) {}
 
@@ -22,6 +23,6 @@ export class ExploreCronService {
 
     const posts = await this.exploreCronCommandHandler.execute();
 
-    await this.cacheManager.set(EXPLORE_CACHE_KEY, posts, 600000);
+    await this.redisService.set(EXPLORE_CACHE_KEY, posts, 600000);
   }
 }

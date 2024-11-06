@@ -11,10 +11,7 @@ import { AuthenticatedContext } from './common/contexts/authenticated.context';
 import { WebsocketModule } from './modules/websocket/websocket.module';
 import { ThrottlerModule } from './modules/throttler/throttler.module';
 import { FeaturesModule } from './features/features.module';
-import { CacheModule } from '@nestjs/cache-manager';
 import { ScheduleModule } from '@nestjs/schedule';
-import * as redisStore from 'cache-manager-redis-store';
-import { IRedisCacheOptions } from './modules/redis/interfaces/redis-cache.options';
 import { RedisModule } from './modules/redis/redis.module';
 
 @Module({
