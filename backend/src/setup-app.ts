@@ -13,6 +13,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import expressMongoSanitize from 'express-mongo-sanitize';
 import cors from 'cors';
+import { TimeoutInterceptor } from './core/interceptors/timeout.interceptor';
 
 export async function setupApp(app: NestExpressApplication) {
   const config = app.get<Config>(ENV);
@@ -53,6 +54,7 @@ export async function setupApp(app: NestExpressApplication) {
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new TransformInterceptor(new Reflector()));
+  app.useGlobalInterceptors(new TimeoutInterceptor(10000));
 
   if (config.isDev) {
     const logger = app.get<Logger>(Logger);
