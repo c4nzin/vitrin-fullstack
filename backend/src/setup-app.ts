@@ -68,7 +68,6 @@ export async function setupApp(app: NestExpressApplication) {
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new TransformInterceptor(new Reflector()));
-  app.useGlobalInterceptors(new TimeoutInterceptor(10000));
 
   if (config.isDev) {
     const logger = app.get<Logger>(Logger);
