@@ -10,6 +10,6 @@ import { RedisModule } from 'src/modules/redis/redis.module';
   imports: [CqrsModule, PostModule, RedisModule],
   controllers: [ExploreController],
   providers: [...allExploreHandlers, ExploreCronService],
-  exports: [...allExploreHandlers, ExploreCronService],
+  exports: [...allExploreHandlers],
 })
 export class ExploreModule {}

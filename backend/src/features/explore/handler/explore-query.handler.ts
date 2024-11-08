@@ -54,8 +54,6 @@ export class ExploreQueryHandler implements IQueryHandler<ExploreCommand> {
       },
     ];
 
-    return this.postRepository.aggregate(pipeline, {
-      allowDiskUse: true,
-    });
+    return this.postRepository.aggregate(pipeline);
   }
 }

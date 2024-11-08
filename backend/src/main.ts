@@ -8,6 +8,11 @@ import { useContainer } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {});
+
+  var server = app.getHttpServer();
+
+  server.setTimeout(10000);
+
   await setupApp(app);
 
   const config = app.get<Config>(ENV);

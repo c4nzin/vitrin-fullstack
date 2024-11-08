@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { PageMetaDtoParameters } from '../interfaces/page-meta-dto-parameters.interface';
-
+//pagination dto
 export class PageMetaDto {
   @ApiProperty()
   public readonly page: number;
