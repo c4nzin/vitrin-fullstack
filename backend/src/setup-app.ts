@@ -13,7 +13,6 @@ import helmet from 'helmet';
 import compression from 'compression';
 import expressMongoSanitize from 'express-mongo-sanitize';
 import cors from 'cors';
-import { TimeoutInterceptor } from './core/interceptors/timeout.interceptor';
 import { Server } from 'socket.io';
 import { GatewayInstance } from './modules/websocket/gateway.instance';
 
