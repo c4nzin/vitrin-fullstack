@@ -12,12 +12,7 @@ import { Logger } from '@nestjs/common';
 import { RedisService } from 'src/modules/redis/services/redis.service';
 import { GatewayInstance } from '../gateway.instance';
 
-@WebSocketGateway({
-  cors: {
-    origin: '*',
-    methods: ['GET', 'POST'],
-  },
-})
+@WebSocketGateway()
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   private logger = new Logger('ChatGateway');
 
