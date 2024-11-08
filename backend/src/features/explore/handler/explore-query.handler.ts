@@ -4,7 +4,7 @@ import { PipelineStage } from 'mongoose';
 import { PostRepository } from 'src/features/posts/repositories/post.repository';
 
 @QueryHandler(ExploreCommand)
-export class ExploreCommandHandler implements IQueryHandler<ExploreCommand> {
+export class ExploreQueryHandler implements IQueryHandler<ExploreCommand> {
   public readonly limit: number = 10;
 
   constructor(private readonly postRepository: PostRepository) {}

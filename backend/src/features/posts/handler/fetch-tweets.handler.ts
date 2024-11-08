@@ -6,7 +6,7 @@ import { PostDocument } from '../schemas/post.schema';
 import { PostRepository } from '../repositories/post.repository';
 
 @QueryHandler(FetchTweetsCommand)
-export class FetchTweetsCommandHandler implements IQueryHandler<FetchTweetsCommand> {
+export class FetchTweetsHandler implements IQueryHandler<FetchTweetsCommand> {
   constructor(
     private readonly postRepository: PostRepository,
     private readonly userRepository: UserRepository,

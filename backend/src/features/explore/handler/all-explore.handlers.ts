@@ -1,3 +1,3 @@
-import { ExploreCommandHandler } from './explore-command.handler';
+import { ExploreQueryHandler } from './explore-query.handler';
 
-export const allExploreHandlers = [ExploreCommandHandler];
+export const allExploreHandlers = [ExploreQueryHandler];

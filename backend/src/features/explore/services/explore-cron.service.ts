@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ExploreCommandHandler } from '../handler/explore-command.handler';
+import { ExploreCommandHandler } from '../handler/explore-query.handler';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { EXPLORE_CACHE_KEY } from '../constants';
 import { RedisService } from 'src/modules/redis/services/redis.service';

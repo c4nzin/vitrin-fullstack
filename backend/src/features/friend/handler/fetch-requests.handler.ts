@@ -5,7 +5,7 @@ import { FriendRequestGateway } from 'src/modules/websocket/gateways/fr-notifica
 import { NotificationRepository } from 'src/features/notification/repositories/notification.repository';
 
 @QueryHandler(FetchRequestCommand)
-export class FetchRequestCommandHandler implements IQueryHandler<FetchRequestCommand> {
+export class FetchRequestHandler implements IQueryHandler<FetchRequestCommand> {
   constructor(
     private readonly notificationRepository: NotificationRepository,
     private readonly friendRequestGateway: FriendRequestGateway,
