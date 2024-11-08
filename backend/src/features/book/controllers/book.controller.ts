@@ -27,10 +27,6 @@ export class BookController {
     @Param('param') param: string,
     @Query() pagination: PageOptionsDto,
   ) {
-    try {
-      return this.queryBus.execute(new SearchBookCommand(param, pagination));
-    } catch (error) {
-      console.log(error);
-    }
+    return this.queryBus.execute(new SearchBookCommand(param, pagination));
   }
 }

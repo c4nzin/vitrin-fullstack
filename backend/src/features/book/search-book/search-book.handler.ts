@@ -17,7 +17,8 @@ export class SearchBookQueryHandler implements IQueryHandler<SearchBookCommand> 
 
     try {
       const response = await axios.get(url, { withCredentials: true });
-      const booksCount: number = response.data.length;
+      const books = response.data || [];
+      const booksCount: number = books.length;
 
       const pageDto = new PageMetaDto({
         pageOptionsDto: pagination,
@@ -26,7 +27,6 @@ export class SearchBookQueryHandler implements IQueryHandler<SearchBookCommand> 
 
       return new PageDto(response.data, pageDto);
     } catch (error) {
-      console.log(error);
       throw new BadRequestException(error);
     }
   }
