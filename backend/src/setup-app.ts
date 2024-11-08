@@ -14,6 +14,8 @@ import compression from 'compression';
 import expressMongoSanitize from 'express-mongo-sanitize';
 import cors from 'cors';
 import { TimeoutInterceptor } from './core/interceptors/timeout.interceptor';
+import { Server } from 'socket.io';
+import { GatewayInstance } from './modules/websocket/gateway.instance';
 
 export async function setupApp(app: NestExpressApplication) {
   const config = app.get<Config>(ENV);
@@ -25,6 +27,18 @@ export async function setupApp(app: NestExpressApplication) {
       credentials: true,
     }),
   );
+
+  const server = app.getHttpServer();
+
+  const io = new Server(server, {
+    cors: {
+      origin: 'http://localhost:3001',
+      methods: ['GET', 'POST'],
+    },
+  });
+
+  const gatewayInstance = app.get(GatewayInstance);
+  gatewayInstance.server = io;
 
   app.use(helmet());
   app.use(compression());
