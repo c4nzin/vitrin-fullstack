@@ -10,6 +10,7 @@ import { UserModule } from './user/user.module';
 import { ConversationModule } from './conversation/conversation.module';
 import { FriendModule } from './friend/friend.module';
 import { ExploreModule } from './explore/explore.module';
+import { BookModule } from './book/book.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ExploreModule } from './explore/explore.module';
     MessageModule,
     FriendModule,
     ExploreModule,
+    BookModule,
   ],
 })
 export class FeaturesModule {}
