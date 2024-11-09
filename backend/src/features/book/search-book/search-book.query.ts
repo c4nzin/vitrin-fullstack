@@ -1,6 +1,6 @@
 import { PageOptionsDto } from 'src/common/pagination/dto';
 
-export class SearchBookCommand {
+export class SearchBookQuery {
   constructor(
     public param: string,
     public pagination: PageOptionsDto,

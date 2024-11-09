@@ -14,11 +14,22 @@ import {
   UpdateResult,
 } from './types/query.types';
 import { Pagination } from 'src/common/decorators/types/pagination.interface';
-import { PaginationDto } from 'src/common/pagination/dto/pagination.dto';
-import { PaginationResult } from 'src/common/pagination/interfaces/pagination-result.interface';
-import { timestamp } from 'rxjs';
-import { createPaginationResult } from 'src/common/pagination/utils/create-pagination.result';
 import { BadRequestException } from '@nestjs/common';
+
+//burasi yeni paginationum klasorlere tasimayi unutma.
+export interface PaginationOptions {
+  page?: number;
+  limit?: number;
+  sort?: Record<string, 1 | -1>;
+}
+
+export interface PaginatedResult<T> {
+  items: T[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
 
 export class BaseRepository<T> {
   constructor(private readonly model: Model<T>) {}
@@ -105,22 +116,26 @@ export class BaseRepository<T> {
       .exec();
   }
 
-  public async paginate({ page, limit }: PaginationDto): Promise<PaginationResult<T[]>> {
-    let query = this.model.find();
+  public async paginate(
+    filter: FilterQuery<T> = {},
+    options: PaginationOptions = {},
+  ): Promise<PaginatedResult<T>> {
+    const page = options.page || 1;
+    const limit = options.limit || 10;
+    const skip = (page - 1) * limit;
 
-    if (page && limit) {
-      query = query.skip((page - 1) * limit);
-    }
+    const [items, total] = await Promise.all([
+      this.model.find(filter).sort(options.sort).skip(skip).limit(limit).exec(),
+      this.model.countDocuments(filter).exec(),
+    ]);
 
-    if (limit) {
-      query = query.sort({ timestamp: -1 }).limit(limit);
-    }
-
-    const records = (await query.exec()) as T[];
-
-    const totalRecords = await this.model.countDocuments();
-
-    return createPaginationResult<T>(records, { page, limit }, totalRecords);
+    return {
+      items,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 
   public async executeTransaction(

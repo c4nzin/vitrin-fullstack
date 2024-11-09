@@ -12,7 +12,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { Message } from 'src/common/decorators';
 import { AuthenticatedGuard } from 'src/common/guards';
 import { PageOptionsDto } from 'src/common/pagination/dto';
-import { SearchBookCommand } from '../search-book/search-book.command';
+import { SearchBookQuery } from '../search-book/search-book.query';
 
 @Controller('books')
 @ApiTags('books')
@@ -27,6 +27,6 @@ export class BookController {
     @Param('param') param: string,
     @Query() pagination: PageOptionsDto,
   ) {
-    return this.queryBus.execute(new SearchBookCommand(param, pagination));
+    return this.queryBus.execute(new SearchBookQuery(param, pagination));
   }
 }

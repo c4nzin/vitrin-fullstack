@@ -6,24 +6,20 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
   MessageBody,
-  OnGatewayInit,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { Logger } from '@nestjs/common';
 import { RedisService } from 'src/modules/redis/services/redis.service';
 import { GatewayInstance } from '../gateway.instance';
 
-export class ChatGateway
-  implements OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit
-{
+@WebSocketGateway()
+export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   private logger = new Logger('ChatGateway');
 
   constructor(
     private readonly redisService: RedisService,
     private readonly gatewayInstance: GatewayInstance,
   ) {}
-
-  public afterInit(server: any) {}
 
   @WebSocketServer()
   public get server(): Server {

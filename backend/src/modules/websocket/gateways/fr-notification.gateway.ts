@@ -9,6 +9,7 @@ import { Logger } from '@nestjs/common';
 import { RedisService } from 'src/modules/redis/services/redis.service';
 import { GatewayInstance } from '../gateway.instance';
 
+@WebSocketGateway()
 export class FriendRequestGateway implements OnGatewayConnection, OnGatewayDisconnect {
   private readonly logger = new Logger('FriendRequestGateway');
 

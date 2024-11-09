@@ -18,7 +18,7 @@
     "@automapper/nestjs": "^8.8.1",
     "@medibloc/nestjs-request-context": "^1.0.1",
     "@nestjs-modules/mailer": "^2.0.2",
-    "@nestjs/axios": "^3.0.2",
+    "@nestjs/axios": "^3.0.3",
     "@nestjs/bull": "^10.1.1",
     "@nestjs/bullmq": "^10.2.0",
     "@nestjs/cache-manager": "^1.0.0",

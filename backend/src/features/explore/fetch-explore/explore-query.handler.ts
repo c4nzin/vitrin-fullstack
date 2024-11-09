@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { PipelineStage } from 'mongoose';
 import { PostRepository } from 'src/features/posts/repositories/post.repository';
-import { ExploreQuery } from '../query/explore.query';
+import { ExploreQuery } from './explore.query';
 
 @QueryHandler(ExploreQuery)
 export class ExploreQueryHandler implements IQueryHandler<ExploreQuery> {

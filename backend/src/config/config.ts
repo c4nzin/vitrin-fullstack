@@ -23,6 +23,8 @@ const config = {
   GOOGLE_CLIENT_SECRET: str(),
   GOOGLE_CLIENT_ID: str(),
   GOOGLE_CALLBACK_URL: str(),
+  HTTP_TIMEOUT: num({ default: 5000 }),
+  MAX_REDIRECTS: num({ default: 5 }),
 };
 
 export const envalidValidator = makeValidators(config);
