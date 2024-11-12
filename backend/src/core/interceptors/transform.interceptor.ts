@@ -7,7 +7,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Response } from 'express';
 import { Observable, map } from 'rxjs';
-import { Message } from 'src/common/decorators';
+import { MESSAGE, Message } from 'src/common/decorators';
 import { Payload } from 'src/common/interfaces/payload.interface';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class TransformInterceptor<T> implements NestInterceptor<T, Payload<T>> {
 
   private transformResponse<T>(data: T, context: ExecutionContext): Payload<T> {
     const handler = context.getHandler();
-    const message = this.reflector.get(Message, handler);
+    const message = this.reflector.get<string>(MESSAGE, handler);
     const { statusCode } = context.switchToHttp().getResponse<Response>();
 
     return { message, statusCode, data };
