@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Inject,
   Post,
   Query,
   Req,
@@ -25,11 +26,13 @@ import { UserDocument } from 'src/features/user/schemas';
 import { FetchUserCommand } from '../command/fetch-user.command';
 import { GoogleGuard } from 'src/common/guards/google.guard';
 import { Request, Response } from 'express';
+import { Config, ENV } from 'src/config/config';
 
 @Controller('auth')
 @ApiTags('auth')
 export class AuthController {
   constructor(
+    @Inject(ENV) private readonly config: Config,
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
   ) {}
@@ -53,7 +56,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(GoogleGuard)
   public async googleCallback(@Res() response: Response): Promise<void> {
-    response.redirect('http://localhost:3001/user/me');
+    response.redirect(this.config.FRONTEND_APP_ORIGIN);
   }
 
   @Post('register')

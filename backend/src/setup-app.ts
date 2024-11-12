@@ -21,7 +21,7 @@ export async function setupApp(app: NestExpressApplication) {
 
   app.use(
     cors({
-      origin: 'http://localhost:3001',
+      origin: config.FRONTEND_APP_ORIGIN,
       allowedHeaders: ['Content-Type', 'Authorization'],
       credentials: true,
     }),
@@ -31,7 +31,7 @@ export async function setupApp(app: NestExpressApplication) {
 
   const io = new Server(server, {
     cors: {
-      origin: 'http://localhost:3001',
+      origin: config.FRONTEND_APP_ORIGIN,
       methods: ['GET', 'POST'],
     },
   });

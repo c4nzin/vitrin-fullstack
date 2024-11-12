@@ -25,6 +25,7 @@ const config = {
   GOOGLE_CALLBACK_URL: str(),
   HTTP_TIMEOUT: num({ default: 5000 }),
   MAX_REDIRECTS: num({ default: 5 }),
+  FRONTEND_APP_ORIGIN: str({ default: 'http://localhost:3001' }),
 };
 
 export const envalidValidator = makeValidators(config);
