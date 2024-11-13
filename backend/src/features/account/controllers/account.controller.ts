@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { Message, User } from 'src/common/decorators';
+import { Message, PublicRoute, User } from 'src/common/decorators';
 import { AuthenticatedGuard } from 'src/common/guards';
 import { UserDocument } from 'src/features/user/schemas';
 import { UpdateProfileDto } from '../dto/update-profile.dto';
@@ -24,11 +24,11 @@ import { ApiTags } from '@nestjs/swagger';
 
 @Controller('account')
 @ApiTags('account')
+@UseGuards(AuthenticatedGuard)
 export class AccountController {
   constructor(private readonly commandBus: CommandBus) {}
 
   @Get('me')
-  @UseGuards(AuthenticatedGuard)
   @Message('Sucessfully fetched the user.')
   @HttpCode(HttpStatus.OK)
   public async getUser(@User() user: UserDocument): Promise<UserDocument> {
@@ -36,7 +36,6 @@ export class AccountController {
   }
 
   @Patch('profile')
-  @UseGuards(AuthenticatedGuard)
   @Message('Sucessfully updated the profile.')
   @HttpCode(HttpStatus.OK)
   public async updateProfile(
@@ -47,7 +46,6 @@ export class AccountController {
   }
 
   @Patch('email')
-  @UseGuards(AuthenticatedGuard)
   @Message('Sucessfully updated the email.')
   @HttpCode(HttpStatus.OK)
   public async updateEmail(
@@ -58,7 +56,6 @@ export class AccountController {
   }
 
   @Patch('password')
-  @UseGuards(AuthenticatedGuard)
   @Message('Sucessfully changed the password.')
   @HttpCode(HttpStatus.OK)
   public async changePassword(
@@ -72,6 +69,7 @@ export class AccountController {
   @Post('password/reset')
   @Message('Sucessfully resetted your password.')
   @HttpCode(HttpStatus.OK)
+  @PublicRoute()
   public async resetPassword(
     @Body() resetPasswordDto: ResetPasswordDto,
   ): Promise<UserDocument> {
