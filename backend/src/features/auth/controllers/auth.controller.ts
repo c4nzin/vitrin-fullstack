@@ -7,6 +7,7 @@ import {
   Inject,
   Post,
   Query,
+  Redirect,
   Req,
   Res,
   UnauthorizedException,
@@ -55,9 +56,8 @@ export class AuthController {
   @Message('Sucessfully logged in with google.')
   @HttpCode(HttpStatus.OK)
   @UseGuards(GoogleGuard)
-  public async googleCallback(@Res() response: Response): Promise<void> {
-    response.redirect(this.config.FRONTEND_APP_ORIGIN);
-  }
+  @Redirect('http://localhost:3001', 301)
+  public async googleCallback(): Promise<void> {}
 
   @Post('register')
   @Message('Sucessfully registered.')

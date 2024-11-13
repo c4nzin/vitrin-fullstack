@@ -13,7 +13,7 @@ export class ResetPasswordDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(6)
-  @MaxLength(300)
+  @MaxLength(30)
   public newPassword: string;
 
   @ApiProperty()
