@@ -15,12 +15,13 @@ import {
 } from './types/query.types';
 import { Pagination } from 'src/common/decorators/types/pagination.interface';
 import { BadRequestException } from '@nestjs/common';
+import { createPaginatedResult } from 'src/utils/create-paginated.result';
 
 //burasi yeni paginationum klasorlere tasimayi unutma.
 export interface PaginationOptions {
   page?: number;
   limit?: number;
-  sort?: Record<string, 1 | -1>;
+  sort?: Record<string, 'asc' | 'desc'>;
 }
 
 export interface PaginatedResult<T> {
@@ -29,6 +30,7 @@ export interface PaginatedResult<T> {
   page: number;
   limit: number;
   totalPages: number;
+  hasNextPage: boolean;
 }
 
 export class BaseRepository<T> {
@@ -124,18 +126,14 @@ export class BaseRepository<T> {
     const limit = options.limit || 10;
     const skip = (page - 1) * limit;
 
-    const [items, total] = await Promise.all([
-      this.model.find(filter).sort(options.sort).skip(skip).limit(limit).exec(),
-      this.model.countDocuments(filter).exec(),
+    const recordsQuery = this.model.find(filter);
+
+    const [records, total] = await Promise.all([
+      recordsQuery.sort(options.sort).skip(skip).limit(limit).exec(),
+      recordsQuery.countDocuments(filter).exec(),
     ]);
 
-    return {
-      items,
-      total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
-    };
+    return createPaginatedResult(records, total, page, limit);
   }
 
   public async executeTransaction(
