@@ -17,22 +17,6 @@ import { Pagination } from 'src/common/decorators/types/pagination.interface';
 import { BadRequestException } from '@nestjs/common';
 import { createPaginatedResult } from 'src/utils/create-paginated.result';
 
-//burasi yeni paginationum klasorlere tasimayi unutma.
-export interface PaginationOptions {
-  page?: number;
-  limit?: number;
-  sort?: Record<string, 'asc' | 'desc'>;
-}
-
-export interface PaginatedResult<T> {
-  items: T[];
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-  hasNextPage: boolean;
-}
-
 export class BaseRepository<T> {
   constructor(private readonly model: Model<T>) {}
 

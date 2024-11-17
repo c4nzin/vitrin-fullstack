@@ -1,4 +1,4 @@
-import { PaginatedResult } from 'src/core/repositories/base.repository';
+import { PaginatedResult } from 'src/common/pagination/interfaces/paginated-result.interface';
 
 export function createPaginatedResult<T>(
   records: T[],
